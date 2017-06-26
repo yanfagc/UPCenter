@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.hanzhdy.manager.upc.mapper.DictTypeMapperExt">
+    <!-- 按条件查询字典类型数量 -->
+	<select id="countAsList" parameterType="java.util.HashMap" resultType="int">
+	SELECT COUNT(1) FROM s_dicttype a
+    <include refid="selectAsList_whereClause" />
+	</select>
+	
+	<!-- 按条件查询字典类型信息 -->
+	<select id="selectAsList" parameterType="java.util.HashMap" resultType="org.hanzhdy.manager.upc.model.DictType">
+    <include refid="Pageable_Prefix" />
+	SELECT a.ID,a.TYPECODE,a.TYPENAME,a.VALUETYPE,a.STATUS,a.REMARK,a.CREATETIME,a.UPDATETIME
+	FROM s_dicttype a
+    <include refid="selectAsList_whereClause" />
+    <include refid="Pageable_Suffix" />
+	</select>
+	
+	<!-- 组合查询字典类型的条件 -->
+	<sql id="selectAsList_whereClause">
+	<where>
+		<if test="typecode!=null and typecode!=''">
+		AND TYPECODE LIKE #{typecode}
+		</if>
+		<if test="typename!=null and typename!=''">
+		AND TYPENAME LIKE #{typename}
+		</if>
+		<if test="status!=null and status!=''">
+		AND STATUS = #{status}
+		</if>
+		<if test="valuetype!=null and valuetype!=''">
+		AND VALUETYPE = #{valuetype}
+		</if>
+		<if test="searchkey!=null and searchkey!=''">
+		AND (TYPECODE LIKE #{searchkey} OR TYPENAME LIKE #{searchkey})
+		</if>
+	</where>
+	</sql>
+</mapper>

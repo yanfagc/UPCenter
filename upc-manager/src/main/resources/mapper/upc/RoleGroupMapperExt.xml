@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.hanzhdy.manager.upc.mapper.RoleGroupMapperExt">
+  <select id="countAsList" parameterType="java.util.HashMap" resultType="int">
+  SELECT COUNT(1) AS gc FROM r_role_group g <include refid="wherecause_group"/>
+  </select>
+  
+  <select id="selectAsList" parameterType="java.util.HashMap" resultType="org.hanzhdy.manager.upc.model.RoleGroup">
+  <include refid="Pageable_Prefix" />
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM r_role_group g
+    <include refid="wherecause_group"/>
+    <include refid="Pageable_Suffix" />
+  </select>
+  
+  <sql id="wherecause_group">
+    <where>
+      <if test="searchkey!=null and searchkey!=''">
+      AND (GROUPCODE LIKE #{searchkey} OR GROUPNAME LIKE #{searchkey})
+      </if>
+      <if test="groupcode!=null and groupcode!=''">
+      AND GROUPCODE=#{groupcode}
+      </if>
+      <if test="groupname!=null and groupname!=''">
+      AND GROUPNAME=#{groupname}
+      </if>
+    </where>
+  </sql>
+</mapper>

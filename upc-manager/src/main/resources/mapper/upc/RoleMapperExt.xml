@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.hanzhdy.manager.upc.mapper.RoleMapperExt">
+  <select id="countAsList" parameterType="java.util.HashMap" resultType="int">
+SELECT COUNT(1) FROM r_role r
+  <include refid="selectAsList_wherecause"></include>
+  </select>
+
+  <select id="selectAsList" parameterType="java.util.HashMap" resultType="org.hanzhdy.manager.upc.vo.RoleVo">
+  <include refid="Pageable_Prefix" />
+SELECT
+	r.ID AS id,
+	r.ROLECODE AS rolecode,
+	r.ROLENAME AS rolename,
+	r.GROUPID AS groupid,
+	r.`STATUS` AS STATUS,
+	r.REMARK AS remark,
+	r.SYSTEMID AS systemId,
+	r.CREATETIME AS createtime,
+	r.UPDATETIME AS updatetime,
+	r.CREATOR AS creator,
+	r.UPDATER AS updater,
+	g.GROUPNAME AS groupname,
+	s.SYSNAME AS systemname
+FROM
+	r_role r
+LEFT JOIN r_role_group g ON r.GROUPID = g.ID
+LEFT JOIN r_accesssystem s ON r.SYSTEMID = s.ID
+  <include refid="selectAsList_wherecause"></include>
+  <include refid="Pageable_Suffix" />
+  </select>
+
+  <sql id="selectAsList_wherecause">
+    <where>
+      <if test="searchkey!=null and searchkey!=''">
+      AND (r.ROLECODE LIKE #{searchkey} OR ROLENAME LIKE #{searchkey})
+      </if>
+      <if test="rolecode!=null and rolecode!=''">
+      AND r.ROLECODE LIKE #{rolecode}
+      </if>
+      <if test="rolename!=null and rolename!=''">
+      AND r.ROLENAME LIKE #{rolename}
+      </if>
+      <if test="groupid!=null">
+      AND r.GROUPID = #{groupid}
+      </if>
+      <if test="sysid!=null">
+      AND r.SYSTEMID = #{sysid}
+      </if>
+      <if test="status!=null">
+      AND r.STATUS = #{status}
+      </if>
+    </where>
+  </sql>
+  
+  <update id="updateGroupId2ZeroByGroupId" parameterType="java.lang.Long">
+    UPDATE r_role SET GROUPID=0 WHERE GROUPID=#{groupId}
+  </update>
+</mapper>

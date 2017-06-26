@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:oxm="http://www.springframework.org/schema/oxm"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+    http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm-3.1.xsd">
+
+    <bean id="manager-stat-filter" class="com.alibaba.druid.filter.stat.StatFilter">
+    </bean>
+
+    <bean id="_manager-dataSource" class="org.hanzhdy.web.datasource.SecurityDruidDataSource" destroy-method="close">
+        <property name="driverClassName" value="${db.manager.driverClassName}" />
+        <property name="url" value="${db.manager.url}" />
+        <property name="username" value="${db.manager.username}" />
+        <property name="password" value="${db.manager.password}" />
+
+        <property name="maxActive" value="${db.manager.maxActive}" />
+        <property name="initialSize" value="${db.manager.initialSize}" />
+        <property name="minIdle" value="${db.manager.minIdle}" />
+        <property name="maxWait" value="${db.manager.maxWait}" />
+        <property name="timeBetweenEvictionRunsMillis" value="${db.manager.ERMillis}" />
+        <property name="minEvictableIdleTimeMillis" value="${db.manager.ETMillis}" />
+        <property name="validationQuery" value="SELECT 'x' FROM DUAL" />
+        <property name="testWhileIdle" value="true" />
+        <property name="testOnBorrow" value="false" />
+        <property name="testOnReturn" value="false" />
+
+        <property name="filters" value="slf4j,config" />
+        <property name="proxyFilters">
+            <list>
+                <ref bean="manager-stat-filter" />
+            </list>
+        </property>
+
+        <property name="connectionProperties" value="config.decrypt=false" />
+    </bean>
+	
+	<!-- <bean id="manager-dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+		<property name="dataSource" ref="_manager-dataSource"/>
+		<property name="dumpSqlMaxLineLength" value="0" />
+	</bean> -->
+	
+    <bean id="manager-transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="_manager-dataSource" />
+    </bean>
+
+    <!-- 使用annotation定义事务 -->
+    <!-- 配置事务特性 -->
+    <tx:advice id="manager-tx-advice" transaction-manager="manager-transactionManager">
+        <tx:attributes>
+            <tx:method name="add*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+            <tx:method name="save*" propagation="REQUIRED"
+                       rollback-for="java.lang.Exception" />
+            <tx:method name="insert*" propagation="REQUIRED"
+                       rollback-for="java.lang.Exception" />
+            <tx:method name="del*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+            <tx:method name="remove*" propagation="REQUIRED"
+                       rollback-for="java.lang.Exception" />
+            <tx:method name="update*" propagation="REQUIRED"
+                       rollback-for="java.lang.Exception" />
+            <tx:method name="edit*" propagation="REQUIRED"
+                       rollback-for="java.lang.Exception" />
+            <tx:method name="batchDelete*" propagation="REQUIRED"
+                       rollback-for="java.lang.Exception" />
+            <tx:method name="loadUser*" propagation="REQUIRED"
+                       rollback-for="java.lang.Exception" />
+            <tx:method name="*" read-only="true" />
+        </tx:attributes>
+    </tx:advice>
+
+    <!-- 配置哪些类的方法需要进行事务管理 -->
+    <aop:config>
+        <aop:advisor pointcut="execution(* org.hanzhdy.manager.form.service..*Service.*(..))" advice-ref="manager-tx-advice" />
+        <aop:advisor pointcut="execution(* org.hanzhdy.manager.support.service..*Service.*(..))" advice-ref="manager-tx-advice" />
+        <aop:advisor pointcut="execution(* org.hanzhdy.manager.upc.service..*Service.*(..))" advice-ref="manager-tx-advice" />
+    </aop:config>
+	
+	<context:component-scan base-package="org.hanzhdy.manager.form.**"></context:component-scan>
+    <context:component-scan base-package="org.hanzhdy.manager.support.**"></context:component-scan>
+    <context:component-scan base-package="org.hanzhdy.manager.upc.**"></context:component-scan>
+    
+    <!-- beware that mapper-config.xml is not needed if you use injected mappers -->
+    <bean id="manager-form-sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="_manager-dataSource" />
+        <property name="mapperLocations" value="classpath*:mapper/form/**/*.xml"/>
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="org.hanzhdy.manager.form.mapper" />
+        <!-- optional unless there are multiple session factories defined -->
+        <property name="sqlSessionFactoryBeanName" value="manager-form-sqlSessionFactoryBean" />
+    </bean>
+    
+    <!-- beware that mapper-config.xml is not needed if you use injected mappers -->
+    <bean id="manager-support-sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="_manager-dataSource" />
+        <property name="mapperLocations" value="classpath*:mapper/support/**/*.xml"/>
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="org.hanzhdy.manager.support.mapper" />
+        <!-- optional unless there are multiple session factories defined -->
+        <property name="sqlSessionFactoryBeanName" value="manager-support-sqlSessionFactoryBean" />
+    </bean>
+    
+    <!-- beware that mapper-config.xml is not needed if you use injected mappers -->
+    <bean id="manager-upc-sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="_manager-dataSource" />
+        <property name="mapperLocations" value="classpath*:mapper/upc/**/*.xml"/>
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="org.hanzhdy.manager.upc.mapper" />
+        <!-- optional unless there are multiple session factories defined -->
+        <property name="sqlSessionFactoryBeanName" value="manager-upc-sqlSessionFactoryBean" />
+    </bean>
+</beans>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.hanzhdy.manager.form.mapper.FieldItemMapperExt">
+	<!-- 根据formid查询出form关联的字段中子列信息 -->
+	<select id="selectFieldItemsByFormid" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+	SELECT
+		item.*
+	FROM
+		f_field_info fi,
+		f_field_item item,
+		f_form_field ff
+	WHERE
+		ff.FORMID = #{formid}
+	AND ff.FIELDID = fi.ID
+	AND fi.ID = item.FIELDID
+	  <if test="status!=null and status!=''">
+	  AND item.`STATUS` = #{status}
+	  AND fi.`STATUS` = #{status}
+	  </if>
+	</select>
+
+</mapper>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.hanzhdy.manager.upc.mapper.UserBasicMapperExt">
+	<!-- 按条件查询用户数量 -->
+	<select id="countAsList" parameterType="java.util.HashMap" resultType="int">
+	SELECT COUNT(1) FROM u_user_basic b,u_user_info i,u_user_status s
+	WHERE b.ID = i.USERID AND b.ID=s.USERID
+    <include refid="selectAsList_whereClause" />
+	</select>
+	
+	<!-- 按条件查询用户信息 -->
+	<select id="selectAsList" parameterType="java.util.HashMap" resultType="org.hanzhdy.manager.upc.vo.UserVo">
+    <include refid="Pageable_Prefix" />
+	SELECT b.ID,b.ACCOUNT,b.NICKNAME,i.MOBILENO,i.EMAIL,s.`STATUS`
+	FROM u_user_basic b,u_user_info i,u_user_status s
+	WHERE b.ID = i.USERID AND b.ID=s.USERID
+    <include refid="selectAsList_whereClause" />
+    <include refid="Pageable_Suffix" />
+	</select>
+	
+	<!-- 根据用户ID查询用户信息 -->
+	<select id="selectById" parameterType="java.lang.Long" resultType="org.hanzhdy.manager.upc.vo.UserVo">
+	SELECT 
+		b.ID,
+		b.ACCOUNT,
+		b.NICKNAME,
+		b.FORMID,
+		i.MOBILENO,
+		i.EMAIL,
+		i.CERTTYPE,
+		i.CERTNO,
+		i.OFFICEPHONE,
+		i.FAXNO,
+		s.`STATUS`,
+		b.PASSWORD
+	FROM u_user_basic b,u_user_info i,u_user_status s
+	WHERE b.ID = i.USERID AND b.ID=s.USERID AND b.ID=#{userid}
+	</select>
+	
+	<!-- 根据用户帐号查询用户信息 -->
+	<select id="selectByAccount" parameterType="java.lang.String" resultType="org.hanzhdy.manager.upc.vo.UserVo">
+	SELECT b.ID,b.ACCOUNT,b.NICKNAME,i.MOBILENO,i.EMAIL,s.`STATUS`,b.PASSWORD
+	FROM u_user_basic b,u_user_info i,u_user_status s
+	WHERE b.ID = i.USERID AND b.ID=s.USERID AND b.ACCOUNT=#{account}
+	</select>
+	
+	<!-- 组合查询用户信息的条件 -->
+	<sql id="selectAsList_whereClause">
+		<if test="account!=null and account!=''">
+		AND account LIKE #{account}
+		</if>
+		<if test="email!=null and email!=''">
+		AND email LIKE #{email}
+		</if>
+		<if test="mobileno!=null and mobileno!=''">
+		AND mobileno LIKE #{mobileno}
+		</if>
+		<if test="nickname!=null and nickname!=''">
+		AND nickname LIKE #{nickname}
+		</if>
+		<if test="status!=null and status!=''">
+		AND status = #{status}
+		</if>
+		<if test="searchkey!=null and searchkey!=''">
+		AND (account LIKE #{searchkey} OR email LIKE #{searchkey} OR mobileno LIKE #{searchkey} OR nickname LIKE #{searchkey})
+		</if>
+	</sql>
+</mapper>

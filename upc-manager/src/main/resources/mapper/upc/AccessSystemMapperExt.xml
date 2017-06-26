@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.hanzhdy.manager.upc.mapper.AccessSystemMapperExt">
+    <!-- 按条件查询接入系统数量 -->
+	<select id="countAsList" parameterType="java.util.HashMap" resultType="int">
+	SELECT COUNT(1) FROM r_accesssystem a
+    <include refid="selectAsList_whereClause" />
+	</select>
+	
+	<!-- 按条件查询接入系统信息 -->
+	<select id="selectAsList" parameterType="java.util.HashMap" resultType="org.hanzhdy.manager.upc.model.AccessSystem">
+    <include refid="Pageable_Prefix" />
+	SELECT a.ID,a.SYSCODE,a.SYSNAME,a.SYSADDR,a.STATUS,a.CREATETIME,a.UPDATETIME
+	FROM r_accesssystem a
+    <include refid="selectAsList_whereClause" />
+    <include refid="Pageable_Suffix" />
+	</select>
+	
+	<!-- 组合查询接入系统信息的条件 -->
+	<sql id="selectAsList_whereClause">
+	<where>
+		<if test="syscode!=null and syscode!=''">
+		AND syscode LIKE #{syscode}
+		</if>
+		<if test="sysname!=null and sysname!=''">
+		AND sysname LIKE #{sysname}
+		</if>
+		<if test="status!=null and status!=''">
+		AND status = #{status}
+		</if>
+		<if test="searchkey!=null and searchkey!=''">
+		AND (syscode LIKE #{searchkey} OR sysname LIKE #{searchkey} OR sysaddr LIKE #{searchkey})
+		</if>
+	</where>
+	</sql>
+</mapper>

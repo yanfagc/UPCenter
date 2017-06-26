@@ -1,0 +1,51 @@
+label.error {
+	color: red;
+	font-weight: normal;
+	font-size: 13px;
+	padding-left: 15px;
+	margin-left: 5px;
+	margin-bottom: 0px;
+	display: inline;
+	height: 30px;
+	padding-top: 6px;
+	background: url("../images/icon/unchecked.jpg") left no-repeat;
+}
+
+.input-sm{
+	padding:5px 3px;
+}
+
+.form-control{
+	padding:5px 3px;
+}
+
+span.red{
+	color: red;
+	font-weight: bold;
+}
+
+.myspan2 {
+	display: inline;
+	width: 20%;
+}
+
+.myspan4 {
+	width: 40%;
+	display: inline;
+}
+
+.myspan6 {
+	display: inline;
+	width: 60%;
+}
+
+.myspanAll {
+	display: inline;
+	width: 100%;
+}
+
+
+.easyDialog_title {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}

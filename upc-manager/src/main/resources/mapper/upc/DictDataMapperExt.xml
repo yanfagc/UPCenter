@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.hanzhdy.manager.upc.mapper.DictDataMapperExt">
+    <!-- 按条件查询数据字典数量 -->
+	<select id="countAsList" parameterType="java.util.HashMap" resultType="int">
+	SELECT COUNT(1) FROM s_dictdata s, s_dicttype t
+    <include refid="selectAsList_whereClause" />
+	</select>
+	
+	<!-- 按条件查询数据字典信息 -->
+	<select id="selectAsList" parameterType="java.util.HashMap" resultType="org.hanzhdy.manager.upc.vo.DictDataVo">
+    <include refid="Pageable_Prefix" />
+	SELECT s.ID,s.DATACODE,s.DATANAME,s.TYPEID,s.SORT,s.STATUS,s.DATAVALUE,s.CREATETIME,s.UPDATETIME,t.TYPENAME,t.VALUETYPE
+	FROM s_dictdata s, s_dicttype t
+    <include refid="selectAsList_whereClause" />
+    <include refid="Pageable_Suffix" />
+	</select>
+	
+	<!-- 根据字典类型typecode值查询其包含的数据字典数据 -->
+	<select id="selectByTypecode" parameterType="java.lang.String" resultType="org.hanzhdy.manager.upc.model.DictData">
+	SELECT s.ID,s.DATACODE,s.DATANAME,s.TYPEID,s.SORT,s.STATUS,s.DATAVALUE,s.CREATETIME,s.UPDATETIME
+	FROM s_dictdata s, s_dicttype t
+	WHERE s.TYPEID=t.ID
+	AND s.STATUS='N'
+	AND s.TYPECODE=#{typecode}
+	ORDER BY s.SORT ASC
+	</select>
+	
+	<!-- 组合查询数据字段的条件 -->
+	<sql id="selectAsList_whereClause">
+		WHERE s.TYPEID=t.ID
+		<if test="typeid!=null">
+		AND s.TYPEID = #{typeid}
+		</if>
+		<if test="status!=null and status!=''">
+		AND s.STATUS = #{status}
+		</if>
+		<if test="searchkey!=null and searchkey!=''">
+		AND (s.DATACODE LIKE #{searchkey} OR s.DATANAME LIKE #{searchkey} OR s.DATAVALUE LIKE #{searchkey})
+		</if>
+	</sql>
+</mapper>

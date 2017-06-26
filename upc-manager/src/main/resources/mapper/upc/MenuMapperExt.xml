@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.hanzhdy.manager.upc.mapper.MenuMapperExt">
+  <select id="countAsList" parameterType="java.util.HashMap" resultType="int">
+  SELECT COUNT(1)AS mc FROM r_menu m <include refid="wherecause_menu"/>
+  </select>
+  
+  <select id="selectAsList" parameterType="java.util.HashMap" resultType="org.hanzhdy.manager.upc.vo.MenuVo">
+  <include refid="Pageable_Prefix" />
+    SELECT
+      m.ID AS id,
+      m.MENUCODE AS CODE,
+      m.MENUNAME AS NAME,
+      m.URLTYPE AS urltype,
+      m.MENUURL AS url,
+      m.STATUS AS status
+    FROM r_menu m
+    <include refid="wherecause_menu"/>
+    <include refid="Pageable_Suffix" />
+  </select>
+  
+  <sql id="wherecause_menu">
+  WHERE m.PARENTID = #{parentid}
+    <if test="searchkey!=null and searchkey!=''">
+    AND (MENUCODE LIKE #{searchkey} OR MENUNAME LIKE #{searchkey})
+    </if>
+    <if test="systemid!=null and systemid!=''">
+    AND SYSTEMID=#{systemid}
+    </if>
+    <if test="urltype!=null and urltype!=''">
+    AND URLTYPE=#{urltype}
+    </if>
+    <if test="status!=null and status!=''">
+    AND STATUS=#{status}
+    </if>
+  </sql>
+  
+  <select id="selectAsZTreeNodeByRoleAndSystemid" parameterType="java.util.HashMap" resultType="org.hanzhdy.web.bean.ZTreeNode">
+  (
+	SELECT
+		concat('m_',m.ID) AS id,
+		m.MENUNAME AS NAME,
+	IF(m.PARENTID IS NULL OR m.PARENTID='0','0',concat('m_',m.PARENTID)) AS pId,
+		'true' AS OPEN,
+		'true' AS parent,
+
+	IF (
+		rm.ROLEID IS NOT NULL
+		AND rm.ROLEID <![CDATA[<>]]> '',
+		'true',
+		'false'
+	) AS checked
+	FROM
+		r_menu m
+	LEFT JOIN r_role_menu rm ON (
+		m.ID = rm.MENUID
+		AND rm.ROLEID = #{roleid}
+	)
+	WHERE
+		m.SYSTEMID = #{systemid}
+	AND m.`STATUS` <![CDATA[<>]]> 'D'
+	ORDER BY m.SORT
+)
+UNION ALL
+	(
+		SELECT
+			concat('mi_',mi.ID) AS id,
+			mi.ITEMNAME AS NAME,
+			concat('m_',mi.MENUID) AS pId,
+			'false' AS OPEN,
+			'false' AS parent,
+
+		IF (
+			rmi.ROLEID IS NOT NULL
+			AND rmi.ROLEID <![CDATA[<>]]> '',
+			'true',
+			'false'
+		) AS checked
+		FROM
+			r_menu m,
+			r_menuitem mi
+		LEFT JOIN r_role_menuitem rmi ON (
+			mi.ID = rmi.ITEMID
+			AND rmi.ROLEID = #{roleid}
+		)
+		WHERE
+			mi.MENUID = m.ID
+		AND m.SYSTEMID = #{systemid}
+		AND m. STATUS <![CDATA[<>]]> 'D'
+		AND mi. STATUS <![CDATA[<>]]> 'D'
+		ORDER BY m.SORT
+	)
+  
+  </select>
+</mapper>

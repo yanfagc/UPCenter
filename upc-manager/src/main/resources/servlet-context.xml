@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	<bean id="propertyConfigurer"  
+	        class="org.hanzhdy.web.spring.ResourcePropertyPlaceholderConfigurer">
+	    <constructor-arg name="globalName" value="global"/>
+	    <constructor-arg name="configDir" value="config"/>
+	    <constructor-arg name="fileList">
+	    	<list>
+	    		<value>common</value>
+	    		<value>datasource</value>
+	    		<value>framework</value>
+	    	</list>
+	    </constructor-arg>
+	    <property name="locations">
+            <list>
+                <value>classpath*:log4j.properties</value>
+            </list>
+        </property>
+	</bean>
+	
+    <!-- Imports user-defined @Controller beans that process client requests -->
+    <context:component-scan base-package="org.hanzhdy.manager.form.controller" />
+    <context:component-scan base-package="org.hanzhdy.manager.support.controller" />
+    <context:component-scan base-package="org.hanzhdy.manager.upc.controller" />
+	
+    <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+		<property name="paramName" value="siteLanguage" />
+	</bean>
+
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver" />
+
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	
+	<!-- ===========================formdesign========================= -->
+	
+	<!-- 启用缓存注解功能，这个是必须的，否则注解不会生效，另外，该注解一定要声明在spring主配置文件中才会生效 <cache:annotation-driven 
+		cache-manager="cacheManager" /> -->
+	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
+	
+	<!-- 避免IE在ajax请求时，返回json出现下载 -->
+	<bean id="jacksonMessageConverter"
+		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/html;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- ①注册ConversionService -->
+	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+	    <property name="converters">
+	       <set>
+	            <bean class="org.hanzhdy.web.spring.DateConverter" />
+	        </set>
+	    </property>
+	</bean>
+	
+	<!-- ②使用ConfigurableWebBindingInitializer注册conversionService -->  
+	<bean id="webBindingInitializer" class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer">  
+	    <property name="conversionService" ref="conversionService"/>  
+	</bean>
+	
+	<!-- 3 -->
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">  
+		<property name="webBindingInitializer" ref="webBindingInitializer"/>  
+		<property name="messageConverters">
+            <list>
+                <bean class="org.hanzhdy.web.spring.UTF8StringHttpMessageConverter"/>
+                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+            </list>
+        </property>
+	</bean>  
+	
+	<!-- 拦截器  -->
+    <mvc:interceptors>
+        <!--登录拦截器-->
+        <mvc:interceptor>
+            <mvc:mapping path="/"/>
+            <mvc:mapping path="/index"/>
+            <mvc:mapping path="/index/"/>
+            <mvc:mapping path="/basic/**"/>
+            <bean class="org.hanzhdy.manager.support.session.CheckSessionInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+	
+    <mvc:annotation-driven conversion-service="conversionService"></mvc:annotation-driven>
+    <mvc:default-servlet-handler/>
+</beans>
