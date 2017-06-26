@@ -165,6 +165,8 @@ public class RoleController extends ApplicationController {
     public String toSettingResources(Model model, @RequestParam("roleid") Long roleid,
             @RequestParam("sysid") Long sysid) {
         List<ZTreeNode> nodeList = this.roleService.queryRoleResourceById(roleid, sysid);
+        model.addAttribute("roleid", roleid);
+        model.addAttribute("sysid", sysid);
         model.addAttribute("nodeList", nodeList);
         return "/basic/role/role-setting";
     }

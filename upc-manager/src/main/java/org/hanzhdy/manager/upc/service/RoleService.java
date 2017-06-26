@@ -122,7 +122,7 @@ public class RoleService extends AbstractUpcService {
     
     /**
      * 根据角色编码查询角色信息
-     * @param groupcode
+     * @param rolecode
      * @return
      */
     public Role queryByRolecode(String rolecode) {
@@ -200,7 +200,7 @@ public class RoleService extends AbstractUpcService {
                     }
                     // 菜单项
                     else {
-                        Long mid = Long.valueOf(obj.getString("id").substring(2));
+                        Long mid = Long.valueOf(obj.getString("id").substring(3));
                         RoleMenuItemKey r = new RoleMenuItemKey();
                         r.setRoleId(id);
                         r.setItemId(mid);

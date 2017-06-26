@@ -17,7 +17,7 @@
             <property name="forceBigDecimals" value="false" />  
         </javaTypeResolver>  
         <!-- generate Model -->  
-        <javaModelGenerator targetPackage="org.hanzhdy.manager.form.model" targetProject="E:\workspace\myjobs\UPCenter\upc\upc-manager\src\main\java">  
+        <javaModelGenerator targetPackage="org.hanzhdy.manager.form.model" targetProject="E:\workspace_git\UPCenter\upc-manager\src\main\java">
             <property name="enableSubPackages" value="true" />  
             <property name="trimStrings" value="true" />  
 			<property name="rootInterface" value="java.io.Serializable"/>
@@ -25,12 +25,12 @@
           
           
         <!-- generate xml -->  
-        <sqlMapGenerator targetPackage="mapper.form"  targetProject="E:\workspace\myjobs\UPCenter\upc\upc-manager\src\main\resources">  
+        <sqlMapGenerator targetPackage="mapper.form"  targetProject="E:\workspace_git\UPCenter\upc-manager\src\main\resources">
             <property name="enableSubPackages" value="true" />  
         </sqlMapGenerator>  
           
         <!-- generate Mapper -->  
-        <javaClientGenerator type="XMLMAPPER" targetPackage="org.hanzhdy.manager.form.mapper" targetProject="E:\workspace\myjobs\UPCenter\upc\upc-manager\src\main\java">  
+        <javaClientGenerator type="XMLMAPPER" targetPackage="org.hanzhdy.manager.form.mapper" targetProject="E:\workspace_git\UPCenter\upc-manager\src\main\java">
             <property name="enableSubPackages" value="true" />  
         </javaClientGenerator>
         
@@ -63,8 +63,8 @@
         	<columnOverride column="ID" property="id" javaType="java.lang.Long" jdbcType="NUMERIC"/>
         	<columnOverride column="COLCOUNTS" property="colcounts" javaType="java.lang.Integer" jdbcType="NUMERIC"/>
         	<columnOverride column="STATUS" property="status" javaType="org.hanzhdy.manager.support.enums.CommonStatus" jdbcType="VARCHAR"/>
-			<columnOverride column="CREATETIME" property="createtime" javaType="java.util.Date" jdbcType="TIMESTAMP"
-			<columnOverride column="UPDATETIME" property="updatetime" javaType="java.util.Date" jdbcType="TIMESTAMP"
+			<columnOverride column="CREATETIME" property="createtime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+			<columnOverride column="UPDATETIME" property="updatetime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
         	<columnOverride column="CREATOR" property="creator" javaType="java.lang.Long" jdbcType="NUMERIC"/>
         	<columnOverride column="UPDATER" property="updater" javaType="java.lang.Long" jdbcType="NUMERIC"/>
         </table>

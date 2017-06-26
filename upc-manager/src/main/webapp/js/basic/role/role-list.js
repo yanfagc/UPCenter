@@ -111,7 +111,7 @@ $(function() {
     $('tbody').on("click", '.toSettingResources', function(){
     	var roleid=$(this).attr("fid");
     	var sysid=$(this).attr("sysid");
-    	openWindow($ctx+'/basic/role/toSettingResources?roleid='+roleid+'&sysid='+sysid,750,350);
+    	openWindow($ctx+'/basic/role/toSettingResources?roleid='+roleid+'&sysid='+sysid,550,480);
     });
     
     // 编辑

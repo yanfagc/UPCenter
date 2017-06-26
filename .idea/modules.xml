@@ -4,7 +4,9 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/UPCenter.iml" filepath="$PROJECT_DIR$/.idea/UPCenter.iml" />
       <module fileurl="file://$PROJECT_DIR$/upc-api/upc-api.iml" filepath="$PROJECT_DIR$/upc-api/upc-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/upc-client/upc-client.iml" filepath="$PROJECT_DIR$/upc-client/upc-client.iml" />
       <module fileurl="file://$PROJECT_DIR$/upc-manager/upc-manager.iml" filepath="$PROJECT_DIR$/upc-manager/upc-manager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/upc-support/upc-support.iml" filepath="$PROJECT_DIR$/upc-support/upc-support.iml" />
     </modules>
   </component>
 </project>

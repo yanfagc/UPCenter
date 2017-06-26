@@ -15,12 +15,20 @@
         </div>
       </div>
     </nav>
-    <div class="container" style="width:100%;margin-top:50px;padding-left:10px;padding-right:10px;">
-      <div class="row">
+    <div class="container" style="width:100%;margin-top:50px;padding-left:10px;padding-right:10px;height:430px;overflow-y:auto;">
+      <form id="submitForm" class="form-horizontal" action="${ctx}/basic/role/saveResources" method="POST">
+        <input type="hidden" name="roleid" value="${roleid}"/>
+        <input type="hidden" name="resources" id="resources"/>
+      </form>
+      <div class="row" style="width:98%">
         <div class="col-xs-2">
           <ul id="menuTree" class="ztree"></ul>
         </div>
       </div>
+    </div>
+    <div class="well center-block" style="left:10px;right:10px;position:fixed;bottom:0px;padding:10px;">
+      <button type="button" class="btn btn-primary submit">&nbsp;&nbsp;保&nbsp;存&nbsp;&nbsp;</button>
+      <button type="button" class="btn btn-warning" onclick="window.close();" style="float:right">&nbsp;&nbsp;关&nbsp;闭&nbsp;&nbsp;</button>
     </div>
   </body>
   <jsp:include page="/WEB-INF/jsp/commons/editfooter.jsp" />

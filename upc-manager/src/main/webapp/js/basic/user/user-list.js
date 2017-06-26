@@ -54,7 +54,7 @@ $(function() {
                     mData:null,
                     sClass:"text-center",
                     mRender:function(data, display, record) {
-                    	return '<a class="btn btn-success btn-xs toExtendProps" fid="'+record.id
+                    	return '<a class="btn btn-primary btn-xs toExtendProps" fid="'+record.id
                         	+'" href="javascript:void(0);">&nbsp;扩展属性&nbsp;</a>';
                     }
                 },

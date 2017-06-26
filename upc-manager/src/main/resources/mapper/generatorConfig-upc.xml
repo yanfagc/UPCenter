@@ -17,7 +17,7 @@
             <property name="forceBigDecimals" value="false" />  
         </javaTypeResolver>  
         <!-- generate Model -->  
-        <javaModelGenerator targetPackage="org.hanzhdy.manager.upc.model" targetProject="E:\workspace\myjobs\UPCenter\upc\upc-manager\src\main\java">  
+        <javaModelGenerator targetPackage="org.hanzhdy.manager.upc.model" targetProject="E:\workspace_git\UPCenter\upc-manager\src\main\java">
             <property name="enableSubPackages" value="true" />  
             <property name="trimStrings" value="true" />  
 			<property name="rootInterface" value="java.io.Serializable"/>
@@ -25,12 +25,12 @@
           
           
         <!-- generate xml -->  
-        <sqlMapGenerator targetPackage="mapper.upc"  targetProject="E:\workspace\myjobs\UPCenter\upc\upc-manager\src\main\resources">  
+        <sqlMapGenerator targetPackage="mapper.upc"  targetProject="E:\workspace_git\UPCenter\upc-manager\src\main\resources">
             <property name="enableSubPackages" value="true" />  
         </sqlMapGenerator>  
           
         <!-- generate Mapper -->  
-        <javaClientGenerator type="XMLMAPPER" targetPackage="org.hanzhdy.manager.upc.mapper" targetProject="E:\workspace\myjobs\UPCenter\upc\upc-manager\src\main\java">  
+        <javaClientGenerator type="XMLMAPPER" targetPackage="org.hanzhdy.manager.upc.mapper" targetProject="E:\workspace_git\UPCenter\upc-manager\src\main\java">
             <property name="enableSubPackages" value="true" />  
         </javaClientGenerator>
         
