@@ -196,7 +196,7 @@ public class UserManagerService extends AbstractUpcService {
     
     /**
      * 更改用户状态
-     * @param status
+     * @param record
      * @return
      */
     public boolean updateStatus(UserStatus record) {

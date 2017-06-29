@@ -1,11 +1,12 @@
 package org.hanzhdy.manager.form.model;
 
+import org.hanzhdy.manager.support.enums.CommonStatus;
+import org.hanzhdy.manager.support.enums.FieldType;
+import org.hanzhdy.manager.support.enums.YesOrNo;
+import org.hanzhdy.web.bean.Page;
+
 import java.util.ArrayList;
 import java.util.List;
-import org.hanzhdy.framework.bean.Page;
-import org.hanzhdy.manager.engine.constants.FieldType;
-import org.hanzhdy.manager.support.enums.CommonStatus;
-import org.hanzhdy.manager.support.enums.YesOrNo;
 
 public class FieldInfoExample {
     /**

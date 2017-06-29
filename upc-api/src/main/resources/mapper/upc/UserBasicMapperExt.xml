@@ -1,3 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="org.hanzhdy.manager.upc.mapper.UserBasicMapperExt" />
+<mapper namespace="org.hanzhdy.manager.upc.mapper.UserBasicMapperExt">
+    <!-- 根据用户帐号查询用户信息 -->
+    <select id="selectByAccount" parameterType="java.lang.String" resultType="org.hanzhdy.api.vo.UserVo">
+SELECT b.ID AS id,
+       b.ACCOUNT AS account,
+       b.NICKNAME AS nickname,
+       b.PASSWORD AS password,
+       b.FORMID AS formid,
+       b.CURRLOGINTIME AS currlogintime,
+       b.PRELOGINTIME AS prelogintime,
+       b.CURRLOGINIP AS currloginip,
+       b.PRELOGINIP AS preloginip,
+       s.`STATUS` AS status,
+       i.MOBILENO AS mobileno,
+       i.EMAIL AS email,
+       i.CERTTYPE AS certtype,
+       i.CERTNO AS certno,
+       i.OFFICEPHONE AS officephone,
+       i.FAXNO AS faxno
+  FROM u_user_basic b,u_user_info i,u_user_status s
+ WHERE b.ID = i.USERID
+   AND b.ID=s.USERID
+   AND b.ACCOUNT=#{account}
+ LIMIT 1
+    </select>
+</mapper>

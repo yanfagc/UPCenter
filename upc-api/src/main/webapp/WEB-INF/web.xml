@@ -39,7 +39,7 @@
   </filter-mapping>
   <servlet>
     <servlet-name>graduate</servlet-name>
-    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <servlet-class>org.hanzhdy.manager.support.servlet.UpcDispatcherServlet</servlet-class>
     <init-param>
       <param-name>contextConfigLocation</param-name>
       <param-value>classpath*:servlet-context.xml</param-value>
@@ -54,12 +54,12 @@
     <servlet-name>default</servlet-name>
     <url-pattern>*.ico</url-pattern>
   </servlet-mapping>
-
+  
   <error-page>
     <error-code>500</error-code>
     <location>/WEB-INF/jsp/error/500.jsp</location>
   </error-page>
-
+  
   <session-config>
     <session-timeout>100</session-timeout>
   </session-config>

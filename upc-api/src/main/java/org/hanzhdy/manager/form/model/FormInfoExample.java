@@ -3,8 +3,8 @@ package org.hanzhdy.manager.form.model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import org.hanzhdy.framework.bean.Page;
 import org.hanzhdy.manager.support.enums.CommonStatus;
+import org.hanzhdy.web.bean.Page;
 
 public class FormInfoExample {
     /**

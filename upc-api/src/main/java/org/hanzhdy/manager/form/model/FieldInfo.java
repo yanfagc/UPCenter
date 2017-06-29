@@ -1,9 +1,10 @@
 package org.hanzhdy.manager.form.model;
 
-import java.io.Serializable;
-import org.hanzhdy.manager.engine.constants.FieldType;
 import org.hanzhdy.manager.support.enums.CommonStatus;
+import org.hanzhdy.manager.support.enums.FieldType;
 import org.hanzhdy.manager.support.enums.YesOrNo;
+
+import java.io.Serializable;
 
 public class FieldInfo implements Serializable {
     public static final long serialVersionUID = 1517388090L;

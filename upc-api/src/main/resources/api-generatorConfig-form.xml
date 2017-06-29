@@ -46,7 +46,7 @@
         <table schema="" tableName="F_FIELD_INFO"          domainObjectName="FieldInfo">
         	<generatedKey column="ID" sqlStatement="JDBC" identity="false"/>
         	<columnOverride column="ID" property="id" javaType="java.lang.Long" jdbcType="NUMERIC"/>
-        	<columnOverride column="FIELDTYPE" property="fieldtype" javaType="org.hanzhdy.manager.engine.constants.FieldType" jdbcType="VARCHAR"/>
+        	<columnOverride column="FIELDTYPE" property="fieldtype" javaType="org.hanzhdy.manager.support.enums.FieldType" jdbcType="VARCHAR"/>
         	<columnOverride column="STATUS" property="status" javaType="org.hanzhdy.manager.support.enums.CommonStatus" jdbcType="VARCHAR"/>
         	<columnOverride column="COLSPAN" property="colspan" javaType="java.lang.Integer" jdbcType="NUMERIC"/>
         	<columnOverride column="REQUIRED" property="required" javaType="org.hanzhdy.manager.support.enums.YesOrNo" jdbcType="VARCHAR"/>
