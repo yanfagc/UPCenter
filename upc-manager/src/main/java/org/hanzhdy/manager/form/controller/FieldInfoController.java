@@ -1,11 +1,7 @@
 package org.hanzhdy.manager.form.controller;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
+import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.StringUtils;
-import org.hanzhdy.manager.engine.constants.FieldType;
 import org.hanzhdy.manager.engine.constants.InputMacrosType;
 import org.hanzhdy.manager.engine.constants.NormalMacrosType;
 import org.hanzhdy.manager.form.controller.params.FieldInfoParams;
@@ -15,6 +11,7 @@ import org.hanzhdy.manager.form.service.FieldInfoService;
 import org.hanzhdy.manager.form.vo.FieldInfoVo;
 import org.hanzhdy.manager.support.constants.resp.RespResult;
 import org.hanzhdy.manager.support.controller.ApplicationController;
+import org.hanzhdy.manager.support.enums.FieldType;
 import org.hanzhdy.web.bean.DatatableResult;
 import org.hanzhdy.web.throwable.BizException;
 import org.slf4j.Logger;
@@ -27,7 +24,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSON;
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @description 表单字段管理Controller

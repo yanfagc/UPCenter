@@ -1,6 +1,6 @@
 package org.hanzhdy.manager.form.controller.params;
 
-import org.hanzhdy.manager.engine.constants.FieldType;
+import org.hanzhdy.manager.support.enums.FieldType;
 import org.hanzhdy.web.bean.DatatableParams;
 
 /**
@@ -18,7 +18,7 @@ public class FieldInfoParams extends DatatableParams {
     
     private String            fieldname;
     
-    private FieldType         fieldtype;
+    private FieldType fieldtype;
     
     public Long getFormid() {
         return formid;

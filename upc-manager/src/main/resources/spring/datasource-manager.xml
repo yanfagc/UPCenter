@@ -45,8 +45,7 @@
 		<property name="dumpSqlMaxLineLength" value="0" />
 	</bean> -->
 	
-    <bean id="manager-transactionManager"
-          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <bean id="manager-transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="_manager-dataSource" />
     </bean>
 
@@ -55,21 +54,14 @@
     <tx:advice id="manager-tx-advice" transaction-manager="manager-transactionManager">
         <tx:attributes>
             <tx:method name="add*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
-            <tx:method name="save*" propagation="REQUIRED"
-                       rollback-for="java.lang.Exception" />
-            <tx:method name="insert*" propagation="REQUIRED"
-                       rollback-for="java.lang.Exception" />
+            <tx:method name="save*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+            <tx:method name="insert*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
             <tx:method name="del*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
-            <tx:method name="remove*" propagation="REQUIRED"
-                       rollback-for="java.lang.Exception" />
-            <tx:method name="update*" propagation="REQUIRED"
-                       rollback-for="java.lang.Exception" />
-            <tx:method name="edit*" propagation="REQUIRED"
-                       rollback-for="java.lang.Exception" />
-            <tx:method name="batchDelete*" propagation="REQUIRED"
-                       rollback-for="java.lang.Exception" />
-            <tx:method name="loadUser*" propagation="REQUIRED"
-                       rollback-for="java.lang.Exception" />
+            <tx:method name="remove*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+            <tx:method name="update*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+            <tx:method name="edit*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+            <tx:method name="batchDelete*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+            <tx:method name="loadUser*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
             <tx:method name="*" read-only="true" />
         </tx:attributes>
     </tx:advice>
@@ -77,12 +69,10 @@
     <!-- 配置哪些类的方法需要进行事务管理 -->
     <aop:config>
         <aop:advisor pointcut="execution(* org.hanzhdy.manager.form.service..*Service.*(..))" advice-ref="manager-tx-advice" />
-        <aop:advisor pointcut="execution(* org.hanzhdy.manager.support.service..*Service.*(..))" advice-ref="manager-tx-advice" />
         <aop:advisor pointcut="execution(* org.hanzhdy.manager.upc.service..*Service.*(..))" advice-ref="manager-tx-advice" />
     </aop:config>
 	
 	<context:component-scan base-package="org.hanzhdy.manager.form.**"></context:component-scan>
-    <context:component-scan base-package="org.hanzhdy.manager.support.**"></context:component-scan>
     <context:component-scan base-package="org.hanzhdy.manager.upc.**"></context:component-scan>
     
     <!-- beware that mapper-config.xml is not needed if you use injected mappers -->
@@ -96,19 +86,7 @@
         <!-- optional unless there are multiple session factories defined -->
         <property name="sqlSessionFactoryBeanName" value="manager-form-sqlSessionFactoryBean" />
     </bean>
-    
-    <!-- beware that mapper-config.xml is not needed if you use injected mappers -->
-    <bean id="manager-support-sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="_manager-dataSource" />
-        <property name="mapperLocations" value="classpath*:mapper/support/**/*.xml"/>
-    </bean>
 
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="org.hanzhdy.manager.support.mapper" />
-        <!-- optional unless there are multiple session factories defined -->
-        <property name="sqlSessionFactoryBeanName" value="manager-support-sqlSessionFactoryBean" />
-    </bean>
-    
     <!-- beware that mapper-config.xml is not needed if you use injected mappers -->
     <bean id="manager-upc-sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="_manager-dataSource" />

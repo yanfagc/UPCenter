@@ -39,6 +39,7 @@
     </properties>
   </component>
   <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/upc-api" />
     <file type="web" url="file://$PROJECT_DIR$/upc-manager" />
   </component>
   <component name="MavenProjectsManager">
@@ -46,6 +47,12 @@
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/upc-api/pom.xml" />
+        <option value="$PROJECT_DIR$/upc-support/pom.xml" />
+      </set>
     </option>
   </component>
 </project>

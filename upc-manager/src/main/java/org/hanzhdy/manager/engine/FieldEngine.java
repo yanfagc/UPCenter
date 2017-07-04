@@ -1,14 +1,13 @@
 package org.hanzhdy.manager.engine;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.hanzhdy.manager.engine.attribute.FieldAttribute;
-import org.hanzhdy.manager.engine.constants.FieldType;
 import org.hanzhdy.manager.form.model.FieldInfo;
 import org.hanzhdy.manager.form.model.FieldItem;
 import org.hanzhdy.manager.form.model.FormData;
+import org.hanzhdy.manager.support.enums.FieldType;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @description Field Engine

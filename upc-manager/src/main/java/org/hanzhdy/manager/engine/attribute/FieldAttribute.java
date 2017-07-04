@@ -1,6 +1,6 @@
 package org.hanzhdy.manager.engine.attribute;
 
-import org.hanzhdy.manager.engine.constants.FieldType;
+import org.hanzhdy.manager.support.enums.FieldType;
 
 /**
  * @description 表单字段的属性

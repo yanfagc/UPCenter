@@ -1,18 +1,18 @@
 package org.hanzhdy.manager.engine.impl;
 
-import java.util.List;
-
 import org.apache.commons.lang3.StringUtils;
 import org.hanzhdy.manager.engine.EngineContext;
 import org.hanzhdy.manager.engine.attribute.FieldAttribute;
 import org.hanzhdy.manager.engine.attribute.SelectAttribute;
 import org.hanzhdy.manager.engine.attribute.item.Option;
 import org.hanzhdy.manager.engine.attribute.item.SelectOption;
-import org.hanzhdy.manager.engine.constants.FieldType;
 import org.hanzhdy.manager.engine.utils.FieldHtmlFormat;
 import org.hanzhdy.manager.form.model.FieldInfo;
 import org.hanzhdy.manager.form.model.FieldItem;
 import org.hanzhdy.manager.form.model.FormData;
+import org.hanzhdy.manager.support.enums.FieldType;
+
+import java.util.List;
 
 /**
  * @description Select Field Engine

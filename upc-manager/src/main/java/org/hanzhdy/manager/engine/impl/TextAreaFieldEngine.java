@@ -4,10 +4,10 @@ import org.hanzhdy.manager.engine.EngineContext;
 import org.hanzhdy.manager.engine.attribute.FieldAttribute;
 import org.hanzhdy.manager.engine.attribute.TextAreaAttribute;
 import org.hanzhdy.manager.engine.attribute.item.Option;
-import org.hanzhdy.manager.engine.constants.FieldType;
 import org.hanzhdy.manager.engine.utils.FieldHtmlFormat;
 import org.hanzhdy.manager.form.model.FieldInfo;
 import org.hanzhdy.manager.form.model.FieldItem;
+import org.hanzhdy.manager.support.enums.FieldType;
 
 /**
  * @description textarea Field Engine

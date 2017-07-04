@@ -1,26 +1,20 @@
 package org.hanzhdy.manager.engine;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.hanzhdy.manager.engine.attribute.FieldAttribute;
 import org.hanzhdy.manager.engine.build.LineBuilder;
-import org.hanzhdy.manager.engine.constants.FieldType;
-import org.hanzhdy.manager.engine.impl.CheckboxFieldEngine;
-import org.hanzhdy.manager.engine.impl.InputFieldEngine;
-import org.hanzhdy.manager.engine.impl.MacrosFieldEngine;
-import org.hanzhdy.manager.engine.impl.RadioFieldEngine;
-import org.hanzhdy.manager.engine.impl.SelectFieldEngine;
-import org.hanzhdy.manager.engine.impl.TextAreaFieldEngine;
+import org.hanzhdy.manager.engine.impl.*;
 import org.hanzhdy.manager.engine.utils.SortableUtils;
 import org.hanzhdy.manager.form.model.FieldInfo;
 import org.hanzhdy.manager.form.model.FieldItem;
 import org.hanzhdy.manager.form.model.FormData;
 import org.hanzhdy.manager.form.model.FormInfo;
+import org.hanzhdy.manager.support.enums.FieldType;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @description Form Engine
