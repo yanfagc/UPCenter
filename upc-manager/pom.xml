@@ -234,5 +234,10 @@
           <groupId>org.hanzhdy</groupId>
           <artifactId>hanzhdy-web</artifactId>
       </dependency>
+      <dependency>
+          <groupId>org.hanzhdy.upc</groupId>
+          <artifactId>upc-client</artifactId>
+          <version>1.0.0-SNAPSHOT</version>
+      </dependency>
   </dependencies>
 </project>
