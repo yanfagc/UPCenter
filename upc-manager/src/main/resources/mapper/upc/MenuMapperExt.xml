@@ -38,14 +38,14 @@
   </sql>
   
   <select id="selectAsZTreeNodeByRoleAndSystemid" parameterType="java.util.HashMap" resultType="org.hanzhdy.web.bean.ZTreeNode">
-  (
+  SELECT * FROM ((
 	SELECT
 		concat('m_',m.ID) AS id,
 		m.MENUNAME AS NAME,
 	IF(m.PARENTID IS NULL OR m.PARENTID='0','0',concat('m_',m.PARENTID)) AS pId,
 		'true' AS OPEN,
 		'true' AS parent,
-
+		m.SORT AS sort,
 	IF (
 		rm.ROLEID IS NOT NULL
 		AND rm.ROLEID <![CDATA[<>]]> '',
@@ -61,7 +61,6 @@
 	WHERE
 		m.SYSTEMID = #{systemid}
 	AND m.`STATUS` <![CDATA[<>]]> 'D'
-	ORDER BY m.SORT
 )
 UNION ALL
 	(
@@ -71,7 +70,7 @@ UNION ALL
 			concat('m_',mi.MENUID) AS pId,
 			'false' AS OPEN,
 			'false' AS parent,
-
+			mi.SORT AS sort,
 		IF (
 			rmi.ROLEID IS NOT NULL
 			AND rmi.ROLEID <![CDATA[<>]]> '',
@@ -90,8 +89,7 @@ UNION ALL
 		AND m.SYSTEMID = #{systemid}
 		AND m. STATUS <![CDATA[<>]]> 'D'
 		AND mi. STATUS <![CDATA[<>]]> 'D'
-		ORDER BY m.SORT
-	)
+	)) t ORDER BY t.SORT ASC
   
   </select>
   <select id="selectByUserAndSystemid" parameterType="java.util.HashMap" resultType="org.hanzhdy.manager.upc.vo.Resource">
