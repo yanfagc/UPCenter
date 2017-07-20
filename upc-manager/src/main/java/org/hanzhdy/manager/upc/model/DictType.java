@@ -2,7 +2,6 @@ package org.hanzhdy.manager.upc.model;
 
 import java.io.Serializable;
 import java.util.Date;
-
 import org.hanzhdy.manager.support.enums.CommonStatus;
 
 public class DictType implements Serializable {

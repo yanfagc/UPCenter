@@ -1,20 +1,28 @@
 package org.hanzhdy.manager.upc.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.hanzhdy.manager.support.bean.SessionUser;
 import org.hanzhdy.manager.support.constants.resp.RespResult;
 import org.hanzhdy.manager.support.controller.ApplicationController;
+import org.hanzhdy.manager.upc.model.AccessSystem;
+import org.hanzhdy.manager.upc.service.AccessSystemService;
+import org.hanzhdy.manager.upc.service.LoginLogService;
 import org.hanzhdy.manager.upc.service.LoginService;
+import org.hanzhdy.manager.upc.service.MenuService;
+import org.hanzhdy.manager.upc.vo.Resource;
+import org.hanzhdy.utils.HttpUtils;
 import org.hanzhdy.web.throwable.BizException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @description 首页、登录、登出
@@ -27,6 +35,15 @@ public class IndexController extends ApplicationController {
     @Autowired
     private LoginService        loginService;
     
+    @Autowired
+    private MenuService         menuService;
+    
+    @Autowired
+    private AccessSystemService accessSystemService;
+    
+    @Autowired
+    private LoginLogService     loginLogService;
+    
     /** 日志对象 */
     private static final Logger logger = LoggerFactory.getLogger(IndexController.class);
     
@@ -35,7 +52,18 @@ public class IndexController extends ApplicationController {
      * @return
      */
     @RequestMapping(value = {"", "index"}, method = RequestMethod.GET)
-    public String index() {
+    public String index(Model model, HttpServletRequest request) {
+        try {
+            SessionUser user = super.getSessionUser(request);
+            AccessSystem system = accessSystemService.queryBySyscode(systemCode);
+            if (system != null) {
+                List<Resource> resourceList = this.menuService.queryMenuResourceByUserAndSysid(user.getId(), system.getId());
+                model.addAttribute("resourceList", resourceList);
+            }
+        }
+        catch (Exception ex) {
+            logger.error("首页打开失败", ex);
+        }
         return "index";
     }
     
@@ -62,6 +90,11 @@ public class IndexController extends ApplicationController {
         try {
             SessionUser user = this.loginService.insertByCheckLogin(username, password, captcha);
             super.setSessionUser(request, user);
+    
+            // 记录日志
+            this.loginLogService.insert(user, HttpUtils.getRealIp(request), "用户[" + username + "]登录系统");
+            
+            // 返回登录成功
             return RespResult.create(respCode.SUCCESS);
         }
         catch (BizException ex) {
@@ -82,7 +115,8 @@ public class IndexController extends ApplicationController {
      * @return
      */
     @RequestMapping(value = "logout")
-    public String logout() {
-        return "";
+    public String logout(HttpServletRequest request) {
+        super.removeSessionUser(request);
+        return redirect("login");
     }
 }

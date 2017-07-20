@@ -15,6 +15,8 @@ public class RoleVo extends Role {
     
     private String systemname;
     
+    private boolean checked;
+    
     public String getGroupname() {
         return groupname;
     }
@@ -31,4 +33,11 @@ public class RoleVo extends Role {
         this.systemname = systemname;
     }
     
+    public boolean isChecked() {
+        return checked;
+    }
+    
+    public void setChecked(boolean checked) {
+        this.checked = checked;
+    }
 }

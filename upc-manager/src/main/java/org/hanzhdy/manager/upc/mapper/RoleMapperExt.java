@@ -1,9 +1,9 @@
 package org.hanzhdy.manager.upc.mapper;
 
+import org.hanzhdy.manager.upc.vo.RoleVo;
+
 import java.util.List;
 import java.util.Map;
-
-import org.hanzhdy.manager.upc.vo.RoleVo;
 
 public interface RoleMapperExt extends RoleMapper {
     /**
@@ -19,6 +19,13 @@ public interface RoleMapperExt extends RoleMapper {
      * @return
      */
     List<RoleVo> selectAsList(Map<String, Object> params);
+    
+    /**
+     * 用户角色设置专用，查询用户角色
+     * @param userid
+     * @return
+     */
+    List<RoleVo> selectRolesForUserSetting(Long userid);
     
     /**
      * 将GroupId值设置为NULL

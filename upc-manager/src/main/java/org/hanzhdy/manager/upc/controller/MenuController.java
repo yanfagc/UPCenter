@@ -1,12 +1,10 @@
 package org.hanzhdy.manager.upc.controller;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
+import com.alibaba.fastjson.JSON;
 import org.hanzhdy.manager.support.bean.SessionUser;
 import org.hanzhdy.manager.support.constants.resp.RespResult;
 import org.hanzhdy.manager.support.controller.ApplicationController;
+import org.hanzhdy.manager.support.enums.MenuIcon;
 import org.hanzhdy.manager.upc.controller.params.MenuParams;
 import org.hanzhdy.manager.upc.model.AccessSystem;
 import org.hanzhdy.manager.upc.model.Menu;
@@ -26,7 +24,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSON;
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @description 菜单资源管理Controller
@@ -133,6 +132,10 @@ public class MenuController extends ApplicationController {
     public String toEdit(Long id, Long parentid, @RequestParam("systemid") Long systemid, Model model,
             HttpServletRequest request) {
         try {
+            AccessSystem system = accessSystemService.queryById(systemid);
+            model.addAttribute("system", system);
+            model.addAttribute("iconList", MenuIcon.values());
+            
             if (id != null && id > 0) {
                 Menu record = menuService.queryMenuById(id);
                 Menu parent = null;

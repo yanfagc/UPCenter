@@ -1,11 +1,5 @@
 package org.hanzhdy.manager.upc.service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.apache.commons.lang3.StringUtils;
 import org.hanzhdy.manager.support.enums.CommonStatus;
 import org.hanzhdy.manager.support.service.AbstractUpcService;
@@ -17,10 +11,13 @@ import org.hanzhdy.manager.upc.model.MenuExample;
 import org.hanzhdy.manager.upc.model.MenuExample.Criteria;
 import org.hanzhdy.manager.upc.model.MenuItem;
 import org.hanzhdy.manager.upc.vo.MenuVo;
+import org.hanzhdy.manager.upc.vo.Resource;
 import org.hanzhdy.web.bean.DatatableResult;
 import org.hanzhdy.web.bean.ZTreeNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.*;
 
 /**
  * @description 菜单Service
@@ -89,6 +86,36 @@ public class MenuService extends AbstractUpcService {
                 node.setpId(String.valueOf(menu.getParentId()));
                 node.setParent(true);
                 resultList.add(node);
+            }
+        }
+        return resultList;
+    }
+    
+    /**
+     * 根据用户和系统ID查询菜单信息
+     * @param userid
+     * @param systemid
+     * @return
+     */
+    public List<Resource> queryMenuResourceByUserAndSysid(Long userid, Long systemid) {
+        List<Resource> dataList = this.menuMapperExt.selectByUserAndSystemid(userid, systemid);
+        if (dataList == null || dataList.isEmpty()) {
+            return dataList;
+        }
+        
+        Map<Long, Resource> map = new HashMap<>((int)(dataList.size() * 1.5));
+        List<Resource> resultList = new ArrayList<Resource>();
+        for (Resource data : dataList) {
+            map.put(data.getId(), data);
+            if (data.getParentid() == null || data.getParentid() == 0) {
+                resultList.add(data);
+            }
+        }
+        
+        for (Resource data : dataList) {
+            if (data.getParentid() != null && data.getParentid() != 0) {
+                Resource parent = map.get(data.getParentid());
+                parent.addChild(data);
             }
         }
         return resultList;

@@ -51,6 +51,9 @@ public class RespCode {
 
     /** 数据保存失败，记录已存在 */
     public final BizStatus        SAVE_DUPLICATE            = null;
+    
+    /** 数据保存失败，主键数据为空 */
+    public final BizStatus        SAVE_PRIMARY_EMPTY        = null;
 
     /** 操作失败，错误的数据格式 */
     public final BizStatus        ERROR_DATA_FORMAT         = null;

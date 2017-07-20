@@ -1,33 +1,20 @@
 package org.hanzhdy.manager.upc.service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.StringUtils;
 import org.hanzhdy.manager.support.service.AbstractUpcService;
 import org.hanzhdy.manager.upc.controller.params.RoleParams;
-import org.hanzhdy.manager.upc.mapper.MenuMapperExt;
-import org.hanzhdy.manager.upc.mapper.RoleMapperExt;
-import org.hanzhdy.manager.upc.mapper.RoleMenuItemMapperExt;
-import org.hanzhdy.manager.upc.mapper.RoleMenuMapperExt;
-import org.hanzhdy.manager.upc.model.Role;
-import org.hanzhdy.manager.upc.model.RoleExample;
-import org.hanzhdy.manager.upc.model.RoleMenuExample;
-import org.hanzhdy.manager.upc.model.RoleMenuItemExample;
-import org.hanzhdy.manager.upc.model.RoleMenuItemKey;
-import org.hanzhdy.manager.upc.model.RoleMenuKey;
+import org.hanzhdy.manager.upc.mapper.*;
+import org.hanzhdy.manager.upc.model.*;
 import org.hanzhdy.manager.upc.vo.RoleVo;
 import org.hanzhdy.web.bean.DatatableResult;
 import org.hanzhdy.web.bean.ZTreeNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
+import java.util.*;
 
 /**
  * @description 角色管理Service
@@ -41,6 +28,9 @@ public class RoleService extends AbstractUpcService {
     
     @Autowired
     private RoleMapperExt         roleMapperExt;
+    
+    @Autowired
+    private RoleGroupMapperExt    roleGroupMapperExt;
     
     @Autowired
     private RoleMenuMapperExt     roleMenuMapperExt;
@@ -109,6 +99,43 @@ public class RoleService extends AbstractUpcService {
         }
         
         return result;
+    }
+    
+    public List<ZTreeNode> queryRoleForUserSetting(Long userid) {
+        List<RoleGroup> groupList = this.roleGroupMapperExt.selectByExample(new RoleGroupExample());
+        if (groupList == null || groupList.isEmpty()) {
+            return null;
+        }
+        
+        Map<Long, ZTreeNode> map = new HashMap<>((int)(groupList.size() * 1.5));
+        List<ZTreeNode> resultList = new ArrayList<>(groupList.size());
+        for (RoleGroup group : groupList) {
+            ZTreeNode node = new ZTreeNode();
+            node.setId("g_" + group.getId());
+            node.setName(group.getGroupname());
+            node.setParent(true);
+            node.setOpen(true);
+            resultList.add(node);
+            map.put(group.getId(), node);
+        }
+    
+        List<RoleVo> roleList = this.roleMapperExt.selectRolesForUserSetting(userid);
+        if (roleList != null && !roleList.isEmpty()) {
+            for (RoleVo role : roleList) {
+                ZTreeNode parent = map.get(role.getGroupid());
+                if (parent == null) {
+                    continue;
+                }
+                ZTreeNode node = new ZTreeNode();
+                node.setId(String.valueOf(role.getId()));
+                node.setName(role.getRolename());
+                node.setChecked(role.isChecked());
+                node.setpId("g_" + role.getGroupid());
+                parent.addChild(node);
+            }
+        }
+        
+        return resultList;
     }
     
     /**

@@ -92,4 +92,28 @@ UNION ALL
 	)
   
   </select>
+  <select id="selectByUserAndSystemid" parameterType="java.util.HashMap" resultType="org.hanzhdy.manager.upc.vo.Resource">
+SELECT
+	m.ID AS id,
+	m.MENUCODE AS code,
+	m.MENUNAME AS name,
+	m.PARENTID AS parentid,
+	m.MENUICON AS icon,
+	m.URLTYPE AS urltype,
+	m.MENUURL AS url
+FROM
+	R_MENU m,
+	R_ROLE r,
+	R_ROLE_MENU rm,
+	R_USER_ROLE ur
+WHERE
+	m.`STATUS` = 'N'
+AND r.`STATUS` = 'N'
+AND m.SYSTEMID = #{systemid}
+AND m.ID = rm.MENUID
+AND r.ID = rm.ROLEID
+AND r.ID = ur.ROLEID
+AND ur.USERID=#{userid}
+ORDER BY m.SORT
+  </select>
 </mapper>

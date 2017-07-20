@@ -5,6 +5,8 @@
   <head>
     <title>编辑菜单信息</title>
     <jsp:include page="/WEB-INF/jsp/commons/editheader.jsp" />
+    <link href="${ctx}/plugins/font-awesome-4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="${ctx}/plugins/ionicons-2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
     <nav class="navbar navbar-default navbar-fixed-top" style="min-height:40px;">
@@ -25,25 +27,39 @@
             <td style="width:32%;padding:4px;">
               <input name="pid" class="form-control input-sm myspan6" type="text" readonly value="${not empty parent?parent.menuname:'无'}">
             </td>
-            <td style="width:16%;text-align:right;"><span class="red">&nbsp;*&nbsp;</span>菜单编码：</td>
+            <td style="width:16%;text-align:right;">所属系统：</td>
             <td style="width:32%;padding:4px;">
-            <c:if test="${not empty parent}">
-              <input name="pmcode" class="form-control input-sm myspan4" type="text" readonly value="${parent.menucode}">
-              -
-              <input name="menucode" class="form-control input-sm myspan4" type="text" placeholder="子编码" value="${record.menucode}">
-            </c:if>
-            <c:if test="${empty parent}">
-              <input name="menucode" class="form-control input-sm myspan6" type="text" placeholder="菜单编码" value="${record.menucode}">
-            </c:if>
+              <input name="pid" class="form-control input-sm myspan6" type="text" readonly value="${system.sysname}">
             </td>
           </tr>
           <tr>
+            <td style="width:16%;text-align:right;"><span class="red">&nbsp;*&nbsp;</span>菜单编码：</td>
+            <td style="width:32%;padding:4px;">
+              <c:if test="${not empty parent}">
+                <input name="pmcode" class="form-control input-sm myspan4" type="text" readonly value="${parent.menucode}">
+                -
+                <input name="menucode" class="form-control input-sm myspan4" type="text" placeholder="子编码" value="${record.menucode}">
+              </c:if>
+              <c:if test="${empty parent}">
+                <input name="menucode" class="form-control input-sm myspan6" type="text" placeholder="菜单编码" value="${record.menucode}">
+              </c:if>
+            </td>
             <td style="width:16%;text-align:right;"><span class="red">&nbsp;*&nbsp;</span>菜单名称：</td>
             <td style="width:32%;padding:4px;">
               <input name="menuname" class="form-control input-sm myspan6" type="text" placeholder="菜单名称" value="${record.menuname}">
             </td>
+          </tr>
+          <tr>
+            <td style="width:16%;text-align:right;"><span class="red">&nbsp;*&nbsp;</span>菜单类型：</td>
+            <td style="width:32%;padding:4px;">
+              <select name="urltype" class="form-control input-sm myspan6">
+                <option value="M" ${record.urltype eq 'M'?'selected="selected"':''}>菜单目录</option>
+                <option value="R" ${record.urltype eq 'R'?'selected="selected"':''}>内部地址</option>
+                <option value="A" ${record.urltype eq 'A'?'selected="selected"':''}>外部地址</option>
+              </select>
+            </td>
             <td style="width:16%;text-align:right;"><span class="red">&nbsp;*&nbsp;</span>状态：</td>
-            <td style="padding:4px;">
+            <td colspan="3" style="padding:4px;">
               <select name="status" class="form-control input-sm myspan6">
                 <option value="N" ${record.status eq 'N'?'selected="selected"':''}>正常</option>
                 <option value="F" ${record.status eq 'F'?'selected="selected"':''}>冻结</option>
@@ -56,13 +72,20 @@
             <td style="width:32%;padding:4px;">
               <input name="sort" class="form-control input-sm myspan6" type="text" placeholder="排序（0~999）" value="${record.sort}">
             </td>
-            <td style="width:16%;text-align:right;"><span class="red">&nbsp;*&nbsp;</span>菜单类型：</td>
-            <td style="width:32%;padding:4px;">
-              <select name="urltype" class="form-control input-sm myspan6">
-                <option value="M" ${record.urltype eq 'M'?'selected="selected"':''}>菜单目录</option>
-                <option value="R" ${record.urltype eq 'R'?'selected="selected"':''}>内部地址</option>
-                <option value="A" ${record.urltype eq 'A'?'selected="selected"':''}>外部地址</option>
-              </select>
+            <td style="width:16%;text-align:right;">图标样式：</td>
+            <td style="padding:4px;">
+              <input name="menuicon" class="form-control input-sm myspan6" type="text" placeholder="图标样式" value="${record.menuicon}">
+            </td>
+          </tr>
+          <tr>
+            <td style="width:16%;text-align:right;">图标备选：</td>
+            <td colspan="3" style="padding:4px;">
+              <c:forEach items="${iconList}" var="item" varStatus="status">
+                ${status.index ne 0 and status.index % 4 eq 0?'<br/>':''}
+                <label class="radio-inline" ${status.index % 4 eq 0?'style="margin-left:10px;"':''}>
+                  <input type="radio" name="_menuicon" value="${item.remark}"><i class="fa ${item.remark}"></i> ${item.remark}
+                </label>
+              </c:forEach>
             </td>
           </tr>
           <tr>

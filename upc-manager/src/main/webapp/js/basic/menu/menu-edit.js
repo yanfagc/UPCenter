@@ -74,6 +74,10 @@ $(function() {
         };
         $sessionAjaxSubmit($("#submitForm"),options);
     });
-    
+
+    $('.radio-inline').on('click','input',function(){
+        $('input[name="menuicon"]').val($(this).val());
+    });
 });
+
 

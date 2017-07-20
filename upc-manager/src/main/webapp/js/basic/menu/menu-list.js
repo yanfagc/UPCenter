@@ -102,7 +102,7 @@ $(function() {
     $('.add-menu-btn').click(function() {
         var parentid=$('input[name="parentid"]').val();
         var systemid=$('input[name="systemid"]').val();
-        openWindow($ctx+'/basic/menu/toEdit?parentid='+parentid+'&systemid='+systemid,750,350);
+        openWindow($ctx+'/basic/menu/toEdit?parentid='+parentid+'&systemid='+systemid,750,500);
     });
     // 新增
     $('.add-item-btn').click(function() {
@@ -145,7 +145,7 @@ $(function() {
         if(showtype=='item'){
             openWindow($ctx+'/basic/menuitem/toEdit?id='+id+'&menuid='+parentid,750,350);
         }else{
-            openWindow($ctx+'/basic/menu/toEdit?id='+id+'&parentid='+parentid+'&systemid='+systemid,750,350);
+            openWindow($ctx+'/basic/menu/toEdit?id='+id+'&parentid='+parentid+'&systemid='+systemid,750,500);
         }
     });
     // 注销

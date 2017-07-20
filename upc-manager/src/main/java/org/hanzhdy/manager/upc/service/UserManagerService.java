@@ -1,12 +1,6 @@
 package org.hanzhdy.manager.upc.service;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
+import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.StringUtils;
 import org.hanzhdy.manager.form.mapper.FormDataMapperExt;
 import org.hanzhdy.manager.form.model.FormData;
@@ -17,18 +11,24 @@ import org.hanzhdy.manager.support.service.AbstractUpcService;
 import org.hanzhdy.manager.upc.controller.params.UserParams;
 import org.hanzhdy.manager.upc.mapper.UserBasicMapperExt;
 import org.hanzhdy.manager.upc.mapper.UserInfoMapperExt;
+import org.hanzhdy.manager.upc.mapper.UserRoleMapperExt;
 import org.hanzhdy.manager.upc.mapper.UserStatusMapperExt;
-import org.hanzhdy.manager.upc.model.UserBasic;
-import org.hanzhdy.manager.upc.model.UserInfo;
-import org.hanzhdy.manager.upc.model.UserStatus;
+import org.hanzhdy.manager.upc.model.*;
 import org.hanzhdy.manager.upc.vo.UserVo;
 import org.hanzhdy.utils.Strings;
 import org.hanzhdy.utils.security.SecurityUtils;
 import org.hanzhdy.web.bean.DatatableResult;
+import org.hanzhdy.web.throwable.BizException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @description 用户管理Service
@@ -48,6 +48,9 @@ public class UserManagerService extends AbstractUpcService {
     
     @Autowired
     private FormDataMapperExt   formDataMapperExt;
+    
+    @Autowired
+    private UserRoleMapperExt   userRoleMapperExt;
     
     @Autowired
     private FormEngineService   formEngineService;
@@ -209,9 +212,15 @@ public class UserManagerService extends AbstractUpcService {
         return count > 0;
     }
     
+    /**
+     * 插入用户的扩展信息
+     * @param userid
+     * @param formid
+     * @param request
+     */
     public void insertExtendData(Long userid, Long formid, HttpServletRequest request) {
         if (userid == null) {
-            logger.warn("插入扩展信息失败，无效数据，userid:{}", userid);
+            logger.warn("插入扩展信息失败，userid=null");
             return;
         }
         
@@ -238,6 +247,40 @@ public class UserManagerService extends AbstractUpcService {
                 formDataMapperExt.insert(data);
             }
         }
+    }
+    
+    /**
+     * 保存用户的角色信息
+     * @param userid
+     * @param roles
+     * @return
+     */
+    public boolean updateUserRole(Long userid, String roles) {
+        if (userid == null) {
+            logger.warn("保存用户角色信息失败，userid=null");
+            throw new BizException(respCode.SAVE_PRIMARY_EMPTY);
+        }
+    
+        UserRoleExample ure = new UserRoleExample();
+        ure.createCriteria().andUserIdEqualTo(userid);
+        this.userRoleMapperExt.deleteByExample(ure);
+        if (StringUtils.isNotBlank(roles)) {
+            List<String> strs = JSON.parseArray(roles, String.class);
+            for (String str : strs) {
+                try {
+                    Long roleid = Long.valueOf(str);
+                    UserRoleKey key = new UserRoleKey();
+                    key.setRoleId(roleid);
+                    key.setUserId(userid);
+                    this.userRoleMapperExt.insertSelective(key);
+                }
+                catch (Exception ex) {
+                    logger.warn("用户角色信息保存失败, 角色ID：" + str + ", 用户ID: " + userid, ex);
+                }
+            }
+        }
+        
+        return true;
     }
     
     /**

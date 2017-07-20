@@ -3,7 +3,6 @@ package org.hanzhdy.manager.upc.model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import org.hanzhdy.manager.support.enums.CommonStatus;
 import org.hanzhdy.manager.support.enums.URLType;
 import org.hanzhdy.web.bean.Page;

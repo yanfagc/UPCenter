@@ -323,3 +323,20 @@ create table U_USER_PROPERTY
    VALUE                varchar(1024) comment '值',
    primary key (USERID, FIELDCODE)
 ) Engine=InnoDB DEFAULT CHARSET=utf8 comment='用户扩展属性表';
+
+drop table if exists G_LOGIN_LOG;
+
+/*==============================================================*/
+/* Table: G_LOGIN_LOG                                           */
+/*==============================================================*/
+create table G_LOGIN_LOG
+(
+   ID                   bigint(20) not null auto_increment comment 'ID号',
+   USERID               bigint(20) comment '用户ID',
+   ACCOUNT              varchar(32) comment '登录名',
+   NICKNAME             varchar(128) comment '用户昵称',
+   LOGINIP              varchar(32) comment '登录IP',
+   LOGINTIME            datetime comment '登录时间',
+   REMARK               varchar(512) comment '备注',
+   primary key (ID)
+) Engine=MyISAM DEFAULT CHARSET=utf8 auto_increment = 1000 comment='登录日志';

@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>用户管理</title>
+    <title>菜单管理</title>
     <jsp:include page="/WEB-INF/jsp/commons/metaheader.jsp" />
     <link href="${ctx}/css/list.css" rel="stylesheet" type="text/css" />
     <link href="${ctx}/plugins/ztree_v3/css/zTreeStyle.css" rel="stylesheet" type="text/css" />

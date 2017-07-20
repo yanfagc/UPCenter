@@ -244,7 +244,7 @@
                       <a href="#" class="btn btn-default btn-flat">Profile</a>
                     </div>
                     <div class="pull-right">
-                      <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                      <a href="${ctx}/logout" class="btn btn-default btn-flat">退出</a>
                     </div>
                   </li>
                 </ul>
@@ -271,56 +271,42 @@
             </div>
           </div>
           <!-- sidebar menu: : style can be found in sidebar.less -->
+          <%--<c:set var="activeUrl"/>
+          <c:set var="activeUrlType"/>--%>
           <ul class="sidebar-menu">
-            <li class="header">基础管理</li>
-            <li class="treeview active">
-              <a href="#">
-                <i class="fa fa-user-md"></i> <span>权限管理</span> <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="javascript:void(0);" onclick="goPage('${ctx}/basic/user/list')"><i class="fa fa-circle-o"></i>用户管理</a></li>
-                <li><a href="javascript:void(0);" onclick="goPage('${ctx}/basic/group/list')"><i class="fa fa-circle-o"></i>角色分组</a></li>
-                <li><a href="javascript:void(0);" onclick="goPage('${ctx}/basic/role/list')"><i class="fa fa-circle-o"></i>角色管理</a></li>
-              </ul>
-            </li>
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-suitcase"></i> <span>系统管理</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="javascript:void(0);" onclick="goPage('${ctx}/basic/dicttype/list')"><i class="fa fa-circle-o"></i>字典类型</a></li>
-                <li><a href="javascript:void(0);" onclick="goPage('${ctx}/basic/dictdata/list')"><i class="fa fa-circle-o"></i>数据字典</a></li>
-                <li><a href="javascript:void(0);" onclick="goPage('${ctx}/basic/accesssys/list')"><i class="fa fa-circle-o"></i>第三方系统</a></li>
-              </ul>
-            </li>
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-clipboard"></i> <span>表单管理</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="javascript:void(0);" onclick="goPage('${ctx}/basic/form/list')"><i class="fa fa-circle-o"></i>表单维护</a></li>
-                <li><a href="javascript:void(0);" onclick="goPage('${ctx}/basic/field/list')"><i class="fa fa-circle-o"></i>表单字段</a></li>
-              </ul>
-            </li>
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-cloud-download"></i> <span>日志检索</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="simple.html"><i class="fa fa-circle-o"></i>登录日志</a></li>
-                <li><a href="simple.html"><i class="fa fa-circle-o"></i>接口日志</a></li>
-              </ul>
-            </li>
+            <li class="header">用户权限管理</li>
+            <c:forEach items="${resourceList}" var="item" varStatus="status">
+              <li class="treeview ${status.index eq 0?'active':''}">
+                <a href="javascript:void(0);">
+                  <i class="fa ${item.icon}"></i> <span>${item.name}</span> <i class="fa fa-angle-left pull-right"></i>
+                  <ul class="treeview-menu">
+                    <c:forEach items="${item.children}" var="menu">
+                      <c:choose>
+                        <c:when test="${menu.urltype eq 'R'}">
+                          <c:if test="${empty activeUrl}"><c:set var="activeUrl" value="${ctx}${menu.url}"/></c:if>
+                          <li><a href="javascript:void(0);" onclick="goPage('${ctx}${menu.url}')"><i class="fa ${menu.icon}"></i>${menu.name}</a></li>
+                        </c:when>
+                        <c:when test="${menu.urltype eq 'A'}">
+                          <c:if test="${empty activeUrl}"><c:set var="activeUrl" value="${menu.url}"/></c:if>
+                          <li><a href="javascript:void(0);" onclick="goPage('${menu.url}')"><i class="fa ${menu.icon}"></i>${menu.name}</a></li>
+                        </c:when>
+                        <c:otherwise>
+                          <li><a href="javascript:void(0);"><i class="fa ${menu.icon}"></i>${menu.name}</a></li>
+                        </c:otherwise>
+                      </c:choose>
+
+                    </c:forEach>
+                  </ul>
+                </a>
+              </li>
+            </c:forEach>
           </ul>
         </section>
         <!-- /.sidebar -->
         	
       </aside>
       <div class="content-wrapper">
-        <iframe id="content-iframe" src="${ctx}/basic/user/list" style="border:none; width:1000px;"></iframe>
+        <iframe id="content-iframe" src="${activeUrl}" style="border:none; width:1000px;"></iframe>
       </div>
       
     </div>

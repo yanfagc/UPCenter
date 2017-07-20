@@ -61,6 +61,14 @@ $(function() {
                 {
                     mData:null,
                     sClass:"text-center",
+                    mRender:function(data, display, record) {
+                        return '<a class="btn btn-primary btn-xs toUserRole" fid="'+record.id
+                            +'" href="javascript:void(0);">&nbsp;角色设置&nbsp;</a>';
+                    }
+                },
+                {
+                    mData:null,
+                    sClass:"text-center",
                     sWidth:null,
                     mRender:function(data, display, record) {
                         var html="";
@@ -106,6 +114,11 @@ $(function() {
     $('tbody').on("click", '.toExtendProps', function() {
         var id=$(this).attr("fid");
         openWindow($ctx+'/basic/user/toUserProps?userid='+id);
+    });
+    // 用户角色设置
+    $('tbody').on("click", '.toUserRole', function() {
+        var id=$(this).attr("fid");
+        openWindow($ctx+'/basic/user/toEditRole?userid='+id);
     });
     // 注销
     $('tbody').on("click", '.toDemise',function() {
