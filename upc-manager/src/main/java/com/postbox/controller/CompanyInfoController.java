@@ -2,12 +2,12 @@ package com.postbox.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.postbox.controller.params.CompanyInfoParams;
+import com.postbox.enums.DataStatus;
 import com.postbox.model.CompanyInfo;
 import com.postbox.service.CompanyInfoService;
 import org.hanzhdy.manager.support.bean.SessionUser;
 import org.hanzhdy.manager.support.constants.resp.RespResult;
 import org.hanzhdy.manager.support.controller.ApplicationController;
-import org.hanzhdy.manager.support.enums.CommonStatus;
 import org.hanzhdy.web.bean.DatatableResult;
 import org.hanzhdy.web.throwable.BizException;
 import org.slf4j.Logger;
@@ -37,7 +37,7 @@ public class CompanyInfoController extends ApplicationController {
     
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public String toList(Model model, HttpServletRequest request) {
-        model.addAttribute("statusList", CommonStatus.values());
+        model.addAttribute("statusList", DataStatus.values());
         return "/postbox/company/company-list";
     }
     
@@ -72,8 +72,9 @@ public class CompanyInfoController extends ApplicationController {
      */
     @RequestMapping(value = "toEdit", method = RequestMethod.GET)
     public String toEdit(Long id, Model model, HttpServletRequest request) {
+        model.addAttribute("statusList", DataStatus.values());
+        
         if (id != null) {
-            model.addAttribute("statusList", CommonStatus.values());
             CompanyInfo record = this.companyInfoService.queryById(id);
             if (record != null) {
                 model.addAttribute("record", record);
@@ -148,9 +149,9 @@ public class CompanyInfoController extends ApplicationController {
      * @param request
      * @return
      */
-    @RequestMapping(value = "updateStatus", method = RequestMethod.POST)
+    @RequestMapping(value = "refreshAuth", method = RequestMethod.POST)
     @ResponseBody
-    public Object updateStatus(@RequestParam("id") Long id, HttpServletRequest request) {
+    public Object refreshAuth(@RequestParam("id") Long id, HttpServletRequest request) {
         SessionUser user = super.getSessionUser(request);
         try {
             this.companyInfoService.updateRefreshAuth(id);

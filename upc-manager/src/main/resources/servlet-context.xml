@@ -32,6 +32,7 @@
     <context:component-scan base-package="org.hanzhdy.manager.form.controller" />
     <context:component-scan base-package="org.hanzhdy.manager.support.controller" />
     <context:component-scan base-package="org.hanzhdy.manager.upc.controller" />
+	<context:component-scan base-package="com.postbox.controller" />
 	
     <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
 		<property name="paramName" value="siteLanguage" />

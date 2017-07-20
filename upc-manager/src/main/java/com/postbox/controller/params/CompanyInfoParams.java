@@ -1,6 +1,6 @@
 package com.postbox.controller.params;
 
-import org.hanzhdy.manager.support.enums.CommonStatus;
+import com.postbox.enums.DataStatus;
 import org.hanzhdy.web.bean.DatatableParams;
 
 /**
@@ -15,7 +15,7 @@ public class CompanyInfoParams extends DatatableParams {
     
     private String contactPhone;
     
-    private CommonStatus status;
+    private DataStatus status;
     
     public String getCompanyName() {
         return companyName;
@@ -49,11 +49,11 @@ public class CompanyInfoParams extends DatatableParams {
         this.contactPhone = contactPhone;
     }
     
-    public CommonStatus getStatus() {
+    public DataStatus getStatus() {
         return status;
     }
     
-    public void setStatus(CommonStatus status) {
+    public void setStatus(DataStatus status) {
         this.status = status;
     }
 }

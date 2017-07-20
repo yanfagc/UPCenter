@@ -1,6 +1,7 @@
 package com.postbox.service;
 
 import com.postbox.controller.params.CompanyInfoParams;
+import com.postbox.enums.DataStatus;
 import com.postbox.mapper.CompanyInfoMapperExt;
 import com.postbox.model.CompanyInfo;
 import com.postbox.model.CompanyInfoExample;
@@ -28,7 +29,7 @@ public class CompanyInfoService extends AbstractUpcService {
         CompanyInfoExample example = new CompanyInfoExample();
         CompanyInfoExample.Criteria criteria = example.createCriteria();
         if (StringUtils.isNotBlank(params.getCompanyName())) {
-            criteria.andCompanyNameEqualTo("%" + params.getCompanyName() + "%");
+            criteria.andCompanyNameLike("%" + params.getCompanyName() + "%");
         }
         if (StringUtils.isNotBlank(params.getContactName())) {
             criteria.andContactNameLike("%" + params.getContactName() + "%");
@@ -38,6 +39,9 @@ public class CompanyInfoService extends AbstractUpcService {
         }
         if (StringUtils.isNotBlank(params.getLegalPersonName())) {
             criteria.andLegalPersonNameLike("%" + params.getLegalPersonName() + "%");
+        }
+        if (params.getStatus() != null) {
+            criteria.andStatusEqualTo(params.getStatus());
         }
     
         // 设置返回结果
@@ -55,7 +59,7 @@ public class CompanyInfoService extends AbstractUpcService {
      * @param status
      * @return
      */
-    public List<CompanyInfo> queryAllCompanyInfo(CommonStatus status) {
+    public List<CompanyInfo> queryAllCompanyInfo(DataStatus status) {
         CompanyInfoExample example = new CompanyInfoExample();
         example.createCriteria().andStatusEqualTo(status);
         return this.companyInfoMapperExt.selectByExample(example);
@@ -77,7 +81,7 @@ public class CompanyInfoService extends AbstractUpcService {
      */
     public boolean insert(CompanyInfo record) {
         if (record.getStatus() == null) {
-            record.setStatus(CommonStatus.N);
+            record.setStatus(DataStatus.NORMAL);
         }
         record.setCreatetime(new Date());
         record.setAuth(UUID.randomUUID().toString().replace("-", ""));

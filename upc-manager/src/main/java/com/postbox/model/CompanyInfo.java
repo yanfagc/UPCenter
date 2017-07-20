@@ -1,7 +1,6 @@
 package com.postbox.model;
 
-import org.hanzhdy.manager.support.enums.CommonStatus;
-
+import com.postbox.enums.DataStatus;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -42,7 +41,7 @@ public class CompanyInfo implements Serializable {
      * 状态: t_company_info.STATUS
      * @author MyBatis Generator
      */
-    private CommonStatus status;
+    private DataStatus status;
 
     /**
      * 鉴权: t_company_info.AUTH
@@ -151,7 +150,7 @@ public class CompanyInfo implements Serializable {
      * @return 状态: t_company_info.STATUS
      * @author MyBatis Generator
      */
-    public CommonStatus getStatus() {
+    public DataStatus getStatus() {
         return status;
     }
 
@@ -160,7 +159,7 @@ public class CompanyInfo implements Serializable {
      * @param status 映射数据库字段: t_company_info.STATUS
      * @author MyBatis Generator
      */
-    public void setStatus(CommonStatus status) {
+    public void setStatus(DataStatus status) {
         this.status = status;
     }
 

@@ -15,8 +15,8 @@
       </div>
     </nav>
     <div class="container" style="width:100%;margin-top:50px;padding-left:10px;padding-right:10px;">
-      <form id="submitForm" class="form-horizontal" action="${ctx}/basic/user/save" method="POST">
-        <input type="hidden" name="id" value="${record.id}"/>
+      <form id="submitForm" class="form-horizontal" action="${ctx}/postbox/company/save" method="POST">
+        <input type="hidden" name="companyInfoId" value="${record.companyInfoId}"/>
         <table class="table table-bordered table-hover">
           <tr>
             <td style="width:16%;text-align:right;">企业名称：</td>
@@ -25,7 +25,7 @@
             </td>
             <td style="width:16%;text-align:right;">企业法人：</td>
             <td style="width:32%;padding:4px;">
-              <input name="legalPersonName" class="form-control input-sm myspan6" type="text" placeholder="legalPersonName" value="${record.legalPersonName}">
+              <input name="legalPersonName" class="form-control input-sm myspan6" type="text" placeholder="企业法人" value="${record.legalPersonName}">
             </td>
           </tr>
           <tr>

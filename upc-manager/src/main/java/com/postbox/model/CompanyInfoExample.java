@@ -1,9 +1,9 @@
 package com.postbox.model;
 
+import com.postbox.enums.DataStatus;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import org.hanzhdy.manager.support.enums.CommonStatus;
 import org.hanzhdy.web.bean.Page;
 
 public class CompanyInfoExample {
@@ -557,62 +557,62 @@ public class CompanyInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andStatusEqualTo(CommonStatus value) {
+        public Criteria andStatusEqualTo(DataStatus value) {
             addCriterion("STATUS =", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotEqualTo(CommonStatus value) {
+        public Criteria andStatusNotEqualTo(DataStatus value) {
             addCriterion("STATUS <>", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusGreaterThan(CommonStatus value) {
+        public Criteria andStatusGreaterThan(DataStatus value) {
             addCriterion("STATUS >", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusGreaterThanOrEqualTo(CommonStatus value) {
+        public Criteria andStatusGreaterThanOrEqualTo(DataStatus value) {
             addCriterion("STATUS >=", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLessThan(CommonStatus value) {
+        public Criteria andStatusLessThan(DataStatus value) {
             addCriterion("STATUS <", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLessThanOrEqualTo(CommonStatus value) {
+        public Criteria andStatusLessThanOrEqualTo(DataStatus value) {
             addCriterion("STATUS <=", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLike(CommonStatus value) {
+        public Criteria andStatusLike(DataStatus value) {
             addCriterion("STATUS like", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotLike(CommonStatus value) {
+        public Criteria andStatusNotLike(DataStatus value) {
             addCriterion("STATUS not like", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusIn(List<CommonStatus> values) {
+        public Criteria andStatusIn(List<DataStatus> values) {
             addCriterion("STATUS in", values, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotIn(List<CommonStatus> values) {
+        public Criteria andStatusNotIn(List<DataStatus> values) {
             addCriterion("STATUS not in", values, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusBetween(CommonStatus value1, CommonStatus value2) {
+        public Criteria andStatusBetween(DataStatus value1, DataStatus value2) {
             addCriterion("STATUS between", value1, value2, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotBetween(CommonStatus value1, CommonStatus value2) {
+        public Criteria andStatusNotBetween(DataStatus value1, DataStatus value2) {
             addCriterion("STATUS not between", value1, value2, "status");
             return (Criteria) this;
         }

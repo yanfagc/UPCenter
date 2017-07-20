@@ -38,7 +38,7 @@
         <table schema="" tableName="T_COMPANY_INFO"          domainObjectName="CompanyInfo">
         	<generatedKey column="COMPANY_INFO_ID" sqlStatement="JDBC" identity="false"/>
         	<columnOverride column="COMPANY_INFO_ID" property="companyInfoId" javaType="java.lang.Long" jdbcType="NUMERIC"/>
-        	<columnOverride column="STATUS" property="status" javaType="org.hanzhdy.manager.support.enums.CommonStatus" jdbcType="VARCHAR"/>
+        	<columnOverride column="STATUS" property="status" javaType="com.postbox.enums.DataStatus" jdbcType="VARCHAR"/>
             <columnOverride column="CREATETIME" property="createtime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
         </table>
 
