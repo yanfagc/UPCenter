@@ -13,7 +13,8 @@
       i.ITEMNAME AS NAME,
       i.URLTYPE AS urltype,
       i.ITEMURL AS url,
-      i.STATUS AS status
+      i.STATUS AS status,
+      i.SORT AS sort
     FROM r_menuitem i
     <include refid="wherecause_menuitem"/>
     <include refid="Pageable_Suffix" />
