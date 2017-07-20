@@ -75,6 +75,7 @@ public class MenuService extends AbstractUpcService {
         criteria.andParentIdEqualTo(parentId);
         criteria.andSystemIdEqualTo(systemid);
         criteria.andStatusEqualTo(CommonStatus.N);
+        example.setOrderByClause(" SORT ASC ");
         List<Menu> menuList = this.menuMapperExt.selectByExample(example);
         
         List<ZTreeNode> resultList = new ArrayList<ZTreeNode>();

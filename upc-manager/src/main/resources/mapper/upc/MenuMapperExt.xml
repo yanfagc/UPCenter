@@ -17,6 +17,7 @@
 	  m.SORT AS sort
     FROM r_menu m
     <include refid="wherecause_menu"/>
+	ORDER BY m.SORT ASC
     <include refid="Pageable_Suffix" />
   </select>
   
