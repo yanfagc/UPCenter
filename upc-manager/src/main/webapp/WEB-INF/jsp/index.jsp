@@ -10,12 +10,12 @@
   <body class="skin-blue sidebar-mini">
     <div class="wrapper">
       <header class="main-header">
-        <a href="../../index2.html" class="logo">
+        <a href="javascript:void(0)" class="logo">
           <span class="logo-mini">UPC</span>
           <span class="logo-lg">用户权限管理中心</span>
         </a>
         <nav class="navbar navbar-static-top" role="navigation">
-          <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+          <a href="javascript:void(0)" class="sidebar-toggle" data-toggle="offcanvas" role="button">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -306,7 +306,7 @@
         	
       </aside>
       <div class="content-wrapper">
-        <iframe id="content-iframe" src="${activeUrl}" style="border:none; width:1000px;"></iframe>
+        <iframe id="content-iframe" src="${activeUrl}" style="border:none; width:100%;height:100%;"></iframe>
       </div>
       
     </div>
@@ -322,16 +322,20 @@
     $.browser.msie = /msie/.test(navigator.userAgent.toLowerCase());
     
     $(function() {
-    	var iframe=document.getElementById("content-iframe");
-    	if (iframe.attachEvent){ 
-    		iframe.attachEvent("onload", function(){ 
-    			resetSize();
-    		}); 
-    	} else {
-    		iframe.onload = function(){ 
-    			resetSize();
-    		}; 
-    	};
+        var iframe = document.getElementById("content-iframe");
+        if (iframe.attachEvent) {
+            iframe.attachEvent("onload", function () {
+                resetSize();
+            });
+        } else {
+            iframe.onload = function () {
+                resetSize();
+            };
+        }
+
+        $(window).resize(function () {
+            resetSize();
+        });
     });
     
     function goPage(url) {
@@ -341,8 +345,8 @@
     function resetSize() {
     	var $window=$(window);
     	var h1=$window.height() - 60;
-    	var w1=$window.width()-230;
-    	$('#content-iframe').css("height",h1).css("width",w1);
+//    	var w1=$window.width()-230;
+    	$('#content-iframe').css("height",h1);//.css("width",w1);
     	var doc=getDocument("content-iframe");
     	if(doc){
     		var h2=getScrollHeight(doc);
