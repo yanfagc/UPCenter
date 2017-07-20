@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE generatorConfiguration  
+      PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"  
+      "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">  
+  
+<generatorConfiguration>  
+    <classPathEntry location="D:\apache-maven-3.1.1\.m2\mysql\mysql-connector-java\5.1.29\mysql-connector-java-5.1.29.jar" />  
+  
+    <context id="DB2Tables" targetRuntime="MyBatis3">  
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"  
+            connectionURL="jdbc:mysql://192.168.80.128:3306/postbox"
+            userId="root"  
+            password="111111">  
+        </jdbcConnection>  
+  
+        <javaTypeResolver >  
+            <property name="forceBigDecimals" value="false" />  
+        </javaTypeResolver>  
+        <!-- generate Model -->  
+        <javaModelGenerator targetPackage="com.postbox.model" targetProject="E:\workspace_git\UPCenter\upc-manager\src\main\java">
+            <property name="enableSubPackages" value="true" />  
+            <property name="trimStrings" value="true" />  
+			<property name="rootInterface" value="java.io.Serializable"/>
+        </javaModelGenerator>  
+          
+          
+        <!-- generate xml -->  
+        <sqlMapGenerator targetPackage="mapper.postbox"  targetProject="E:\workspace_git\UPCenter\upc-manager\src\main\resources">
+            <property name="enableSubPackages" value="true" />  
+        </sqlMapGenerator>  
+          
+        <!-- generate Mapper -->  
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.postbox.mapper" targetProject="E:\workspace_git\UPCenter\upc-manager\src\main\java">
+            <property name="enableSubPackages" value="true" />  
+        </javaClientGenerator>
+        
+
+        <table schema="" tableName="T_COMPANY_INFO"          domainObjectName="CompanyInfo">
+        	<generatedKey column="COMPANY_INFO_ID" sqlStatement="JDBC" identity="false"/>
+        	<columnOverride column="COMPANY_INFO_ID" property="companyInfoId" javaType="java.lang.Long" jdbcType="NUMERIC"/>
+        	<columnOverride column="STATUS" property="status" javaType="org.hanzhdy.manager.support.enums.CommonStatus" jdbcType="VARCHAR"/>
+            <columnOverride column="CREATETIME" property="createtime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+        </table>
+
+    </context>  
+</generatorConfiguration>
