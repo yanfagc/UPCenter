@@ -47,6 +47,12 @@ $(function() {
                     mData:"name"
                 },
                 {
+                    mData:"sort",
+                    mRender:function(data, display, record) {
+                        return data?data:'';
+                    }
+                },
+                {
                     mData:"urltype",
                     mRender:function(data, display, record) {
                         if(data=='M'){

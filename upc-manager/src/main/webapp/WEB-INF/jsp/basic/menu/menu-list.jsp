@@ -63,9 +63,10 @@
               <table id="dataList" class="table table-bordered table-hover">
                 <thead>
                   <tr>
-                    <th class="text-center" style="width:16%">菜单编码</th>
-                    <th class="text-center" style="width:16%">菜单名称</th>
-                    <th class="text-center" style="width:13%">菜单类型</th>
+                    <th class="text-center" style="width:15%">菜单编码</th>
+                    <th class="text-center" style="width:15%">菜单名称</th>
+                    <th class="text-center" style="width:10%">菜单排序</th>
+                    <th class="text-center" style="width:10%">菜单类型</th>
                     <th class="text-center" style="width:23%">菜单地址</th>
                     <th class="text-center" style="width:10%">状态</th>
                     <th class="text-center" style="width:22%">操作</th>

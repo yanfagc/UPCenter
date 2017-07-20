@@ -198,7 +198,7 @@ public class FormInfoController extends ApplicationController {
     
     /**
      * 根据表单ID，分页请求获取表单字段列表数据
-     * @param formid
+     * @param params
      * @param request
      * @return
      */

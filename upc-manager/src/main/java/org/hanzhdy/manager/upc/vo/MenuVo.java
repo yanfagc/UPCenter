@@ -24,6 +24,9 @@ public class MenuVo {
     /** 菜单地址 */
     private String url;
     
+    /** 菜单排序 */
+    private String sort;
+    
     /** 菜单状态 */
     private String status;
     
@@ -73,6 +76,14 @@ public class MenuVo {
     
     public void setUrl(String url) {
         this.url = url;
+    }
+    
+    public String getSort() {
+        return sort;
+    }
+    
+    public void setSort(String sort) {
+        this.sort = sort;
     }
     
     public String getStatus() {
