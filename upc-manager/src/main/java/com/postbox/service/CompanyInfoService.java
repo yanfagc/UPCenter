@@ -27,6 +27,7 @@ public class CompanyInfoService extends AbstractUpcService {
     public DatatableResult queryAsDatatableResult(CompanyInfoParams params) {
         // 构造查询条件
         CompanyInfoExample example = new CompanyInfoExample();
+        example.setPage(params.getPage());
         CompanyInfoExample.Criteria criteria = example.createCriteria();
         if (StringUtils.isNotBlank(params.getCompanyName())) {
             criteria.andCompanyNameLike("%" + params.getCompanyName() + "%");
