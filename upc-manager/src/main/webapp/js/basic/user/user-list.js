@@ -39,13 +39,13 @@ $(function() {
                     mData:"status",
                     mRender:function(data, display, record) {
                         if(data=='N'){
-                            return '<lable style="color:green">正常</label>';
+                            return '<label style="color:green">正常</label>';
                         }else if(data=='F'){
-                            return '<lable style="color:red">冻结</label>';
+                            return '<label style="color:red">冻结</label>';
                         }else if(data=='L'){
-                            return '<lable style="color:red">锁定</label>';
+                            return '<label style="color:red">锁定</label>';
                         }else if(data=='D'){
-                            return '<lable style="color:gray;">注销</label>';
+                            return '<label style="color:gray;">注销</label>';
                         }
                         return (data==0||data)?data:'';
                     }

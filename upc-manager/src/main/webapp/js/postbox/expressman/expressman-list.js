@@ -5,7 +5,7 @@ $(function() {
     // 构造datatable对象
     datatable=$('#dataList').dataTable(
         $.extend({},pageParams,{
-            sAjaxSource:$ctx+"/postbox/customer/dataList",
+            sAjaxSource:$ctx+"/postbox/expressman/dataList",
             fnServerParams:function(aodata) {
                 aodata.push({
                     "name":"realName",
@@ -55,7 +55,9 @@ $(function() {
                 {
                     mData:"status",
                     mRender:function(data, display, record) {
-                        if(data=='NORMAL'){
+                        if(data=='NOACTIVE'){
+                            return '<label>未激活</label>';
+                        }else if(data=='NORMAL'){
                             return '<label style="color:green">正常</label>';
                         }else if(data=='FROZEN'){
                             return '<label style="color:red">冻结</label>';
@@ -66,7 +68,13 @@ $(function() {
                     }
                 },
                 {
-                    mData:"registerTime",
+                    mData:"applytime",
+                    mRender:function(data, display, record) {
+                        return data?formatDatetime(data):'';
+                    }
+                },
+                {
+                    mData:"activetime",
                     mRender:function(data, display, record) {
                         return data?formatDatetime(data):'';
                     }
@@ -77,18 +85,22 @@ $(function() {
                     sWidth:null,
                     mRender:function(data, display, record) {
                         var html="";
-                        if(record.status=='NORMAL'){
-                            html+='<a class="btn btn-primary btn-xs toView" fid="'+record.customerInfoId+'" href="javascript:void(0);">&nbsp;详情&nbsp;</a>&nbsp;';
-                            html+='<a class="btn btn-warning btn-xs toFrozen" fid="'+record.customerInfoId+'" href="javascript:void(0);">&nbsp;冻结&nbsp;</a>&nbsp;';
-                            html+='<a class="btn btn-danger btn-xs toDemise" fid="'+record.customerInfoId+'" href="javascript:void(0);">&nbsp;注销&nbsp;</a>';
+                        if(record.status=='NOACTIVE'){
+                            html+='<a class="btn btn-primary btn-xs toAudit" fid="'+record.expressmanInfoId+'" href="javascript:void(0);">&nbsp;审核&nbsp;</a>&nbsp;';
+                            html+='<a class="btn btn-warning btn-xs toFrozen" fid="'+record.expressmanInfoId+'" href="javascript:void(0);">&nbsp;冻结&nbsp;</a>&nbsp;';
+                            html+='<a class="btn btn-danger btn-xs toDemise" fid="'+record.expressmanInfoId+'" href="javascript:void(0);">&nbsp;注销&nbsp;</a>';
+                        }else if(record.status=='NORMAL'){
+                            html+='<a class="btn btn-primary btn-xs toView" fid="'+record.expressmanInfoId+'" href="javascript:void(0);">&nbsp;详情&nbsp;</a>&nbsp;';
+                            html+='<a class="btn btn-warning btn-xs toFrozen" fid="'+record.expressmanInfoId+'" href="javascript:void(0);">&nbsp;冻结&nbsp;</a>&nbsp;';
+                            html+='<a class="btn btn-danger btn-xs toDemise" fid="'+record.expressmanInfoId+'" href="javascript:void(0);">&nbsp;注销&nbsp;</a>';
                         }else if(record.status=='DEMISE'){
-                            html+='<a class="btn btn-primary btn-xs toView" fid="'+record.customerInfoId+'" href="javascript:void(0);">&nbsp;详情&nbsp;</a>&nbsp;';
-                            html+='<a class="btn btn-success btn-xs toNormal" fid="'+record.customerInfoId+'" href="javascript:void(0);">&nbsp;恢复&nbsp;</a>&nbsp;';
-                            html+='<a class="btn btn-warning btn-xs" fid="'+record.customerInfoId+'" style="visibility:hidden">&nbsp;隐藏&nbsp;</a>';
+                            html+='<a class="btn btn-primary btn-xs toView" fid="'+record.expressmanInfoId+'" href="javascript:void(0);">&nbsp;详情&nbsp;</a>&nbsp;';
+                            html+='<a class="btn btn-success btn-xs toNormal" fid="'+record.expressmanInfoId+'" acttime="'+(record.activetime?record.activetime:'')+'" href="javascript:void(0);">&nbsp;恢复&nbsp;</a>&nbsp;';
+                            html+='<a class="btn btn-warning btn-xs" fid="'+record.expressmanInfoId+'" style="visibility:hidden">&nbsp;隐藏&nbsp;</a>';
                         }else if(record.status=='FROZEN'){
-                            html+='<a class="btn btn-primary btn-xs toView" fid="'+record.customerInfoId+'" href="javascript:void(0);">&nbsp;详情&nbsp;</a>&nbsp;';
-                            html+='<a class="btn btn-success btn-xs toNormal" fid="'+record.customerInfoId+'" href="javascript:void(0);">&nbsp;恢复&nbsp;</a>&nbsp;';
-                            html+='<a class="btn btn-danger btn-xs toDemise" fid="'+record.customerInfoId+'" href="javascript:void(0);">&nbsp;注销&nbsp;</a>';
+                            html+='<a class="btn btn-primary btn-xs toView" fid="'+record.expressmanInfoId+'" href="javascript:void(0);">&nbsp;详情&nbsp;</a>&nbsp;';
+                            html+='<a class="btn btn-success btn-xs toNormal" fid="'+record.expressmanInfoId+'" acttime="'+(record.activetime?record.activetime:'')+'" href="javascript:void(0);">&nbsp;恢复&nbsp;</a>&nbsp;';
+                            html+='<a class="btn btn-danger btn-xs toDemise" fid="'+record.expressmanInfoId+'" href="javascript:void(0);">&nbsp;注销&nbsp;</a>';
                         }
                         return html;
                     }
@@ -101,7 +113,12 @@ $(function() {
     // 查询详情
     $('tbody').on("click", '.toView', function() {
         var id=$(this).attr("fid");
-        openWindow($ctx+'/postbox/customer/viewDetail?id='+id,750,450);
+        openWindow($ctx+'/postbox/expressman/viewDetail?id='+id,750,450);
+    });
+    // 审核
+    $('tbody').on("click", '.toAudit',function() {
+        var id=$(this).attr("fid");
+        openWindow($ctx+'/postbox/expressman/toAudit?id='+id,750,450);
     });
     // 注销
     $('tbody').on("click", '.toDemise',function() {
@@ -112,9 +129,13 @@ $(function() {
     });
     // 恢复
     $('tbody').on("click",'.toNormal',function() {
-        var id=$(this).attr("fid");
+        var id=$(this).attr("fid"),acttime=$(this).attr('acttime');
         showTipsDialog("提示信息","确定执行恢复操作吗？",function() {
-            statusChange(id,'NORMAL');
+            if(acttime){
+                statusChange(id,'NORMAL');
+            }else{
+                statusChange(id,'NOACTIVE');
+            }
         },true);
     });
     // 冻结
@@ -127,8 +148,8 @@ $(function() {
     // 状态变更
     function statusChange(id, toStatus) {
         $sessionAjax({
-            url:$ctx+'/postbox/customer/updateStatus',
-            data:{'customerInfoId':id,'status':toStatus},
+            url:$ctx+'/postbox/expressman/updateStatus',
+            data:{'expressmanInfoId':id,'status':toStatus},
             success:function(rsp){
                 if(rsp.code=='1000'){
                     search();

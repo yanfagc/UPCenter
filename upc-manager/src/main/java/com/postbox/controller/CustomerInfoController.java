@@ -3,6 +3,7 @@ package com.postbox.controller;
 import com.alibaba.fastjson.JSON;
 import com.postbox.controller.params.CustomerInfoParams;
 import com.postbox.enums.DataStatus;
+import com.postbox.enums.Sex;
 import com.postbox.model.CustomerInfo;
 import com.postbox.service.CustomerInfoService;
 import org.hanzhdy.manager.support.bean.SessionUser;
@@ -74,6 +75,8 @@ public class CustomerInfoController extends ApplicationController {
         if (id != null) {
             CustomerInfo record = this.customerInfoService.queryById(id);
             if (record != null) {
+                model.addAttribute("sexList", Sex.values());
+                model.addAttribute("statusList", DataStatus.values());
                 model.addAttribute("record", record);
                 return "/postbox/customer/customer-detail";
             }

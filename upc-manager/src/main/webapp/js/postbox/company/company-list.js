@@ -42,11 +42,11 @@ $(function() {
                     mData:"status",
                     mRender:function(data, display, record) {
                         if(data=='NORMAL'){
-                            return '<lable style="color:green">正常</label>';
+                            return '<label style="color:green">正常</label>';
                         }else if(data=='FROZEN'){
-                            return '<lable style="color:red">冻结</label>';
+                            return '<label style="color:red">冻结</label>';
                         }else if(data=='DEMISE'){
-                            return '<lable style="color:gray;">注销</label>';
+                            return '<label style="color:gray;">注销</label>';
                         }
                         return (data==0||data)?data:'';
                     }

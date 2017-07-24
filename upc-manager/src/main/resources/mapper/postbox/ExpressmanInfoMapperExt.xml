@@ -1,3 +1,48 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.postbox.mapper.ExpressmanInfoMapperExt" />
+<mapper namespace="com.postbox.mapper.ExpressmanInfoMapperExt">
+    <!-- 按条件查询快递员总数  -->
+    <select id="countAsList" parameterType="java.util.HashMap" resultType="int">
+SELECT COUNT(1) FROM T_CUSTOMER_INFO c, T_EXPRESSMAN_INFO e <include refid="sql_selectAsList"/>
+    </select>
+
+    <!-- 按条件查询快递员信息，并返回符合条件的列表数据（支持分页参数） -->
+    <select id="selectAsList" parameterType="java.util.HashMap" resultType="com.postbox.vo.ExpressmanInfoVo">
+		<include refid="Pageable_Prefix" />
+SELECT
+	e.EXPRESSMAN_INFO_ID AS expressmanInfoId,
+	e.CUSTOMER_INFO_ID AS customerInfoId,
+	e.EXPRESS_COMPANY AS expressCompany,
+	e.IDCARD_IMG_PATH AS idcardImgPath,
+	e.WORKCARD_IMG_PATH AS workcardImgPath,
+	e.`STATUS` AS STATUS,
+	e.APPLYTIME AS applytime,
+	e.ACTIVETIME AS activetime,
+	c.COUNTRY AS country,
+	c.PROVINCE AS province,
+	c.CITY AS city,
+	c.REALNAME AS realname,
+	c.SEX AS sex,
+	c.MOBILE_PHONE AS mobilePhone,
+	c.REGISTER_IP_ADDRESS AS registerIpAddress,
+	c.REGISTER_TIME AS registerTime
+FROM
+	T_CUSTOMER_INFO c,
+	T_EXPRESSMAN_INFO e
+	    <include refid="sql_selectAsList"/>
+		<include refid="Pageable_Suffix" />
+    </select>
+    <sql id="sql_selectAsList">
+WHERE
+	c.CUSTOMER_INFO_ID = e.CUSTOMER_INFO_ID
+	    <if test="realName!=null and realName!=''">
+            AND c.REALNAME LIKE #{realName}
+        </if>
+        <if test="mobilePhone!=null and mobilePhone!=''">
+            AND c.MOBILE_PHONE LIKE #{mobilePhone}
+        </if>
+        <if test="status!=null and status!=''">
+            AND e.STATUS=#{status}
+        </if>
+    </sql>
+</mapper>
