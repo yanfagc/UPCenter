@@ -1,24 +1,25 @@
 package com.postbox.mapper;
 
-import com.postbox.model.Repairernfo;
-import com.postbox.model.RepairernfoExample;
-import java.util.List;
+import com.postbox.model.RepairerInfo;
+import com.postbox.model.RepairerInfoExample;
 import org.apache.ibatis.annotations.Param;
 
-public interface RepairernfoMapper {
+import java.util.List;
+
+public interface RepairerInfoMapper {
     /**
      * 本段代码由Mybatis Generator自动生成.
      * 映射数据库: t_repairer_info
      * @author MyBatis Generator
      */
-    int countByExample(RepairernfoExample example);
+    int countByExample(RepairerInfoExample example);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
      * 映射数据库: t_repairer_info
      * @author MyBatis Generator
      */
-    int deleteByExample(RepairernfoExample example);
+    int deleteByExample(RepairerInfoExample example);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
@@ -32,54 +33,54 @@ public interface RepairernfoMapper {
      * 映射数据库: t_repairer_info
      * @author MyBatis Generator
      */
-    int insert(Repairernfo record);
+    int insert(RepairerInfo record);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
      * 映射数据库: t_repairer_info
      * @author MyBatis Generator
      */
-    int insertSelective(Repairernfo record);
+    int insertSelective(RepairerInfo record);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
      * 映射数据库: t_repairer_info
      * @author MyBatis Generator
      */
-    List<Repairernfo> selectByExample(RepairernfoExample example);
+    List<RepairerInfo> selectByExample(RepairerInfoExample example);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
      * 映射数据库: t_repairer_info
      * @author MyBatis Generator
      */
-    Repairernfo selectByPrimaryKey(Long repairerInfoid);
+    RepairerInfo selectByPrimaryKey(Long repairerInfoid);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
      * 映射数据库: t_repairer_info
      * @author MyBatis Generator
      */
-    int updateByExampleSelective(@Param("record") Repairernfo record, @Param("example") RepairernfoExample example);
+    int updateByExampleSelective(@Param("record") RepairerInfo record, @Param("example") RepairerInfoExample example);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
      * 映射数据库: t_repairer_info
      * @author MyBatis Generator
      */
-    int updateByExample(@Param("record") Repairernfo record, @Param("example") RepairernfoExample example);
+    int updateByExample(@Param("record") RepairerInfo record, @Param("example") RepairerInfoExample example);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
      * 映射数据库: t_repairer_info
      * @author MyBatis Generator
      */
-    int updateByPrimaryKeySelective(Repairernfo record);
+    int updateByPrimaryKeySelective(RepairerInfo record);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
      * 映射数据库: t_repairer_info
      * @author MyBatis Generator
      */
-    int updateByPrimaryKey(Repairernfo record);
+    int updateByPrimaryKey(RepairerInfo record);
 }

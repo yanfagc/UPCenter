@@ -1,15 +1,19 @@
 var datatable;
 $(function() {
     // 定义操作变量
-    var $companyName=$('#companyName'),$status=$('#status');
+    var $realname=$('#realname'),$mobilePhone=$('#mobilePhone'),$status=$('#status');
     // 构造datatable对象
     datatable=$('#dataList').dataTable(
         $.extend({},pageParams,{
-            sAjaxSource:$ctx+"/postbox/company/dataList",
+            sAjaxSource:$ctx+"/postbox/repairer/dataList",
             fnServerParams:function(aodata) {
                 aodata.push({
-                    "name":"companyName",
-                    "value":$companyName.val()
+                    "name":"realname",
+                    "value":$realname.val()
+                });
+                aodata.push({
+                    "name":"mobilePhone",
+                    "value":$mobilePhone.val()
                 });
                 aodata.push({
                     "name":"status",
@@ -18,22 +22,10 @@ $(function() {
             },
             aoColumns:[
                 {
-                    mData:"companyName"
+                    mData:"realname"
                 },
                 {
-                    mData:"legalPersonName",
-                    mRender:function(data, display, record) {
-                        return data?data:'';
-                    }
-                },
-                {
-                    mData:"contactName",
-                    mRender:function(data, display, record) {
-                        return data?data:'';
-                    }
-                },
-                {
-                    mData:"contactPhone",
+                    mData:"mobilePhone",
                     mRender:function(data, display, record) {
                         return data?data:'';
                     }
@@ -64,17 +56,17 @@ $(function() {
                     mRender:function(data, display, record) {
                         var html="";
                         if(record.status=='NORMAL'){
-                            html+='<a class="btn btn-primary btn-xs toEdit" fid="'+record.companyInfoId+'" href="javascript:void(0);">&nbsp;编辑&nbsp;</a>&nbsp;';
-                            html+='<a class="btn btn-warning btn-xs toFrozen" fid="'+record.companyInfoId+'" href="javascript:void(0);">&nbsp;冻结&nbsp;</a>&nbsp;';
-                            html+='<a class="btn btn-danger btn-xs toDemise" fid="'+record.companyInfoId+'" href="javascript:void(0);">&nbsp;注销&nbsp;</a>';
+                            html+='<a class="btn btn-primary btn-xs toEdit" fid="'+record.repairerInfoid+'" href="javascript:void(0);">&nbsp;编辑&nbsp;</a>&nbsp;';
+                            html+='<a class="btn btn-warning btn-xs toFrozen" fid="'+record.repairerInfoid+'" href="javascript:void(0);">&nbsp;冻结&nbsp;</a>&nbsp;';
+                            html+='<a class="btn btn-danger btn-xs toDemise" fid="'+record.repairerInfoid+'" href="javascript:void(0);">&nbsp;注销&nbsp;</a>';
                         }else if(record.status=='DEMISE'){
-                            html+='<a class="btn btn-primary btn-xs toEdit" fid="'+record.companyInfoId+'" href="javascript:void(0);">&nbsp;编辑&nbsp;</a>&nbsp;';
-                            html+='<a class="btn btn-success btn-xs toNormal" fid="'+record.companyInfoId+'" href="javascript:void(0);">&nbsp;恢复&nbsp;</a>&nbsp;';
-                            html+='<a class="btn btn-warning btn-xs" fid="'+record.companyInfoId+'" style="visibility:hidden">&nbsp;隐藏&nbsp;</a>';
+                            html+='<a class="btn btn-primary btn-xs toEdit" fid="'+record.repairerInfoid+'" href="javascript:void(0);">&nbsp;编辑&nbsp;</a>&nbsp;';
+                            html+='<a class="btn btn-success btn-xs toNormal" fid="'+record.repairerInfoid+'" href="javascript:void(0);">&nbsp;恢复&nbsp;</a>&nbsp;';
+                            html+='<a class="btn btn-warning btn-xs" fid="'+record.repairerInfoid+'" style="visibility:hidden">&nbsp;隐藏&nbsp;</a>';
                         }else if(record.status=='FROZEN'){
-                            html+='<a class="btn btn-primary btn-xs toEdit" fid="'+record.companyInfoId+'" href="javascript:void(0);">&nbsp;编辑&nbsp;</a>&nbsp;';
-                            html+='<a class="btn btn-success btn-xs toNormal" fid="'+record.companyInfoId+'" href="javascript:void(0);">&nbsp;恢复&nbsp;</a>&nbsp;';
-                            html+='<a class="btn btn-danger btn-xs toDemise" fid="'+record.companyInfoId+'" href="javascript:void(0);">&nbsp;注销&nbsp;</a>';
+                            html+='<a class="btn btn-primary btn-xs toEdit" fid="'+record.repairerInfoid+'" href="javascript:void(0);">&nbsp;编辑&nbsp;</a>&nbsp;';
+                            html+='<a class="btn btn-success btn-xs toNormal" fid="'+record.repairerInfoid+'" href="javascript:void(0);">&nbsp;恢复&nbsp;</a>&nbsp;';
+                            html+='<a class="btn btn-danger btn-xs toDemise" fid="'+record.repairerInfoid+'" href="javascript:void(0);">&nbsp;注销&nbsp;</a>';
                         }
                         return html;
                     }
@@ -84,14 +76,14 @@ $(function() {
     $('.search').click(function() {
         search();
     });
-    // 新增企业信息
+    // 新增维修员信息
     $('.add-btn').click(function() {
-        openWindow($ctx+'/postbox/company/toEdit',750,350);
+        openWindow($ctx+'/postbox/repairer/toEdit',750,350);
     });
     // 编辑
     $('tbody').on("click", '.toEdit', function() {
         var id=$(this).attr("fid");
-        openWindow($ctx+'/postbox/company/toEdit?id='+id,750,350);
+        openWindow($ctx+'/postbox/repairer/toEdit?id='+id,750,350);
     });
     // 注销
     $('tbody').on("click", '.toDemise',function() {
@@ -117,8 +109,8 @@ $(function() {
     // 状态变更
     function statusChange(id, toStatus) {
         $sessionAjax({
-            url:$ctx+'/postbox/company/updateStatus',
-            data:{'companyInfoId':id,'status':toStatus},
+            url:$ctx+'/postbox/repairer/updateStatus',
+            data:{'repairerInfoid':id,'status':toStatus},
             success:function(rsp){
                 if(rsp.code=='1000'){
                     search();

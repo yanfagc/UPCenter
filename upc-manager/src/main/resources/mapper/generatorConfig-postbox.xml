@@ -60,7 +60,7 @@
             <columnOverride column="ACTIVETIME" property="activetime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
         </table>
 
-        <table schema="" tableName="T_REPAIRER_INFO"          domainObjectName="Repairernfo">
+        <table schema="" tableName="T_REPAIRER_INFO"          domainObjectName="RepairerInfo">
             <generatedKey column="REPAIRER_INFO_ID" sqlStatement="JDBC" identity="false"/>
             <columnOverride column="REPAIRER_INFO_ID" property="repairerInfoid" javaType="java.lang.Long" jdbcType="NUMERIC"/>
             <columnOverride column="STATUS" property="status" javaType="com.postbox.enums.DataStatus" jdbcType="VARCHAR"/>

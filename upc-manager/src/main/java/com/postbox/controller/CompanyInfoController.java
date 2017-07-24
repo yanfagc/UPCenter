@@ -128,7 +128,6 @@ public class CompanyInfoController extends ApplicationController {
     @RequestMapping(value = "updateStatus", method = RequestMethod.POST)
     @ResponseBody
     public Object updateStatus(CompanyInfo record, HttpServletRequest request) {
-        SessionUser user = super.getSessionUser(request);
         try {
             this.companyInfoService.updateStatus(record);
             return RespResult.create(respCode.SUCCESS);

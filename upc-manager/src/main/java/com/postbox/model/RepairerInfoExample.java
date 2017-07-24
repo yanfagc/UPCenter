@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 import org.hanzhdy.web.bean.Page;
 
-public class RepairernfoExample {
+public class RepairerInfoExample {
     /**
      * 本段代码由Mybatis Generator自动生成.
      * 映射数据库: t_repairer_info
@@ -40,7 +40,7 @@ public class RepairernfoExample {
      * 映射数据库: t_repairer_info
      * @author MyBatis Generator
      */
-    public RepairernfoExample() {
+    public RepairerInfoExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 

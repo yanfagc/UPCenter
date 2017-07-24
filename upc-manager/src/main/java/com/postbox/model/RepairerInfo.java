@@ -4,8 +4,8 @@ import com.postbox.enums.DataStatus;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Repairernfo implements Serializable {
-    public static final long serialVersionUID = -1530247448L;
+public class RepairerInfo implements Serializable {
+    public static final long serialVersionUID = -194125379L;
 
     /**
      * 维修人员ID: t_repairer_info.REPAIRER_INFO_ID
