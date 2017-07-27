@@ -1,24 +1,24 @@
 package com.postbox.mapper;
 
-import com.postbox.model.TBoxGroup;
-import com.postbox.model.TBoxGroupExample;
+import com.postbox.model.BoxGroup;
+import com.postbox.model.BoxGroupExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface TBoxGroupMapper {
+public interface BoxGroupMapper {
     /**
      * 本段代码由Mybatis Generator自动生成.
      * 映射数据库: t_box_group
      * @author MyBatis Generator
      */
-    int countByExample(TBoxGroupExample example);
+    int countByExample(BoxGroupExample example);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
      * 映射数据库: t_box_group
      * @author MyBatis Generator
      */
-    int deleteByExample(TBoxGroupExample example);
+    int deleteByExample(BoxGroupExample example);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
@@ -32,54 +32,54 @@ public interface TBoxGroupMapper {
      * 映射数据库: t_box_group
      * @author MyBatis Generator
      */
-    int insert(TBoxGroup record);
+    int insert(BoxGroup record);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
      * 映射数据库: t_box_group
      * @author MyBatis Generator
      */
-    int insertSelective(TBoxGroup record);
+    int insertSelective(BoxGroup record);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
      * 映射数据库: t_box_group
      * @author MyBatis Generator
      */
-    List<TBoxGroup> selectByExample(TBoxGroupExample example);
+    List<BoxGroup> selectByExample(BoxGroupExample example);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
      * 映射数据库: t_box_group
      * @author MyBatis Generator
      */
-    TBoxGroup selectByPrimaryKey(Long boxGroupId);
+    BoxGroup selectByPrimaryKey(Long boxGroupId);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
      * 映射数据库: t_box_group
      * @author MyBatis Generator
      */
-    int updateByExampleSelective(@Param("record") TBoxGroup record, @Param("example") TBoxGroupExample example);
+    int updateByExampleSelective(@Param("record") BoxGroup record, @Param("example") BoxGroupExample example);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
      * 映射数据库: t_box_group
      * @author MyBatis Generator
      */
-    int updateByExample(@Param("record") TBoxGroup record, @Param("example") TBoxGroupExample example);
+    int updateByExample(@Param("record") BoxGroup record, @Param("example") BoxGroupExample example);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
      * 映射数据库: t_box_group
      * @author MyBatis Generator
      */
-    int updateByPrimaryKeySelective(TBoxGroup record);
+    int updateByPrimaryKeySelective(BoxGroup record);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
      * 映射数据库: t_box_group
      * @author MyBatis Generator
      */
-    int updateByPrimaryKey(TBoxGroup record);
+    int updateByPrimaryKey(BoxGroup record);
 }

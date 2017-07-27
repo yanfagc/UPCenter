@@ -67,9 +67,10 @@
             <columnOverride column="CREATETIME" property="createtime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
         </table>
 
-        <table schema="" tableName="T_BOX_GROUP"          domainObjectName="">
+        <table schema="" tableName="T_BOX_GROUP"          domainObjectName="BoxGroup">
             <generatedKey column="BOX_GROUP_ID" sqlStatement="JDBC" identity="false"/>
             <columnOverride column="BOX_GROUP_ID" property="boxGroupId" javaType="java.lang.Long" jdbcType="NUMERIC"/>
+            <columnOverride column="COMPANY_INFO_ID" property="companyInfoId" javaType="java.lang.Long" jdbcType="NUMERIC"/>
             <columnOverride column="REPAIRER_INFO_ID" property="repairerInfoId" javaType="java.lang.Long" jdbcType="NUMERIC"/>
             <columnOverride column="STATUS" property="status" javaType="com.postbox.enums.BoxGroupStatus" jdbcType="VARCHAR"/>
             <columnOverride column="CREATETIME" property="createtime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>

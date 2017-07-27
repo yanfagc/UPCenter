@@ -2,9 +2,8 @@ package com.postbox.mapper;
 
 import com.postbox.model.RepairerInfo;
 import com.postbox.model.RepairerInfoExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface RepairerInfoMapper {
     /**
