@@ -1,11 +1,13 @@
-package org.hanzhdy.manager.upc.model;
+package org.hanzhdy.manager.settings.model;
+
+import org.hanzhdy.manager.support.enums.CommonStatus;
+import org.hanzhdy.manager.support.enums.DictDataType;
 
 import java.io.Serializable;
 import java.util.Date;
-import org.hanzhdy.manager.support.enums.CommonStatus;
 
 public class DictData implements Serializable {
-    public static final long serialVersionUID = -1195025972L;
+    public static final long serialVersionUID = -672720625L;
 
     /**
      * ID号: s_dictdata.ID
@@ -42,6 +44,12 @@ public class DictData implements Serializable {
      * @author MyBatis Generator
      */
     private CommonStatus status;
+
+    /**
+     * 字典值类型,N:无数据;B:布尔数据;T:文本数据;I:整型数据;F浮点型数据: s_dictdata.DATATYPE
+     * @author MyBatis Generator
+     */
+    private DictDataType datatype;
 
     /**
      * 字典值: s_dictdata.DATAVALUE
@@ -179,6 +187,24 @@ public class DictData implements Serializable {
      */
     public void setStatus(CommonStatus status) {
         this.status = status;
+    }
+
+    /**
+     * 获取字典值类型,N:无数据;B:布尔数据;T:文本数据;I:整型数据;F浮点型数据: s_dictdata.DATATYPE
+     * @return 字典值类型,N:无数据;B:布尔数据;T:文本数据;I:整型数据;F浮点型数据: s_dictdata.DATATYPE
+     * @author MyBatis Generator
+     */
+    public DictDataType getDatatype() {
+        return datatype;
+    }
+
+    /**
+     * 设置字典值类型,N:无数据;B:布尔数据;T:文本数据;I:整型数据;F浮点型数据: s_dictdata.DATATYPE
+     * @param datatype 映射数据库字段: s_dictdata.DATATYPE
+     * @author MyBatis Generator
+     */
+    public void setDatatype(DictDataType datatype) {
+        this.datatype = datatype;
     }
 
     /**

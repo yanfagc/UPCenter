@@ -1,9 +1,10 @@
-package org.hanzhdy.manager.upc.model;
+package org.hanzhdy.manager.settings.model;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.hanzhdy.manager.support.enums.CommonStatus;
+import org.hanzhdy.manager.support.enums.DictDataType;
 import org.hanzhdy.web.bean.Page;
 
 public class DictDataExample {
@@ -594,6 +595,76 @@ public class DictDataExample {
 
         public Criteria andStatusNotBetween(CommonStatus value1, CommonStatus value2) {
             addCriterion("STATUS not between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andDatatypeIsNull() {
+            addCriterion("DATATYPE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDatatypeIsNotNull() {
+            addCriterion("DATATYPE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDatatypeEqualTo(DictDataType value) {
+            addCriterion("DATATYPE =", value, "datatype");
+            return (Criteria) this;
+        }
+
+        public Criteria andDatatypeNotEqualTo(DictDataType value) {
+            addCriterion("DATATYPE <>", value, "datatype");
+            return (Criteria) this;
+        }
+
+        public Criteria andDatatypeGreaterThan(DictDataType value) {
+            addCriterion("DATATYPE >", value, "datatype");
+            return (Criteria) this;
+        }
+
+        public Criteria andDatatypeGreaterThanOrEqualTo(DictDataType value) {
+            addCriterion("DATATYPE >=", value, "datatype");
+            return (Criteria) this;
+        }
+
+        public Criteria andDatatypeLessThan(DictDataType value) {
+            addCriterion("DATATYPE <", value, "datatype");
+            return (Criteria) this;
+        }
+
+        public Criteria andDatatypeLessThanOrEqualTo(DictDataType value) {
+            addCriterion("DATATYPE <=", value, "datatype");
+            return (Criteria) this;
+        }
+
+        public Criteria andDatatypeLike(DictDataType value) {
+            addCriterion("DATATYPE like", value, "datatype");
+            return (Criteria) this;
+        }
+
+        public Criteria andDatatypeNotLike(DictDataType value) {
+            addCriterion("DATATYPE not like", value, "datatype");
+            return (Criteria) this;
+        }
+
+        public Criteria andDatatypeIn(List<DictDataType> values) {
+            addCriterion("DATATYPE in", values, "datatype");
+            return (Criteria) this;
+        }
+
+        public Criteria andDatatypeNotIn(List<DictDataType> values) {
+            addCriterion("DATATYPE not in", values, "datatype");
+            return (Criteria) this;
+        }
+
+        public Criteria andDatatypeBetween(DictDataType value1, DictDataType value2) {
+            addCriterion("DATATYPE between", value1, value2, "datatype");
+            return (Criteria) this;
+        }
+
+        public Criteria andDatatypeNotBetween(DictDataType value1, DictDataType value2) {
+            addCriterion("DATATYPE not between", value1, value2, "datatype");
             return (Criteria) this;
         }
 

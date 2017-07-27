@@ -1,6 +1,6 @@
-package org.hanzhdy.manager.upc.vo;
+package org.hanzhdy.manager.settings.vo;
 
-import org.hanzhdy.manager.upc.model.DictData;
+import org.hanzhdy.manager.settings.model.DictData;
 
 /**
  * @description

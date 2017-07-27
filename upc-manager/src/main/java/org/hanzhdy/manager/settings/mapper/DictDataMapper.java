@@ -1,85 +1,85 @@
-package org.hanzhdy.manager.upc.mapper;
+package org.hanzhdy.manager.settings.mapper;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-import org.hanzhdy.manager.upc.model.DictType;
-import org.hanzhdy.manager.upc.model.DictTypeExample;
+import org.hanzhdy.manager.settings.model.DictData;
+import org.hanzhdy.manager.settings.model.DictDataExample;
 
-public interface DictTypeMapper {
+public interface DictDataMapper {
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: s_dicttype
+     * 映射数据库: s_dictdata
      * @author MyBatis Generator
      */
-    int countByExample(DictTypeExample example);
+    int countByExample(DictDataExample example);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: s_dicttype
+     * 映射数据库: s_dictdata
      * @author MyBatis Generator
      */
-    int deleteByExample(DictTypeExample example);
+    int deleteByExample(DictDataExample example);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: s_dicttype
+     * 映射数据库: s_dictdata
      * @author MyBatis Generator
      */
     int deleteByPrimaryKey(Long id);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: s_dicttype
+     * 映射数据库: s_dictdata
      * @author MyBatis Generator
      */
-    int insert(DictType record);
+    int insert(DictData record);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: s_dicttype
+     * 映射数据库: s_dictdata
      * @author MyBatis Generator
      */
-    int insertSelective(DictType record);
+    int insertSelective(DictData record);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: s_dicttype
+     * 映射数据库: s_dictdata
      * @author MyBatis Generator
      */
-    List<DictType> selectByExample(DictTypeExample example);
+    List<DictData> selectByExample(DictDataExample example);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: s_dicttype
+     * 映射数据库: s_dictdata
      * @author MyBatis Generator
      */
-    DictType selectByPrimaryKey(Long id);
+    DictData selectByPrimaryKey(Long id);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: s_dicttype
+     * 映射数据库: s_dictdata
      * @author MyBatis Generator
      */
-    int updateByExampleSelective(@Param("record") DictType record, @Param("example") DictTypeExample example);
+    int updateByExampleSelective(@Param("record") DictData record, @Param("example") DictDataExample example);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: s_dicttype
+     * 映射数据库: s_dictdata
      * @author MyBatis Generator
      */
-    int updateByExample(@Param("record") DictType record, @Param("example") DictTypeExample example);
+    int updateByExample(@Param("record") DictData record, @Param("example") DictDataExample example);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: s_dicttype
+     * 映射数据库: s_dictdata
      * @author MyBatis Generator
      */
-    int updateByPrimaryKeySelective(DictType record);
+    int updateByPrimaryKeySelective(DictData record);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: s_dicttype
+     * 映射数据库: s_dictdata
      * @author MyBatis Generator
      */
-    int updateByPrimaryKey(DictType record);
+    int updateByPrimaryKey(DictData record);
 }

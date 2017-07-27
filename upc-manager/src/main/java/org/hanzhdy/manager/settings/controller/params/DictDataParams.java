@@ -1,4 +1,4 @@
-package org.hanzhdy.manager.upc.controller.params;
+package org.hanzhdy.manager.settings.controller.params;
 
 import org.hanzhdy.web.bean.DatatableParams;
 

@@ -119,26 +119,6 @@
         	<columnOverride column="CREATOR" property="creator" javaType="java.lang.Long" jdbcType="NUMERIC" />
         	<columnOverride column="UPDATER" property="updater" javaType="java.lang.Long" jdbcType="NUMERIC" />
         </table>
-        <table schema="" tableName="S_DICTTYPE" domainObjectName="DictType">
-        	<generatedKey column="ID" sqlStatement="JDBC" identity="false"/>
-        	<columnOverride column="ID" property="id" javaType="java.lang.Long" jdbcType="NUMERIC" />
-        	<columnOverride column="STATUS" property="status" javaType="org.hanzhdy.manager.support.enums.CommonStatus" jdbcType="VARCHAR" />
-        	<columnOverride column="CREATETIME" property="createtime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
-			<columnOverride column="UPDATETIME" property="updatetime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
-        	<columnOverride column="CREATOR" property="creator" javaType="java.lang.Long" jdbcType="NUMERIC" />
-        	<columnOverride column="UPDATER" property="updater" javaType="java.lang.Long" jdbcType="NUMERIC" />
-        </table>
-        <table schema="" tableName="S_DICTDATA" domainObjectName="DictData">
-        	<generatedKey column="ID" sqlStatement="JDBC" identity="false"/>
-        	<columnOverride column="ID" property="id" javaType="java.lang.Long" jdbcType="NUMERIC" />
-        	<columnOverride column="SORT" property="sort" javaType="java.lang.Short" jdbcType="NUMERIC" />
-        	<columnOverride column="TYPEID" property="typeId" javaType="java.lang.Long" jdbcType="NUMERIC" />
-        	<columnOverride column="STATUS" property="status" javaType="org.hanzhdy.manager.support.enums.CommonStatus" jdbcType="VARCHAR" />
-        	<columnOverride column="CREATETIME" property="createtime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
-			<columnOverride column="UPDATETIME" property="updatetime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
-        	<columnOverride column="CREATOR" property="creator" javaType="java.lang.Long" jdbcType="NUMERIC" />
-        	<columnOverride column="UPDATER" property="updater" javaType="java.lang.Long" jdbcType="NUMERIC" />
-        </table>
 
 		<table schema="" tableName="G_LOGIN_LOG" domainObjectName="LoginLog">
 			<generatedKey column="ID" sqlStatement="JDBC" identity="false"/>

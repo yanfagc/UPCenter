@@ -1,11 +1,11 @@
-package org.hanzhdy.manager.upc.model;
+package org.hanzhdy.manager.settings.model;
 
 import java.io.Serializable;
 import java.util.Date;
 import org.hanzhdy.manager.support.enums.CommonStatus;
 
 public class DictType implements Serializable {
-    public static final long serialVersionUID = -1194526372L;
+    public static final long serialVersionUID = -672221025L;
 
     /**
      * ID号: s_dicttype.ID
@@ -24,12 +24,6 @@ public class DictType implements Serializable {
      * @author MyBatis Generator
      */
     private String typename;
-
-    /**
-     * 字典值类型,N:无数据;B:布尔数据;T:文本数据;I:整型数据;F浮点型数据: s_dicttype.VALUETYPE
-     * @author MyBatis Generator
-     */
-    private String valuetype;
 
     /**
      * 状态: s_dicttype.STATUS
@@ -119,24 +113,6 @@ public class DictType implements Serializable {
      */
     public void setTypename(String typename) {
         this.typename = typename == null ? null : typename.trim();
-    }
-
-    /**
-     * 获取字典值类型,N:无数据;B:布尔数据;T:文本数据;I:整型数据;F浮点型数据: s_dicttype.VALUETYPE
-     * @return 字典值类型,N:无数据;B:布尔数据;T:文本数据;I:整型数据;F浮点型数据: s_dicttype.VALUETYPE
-     * @author MyBatis Generator
-     */
-    public String getValuetype() {
-        return valuetype;
-    }
-
-    /**
-     * 设置字典值类型,N:无数据;B:布尔数据;T:文本数据;I:整型数据;F浮点型数据: s_dicttype.VALUETYPE
-     * @param valuetype 映射数据库字段: s_dicttype.VALUETYPE
-     * @author MyBatis Generator
-     */
-    public void setValuetype(String valuetype) {
-        this.valuetype = valuetype == null ? null : valuetype.trim();
     }
 
     /**

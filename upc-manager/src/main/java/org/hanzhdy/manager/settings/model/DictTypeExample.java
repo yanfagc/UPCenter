@@ -1,4 +1,4 @@
-package org.hanzhdy.manager.upc.model;
+package org.hanzhdy.manager.settings.model;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -404,76 +404,6 @@ public class DictTypeExample {
 
         public Criteria andTypenameNotBetween(String value1, String value2) {
             addCriterion("TYPENAME not between", value1, value2, "typename");
-            return (Criteria) this;
-        }
-
-        public Criteria andValuetypeIsNull() {
-            addCriterion("VALUETYPE is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andValuetypeIsNotNull() {
-            addCriterion("VALUETYPE is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andValuetypeEqualTo(String value) {
-            addCriterion("VALUETYPE =", value, "valuetype");
-            return (Criteria) this;
-        }
-
-        public Criteria andValuetypeNotEqualTo(String value) {
-            addCriterion("VALUETYPE <>", value, "valuetype");
-            return (Criteria) this;
-        }
-
-        public Criteria andValuetypeGreaterThan(String value) {
-            addCriterion("VALUETYPE >", value, "valuetype");
-            return (Criteria) this;
-        }
-
-        public Criteria andValuetypeGreaterThanOrEqualTo(String value) {
-            addCriterion("VALUETYPE >=", value, "valuetype");
-            return (Criteria) this;
-        }
-
-        public Criteria andValuetypeLessThan(String value) {
-            addCriterion("VALUETYPE <", value, "valuetype");
-            return (Criteria) this;
-        }
-
-        public Criteria andValuetypeLessThanOrEqualTo(String value) {
-            addCriterion("VALUETYPE <=", value, "valuetype");
-            return (Criteria) this;
-        }
-
-        public Criteria andValuetypeLike(String value) {
-            addCriterion("VALUETYPE like", value, "valuetype");
-            return (Criteria) this;
-        }
-
-        public Criteria andValuetypeNotLike(String value) {
-            addCriterion("VALUETYPE not like", value, "valuetype");
-            return (Criteria) this;
-        }
-
-        public Criteria andValuetypeIn(List<String> values) {
-            addCriterion("VALUETYPE in", values, "valuetype");
-            return (Criteria) this;
-        }
-
-        public Criteria andValuetypeNotIn(List<String> values) {
-            addCriterion("VALUETYPE not in", values, "valuetype");
-            return (Criteria) this;
-        }
-
-        public Criteria andValuetypeBetween(String value1, String value2) {
-            addCriterion("VALUETYPE between", value1, value2, "valuetype");
-            return (Criteria) this;
-        }
-
-        public Criteria andValuetypeNotBetween(String value1, String value2) {
-            addCriterion("VALUETYPE not between", value1, value2, "valuetype");
             return (Criteria) this;
         }
 

@@ -1,20 +1,20 @@
-package org.hanzhdy.manager.upc.service;
+package org.hanzhdy.manager.settings.service;
+
+import org.apache.commons.lang3.StringUtils;
+import org.hanzhdy.manager.settings.controller.params.DictTypeParams;
+import org.hanzhdy.manager.settings.mapper.DictTypeMapperExt;
+import org.hanzhdy.manager.settings.model.DictType;
+import org.hanzhdy.manager.settings.model.DictTypeExample;
+import org.hanzhdy.manager.support.enums.CommonStatus;
+import org.hanzhdy.manager.support.service.AbstractUpcService;
+import org.hanzhdy.web.bean.DatatableResult;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.apache.commons.lang3.StringUtils;
-import org.hanzhdy.manager.support.enums.CommonStatus;
-import org.hanzhdy.manager.support.service.AbstractUpcService;
-import org.hanzhdy.manager.upc.controller.params.DictTypeParams;
-import org.hanzhdy.manager.upc.mapper.DictTypeMapperExt;
-import org.hanzhdy.manager.upc.model.DictType;
-import org.hanzhdy.manager.upc.model.DictTypeExample;
-import org.hanzhdy.web.bean.DatatableResult;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 /**
  * @description 字典类型Service
@@ -40,9 +40,6 @@ public class DictTypeService extends AbstractUpcService {
         }
         if (StringUtils.isNotBlank(params.getStatus())) {
             search.put("status", params.getStatus());
-        }
-        if (StringUtils.isNotBlank(params.getValuetype())) {
-            search.put("valuetype", params.getValuetype());
         }
         
         // 查询数据
