@@ -1,20 +1,20 @@
-package org.hanzhdy.manager.upc.service;
+package org.hanzhdy.manager.settings.service;
+
+import org.apache.commons.lang3.StringUtils;
+import org.hanzhdy.manager.settings.controller.params.DictDataParams;
+import org.hanzhdy.manager.settings.mapper.DictDataMapperExt;
+import org.hanzhdy.manager.settings.model.DictData;
+import org.hanzhdy.manager.settings.model.DictDataExample;
+import org.hanzhdy.manager.support.enums.CommonStatus;
+import org.hanzhdy.manager.support.service.AbstractUpcService;
+import org.hanzhdy.web.bean.DatatableResult;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.apache.commons.lang3.StringUtils;
-import org.hanzhdy.manager.support.enums.CommonStatus;
-import org.hanzhdy.manager.support.service.AbstractUpcService;
-import org.hanzhdy.manager.upc.controller.params.DictDataParams;
-import org.hanzhdy.manager.upc.mapper.DictDataMapperExt;
-import org.hanzhdy.manager.upc.model.DictData;
-import org.hanzhdy.manager.upc.model.DictDataExample;
-import org.hanzhdy.web.bean.DatatableResult;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 /**
  * @description 数据字典表Service

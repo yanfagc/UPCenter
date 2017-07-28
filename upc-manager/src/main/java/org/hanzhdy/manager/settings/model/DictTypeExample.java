@@ -1,4 +1,4 @@
-package org.hanzhdy.manager.upc.model;
+package org.hanzhdy.manager.settings.model;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -6,47 +6,47 @@ import java.util.List;
 import org.hanzhdy.manager.support.enums.CommonStatus;
 import org.hanzhdy.web.bean.Page;
 
-public class DictDataExample {
+public class DictTypeExample {
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: s_dictdata
+     * 映射数据库: s_dicttype
      * @author MyBatis Generator
      */
     protected String orderByClause;
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: s_dictdata
+     * 映射数据库: s_dicttype
      * @author MyBatis Generator
      */
     protected Page page;
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: s_dictdata
+     * 映射数据库: s_dicttype
      * @author MyBatis Generator
      */
     protected boolean distinct;
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: s_dictdata
+     * 映射数据库: s_dicttype
      * @author MyBatis Generator
      */
     protected List<Criteria> oredCriteria;
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: s_dictdata
+     * 映射数据库: s_dicttype
      * @author MyBatis Generator
      */
-    public DictDataExample() {
+    public DictTypeExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: s_dictdata
+     * 映射数据库: s_dicttype
      * @author MyBatis Generator
      */
     public void setOrderByClause(String orderByClause) {
@@ -55,7 +55,7 @@ public class DictDataExample {
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: s_dictdata
+     * 映射数据库: s_dicttype
      * @author MyBatis Generator
      */
     public String getOrderByClause() {
@@ -64,7 +64,7 @@ public class DictDataExample {
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: s_dictdata
+     * 映射数据库: s_dicttype
      * @author MyBatis Generator
      */
     public void setPage(Page page) {
@@ -73,7 +73,7 @@ public class DictDataExample {
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: s_dictdata
+     * 映射数据库: s_dicttype
      * @author MyBatis Generator
      */
     public Page getPage() {
@@ -82,7 +82,7 @@ public class DictDataExample {
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: s_dictdata
+     * 映射数据库: s_dicttype
      * @author MyBatis Generator
      */
     public void setDistinct(boolean distinct) {
@@ -91,7 +91,7 @@ public class DictDataExample {
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: s_dictdata
+     * 映射数据库: s_dicttype
      * @author MyBatis Generator
      */
     public boolean isDistinct() {
@@ -100,7 +100,7 @@ public class DictDataExample {
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: s_dictdata
+     * 映射数据库: s_dicttype
      * @author MyBatis Generator
      */
     public List<Criteria> getOredCriteria() {
@@ -109,7 +109,7 @@ public class DictDataExample {
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: s_dictdata
+     * 映射数据库: s_dicttype
      * @author MyBatis Generator
      */
     public void or(Criteria criteria) {
@@ -118,7 +118,7 @@ public class DictDataExample {
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: s_dictdata
+     * 映射数据库: s_dicttype
      * @author MyBatis Generator
      */
     public Criteria or() {
@@ -129,7 +129,7 @@ public class DictDataExample {
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: s_dictdata
+     * 映射数据库: s_dicttype
      * @author MyBatis Generator
      */
     public Criteria createCriteria() {
@@ -142,7 +142,7 @@ public class DictDataExample {
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: s_dictdata
+     * 映射数据库: s_dicttype
      * @author MyBatis Generator
      */
     protected Criteria createCriteriaInternal() {
@@ -152,7 +152,7 @@ public class DictDataExample {
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: s_dictdata
+     * 映射数据库: s_dicttype
      * @author MyBatis Generator
      */
     public void clear() {
@@ -163,7 +163,7 @@ public class DictDataExample {
 
     /**
      * 本类由Mybatis Generator自动生成
-     * 映射数据库: s_dictdata
+     * 映射数据库: s_dicttype
      * @author MyBatis Generator
      */
     protected abstract static class GeneratedCriteria {
@@ -267,263 +267,143 @@ public class DictDataExample {
             return (Criteria) this;
         }
 
-        public Criteria andDatacodeIsNull() {
-            addCriterion("DATACODE is null");
+        public Criteria andTypecodeIsNull() {
+            addCriterion("TYPECODE is null");
             return (Criteria) this;
         }
 
-        public Criteria andDatacodeIsNotNull() {
-            addCriterion("DATACODE is not null");
+        public Criteria andTypecodeIsNotNull() {
+            addCriterion("TYPECODE is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDatacodeEqualTo(String value) {
-            addCriterion("DATACODE =", value, "datacode");
+        public Criteria andTypecodeEqualTo(String value) {
+            addCriterion("TYPECODE =", value, "typecode");
             return (Criteria) this;
         }
 
-        public Criteria andDatacodeNotEqualTo(String value) {
-            addCriterion("DATACODE <>", value, "datacode");
+        public Criteria andTypecodeNotEqualTo(String value) {
+            addCriterion("TYPECODE <>", value, "typecode");
             return (Criteria) this;
         }
 
-        public Criteria andDatacodeGreaterThan(String value) {
-            addCriterion("DATACODE >", value, "datacode");
+        public Criteria andTypecodeGreaterThan(String value) {
+            addCriterion("TYPECODE >", value, "typecode");
             return (Criteria) this;
         }
 
-        public Criteria andDatacodeGreaterThanOrEqualTo(String value) {
-            addCriterion("DATACODE >=", value, "datacode");
+        public Criteria andTypecodeGreaterThanOrEqualTo(String value) {
+            addCriterion("TYPECODE >=", value, "typecode");
             return (Criteria) this;
         }
 
-        public Criteria andDatacodeLessThan(String value) {
-            addCriterion("DATACODE <", value, "datacode");
+        public Criteria andTypecodeLessThan(String value) {
+            addCriterion("TYPECODE <", value, "typecode");
             return (Criteria) this;
         }
 
-        public Criteria andDatacodeLessThanOrEqualTo(String value) {
-            addCriterion("DATACODE <=", value, "datacode");
+        public Criteria andTypecodeLessThanOrEqualTo(String value) {
+            addCriterion("TYPECODE <=", value, "typecode");
             return (Criteria) this;
         }
 
-        public Criteria andDatacodeLike(String value) {
-            addCriterion("DATACODE like", value, "datacode");
+        public Criteria andTypecodeLike(String value) {
+            addCriterion("TYPECODE like", value, "typecode");
             return (Criteria) this;
         }
 
-        public Criteria andDatacodeNotLike(String value) {
-            addCriterion("DATACODE not like", value, "datacode");
+        public Criteria andTypecodeNotLike(String value) {
+            addCriterion("TYPECODE not like", value, "typecode");
             return (Criteria) this;
         }
 
-        public Criteria andDatacodeIn(List<String> values) {
-            addCriterion("DATACODE in", values, "datacode");
+        public Criteria andTypecodeIn(List<String> values) {
+            addCriterion("TYPECODE in", values, "typecode");
             return (Criteria) this;
         }
 
-        public Criteria andDatacodeNotIn(List<String> values) {
-            addCriterion("DATACODE not in", values, "datacode");
+        public Criteria andTypecodeNotIn(List<String> values) {
+            addCriterion("TYPECODE not in", values, "typecode");
             return (Criteria) this;
         }
 
-        public Criteria andDatacodeBetween(String value1, String value2) {
-            addCriterion("DATACODE between", value1, value2, "datacode");
+        public Criteria andTypecodeBetween(String value1, String value2) {
+            addCriterion("TYPECODE between", value1, value2, "typecode");
             return (Criteria) this;
         }
 
-        public Criteria andDatacodeNotBetween(String value1, String value2) {
-            addCriterion("DATACODE not between", value1, value2, "datacode");
+        public Criteria andTypecodeNotBetween(String value1, String value2) {
+            addCriterion("TYPECODE not between", value1, value2, "typecode");
             return (Criteria) this;
         }
 
-        public Criteria andDatanameIsNull() {
-            addCriterion("DATANAME is null");
+        public Criteria andTypenameIsNull() {
+            addCriterion("TYPENAME is null");
             return (Criteria) this;
         }
 
-        public Criteria andDatanameIsNotNull() {
-            addCriterion("DATANAME is not null");
+        public Criteria andTypenameIsNotNull() {
+            addCriterion("TYPENAME is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDatanameEqualTo(String value) {
-            addCriterion("DATANAME =", value, "dataname");
+        public Criteria andTypenameEqualTo(String value) {
+            addCriterion("TYPENAME =", value, "typename");
             return (Criteria) this;
         }
 
-        public Criteria andDatanameNotEqualTo(String value) {
-            addCriterion("DATANAME <>", value, "dataname");
+        public Criteria andTypenameNotEqualTo(String value) {
+            addCriterion("TYPENAME <>", value, "typename");
             return (Criteria) this;
         }
 
-        public Criteria andDatanameGreaterThan(String value) {
-            addCriterion("DATANAME >", value, "dataname");
+        public Criteria andTypenameGreaterThan(String value) {
+            addCriterion("TYPENAME >", value, "typename");
             return (Criteria) this;
         }
 
-        public Criteria andDatanameGreaterThanOrEqualTo(String value) {
-            addCriterion("DATANAME >=", value, "dataname");
+        public Criteria andTypenameGreaterThanOrEqualTo(String value) {
+            addCriterion("TYPENAME >=", value, "typename");
             return (Criteria) this;
         }
 
-        public Criteria andDatanameLessThan(String value) {
-            addCriterion("DATANAME <", value, "dataname");
+        public Criteria andTypenameLessThan(String value) {
+            addCriterion("TYPENAME <", value, "typename");
             return (Criteria) this;
         }
 
-        public Criteria andDatanameLessThanOrEqualTo(String value) {
-            addCriterion("DATANAME <=", value, "dataname");
+        public Criteria andTypenameLessThanOrEqualTo(String value) {
+            addCriterion("TYPENAME <=", value, "typename");
             return (Criteria) this;
         }
 
-        public Criteria andDatanameLike(String value) {
-            addCriterion("DATANAME like", value, "dataname");
+        public Criteria andTypenameLike(String value) {
+            addCriterion("TYPENAME like", value, "typename");
             return (Criteria) this;
         }
 
-        public Criteria andDatanameNotLike(String value) {
-            addCriterion("DATANAME not like", value, "dataname");
+        public Criteria andTypenameNotLike(String value) {
+            addCriterion("TYPENAME not like", value, "typename");
             return (Criteria) this;
         }
 
-        public Criteria andDatanameIn(List<String> values) {
-            addCriterion("DATANAME in", values, "dataname");
+        public Criteria andTypenameIn(List<String> values) {
+            addCriterion("TYPENAME in", values, "typename");
             return (Criteria) this;
         }
 
-        public Criteria andDatanameNotIn(List<String> values) {
-            addCriterion("DATANAME not in", values, "dataname");
+        public Criteria andTypenameNotIn(List<String> values) {
+            addCriterion("TYPENAME not in", values, "typename");
             return (Criteria) this;
         }
 
-        public Criteria andDatanameBetween(String value1, String value2) {
-            addCriterion("DATANAME between", value1, value2, "dataname");
+        public Criteria andTypenameBetween(String value1, String value2) {
+            addCriterion("TYPENAME between", value1, value2, "typename");
             return (Criteria) this;
         }
 
-        public Criteria andDatanameNotBetween(String value1, String value2) {
-            addCriterion("DATANAME not between", value1, value2, "dataname");
-            return (Criteria) this;
-        }
-
-        public Criteria andTypeIdIsNull() {
-            addCriterion("TYPEID is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andTypeIdIsNotNull() {
-            addCriterion("TYPEID is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andTypeIdEqualTo(Long value) {
-            addCriterion("TYPEID =", value, "typeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andTypeIdNotEqualTo(Long value) {
-            addCriterion("TYPEID <>", value, "typeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andTypeIdGreaterThan(Long value) {
-            addCriterion("TYPEID >", value, "typeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andTypeIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("TYPEID >=", value, "typeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andTypeIdLessThan(Long value) {
-            addCriterion("TYPEID <", value, "typeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andTypeIdLessThanOrEqualTo(Long value) {
-            addCriterion("TYPEID <=", value, "typeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andTypeIdIn(List<Long> values) {
-            addCriterion("TYPEID in", values, "typeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andTypeIdNotIn(List<Long> values) {
-            addCriterion("TYPEID not in", values, "typeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andTypeIdBetween(Long value1, Long value2) {
-            addCriterion("TYPEID between", value1, value2, "typeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andTypeIdNotBetween(Long value1, Long value2) {
-            addCriterion("TYPEID not between", value1, value2, "typeId");
-            return (Criteria) this;
-        }
-
-        public Criteria andSortIsNull() {
-            addCriterion("SORT is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSortIsNotNull() {
-            addCriterion("SORT is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSortEqualTo(Short value) {
-            addCriterion("SORT =", value, "sort");
-            return (Criteria) this;
-        }
-
-        public Criteria andSortNotEqualTo(Short value) {
-            addCriterion("SORT <>", value, "sort");
-            return (Criteria) this;
-        }
-
-        public Criteria andSortGreaterThan(Short value) {
-            addCriterion("SORT >", value, "sort");
-            return (Criteria) this;
-        }
-
-        public Criteria andSortGreaterThanOrEqualTo(Short value) {
-            addCriterion("SORT >=", value, "sort");
-            return (Criteria) this;
-        }
-
-        public Criteria andSortLessThan(Short value) {
-            addCriterion("SORT <", value, "sort");
-            return (Criteria) this;
-        }
-
-        public Criteria andSortLessThanOrEqualTo(Short value) {
-            addCriterion("SORT <=", value, "sort");
-            return (Criteria) this;
-        }
-
-        public Criteria andSortIn(List<Short> values) {
-            addCriterion("SORT in", values, "sort");
-            return (Criteria) this;
-        }
-
-        public Criteria andSortNotIn(List<Short> values) {
-            addCriterion("SORT not in", values, "sort");
-            return (Criteria) this;
-        }
-
-        public Criteria andSortBetween(Short value1, Short value2) {
-            addCriterion("SORT between", value1, value2, "sort");
-            return (Criteria) this;
-        }
-
-        public Criteria andSortNotBetween(Short value1, Short value2) {
-            addCriterion("SORT not between", value1, value2, "sort");
+        public Criteria andTypenameNotBetween(String value1, String value2) {
+            addCriterion("TYPENAME not between", value1, value2, "typename");
             return (Criteria) this;
         }
 
@@ -597,73 +477,73 @@ public class DictDataExample {
             return (Criteria) this;
         }
 
-        public Criteria andDatavalueIsNull() {
-            addCriterion("DATAVALUE is null");
+        public Criteria andRemarkIsNull() {
+            addCriterion("REMARK is null");
             return (Criteria) this;
         }
 
-        public Criteria andDatavalueIsNotNull() {
-            addCriterion("DATAVALUE is not null");
+        public Criteria andRemarkIsNotNull() {
+            addCriterion("REMARK is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDatavalueEqualTo(String value) {
-            addCriterion("DATAVALUE =", value, "datavalue");
+        public Criteria andRemarkEqualTo(String value) {
+            addCriterion("REMARK =", value, "remark");
             return (Criteria) this;
         }
 
-        public Criteria andDatavalueNotEqualTo(String value) {
-            addCriterion("DATAVALUE <>", value, "datavalue");
+        public Criteria andRemarkNotEqualTo(String value) {
+            addCriterion("REMARK <>", value, "remark");
             return (Criteria) this;
         }
 
-        public Criteria andDatavalueGreaterThan(String value) {
-            addCriterion("DATAVALUE >", value, "datavalue");
+        public Criteria andRemarkGreaterThan(String value) {
+            addCriterion("REMARK >", value, "remark");
             return (Criteria) this;
         }
 
-        public Criteria andDatavalueGreaterThanOrEqualTo(String value) {
-            addCriterion("DATAVALUE >=", value, "datavalue");
+        public Criteria andRemarkGreaterThanOrEqualTo(String value) {
+            addCriterion("REMARK >=", value, "remark");
             return (Criteria) this;
         }
 
-        public Criteria andDatavalueLessThan(String value) {
-            addCriterion("DATAVALUE <", value, "datavalue");
+        public Criteria andRemarkLessThan(String value) {
+            addCriterion("REMARK <", value, "remark");
             return (Criteria) this;
         }
 
-        public Criteria andDatavalueLessThanOrEqualTo(String value) {
-            addCriterion("DATAVALUE <=", value, "datavalue");
+        public Criteria andRemarkLessThanOrEqualTo(String value) {
+            addCriterion("REMARK <=", value, "remark");
             return (Criteria) this;
         }
 
-        public Criteria andDatavalueLike(String value) {
-            addCriterion("DATAVALUE like", value, "datavalue");
+        public Criteria andRemarkLike(String value) {
+            addCriterion("REMARK like", value, "remark");
             return (Criteria) this;
         }
 
-        public Criteria andDatavalueNotLike(String value) {
-            addCriterion("DATAVALUE not like", value, "datavalue");
+        public Criteria andRemarkNotLike(String value) {
+            addCriterion("REMARK not like", value, "remark");
             return (Criteria) this;
         }
 
-        public Criteria andDatavalueIn(List<String> values) {
-            addCriterion("DATAVALUE in", values, "datavalue");
+        public Criteria andRemarkIn(List<String> values) {
+            addCriterion("REMARK in", values, "remark");
             return (Criteria) this;
         }
 
-        public Criteria andDatavalueNotIn(List<String> values) {
-            addCriterion("DATAVALUE not in", values, "datavalue");
+        public Criteria andRemarkNotIn(List<String> values) {
+            addCriterion("REMARK not in", values, "remark");
             return (Criteria) this;
         }
 
-        public Criteria andDatavalueBetween(String value1, String value2) {
-            addCriterion("DATAVALUE between", value1, value2, "datavalue");
+        public Criteria andRemarkBetween(String value1, String value2) {
+            addCriterion("REMARK between", value1, value2, "remark");
             return (Criteria) this;
         }
 
-        public Criteria andDatavalueNotBetween(String value1, String value2) {
-            addCriterion("DATAVALUE not between", value1, value2, "datavalue");
+        public Criteria andRemarkNotBetween(String value1, String value2) {
+            addCriterion("REMARK not between", value1, value2, "remark");
             return (Criteria) this;
         }
 
@@ -910,7 +790,7 @@ public class DictDataExample {
 
     /**
      * This class was generated by MyBatis Generator.
-     * This class corresponds to the database table s_dictdata
+     * This class corresponds to the database table s_dicttype
      * @author do_not_delete_during_merge MyBatis Generator
      */
     public static class Criteria extends GeneratedCriteria {
@@ -922,7 +802,7 @@ public class DictDataExample {
 
     /**
      * 本类由Mybatis Generator自动生成
-     * 映射数据库: s_dictdata
+     * 映射数据库: s_dicttype
      * @author MyBatis Generator
      */
     public static class Criterion {

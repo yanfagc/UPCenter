@@ -1,6 +1,6 @@
-package org.hanzhdy.manager.upc.vo;
+package org.hanzhdy.manager.settings.vo;
 
-import org.hanzhdy.manager.upc.model.DictData;
+import org.hanzhdy.manager.settings.model.DictData;
 
 /**
  * @description
@@ -13,21 +13,11 @@ public class DictDataVo extends DictData {
     
     private String            typename;
     
-    private String            valuetype;
-    
     public String getTypename() {
         return typename;
     }
     
     public void setTypename(String typename) {
         this.typename = typename;
-    }
-    
-    public String getValuetype() {
-        return valuetype;
-    }
-    
-    public void setValuetype(String valuetype) {
-        this.valuetype = valuetype;
     }
 }

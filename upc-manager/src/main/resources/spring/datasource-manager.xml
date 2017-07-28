@@ -70,13 +70,15 @@
     <aop:config>
         <aop:advisor pointcut="execution(* org.hanzhdy.manager.form.service..*Service.*(..))" advice-ref="manager-tx-advice" />
         <aop:advisor pointcut="execution(* org.hanzhdy.manager.upc.service..*Service.*(..))" advice-ref="manager-tx-advice" />
+        <aop:advisor pointcut="execution(* org.hanzhdy.manager.settings.service..*Service.*(..))" advice-ref="manager-tx-advice" />
         <aop:advisor pointcut="execution(* com.postbox.service..*Service.*(..))" advice-ref="manager-tx-advice" />
     </aop:config>
 	
 	<context:component-scan base-package="org.hanzhdy.manager.form.**"></context:component-scan>
     <context:component-scan base-package="org.hanzhdy.manager.upc.**"></context:component-scan>
+    <context:component-scan base-package="org.hanzhdy.manager.settings.**"></context:component-scan>
     <context:component-scan base-package="com.postbox.**"></context:component-scan>
-    
+
     <!-- beware that mapper-config.xml is not needed if you use injected mappers -->
     <bean id="manager-form-sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="_manager-dataSource" />
@@ -99,6 +101,18 @@
         <property name="basePackage" value="org.hanzhdy.manager.upc.mapper" />
         <!-- optional unless there are multiple session factories defined -->
         <property name="sqlSessionFactoryBeanName" value="manager-upc-sqlSessionFactoryBean" />
+    </bean>
+
+    <!-- beware that mapper-config.xml is not needed if you use injected mappers -->
+    <bean id="manager-settings-sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="_manager-dataSource" />
+        <property name="mapperLocations" value="classpath*:mapper/settings/**/*.xml"/>
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="org.hanzhdy.manager.settings.mapper" />
+        <!-- optional unless there are multiple session factories defined -->
+        <property name="sqlSessionFactoryBeanName" value="manager-settings-sqlSessionFactoryBean" />
     </bean>
 
     <!-- beware that mapper-config.xml is not needed if you use injected mappers -->

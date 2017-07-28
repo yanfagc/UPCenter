@@ -1,9 +1,9 @@
-package org.hanzhdy.manager.upc.mapper;
+package org.hanzhdy.manager.settings.mapper;
+
+import org.hanzhdy.manager.settings.model.DictType;
 
 import java.util.List;
 import java.util.Map;
-
-import org.hanzhdy.manager.upc.model.DictType;
 
 public interface DictTypeMapperExt extends DictTypeMapper {
     /**
@@ -11,12 +11,12 @@ public interface DictTypeMapperExt extends DictTypeMapper {
      * @param params
      * @return
      */
-    public int countAsList(Map<String, Object> params);
+    int countAsList(Map<String, Object> params);
     
     /**
      * 按条件查询字典类型信息
      * @param params
      * @return
      */
-    public List<DictType> selectAsList(Map<String, Object> params);
+    List<DictType> selectAsList(Map<String, Object> params);
 }

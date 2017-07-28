@@ -25,17 +25,6 @@
                   <input type="text" class="form-control" id="searchkey" placeholder="关键字"/>
                 </div>
                 <div class="form-group">
-                  <label class="sr-only" for="valuetype">字典值类型</label>
-                  <select id="valuetype" class="form-control">
-                  	<option value=""> --- 选择字典值类型 --- </option>
-                   	<option value="N">无数据</option>
-                   	<option value="B">布尔数据</option>
-                   	<option value="T">文本数据</option>
-                   	<option value="I">整型数据</option>
-                   	<option value="F">浮点型数据</option>
-                  </select>
-                </div>
-                <div class="form-group">
                   <label class="sr-only" for="status">类型状态</label>
                     <select id="status" class="form-control">
                     	<option value=""> --- 选择类型状态 --- </option>
@@ -55,11 +44,10 @@
               <table id="dataList" class="table table-bordered table-hover">
                 <thead>
                   <tr>
-                    <th class="text-center" style="width:12%">类型编码</th>
-                    <th class="text-center" style="width:12%">类型名称</th>
-                    <th class="text-center" style="width:12%">字典值类型</th>
+                    <th class="text-center" style="width:15%">类型编码</th>
+                    <th class="text-center" style="width:15%">类型名称</th>
                     <th class="text-center" style="width:12%">状态</th>
-                    <th class="text-center" style="width:23%">描述</th>
+                    <th class="text-center" style="width:25%">描述</th>
                     <th class="text-center" style="width:15%">创建时间</th>
                     <th class="text-center" style="width:20%">操作</th>
                   </tr>

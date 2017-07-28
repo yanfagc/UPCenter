@@ -1,17 +1,15 @@
-package org.hanzhdy.manager.upc.controller;
+package org.hanzhdy.manager.settings.controller;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
+import com.alibaba.fastjson.JSON;
+import org.hanzhdy.manager.settings.controller.params.DictDataParams;
+import org.hanzhdy.manager.settings.model.DictData;
+import org.hanzhdy.manager.settings.model.DictType;
+import org.hanzhdy.manager.settings.service.DictDataService;
+import org.hanzhdy.manager.settings.service.DictTypeService;
 import org.hanzhdy.manager.support.bean.SessionUser;
 import org.hanzhdy.manager.support.constants.resp.RespResult;
 import org.hanzhdy.manager.support.controller.ApplicationController;
-import org.hanzhdy.manager.upc.controller.params.DictDataParams;
-import org.hanzhdy.manager.upc.model.DictData;
-import org.hanzhdy.manager.upc.model.DictType;
-import org.hanzhdy.manager.upc.service.DictDataService;
-import org.hanzhdy.manager.upc.service.DictTypeService;
+import org.hanzhdy.manager.support.enums.DictDataType;
 import org.hanzhdy.web.bean.DatatableResult;
 import org.hanzhdy.web.throwable.BizException;
 import org.slf4j.Logger;
@@ -23,7 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSON;
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @description 数据字典管理Controller
@@ -50,6 +49,7 @@ public class DictDataController extends ApplicationController {
     public String toList(Model model) {
         try {
             List<DictType> typeList = this.dictTypeService.queryAsList();
+            model.addAttribute("datatypeList", DictDataType.values());
             model.addAttribute("typeList", typeList);
         }
         catch (Exception ex) {
@@ -92,7 +92,7 @@ public class DictDataController extends ApplicationController {
         // 查询字典类型
         List<DictType> typeList = this.dictTypeService.queryAsList();
         model.addAttribute("typeList", typeList);
-        
+        model.addAttribute("datatypeList", DictDataType.values());
         // 查询数据字典信息
         if (id != null && id > 0) {
             DictData record = dictDataService.queryById(id);

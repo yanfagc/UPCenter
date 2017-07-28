@@ -35,7 +35,7 @@
                 </div>
                 <div class="form-group">
                   <label class="sr-only" for="status">字典状态</label>
-                    <select id="fieldtype" class="form-control">
+                    <select id="status" class="form-control">
                     	<option value=""> --- 选择字典状态 --- </option>
                     	<option value="N">正常</option>
                     	<option value="F">冻结</option>
@@ -53,13 +53,14 @@
               <table id="dataList" class="table table-bordered table-hover">
                 <thead>
                   <tr>
-                    <th class="text-center" style="width:15%">字典编码</th>
-                    <th class="text-center" style="width:15%">字典名称</th>
-                    <th class="text-center" style="width:15%">字典类型</th>
-                    <th class="text-center" style="width:15%">字典值</th>
+                    <th class="text-center" style="width:12%">字典编码</th>
+                    <th class="text-center" style="width:12%">字典名称</th>
+                    <th class="text-center" style="width:12%">字典类型</th>
+                    <th class="text-center" style="width:12%">数据类型</th>
+                    <th class="text-center" style="width:16%">字典值</th>
                     <th class="text-center" style="width:12%">排序</th>
                     <th class="text-center" style="width:12%">状态</th>
-                    <th class="text-center" style="width:16%">操作</th>
+                    <th class="text-center" style="width:12%">操作</th>
                   </tr>
                 </thead>
                 <tbody></tbody>

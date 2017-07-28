@@ -1,7 +1,7 @@
 var datatable;
 $(function() {
     // 定义操作变量
-    var $searchkey=$('#searchkey'), $valuetype=$('#valuetype'), $status=$('#status');
+    var $searchkey=$('#searchkey'), $status=$('#status');
     // 构造datatable对象
     datatable=$('#dataList').dataTable(
         $.extend({},pageParams,{
@@ -10,10 +10,6 @@ $(function() {
                 aodata.push({
                     "name":"searchkey",
                     "value":$searchkey.val()
-                });
-                aodata.push({
-                    "name":"valuetype",
-                    "value":$valuetype.val()
                 });
                 aodata.push({
                     "name":"status",
@@ -26,24 +22,6 @@ $(function() {
                 },
                 {
                     mData:"typename"
-                },
-                {
-                    mData:"valuetype",
-                    sClass:"text-center",
-                    mRender:function(data, display, record) {
-                        if(data=='N'){
-                            return '无数据';
-                        }else if(data=='B'){
-                            return '布尔数据';
-                        }else if(data=='T'){
-                            return '文本数据';
-                        }else if(data=='I'){
-                            return '整型数据';
-                        }else if(data=='F'){
-                            return '浮点型数据';
-                        }
-                        return (data==0||data)?data:'';
-                    }
                 },
                 {
                     mData:"status",

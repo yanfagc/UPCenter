@@ -1,13 +1,12 @@
-package org.hanzhdy.manager.upc.controller;
+package org.hanzhdy.manager.settings.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
+import com.alibaba.fastjson.JSON;
+import org.hanzhdy.manager.settings.controller.params.DictTypeParams;
+import org.hanzhdy.manager.settings.model.DictType;
+import org.hanzhdy.manager.settings.service.DictTypeService;
 import org.hanzhdy.manager.support.bean.SessionUser;
 import org.hanzhdy.manager.support.constants.resp.RespResult;
 import org.hanzhdy.manager.support.controller.ApplicationController;
-import org.hanzhdy.manager.upc.controller.params.DictTypeParams;
-import org.hanzhdy.manager.upc.model.DictType;
-import org.hanzhdy.manager.upc.service.DictTypeService;
 import org.hanzhdy.web.bean.DatatableResult;
 import org.hanzhdy.web.throwable.BizException;
 import org.slf4j.Logger;
@@ -19,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSON;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @description 字典类型管理Controller

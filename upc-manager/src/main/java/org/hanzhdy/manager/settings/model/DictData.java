@@ -1,11 +1,13 @@
-package org.hanzhdy.manager.upc.model;
+package org.hanzhdy.manager.settings.model;
+
+import org.hanzhdy.manager.support.enums.CommonStatus;
+import org.hanzhdy.manager.support.enums.DictDataType;
 
 import java.io.Serializable;
 import java.util.Date;
-import org.hanzhdy.manager.support.enums.CommonStatus;
 
 public class DictData implements Serializable {
-    public static final long serialVersionUID = -1195025972L;
+    public static final long serialVersionUID = -672720625L;
 
     /**
      * ID号: s_dictdata.ID
@@ -44,10 +46,22 @@ public class DictData implements Serializable {
     private CommonStatus status;
 
     /**
+     * 字典值类型,N:无数据;B:布尔数据;T:文本数据;I:整型数据;F浮点型数据: s_dictdata.DATATYPE
+     * @author MyBatis Generator
+     */
+    private DictDataType datatype;
+
+    /**
      * 字典值: s_dictdata.DATAVALUE
      * @author MyBatis Generator
      */
     private String datavalue;
+
+    /**
+     * 备注: s_dictdata.REMARK
+     * @author MyBatis Generator
+     */
+    private String remark;
 
     /**
      * 创建时间: s_dictdata.CREATETIME
@@ -182,6 +196,24 @@ public class DictData implements Serializable {
     }
 
     /**
+     * 获取字典值类型,N:无数据;B:布尔数据;T:文本数据;I:整型数据;F浮点型数据: s_dictdata.DATATYPE
+     * @return 字典值类型,N:无数据;B:布尔数据;T:文本数据;I:整型数据;F浮点型数据: s_dictdata.DATATYPE
+     * @author MyBatis Generator
+     */
+    public DictDataType getDatatype() {
+        return datatype;
+    }
+
+    /**
+     * 设置字典值类型,N:无数据;B:布尔数据;T:文本数据;I:整型数据;F浮点型数据: s_dictdata.DATATYPE
+     * @param datatype 映射数据库字段: s_dictdata.DATATYPE
+     * @author MyBatis Generator
+     */
+    public void setDatatype(DictDataType datatype) {
+        this.datatype = datatype;
+    }
+
+    /**
      * 获取字典值: s_dictdata.DATAVALUE
      * @return 字典值: s_dictdata.DATAVALUE
      * @author MyBatis Generator
@@ -197,6 +229,24 @@ public class DictData implements Serializable {
      */
     public void setDatavalue(String datavalue) {
         this.datavalue = datavalue == null ? null : datavalue.trim();
+    }
+
+    /**
+     * 获取备注: s_dictdata.REMARK
+     * @return 备注: s_dictdata.REMARK
+     * @author MyBatis Generator
+     */
+    public String getRemark() {
+        return remark;
+    }
+
+    /**
+     * 设置备注: s_dictdata.REMARK
+     * @param remark 映射数据库字段: s_dictdata.REMARK
+     * @author MyBatis Generator
+     */
+    public void setRemark(String remark) {
+        this.remark = remark == null ? null : remark.trim();
     }
 
     /**

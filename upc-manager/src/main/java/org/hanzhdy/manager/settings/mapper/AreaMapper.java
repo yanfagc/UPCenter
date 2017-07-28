@@ -1,85 +1,85 @@
-package org.hanzhdy.manager.upc.mapper;
+package org.hanzhdy.manager.settings.mapper;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-import org.hanzhdy.manager.upc.model.DictData;
-import org.hanzhdy.manager.upc.model.DictDataExample;
+import org.hanzhdy.manager.settings.model.Area;
+import org.hanzhdy.manager.settings.model.AreaExample;
 
-public interface DictDataMapper {
+public interface AreaMapper {
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: s_dictdata
+     * 映射数据库: t_area
      * @author MyBatis Generator
      */
-    int countByExample(DictDataExample example);
+    int countByExample(AreaExample example);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: s_dictdata
+     * 映射数据库: t_area
      * @author MyBatis Generator
      */
-    int deleteByExample(DictDataExample example);
+    int deleteByExample(AreaExample example);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: s_dictdata
+     * 映射数据库: t_area
      * @author MyBatis Generator
      */
     int deleteByPrimaryKey(Long id);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: s_dictdata
+     * 映射数据库: t_area
      * @author MyBatis Generator
      */
-    int insert(DictData record);
+    int insert(Area record);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: s_dictdata
+     * 映射数据库: t_area
      * @author MyBatis Generator
      */
-    int insertSelective(DictData record);
+    int insertSelective(Area record);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: s_dictdata
+     * 映射数据库: t_area
      * @author MyBatis Generator
      */
-    List<DictData> selectByExample(DictDataExample example);
+    List<Area> selectByExample(AreaExample example);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: s_dictdata
+     * 映射数据库: t_area
      * @author MyBatis Generator
      */
-    DictData selectByPrimaryKey(Long id);
+    Area selectByPrimaryKey(Long id);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: s_dictdata
+     * 映射数据库: t_area
      * @author MyBatis Generator
      */
-    int updateByExampleSelective(@Param("record") DictData record, @Param("example") DictDataExample example);
+    int updateByExampleSelective(@Param("record") Area record, @Param("example") AreaExample example);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: s_dictdata
+     * 映射数据库: t_area
      * @author MyBatis Generator
      */
-    int updateByExample(@Param("record") DictData record, @Param("example") DictDataExample example);
+    int updateByExample(@Param("record") Area record, @Param("example") AreaExample example);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: s_dictdata
+     * 映射数据库: t_area
      * @author MyBatis Generator
      */
-    int updateByPrimaryKeySelective(DictData record);
+    int updateByPrimaryKeySelective(Area record);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: s_dictdata
+     * 映射数据库: t_area
      * @author MyBatis Generator
      */
-    int updateByPrimaryKey(DictData record);
+    int updateByPrimaryKey(Area record);
 }

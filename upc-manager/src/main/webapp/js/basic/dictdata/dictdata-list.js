@@ -31,9 +31,27 @@ $(function() {
                     mData:"typename"
                 },
                 {
+                    mData:"datatype",
+                    mRender:function(data, display, record) {
+                        if(data=='N'){
+                            return '无数据';
+                        }else if(data=='B'){
+                            return '布尔数据';
+                        }else if(data=='T'){
+                            return '文本数据';
+                        }else if(data=='I'){
+                            return '整型数据';
+                        }else if(data=='F'){
+                            return '浮点型数据';
+                        }else{
+                            return '无数据';
+                        }
+                    }
+                },
+                {
                     mData:"datavalue",
                     mRender:function(data, display, record) {
-                        if(record.valuetype=='B'){
+                        if(record.datatype=='B'){
                             if(data=='Y'){
                                 return '是';
                             }else if(data=='N'){
@@ -103,12 +121,12 @@ $(function() {
     });
     // 新增表单信息
     $('.add-btn').click(function() {
-        openWindow($ctx+'/basic/dictdata/toEdit',750,350);
+        openWindow($ctx+'/basic/dictdata/toEdit',750,400);
     });
     // 编辑
     $('tbody').on("click", '.toEdit', function() {
         var id=$(this).attr("fid");
-        openWindow($ctx+'/basic/dictdata/toEdit?id='+id,750,350);
+        openWindow($ctx+'/basic/dictdata/toEdit?id='+id,750,400);
     });
     // 注销
     $('tbody').on("click", '.toDemise',function() {

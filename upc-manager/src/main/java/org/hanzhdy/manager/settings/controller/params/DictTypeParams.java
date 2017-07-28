@@ -1,4 +1,4 @@
-package org.hanzhdy.manager.upc.controller.params;
+package org.hanzhdy.manager.settings.controller.params;
 
 import org.hanzhdy.web.bean.DatatableParams;
 
@@ -19,9 +19,6 @@ public class DictTypeParams extends DatatableParams {
     
     /** 状态 */
     private String            status;
-    
-    /** 字典值类型 */
-    private String            valuetype;
     
     public String getTypecode() {
         return typecode;
@@ -45,13 +42,5 @@ public class DictTypeParams extends DatatableParams {
     
     public void setStatus(String status) {
         this.status = status;
-    }
-    
-    public String getValuetype() {
-        return valuetype;
-    }
-    
-    public void setValuetype(String valuetype) {
-        this.valuetype = valuetype;
     }
 }

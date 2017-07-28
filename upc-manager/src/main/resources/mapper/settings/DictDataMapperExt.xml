@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="org.hanzhdy.manager.upc.mapper.DictDataMapperExt">
+<mapper namespace="org.hanzhdy.manager.settings.mapper.DictDataMapperExt">
     <!-- 按条件查询数据字典数量 -->
 	<select id="countAsList" parameterType="java.util.HashMap" resultType="int">
 	SELECT COUNT(1) FROM s_dictdata s, s_dicttype t
@@ -8,17 +8,17 @@
 	</select>
 	
 	<!-- 按条件查询数据字典信息 -->
-	<select id="selectAsList" parameterType="java.util.HashMap" resultType="org.hanzhdy.manager.upc.vo.DictDataVo">
+	<select id="selectAsList" parameterType="java.util.HashMap" resultType="org.hanzhdy.manager.settings.vo.DictDataVo">
     <include refid="Pageable_Prefix" />
-	SELECT s.ID,s.DATACODE,s.DATANAME,s.TYPEID,s.SORT,s.STATUS,s.DATAVALUE,s.CREATETIME,s.UPDATETIME,t.TYPENAME,t.VALUETYPE
+	SELECT s.ID,s.DATACODE,s.DATANAME,s.TYPEID,s.SORT,s.STATUS,s.DATATYPE,s.DATAVALUE,s.CREATETIME,s.UPDATETIME,t.TYPENAME
 	FROM s_dictdata s, s_dicttype t
     <include refid="selectAsList_whereClause" />
     <include refid="Pageable_Suffix" />
 	</select>
 	
 	<!-- 根据字典类型typecode值查询其包含的数据字典数据 -->
-	<select id="selectByTypecode" parameterType="java.lang.String" resultType="org.hanzhdy.manager.upc.model.DictData">
-	SELECT s.ID,s.DATACODE,s.DATANAME,s.TYPEID,s.SORT,s.STATUS,s.DATAVALUE,s.CREATETIME,s.UPDATETIME
+	<select id="selectByTypecode" parameterType="java.lang.String" resultType="org.hanzhdy.manager.settings.model.DictData">
+	SELECT s.ID,s.DATACODE,s.DATANAME,s.TYPEID,s.SORT,s.STATUS,s.DATATYPE,s.DATAVALUE,s.CREATETIME,s.UPDATETIME
 	FROM s_dictdata s, s_dicttype t
 	WHERE s.TYPEID=t.ID
 	AND s.STATUS='N'

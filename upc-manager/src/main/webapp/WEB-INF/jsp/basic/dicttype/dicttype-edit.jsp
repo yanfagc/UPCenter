@@ -29,16 +29,6 @@
             </td>
           </tr>
           <tr>
-            <td style="text-align:right;">字典值类型</td>
-            <td style="padding:4px;">
-              <select name="valuetype" class="form-control input-sm myspan6">
-                <option value="N" ${record.valuetype eq 'N'?'selected="selected"':''}>无数据</option>
-                <option value="B" ${record.valuetype eq 'B'?'selected="selected"':''}>布尔数据</option>
-                <option value="T" ${record.valuetype eq 'T'?'selected="selected"':''}>文本数据</option>
-                <option value="I" ${record.valuetype eq 'I'?'selected="selected"':''}>整型数据</option>
-                <option value="F" ${record.valuetype eq 'F'?'selected="selected"':''}>浮点型数据</option>
-              </select>
-            </td>
             <td style="text-align:right;">状态：</td>
             <td style="padding:4px;">
               <select name="status" class="form-control input-sm myspan6">
@@ -47,6 +37,7 @@
                 <option value="D" ${record.status eq 'D'?'selected="selected"':''}>注销</option>
               </select>
             </td>
+            <td colspan="2"></td>
           </tr>
           <tr>
             <td style="text-align:right;">备注：</td>
