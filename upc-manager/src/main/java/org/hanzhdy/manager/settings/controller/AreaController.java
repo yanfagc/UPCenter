@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
@@ -33,6 +34,7 @@ public class AreaController extends ApplicationController {
      * @return
      */
     @RequestMapping("findByParent")
+    @ResponseBody
     public Object findByParent(Long parent, HttpServletResponse response) {
         try {
             List<Area> areaList = this.areaService.queryByParent(parent);
