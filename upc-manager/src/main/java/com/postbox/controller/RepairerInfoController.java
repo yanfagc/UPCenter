@@ -89,7 +89,8 @@ public class RepairerInfoController extends ApplicationController {
             RepairerInfo record = this.repairerInfoService.queryById(id);
             if (record != null) {
                 if (StringUtils.isNotBlank(record.getProvince())) {
-//                    this.areaService.
+                    List<Area> cityList = this.areaService.queryByParentName(record.getProvince());
+                    model.addAttribute("cityList", cityList);
                 }
                 
                 model.addAttribute("record", record);
