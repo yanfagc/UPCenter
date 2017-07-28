@@ -1,3 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="org.hanzhdy.manager.settings.mapper.AreaMapperExt" />
+<mapper namespace="org.hanzhdy.manager.settings.mapper.AreaMapperExt">
+    <!-- 根据上级区域名称查询子区域列表，不包括再次级区域 -->
+    <select id="selectByParentName" parameterType="java.lang.String" resultMap="BaseResultMap">
+SELECT
+	t.id AS id,
+	t.node AS node,
+	t.parent AS parent,
+	t.NAME AS name,
+	t.spell AS spell,
+	t.STATUS AS status,
+	t.createtime AS createtime,
+	t.canceltime AS canceltime
+FROM
+	t_area t,
+	t_area p
+WHERE
+	t.parent = p.node
+AND p. NAME = #{parentName}
+    </select>
+</mapper>

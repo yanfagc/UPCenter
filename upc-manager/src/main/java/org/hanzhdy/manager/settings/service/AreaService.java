@@ -27,4 +27,13 @@ public class AreaService extends AbstractUpcService {
         example.createCriteria().andParentEqualTo(parent);
         return this.areaMapperExt.selectByExample(example);
     }
+    
+    /**
+     * 根据上级区域名称查询子区域列表，不包括再次级区域
+     * @param parentName
+     * @return
+     */
+    public List<Area> queryByParentName(String parentName) {
+        return this.areaMapperExt.selectByParentName(parentName);
+    }
 }
