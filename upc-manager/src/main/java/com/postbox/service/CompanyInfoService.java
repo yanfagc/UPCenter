@@ -12,6 +12,7 @@ import org.hanzhdy.web.bean.DatatableResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.xml.crypto.Data;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -56,13 +57,20 @@ public class CompanyInfoService extends AbstractUpcService {
     }
     
     /**
-     * 查询所有符合状态条件的企业信息
+     * 根据企业名称以及状态模糊查询企业信息，并返回符合条件的列表
+     * @param name
      * @param status
      * @return
      */
-    public List<CompanyInfo> queryAllCompanyInfo(DataStatus status) {
+    public List<CompanyInfo> queryByName(String name, DataStatus status) {
         CompanyInfoExample example = new CompanyInfoExample();
-        example.createCriteria().andStatusEqualTo(status);
+        CompanyInfoExample.Criteria criteria = example.createCriteria();
+        if (StringUtils.isNotBlank(name)) {
+            criteria.andCompanyNameLike("%" + name + "%");
+        }
+        if (status != null) {
+            criteria.andStatusEqualTo(status);
+        }
         return this.companyInfoMapperExt.selectByExample(example);
     }
     

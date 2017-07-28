@@ -48,11 +48,13 @@
               <table id="dataList" class="table table-bordered table-hover">
                 <thead>
                   <tr>
-                    <th style="width:20%">维修员姓名</th>
-                    <th style="width:20%">联系方式</th>
-                    <th style="width:15%">状态</th>
+                    <th style="width:12%">维修员姓名</th>
+                    <th style="width:12%">联系方式</th>
+                    <th style="width:12%">省份</th>
+                    <th style="width:12%">城市</th>
+                    <th style="width:12%">状态</th>
                     <th style="width:20%">创建时间</th>
-                    <th style="width:25%">操作</th>
+                    <th style="width:20%">操作</th>
                   </tr>
                 </thead>
                 <tbody></tbody>

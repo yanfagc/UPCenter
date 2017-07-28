@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * 企业管理Controller
@@ -35,6 +37,12 @@ public class CompanyInfoController extends ApplicationController {
     /** 日志对象 */
     private static final Logger logger = LoggerFactory.getLogger(CompanyInfoController.class);
     
+    /**
+     * 打开企业管理列表页面
+     * @param model
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public String toList(Model model, HttpServletRequest request) {
         model.addAttribute("statusList", DataStatus.values());
@@ -84,6 +92,26 @@ public class CompanyInfoController extends ApplicationController {
         }
         else {
             return "/postbox/company/company-edit";
+        }
+    }
+    
+    /**
+     * 根据名称查询企业信息
+     * @param name
+     * @param response
+     * @return
+     */
+    @RequestMapping(value = "findByName", method = RequestMethod.POST)
+    @ResponseBody
+    public Object findByName(String name, HttpServletResponse response) {
+        try {
+            List<CompanyInfo> dataList = this.companyInfoService.queryByName(name, DataStatus.NORMAL);
+            // 处理返回结果
+            return RespResult.create(respCode.SUCCESS, dataList);
+        }
+        catch (Exception ex) {
+            logger.error("根据名称查询区域信息失败，parent：" + name, ex);
+            return RespResult.create(respCode.ERROR_EXCEPTION);
         }
     }
     

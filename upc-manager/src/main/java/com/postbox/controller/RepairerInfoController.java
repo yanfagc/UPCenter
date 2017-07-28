@@ -5,6 +5,9 @@ import com.postbox.controller.params.RepairerInfoParams;
 import com.postbox.enums.DataStatus;
 import com.postbox.model.RepairerInfo;
 import com.postbox.service.RepairerInfoService;
+import org.apache.commons.lang3.StringUtils;
+import org.hanzhdy.manager.settings.model.Area;
+import org.hanzhdy.manager.settings.service.AreaService;
 import org.hanzhdy.manager.support.constants.resp.RespResult;
 import org.hanzhdy.manager.support.controller.ApplicationController;
 import org.hanzhdy.web.bean.DatatableResult;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * Created by H.CAAHN on 2017/7/24.
@@ -28,6 +32,9 @@ import javax.servlet.http.HttpServletRequest;
 public class RepairerInfoController extends ApplicationController {
     @Autowired
     private RepairerInfoService repairerInfoService;
+    
+    @Autowired
+    private AreaService         areaService;
     
     /** 日志对象 */
     private static final Logger logger = LoggerFactory.getLogger(CompanyInfoController.class);
@@ -75,11 +82,16 @@ public class RepairerInfoController extends ApplicationController {
      */
     @RequestMapping(value = "toEdit", method = RequestMethod.GET)
     public String toEdit(Long id, Model model, HttpServletRequest request) {
+        List<Area> areaList = this.areaService.queryByParent(0l);
+        model.addAttribute("provinceList", areaList);
         model.addAttribute("statusList", DataStatus.values());
-        
         if (id != null) {
             RepairerInfo record = this.repairerInfoService.queryById(id);
             if (record != null) {
+                if (StringUtils.isNotBlank(record.getProvince())) {
+//                    this.areaService.
+                }
+                
                 model.addAttribute("record", record);
                 return "/postbox/repairer/repairer-edit";
             }

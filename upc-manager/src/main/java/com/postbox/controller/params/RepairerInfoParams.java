@@ -9,6 +9,12 @@ import org.hanzhdy.web.bean.DatatableParams;
 public class RepairerInfoParams extends DatatableParams {
     private String realname;
     
+    private String country;
+    
+    private String province;
+    
+    private String city;
+    
     private String mobilePhone;
     
     private DataStatus status;
@@ -19,6 +25,30 @@ public class RepairerInfoParams extends DatatableParams {
     
     public void setRealname(String realname) {
         this.realname = realname;
+    }
+    
+    public String getCountry() {
+        return country;
+    }
+    
+    public void setCountry(String country) {
+        this.country = country;
+    }
+    
+    public String getProvince() {
+        return province;
+    }
+    
+    public void setProvince(String province) {
+        this.province = province;
+    }
+    
+    public String getCity() {
+        return city;
+    }
+    
+    public void setCity(String city) {
+        this.city = city;
     }
     
     public String getMobilePhone() {

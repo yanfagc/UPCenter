@@ -31,6 +31,18 @@ $(function() {
                     }
                 },
                 {
+                    mData:"province",
+                    mRender:function(data, display, record) {
+                        return data?data:'';
+                    }
+                },
+                {
+                    mData:"city",
+                    mRender:function(data, display, record) {
+                        return data?data:'';
+                    }
+                },
+                {
                     mData:"status",
                     mRender:function(data, display, record) {
                         if(data=='NORMAL'){

@@ -32,6 +32,24 @@ public class RepairerInfo implements Serializable {
     private String repairerImgPath;
 
     /**
+     * 国家: t_repairer_info.COUNTRY
+     * @author MyBatis Generator
+     */
+    private String country;
+
+    /**
+     * 省份: t_repairer_info.PROVINCE
+     * @author MyBatis Generator
+     */
+    private String province;
+
+    /**
+     * 城市: t_repairer_info.CITY
+     * @author MyBatis Generator
+     */
+    private String city;
+
+    /**
      * 状态,NORMAL正常,FROZEN冻结,DEMISE销户: t_repairer_info.STATUS
      * @author MyBatis Generator
      */
@@ -113,6 +131,60 @@ public class RepairerInfo implements Serializable {
      */
     public void setRepairerImgPath(String repairerImgPath) {
         this.repairerImgPath = repairerImgPath == null ? null : repairerImgPath.trim();
+    }
+
+    /**
+     * 获取国家: t_repairer_info.COUNTRY
+     * @return 国家: t_repairer_info.COUNTRY
+     * @author MyBatis Generator
+     */
+    public String getCountry() {
+        return country;
+    }
+
+    /**
+     * 设置国家: t_repairer_info.COUNTRY
+     * @param country 映射数据库字段: t_repairer_info.COUNTRY
+     * @author MyBatis Generator
+     */
+    public void setCountry(String country) {
+        this.country = country == null ? null : country.trim();
+    }
+
+    /**
+     * 获取省份: t_repairer_info.PROVINCE
+     * @return 省份: t_repairer_info.PROVINCE
+     * @author MyBatis Generator
+     */
+    public String getProvince() {
+        return province;
+    }
+
+    /**
+     * 设置省份: t_repairer_info.PROVINCE
+     * @param province 映射数据库字段: t_repairer_info.PROVINCE
+     * @author MyBatis Generator
+     */
+    public void setProvince(String province) {
+        this.province = province == null ? null : province.trim();
+    }
+
+    /**
+     * 获取城市: t_repairer_info.CITY
+     * @return 城市: t_repairer_info.CITY
+     * @author MyBatis Generator
+     */
+    public String getCity() {
+        return city;
+    }
+
+    /**
+     * 设置城市: t_repairer_info.CITY
+     * @param city 映射数据库字段: t_repairer_info.CITY
+     * @author MyBatis Generator
+     */
+    public void setCity(String city) {
+        this.city = city == null ? null : city.trim();
     }
 
     /**

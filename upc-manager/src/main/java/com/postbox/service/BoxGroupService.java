@@ -22,11 +22,25 @@ public class BoxGroupService extends AbstractUpcService {
     @Autowired
     private BoxGroupMapperExt boxGroupMapperExt;
     
+    /**
+     * 根据条件分页查询箱子组数据，并返回符合前端datatable数据格式要求的对象
+     * @param params
+     * @return
+     */
     public DatatableResult queryAsDatatableResult(BoxGroupParams params) {
         BoxGroupExample example = new BoxGroupExample();
         BoxGroupExample.Criteria criteria = example.createCriteria();
         if (StringUtils.isNotBlank(params.getGroupName())) {
             criteria.andGroupNameLike("%" + params.getGroupName() + "%");
+        }
+        if (StringUtils.isNotBlank(params.getCountry())) {
+            criteria.andCountryEqualTo(params.getCountry());
+        }
+        if (StringUtils.isNotBlank(params.getProvince())) {
+            criteria.andProvinceEqualTo(params.getProvince());
+        }
+        if (StringUtils.isNotBlank(params.getCity())) {
+            criteria.andCityEqualTo(params.getCity());
         }
         if (params.getCompanyInfoId() != null) {
             criteria.andCompanyInfoIdEqualTo(params.getCompanyInfoId());
@@ -46,6 +60,20 @@ public class BoxGroupService extends AbstractUpcService {
         return result;
     }
     
+    /**
+     * 根据ID号查询箱子组数据
+     * @param id
+     * @return
+     */
+    public BoxGroup queryById(Long id) {
+        return this.boxGroupMapperExt.selectByPrimaryKey(id);
+    }
+    
+    /**
+     * 插入一个新的箱子组数据
+     * @param record
+     * @return
+     */
     public boolean insert(BoxGroup record) {
         if (record.getStatus() == null) {
             record.setStatus(BoxGroupStatus.NORMAL);
@@ -55,11 +83,21 @@ public class BoxGroupService extends AbstractUpcService {
         return count > 0;
     }
     
+    /**
+     * 更新箱子组信息
+     * @param record
+     * @return
+     */
     public boolean update(BoxGroup record) {
         int count = this.boxGroupMapperExt.updateByPrimaryKeySelective(record);
         return count > 0;
     }
     
+    /**
+     * 更新箱子组状态
+     * @param record
+     * @return
+     */
     public boolean updateStatus(BoxGroup record) {
         BoxGroup data = new BoxGroup();
         data.setBoxGroupId(record.getBoxGroupId());

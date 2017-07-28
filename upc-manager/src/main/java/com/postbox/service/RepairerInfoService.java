@@ -28,6 +28,15 @@ public class RepairerInfoService extends AbstractUpcService {
         if (StringUtils.isNotBlank(params.getRealname())) {
             criteria.andRealnameLike("%" + params.getRealname() + "%");
         }
+        if (StringUtils.isNotBlank(params.getCountry())) {
+            criteria.andCountryEqualTo(params.getCountry());
+        }
+        if (StringUtils.isNotBlank(params.getProvince())) {
+            criteria.andProvinceEqualTo(params.getProvince());
+        }
+        if (StringUtils.isNotBlank(params.getCity())) {
+            criteria.andCityEqualTo(params.getCity());
+        }
         if (StringUtils.isNotBlank(params.getMobilePhone())) {
             criteria.andMobilePhoneLike("%" + params.getMobilePhone() + "%");
         }

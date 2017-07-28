@@ -35,6 +35,32 @@
             </td>
           </tr>
           <tr>
+            <td style="text-align:right;">国籍：</td>
+            <td style="padding:4px;">
+              <select name="status" class="form-control input-sm myspan6">
+                <option value="中国" area-id="0">中国</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align:right;">省份：</td>
+            <td style="padding:4px;">
+              <select name="status" class="form-control input-sm myspan6">
+                <c:forEach items="${provinceList}" var="province">
+                  <option value="${province.name}" area-id="${province.node}">${province.name}</option>
+                </c:forEach>
+              </select>
+            </td>
+            <td style="text-align:right;">省份：</td>
+            <td style="padding:4px;">
+              <select name="status" class="form-control input-sm myspan6">
+                <c:forEach items="${provinceList}" var="province">
+                  <option value="${province.name}" area-id="${province.node}">${province.name}</option>
+                </c:forEach>
+              </select>
+            </td>
+          </tr>
+          <tr>
             <td style="text-align:right;">状态：</td>
             <td style="padding:4px;">
               <select name="status" class="form-control input-sm myspan6">

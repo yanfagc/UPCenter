@@ -9,6 +9,12 @@ import org.hanzhdy.web.bean.DatatableParams;
 public class BoxGroupParams extends DatatableParams {
     private String groupName;
     
+    private String country;
+    
+    private String province;
+    
+    private String city;
+    
     private Long companyInfoId;
     
     private Long repairerInfoId;
@@ -21,6 +27,30 @@ public class BoxGroupParams extends DatatableParams {
     
     public void setGroupName(String groupName) {
         this.groupName = groupName;
+    }
+    
+    public String getCountry() {
+        return country;
+    }
+    
+    public void setCountry(String country) {
+        this.country = country;
+    }
+    
+    public String getProvince() {
+        return province;
+    }
+    
+    public void setProvince(String province) {
+        this.province = province;
+    }
+    
+    public String getCity() {
+        return city;
+    }
+    
+    public void setCity(String city) {
+        this.city = city;
     }
     
     public Long getCompanyInfoId() {
