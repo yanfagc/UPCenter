@@ -35,7 +35,7 @@
                 </div>
                 <div class="form-group">
                   <label class="sr-only" for="status">字典状态</label>
-                    <select id="fieldtype" class="form-control">
+                    <select id="status" class="form-control">
                     	<option value=""> --- 选择字典状态 --- </option>
                     	<option value="N">正常</option>
                     	<option value="F">冻结</option>
