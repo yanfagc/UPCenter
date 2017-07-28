@@ -58,6 +58,12 @@ public class DictData implements Serializable {
     private String datavalue;
 
     /**
+     * 备注: s_dictdata.REMARK
+     * @author MyBatis Generator
+     */
+    private String remark;
+
+    /**
      * 创建时间: s_dictdata.CREATETIME
      * @author MyBatis Generator
      */
@@ -223,6 +229,24 @@ public class DictData implements Serializable {
      */
     public void setDatavalue(String datavalue) {
         this.datavalue = datavalue == null ? null : datavalue.trim();
+    }
+
+    /**
+     * 获取备注: s_dictdata.REMARK
+     * @return 备注: s_dictdata.REMARK
+     * @author MyBatis Generator
+     */
+    public String getRemark() {
+        return remark;
+    }
+
+    /**
+     * 设置备注: s_dictdata.REMARK
+     * @param remark 映射数据库字段: s_dictdata.REMARK
+     * @author MyBatis Generator
+     */
+    public void setRemark(String remark) {
+        this.remark = remark == null ? null : remark.trim();
     }
 
     /**

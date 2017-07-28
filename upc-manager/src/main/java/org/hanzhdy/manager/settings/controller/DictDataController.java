@@ -9,6 +9,7 @@ import org.hanzhdy.manager.settings.service.DictTypeService;
 import org.hanzhdy.manager.support.bean.SessionUser;
 import org.hanzhdy.manager.support.constants.resp.RespResult;
 import org.hanzhdy.manager.support.controller.ApplicationController;
+import org.hanzhdy.manager.support.enums.DictDataType;
 import org.hanzhdy.web.bean.DatatableResult;
 import org.hanzhdy.web.throwable.BizException;
 import org.slf4j.Logger;
@@ -48,6 +49,7 @@ public class DictDataController extends ApplicationController {
     public String toList(Model model) {
         try {
             List<DictType> typeList = this.dictTypeService.queryAsList();
+            model.addAttribute("datatypeList", DictDataType.values());
             model.addAttribute("typeList", typeList);
         }
         catch (Exception ex) {
@@ -90,7 +92,7 @@ public class DictDataController extends ApplicationController {
         // 查询字典类型
         List<DictType> typeList = this.dictTypeService.queryAsList();
         model.addAttribute("typeList", typeList);
-        
+        model.addAttribute("datatypeList", DictDataType.values());
         // 查询数据字典信息
         if (id != null && id > 0) {
             DictData record = dictDataService.queryById(id);

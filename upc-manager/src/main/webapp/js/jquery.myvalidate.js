@@ -393,9 +393,7 @@ $.extend($.fn, {
             
             options.rules[key]=opt[key];
             if($.fn.isMultiple($(':input[name="'+key+'"]'))){
-                options.rules[key]={unique:true};
-            }else{
-                options.rules[key]={};
+                options.rules[key].unique=true;
             }
         }
     },

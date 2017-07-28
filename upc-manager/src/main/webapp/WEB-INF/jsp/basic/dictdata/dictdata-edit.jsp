@@ -33,12 +33,9 @@
             <td style="padding:4px;">
               <select name="typeId" class="form-control input-sm myspan6">
                 <c:forEach items="${typeList}" var="type">
-                <option value="${type.id}" ${type.id eq record.typeId?'selected="selected"':''} data-type="${type.valuetype}">${type.typename}</option>
+                <option value="${type.id}" ${type.id eq record.typeId?'selected="selected"':''}>${type.typename}</option>
                 </c:forEach>
               </select>
-              <c:forEach items="${typeList}" var="type">
-              <c:set var="vtype" value="${(not empty record.typeId && type.id eq record.typeId)?type.valuetype:(empty vtype && typeList.size()>0?typeList.get(0).valuetype:vtype)}"></c:set>
-              </c:forEach>
             </td>
             <td style="text-align:right;">状态：</td>
             <td style="padding:4px;">
@@ -54,22 +51,38 @@
             <td style="padding:4px;">
               <input name="sort" class="form-control input-sm myspan6" type="text" placeholder="排序（0~999）" value="${record.sort}">
             </td>
+            <td style="text-align:right;">数据类型：</td>
+            <td style="padding:4px;">
+              <select name="datatype" class="form-control input-sm myspan6">
+                <c:forEach items="${datatypeList}" var="item">
+                  <option value="${item}" ${item eq record.datatype?'selected="selected"':''}>${item.remark}</option>
+                </c:forEach>
+              </select>
+            </td>
+          </tr>
+          <tr>
             <td style="text-align:right;">字典值：</td>
-            <td id="td_datavalue" style="padding:${vtype eq 'N'?'8px':'4px'};">
+            <td id="td_datavalue" style="padding:${record.datatype eq 'N'?'8px':'4px'};" colspan="3">
               <c:choose>
-              <c:when test="${vtype eq 'N'}">无数据</c:when>
-              <c:when test="${vtype eq 'B'}">
-                <label class="radio-inline">
-                  <input type="radio" name="datavalue" value="Y" ${record.datavalue eq 'Y'?'checked="checked"':''}>是
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="datavalue" value="N" ${record.datavalue ne 'Y'?'checked="checked"':''}>否
-                </label>
-              </c:when>
-              <c:when test="${vtype eq 'T'}"><input name="datavalue" data-type="text" class="form-control input-sm myspan6" type="text" placeholder="字典值" value="${record.datavalue}"></c:when>
-              <c:when test="${vtype eq 'I'}"><input name="datavalue" data-type="int" class="form-control input-sm myspan6" type="text" placeholder="字典值" value="${record.datavalue}"></c:when>
-              <c:when test="${vtype eq 'F'}"><input name="datavalue" data-type="float" class="form-control input-sm myspan6" type="text" placeholder="字典值" value="${record.datavalue}"></c:when>
+                <c:when test="${record.datatype eq 'N'}">无数据</c:when>
+                <c:when test="${record.datatype eq 'B'}">
+                  <label class="radio-inline">
+                    <input type="radio" name="datavalue" value="Y" ${record.datavalue eq 'Y'?'checked="checked"':''}>是
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" name="datavalue" value="N" ${record.datavalue ne 'Y'?'checked="checked"':''}>否
+                  </label>
+                </c:when>
+                <c:when test="${record.datatype eq 'T'}"><input name="datavalue" data-type="text" class="form-control input-sm myspan6" type="text" placeholder="字典值" value="${record.datavalue}"></c:when>
+                <c:when test="${record.datatype eq 'I'}"><input name="datavalue" data-type="int" class="form-control input-sm myspan6" type="text" placeholder="字典值" value="${record.datavalue}"></c:when>
+                <c:when test="${record.datatype eq 'F'}"><input name="datavalue" data-type="float" class="form-control input-sm myspan6" type="text" placeholder="字典值" value="${record.datavalue}"></c:when>
               </c:choose>
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align:right;">备注：</td>
+            <td style="padding:4px;" colspan="3">
+              <textarea name="remark" rows="4" class="form-control myspan6" placeholder="备注">${record.remark}</textarea>
             </td>
           </tr>
         </table>
