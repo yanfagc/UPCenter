@@ -29,13 +29,28 @@
                   <input type="text" class="form-control" id="mobilePhone" placeholder="联系方式"/>
                 </div>
                 <div class="form-group">
+                  <label class="sr-only" for="province">省份</label>
+                  <select id="province" name="province" class="form-control">
+                    <option value=""> --- 选择省份 --- </option>
+                    <c:forEach items="${provinceList}" var="province">
+                      <option value="${province.name}" area-node="${province.node}">${province.name}</option>
+                    </c:forEach>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="sr-only" for="city">城市</label>
+                  <select id="city" name="city" class="form-control">
+                    <option value=""> --- 选择城市 --- </option>
+                  </select>
+                </div>
+                <div class="form-group">
                   <label class="sr-only" for="status">状态</label>
-                    <select id="status" class="form-control">
-                    	<option value=""> --- 选择状态 --- </option>
-                    	<c:forEach items="${statusList}" var="s">
-                    	<option value="${s}">${s.remark}</option>
-                    	</c:forEach>
-                    </select>
+                  <select id="status" class="form-control">
+                      <option value=""> --- 选择状态 --- </option>
+                      <c:forEach items="${statusList}" var="s">
+                      <option value="${s}">${s.remark}</option>
+                      </c:forEach>
+                  </select>
                 </div>
                 <button type="button" class="btn btn-primary search">&nbsp;&nbsp;搜索&nbsp;&nbsp;</button>
                 <button type="reset" class="btn btn-warning reset">&nbsp;&nbsp;重置&nbsp;&nbsp;</button>

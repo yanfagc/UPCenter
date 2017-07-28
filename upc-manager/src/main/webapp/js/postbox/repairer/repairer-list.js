@@ -1,7 +1,11 @@
 var datatable;
 $(function() {
     // 定义操作变量
-    var $realname=$('#realname'),$mobilePhone=$('#mobilePhone'),$status=$('#status');
+    var $realname=$('#realname'),
+        $province=$('#province'),
+        $city=$('#city'),
+        $mobilePhone=$('#mobilePhone'),
+        $status=$('#status');
     // 构造datatable对象
     datatable=$('#dataList').dataTable(
         $.extend({},pageParams,{
@@ -14,6 +18,14 @@ $(function() {
                 aodata.push({
                     "name":"mobilePhone",
                     "value":$mobilePhone.val()
+                });
+                aodata.push({
+                    "name":"province",
+                    "value":$province.val()
+                });
+                aodata.push({
+                    "name":"city",
+                    "value":$city.val()
                 });
                 aodata.push({
                     "name":"status",
@@ -133,6 +145,32 @@ $(function() {
             }
         });
     }
+
+    $('.form-inline').on('change','select[name="province"]',function(){
+        var province=$(this).find(":selected").attr("area-node");
+        if(!province){
+            $('select[name="city"]').html('<option value="" area-node=""> --- 选择城市 --- </option>');
+            return;
+        }
+        $sessionAjax({
+            url:$ctx+'/basic/area/findByParent?parent='+province,
+            type:'get',
+            success:function(rsp){
+                var html=[];
+                html.push('<option value="" area-node=""> --- 选择城市 --- </option>');
+                for(var i=0;i<rsp.body.length;i++){
+                    html.push('<option value="');
+                    html.push(rsp.body[i].name);
+                    html.push('" area-node="');
+                    html.push(rsp.body[i].node);
+                    html.push('">');
+                    html.push(rsp.body[i].name);
+                    html.push('</option>');
+                }
+                $('select[name="city"]').html(html.join(''));
+            }
+        });
+    });
 });
 function search() {
     datatable.fnClearTable(0);

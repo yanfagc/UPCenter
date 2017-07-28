@@ -62,7 +62,7 @@ $(function() {
     $('#submitForm').on('change','select[name="province"]',function(){
         var province=$(this).find(":selected").attr("area-node");
         if(!province){
-            $('select[name="city"]').html('<option value="" area-node="">---请选择---</option>');
+            $('select[name="city"]').html('<option value="" area-node=""> --- 选择城市 --- </option>');
             return;
         }
         $sessionAjax({
@@ -70,14 +70,14 @@ $(function() {
             type:'get',
             success:function(rsp){
                 var html=[];
-                html.push('<option value="" area-node="">---请选择---</option>');
-                for(var i=0;i<rsp.data.length;i++){
+                html.push('<option value="" area-node=""> --- 选择城市 --- </option>');
+                for(var i=0;i<rsp.body.length;i++){
                     html.push('<option value="');
-                    html.push(rsp.data[i].name);
+                    html.push(rsp.body[i].name);
                     html.push('" area-node="');
-                    html.push(rsp.data[i].node);
+                    html.push(rsp.body[i].node);
                     html.push('">');
-                    html.push(rsp.data[i].name);
+                    html.push(rsp.body[i].name);
                     html.push('</option>');
                 }
                 $('select[name="city"]').html(html.join(''));

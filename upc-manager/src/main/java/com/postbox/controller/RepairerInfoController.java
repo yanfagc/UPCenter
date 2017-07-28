@@ -47,6 +47,8 @@ public class RepairerInfoController extends ApplicationController {
      */
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public String toList(Model model, HttpServletRequest request) {
+        List<Area> provinceList = this.areaService.queryByParent(0l);
+        model.addAttribute("provinceList", provinceList);
         model.addAttribute("statusList", DataStatus.values());
         return "/postbox/repairer/repairer-list";
     }

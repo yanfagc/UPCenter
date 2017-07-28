@@ -37,7 +37,7 @@
           <tr>
             <td style="text-align:right;">国籍：</td>
             <td style="padding:4px;">
-              <select name="status" class="form-control input-sm myspan6">
+              <select name="country" class="form-control input-sm myspan6">
                 <option value="中国" area-node="0">中国</option>
               </select>
             </td>
@@ -46,7 +46,7 @@
             <td style="text-align:right;">省份：</td>
             <td style="padding:4px;">
               <select name="province" class="form-control input-sm myspan6">
-                <option value="" area-node="">---请选择---</option>
+                <option value="" area-node=""> --- 选择省份 --- </option>
                 <c:forEach items="${provinceList}" var="province">
                   <option value="${province.name}" area-node="${province.node}" ${province.name eq record.province?'selected="selected"':''}>${province.name}</option>
                 </c:forEach>
@@ -55,7 +55,7 @@
             <td style="text-align:right;">城市：</td>
             <td style="padding:4px;">
               <select name="city" class="form-control input-sm myspan6">
-                <option value="" area-node="">---请选择---</option>
+                <option value="" area-node=""> --- 选择城市 --- </option>
                 <c:forEach items="${cityList}" var="city">
                   <option value="${city.name}" area-node="${city.node}" ${city.name eq record.city?'selected="selected"':''}>${city.name}</option>
                 </c:forEach>
