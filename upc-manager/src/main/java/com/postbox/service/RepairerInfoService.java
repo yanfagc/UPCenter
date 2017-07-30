@@ -8,9 +8,12 @@ import com.postbox.model.RepairerInfoExample;
 import org.apache.commons.lang3.StringUtils;
 import org.hanzhdy.manager.support.service.AbstractUpcService;
 import org.hanzhdy.web.bean.DatatableResult;
+import org.hanzhdy.web.throwable.BizException;
+import org.hanzhdy.web.throwable.BizStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -25,6 +28,9 @@ public class RepairerInfoService extends AbstractUpcService {
     public DatatableResult queryAsDatatableResult(RepairerInfoParams params) {
         RepairerInfoExample example = new RepairerInfoExample();
         RepairerInfoExample.Criteria criteria = example.createCriteria();
+        if (StringUtils.isNotBlank(params.getRepairerNo())) {
+            criteria.andRepairerNoLike("%" + params.getRepairerNo() + "%");
+        }
         if (StringUtils.isNotBlank(params.getRealname())) {
             criteria.andRealnameLike("%" + params.getRealname() + "%");
         }
@@ -56,7 +62,44 @@ public class RepairerInfoService extends AbstractUpcService {
         return this.repairerInfoMapperExt.selectByPrimaryKey(id);
     }
     
+    public RepairerInfo queryByNo(String no, DataStatus... status) {
+        RepairerInfoExample example = new RepairerInfoExample();
+        RepairerInfoExample.Criteria criteria = example.createCriteria();
+        criteria.andRepairerNoEqualTo(no);
+        if (status != null && status.length > 0) {
+            if (status.length == 0) {
+                criteria.andStatusEqualTo(status[0]);
+            }
+            else {
+                criteria.andStatusIn(Arrays.asList(status));
+            }
+        }
+        List<RepairerInfo> dataList = this.repairerInfoMapperExt.selectByExample(example);
+        return dataList != null && !dataList.isEmpty() ? dataList.get(0) : null;
+    }
+    
+    public List<RepairerInfo> queryByArea(String province, String city, DataStatus... status) {
+        RepairerInfoExample example = new RepairerInfoExample();
+        RepairerInfoExample.Criteria criteria = example.createCriteria();
+        criteria.andProvinceEqualTo(province);
+        criteria.andCityEqualTo(city);
+        if (status != null && status.length > 0) {
+            if (status.length == 0) {
+                criteria.andStatusEqualTo(status[0]);
+            }
+            else {
+                criteria.andStatusIn(Arrays.asList(status));
+            }
+        }
+        return this.repairerInfoMapperExt.selectByExample(example);
+    }
+    
     public boolean insert(RepairerInfo record) {
+        RepairerInfo info = this.queryByNo(record.getRepairerNo());
+        if (info != null) {
+            throw new BizException(respCode.SAVE_DUPLICATE);
+        }
+        
         record.setCreatetime(new Date());
         if (record.getStatus() == null) {
             record.setStatus(DataStatus.NORMAL);
@@ -66,6 +109,11 @@ public class RepairerInfoService extends AbstractUpcService {
     }
     
     public boolean update(RepairerInfo record) {
+        RepairerInfo info = this.queryByNo(record.getRepairerNo());
+        if (info != null && record.getRepairerInfoid().longValue() != info.getRepairerInfoid().longValue()) {
+            throw new BizException(respCode.SAVE_DUPLICATE);
+        }
+        
         int count = this.repairerInfoMapperExt.updateByPrimaryKeySelective(record);
         return count > 0;
     }

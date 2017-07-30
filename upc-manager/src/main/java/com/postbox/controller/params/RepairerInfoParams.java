@@ -7,6 +7,8 @@ import org.hanzhdy.web.bean.DatatableParams;
  * Created by H.CAAHN on 2017/7/24.
  */
 public class RepairerInfoParams extends DatatableParams {
+    private String repairerNo;
+    
     private String realname;
     
     private String country;
@@ -18,6 +20,14 @@ public class RepairerInfoParams extends DatatableParams {
     private String mobilePhone;
     
     private DataStatus status;
+    
+    public String getRepairerNo() {
+        return repairerNo;
+    }
+    
+    public void setRepairerNo(String repairerNo) {
+        this.repairerNo = repairerNo;
+    }
     
     public String getRealname() {
         return realname;

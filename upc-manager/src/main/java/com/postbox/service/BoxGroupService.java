@@ -4,7 +4,7 @@ import com.postbox.controller.params.BoxGroupParams;
 import com.postbox.enums.BoxGroupStatus;
 import com.postbox.mapper.BoxGroupMapperExt;
 import com.postbox.model.BoxGroup;
-import com.postbox.model.BoxGroupExample;
+import com.postbox.vo.BoxGroupVo;
 import org.apache.commons.lang3.StringUtils;
 import org.hanzhdy.manager.support.service.AbstractUpcService;
 import org.hanzhdy.web.bean.DatatableResult;
@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by H.CAAHN on 2017/7/24.
@@ -28,32 +30,54 @@ public class BoxGroupService extends AbstractUpcService {
      * @return
      */
     public DatatableResult queryAsDatatableResult(BoxGroupParams params) {
-        BoxGroupExample example = new BoxGroupExample();
-        BoxGroupExample.Criteria criteria = example.createCriteria();
+//        BoxGroupExample example = new BoxGroupExample();
+//        BoxGroupExample.Criteria criteria = example.createCriteria();
+//        if (StringUtils.isNotBlank(params.getGroupName())) {
+//            criteria.andGroupNameLike("%" + params.getGroupName() + "%");
+//        }
+//        if (StringUtils.isNotBlank(params.getCountry())) {
+//            criteria.andCountryEqualTo(params.getCountry());
+//        }
+//        if (StringUtils.isNotBlank(params.getProvince())) {
+//            criteria.andProvinceEqualTo(params.getProvince());
+//        }
+//        if (StringUtils.isNotBlank(params.getCity())) {
+//            criteria.andCityEqualTo(params.getCity());
+//        }
+//        if (params.getCompanyInfoId() != null) {
+//            criteria.andCompanyInfoIdEqualTo(params.getCompanyInfoId());
+//        }
+//        if (params.getRepairerInfoId() != null) {
+//            criteria.andRepairerInfoIdEqualTo(params.getRepairerInfoId());
+//        }
+//        if (params.getStatus() != null) {
+//            criteria.andStatusEqualTo(params.getStatus());
+//        }
+        Map<String, Object> search = new HashMap<>();
         if (StringUtils.isNotBlank(params.getGroupName())) {
-            criteria.andGroupNameLike("%" + params.getGroupName() + "%");
+            search.put("groupName", "%" + params.getGroupName() + "%");
         }
         if (StringUtils.isNotBlank(params.getCountry())) {
-            criteria.andCountryEqualTo(params.getCountry());
+            search.put("country", params.getCountry());
         }
         if (StringUtils.isNotBlank(params.getProvince())) {
-            criteria.andProvinceEqualTo(params.getProvince());
+            search.put("province", params.getProvince());
         }
         if (StringUtils.isNotBlank(params.getCity())) {
-            criteria.andCityEqualTo(params.getCity());
+            search.put("city", params.getCity());
         }
         if (params.getCompanyInfoId() != null) {
-            criteria.andCompanyInfoIdEqualTo(params.getCompanyInfoId());
+            search.put("companyInfoId", params.getCompanyInfoId());
         }
         if (params.getRepairerInfoId() != null) {
-            criteria.andRepairerInfoIdEqualTo(params.getRepairerInfoId());
+            search.put("repairerInfoId", params.getRepairerInfoId());
         }
         if (params.getStatus() != null) {
-            criteria.andStatusEqualTo(params.getStatus());
+            search.put("status", params.getStatus());
         }
         
-        int total = this.boxGroupMapperExt.countByExample(example);
-        List<BoxGroup> data = this.boxGroupMapperExt.selectByExample(example);
+        int total = this.boxGroupMapperExt.countAsList(search);
+        List<BoxGroupVo> data = this.boxGroupMapperExt.selectAsList(search);
         DatatableResult result = new DatatableResult();
         result.setTotal(total);
         result.setAaData(data);

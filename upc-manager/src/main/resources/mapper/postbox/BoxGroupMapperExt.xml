@@ -1,3 +1,59 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.postbox.mapper.BoxGroupMapperExt" />
+<mapper namespace="com.postbox.mapper.BoxGroupMapperExt">
+    <!-- 查询符合条件的箱子组数据总数 -->
+    <select id="countAsList" parameterType="java.util.HashMap" resultType="int">
+SELECT COUNT(1) FROM t_box_group t LEFT JOIN t_repairer_info r ON t.REPAIRER_INFO_ID = r.REPAIRER_INFO_ID
+        <include refid="sql_selectAsList"/>
+    </select>
+
+	<!-- 根据条件查询箱子组数据 -->
+	<select id="selectAsList" parameterType="java.util.HashMap" resultType="com.postbox.vo.BoxGroupVo">
+		<include refid="Pageable_Prefix" />
+SELECT
+	t.BOX_GROUP_ID AS boxGroupId,
+	t.COMPANY_INFO_ID AS companyInfoId,
+	t.GROUP_NAME AS groupName,
+	t.COUNTRY AS country,
+	t.PROVINCE AS province,
+	t.CITY AS city,
+	t.ADDRESS AS address,
+	t.COORDINATE AS coordinate,
+	t.REPAIRER_INFO_ID AS repairerInfoId,
+	t. STATUS AS status,
+	t.CREATETIME AS createtime,
+	r.REALNAME AS repairerName,
+	r. STATUS AS repairerStatus
+FROM
+	t_box_group t
+LEFT JOIN t_repairer_info r ON t.REPAIRER_INFO_ID = r.REPAIRER_INFO_ID
+		<include refid="sql_selectAsList" />
+		<include refid="Pageable_Suffix" />
+	</select>
+
+    <sql id="sql_selectAsList">
+		<where>
+			<if test="groupName!=null and groupName!=''">
+				AND t.GROUP_NAME LIKE #{groupName}
+			</if>
+			<if test="country!=null and country!=''">
+				AND t.COUNTRY=#{country}
+			</if>
+			<if test="province!=null and province!=''">
+				AND t.PROVINCE=#{province}
+			</if>
+			<if test="city!=null and city!=''">
+				AND t.CITY=#{city}
+			</if>
+			<if test="repairerInfoId!=null">
+				AND t.REPAIRER_INFO_ID=#{repairerInfoId}
+			</if>
+			<if test="companyInfoId!=null">
+				AND t.COMPANY_INFO_ID=#{companyInfoId}
+			</if>
+			<if test="status!=null">
+				AND t.STATUS=#{status}
+			</if>
+		</where>
+    </sql>
+</mapper>

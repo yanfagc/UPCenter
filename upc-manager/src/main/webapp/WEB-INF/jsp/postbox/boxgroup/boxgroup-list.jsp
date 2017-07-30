@@ -4,14 +4,14 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>维修员管理</title>
+    <title>箱子组管理</title>
     <jsp:include page="/WEB-INF/jsp/commons/metaheader.jsp" />
     <link href="${ctx}/css/list.css" rel="stylesheet" type="text/css" />
   </head>
   <body class="skin-blue sidebar-mini">
   <div id="content" style="background-color:#ecf0f5">
     <section class="content-header">
-      <h1><small>单元柜管理 &gt; 维修员管理</small></h1>
+      <h1><small>单元柜管理 &gt; 箱子组管理</small></h1>
     </section>
   <!-- Main content -->
     <section class="content">
@@ -21,16 +21,8 @@
             <div class="box-header">
               <form class="form-inline legend">
                 <div class="form-group">
-                  <label class="sr-only" for="repairerNo">维修员编号</label>
-                  <input type="text" class="form-control" id="repairerNo" placeholder="维修员编号"/>
-                </div>
-                <div class="form-group">
-                  <label class="sr-only" for="realname">维修员姓名</label>
-                  <input type="text" class="form-control" id="realname" placeholder="维修员姓名"/>
-                </div>
-                <div class="form-group">
-                  <label class="sr-only" for="mobilePhone">联系方式</label>
-                  <input type="text" class="form-control" id="mobilePhone" placeholder="联系方式"/>
+                  <label class="sr-only" for="groupName">箱子组名称</label>
+                    <input type="text" class="form-control" id="groupName" placeholder="箱子组名称"/>
                 </div>
                 <div class="form-group">
                   <label class="sr-only" for="province">省份</label>
@@ -45,6 +37,12 @@
                   <label class="sr-only" for="city">城市</label>
                   <select id="city" name="city" class="form-control">
                     <option value=""> --- 选择城市 --- </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="sr-only" for="repairerInfoId">维修员</label>
+                  <select id="repairerInfoId" name="city" class="form-control">
+                    <option value=""> --- 选择维修员 --- </option>
                   </select>
                 </div>
                 <div class="form-group">
@@ -67,14 +65,13 @@
               <table id="dataList" class="table table-bordered table-hover">
                 <thead>
                   <tr>
-                    <th style="width:12%">维修员编号</th>
-                    <th style="width:12%">维修员姓名</th>
+                    <th style="width:12%">箱子组名称</th>
                     <th style="width:12%">联系方式</th>
                     <th style="width:12%">省份</th>
                     <th style="width:12%">城市</th>
                     <th style="width:12%">状态</th>
-                    <th style="width:14%">创建时间</th>
-                    <th style="width:14%">操作</th>
+                    <th style="width:20%">创建时间</th>
+                    <th style="width:20%">操作</th>
                   </tr>
                 </thead>
                 <tbody></tbody>
@@ -86,6 +83,6 @@
     </section><!-- /.content -->
 </div>
     <jsp:include page="/WEB-INF/jsp/commons/metafooter.jsp" />
-    <script type="text/javascript" src="${ctx}/js/postbox/repairer/repairer-list.js<c:if test='${not empty crm}'>?${crm}</c:if>"></script>
+    <script type="text/javascript" src="${ctx}/js/postbox/boxgroup/boxgroup-list.js<c:if test='${not empty crm}'>?${crm}</c:if>"></script>
   </body>
 </html>

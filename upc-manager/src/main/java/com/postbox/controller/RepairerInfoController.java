@@ -19,9 +19,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -102,6 +104,27 @@ public class RepairerInfoController extends ApplicationController {
         }
         else {
             return "/postbox/repairer/repairer-edit";
+        }
+    }
+    
+    /**
+     * 根据区域查询维修人员
+     * @param province
+     * @param city
+     * @param response
+     * @return
+     */
+    @RequestMapping(value = "findByArea", method = RequestMethod.POST)
+    @ResponseBody
+    public Object findByArea(@RequestParam("province") String province, @RequestParam("city")String city, HttpServletResponse response) {
+        try {
+            List<RepairerInfo> dataList = this.repairerInfoService.queryByArea(province, city, DataStatus.NORMAL);
+            // 处理返回结果
+            return RespResult.create(respCode.SUCCESS, dataList);
+        }
+        catch (Exception ex) {
+            logger.error("根据区域查询维修人员失败，province：" + province + ", city: " + city, ex);
+            return RespResult.create(respCode.ERROR_EXCEPTION);
         }
     }
     

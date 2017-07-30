@@ -14,6 +14,12 @@ public class RepairerInfo implements Serializable {
     private Long repairerInfoid;
 
     /**
+     * 维修员工号: t_repairer_info.REPAIRER_NO
+     * @author MyBatis Generator
+     */
+    private String repairerNo;
+
+    /**
      * 维修人员姓名: t_repairer_info.REALNAME
      * @author MyBatis Generator
      */
@@ -77,6 +83,24 @@ public class RepairerInfo implements Serializable {
      */
     public void setRepairerInfoid(Long repairerInfoid) {
         this.repairerInfoid = repairerInfoid;
+    }
+
+    /**
+     * 获取维修员工号: t_repairer_info.REPAIRER_NO
+     * @return 维修员工号: t_repairer_info.REPAIRER_NO
+     * @author MyBatis Generator
+     */
+    public String getRepairerNo() {
+        return repairerNo;
+    }
+
+    /**
+     * 设置维修员工号: t_repairer_info.REPAIRER_NO
+     * @param repairerNo 映射数据库字段: t_repairer_info.REPAIRER_NO
+     * @author MyBatis Generator
+     */
+    public void setRepairerNo(String repairerNo) {
+        this.repairerNo = repairerNo == null ? null : repairerNo.trim();
     }
 
     /**

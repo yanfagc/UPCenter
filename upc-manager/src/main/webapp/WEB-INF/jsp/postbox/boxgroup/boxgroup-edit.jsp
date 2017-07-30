@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>编辑维修员信息</title>
+    <title>编辑箱子组信息</title>
     <jsp:include page="/WEB-INF/jsp/commons/editheader.jsp" />
   </head>
   <body>
@@ -15,23 +15,17 @@
       </div>
     </nav>
     <div class="container" style="width:100%;margin-top:50px;padding-left:10px;padding-right:10px;">
-      <form id="submitForm" class="form-horizontal" action="${ctx}/postbox/repairer/save" method="POST">
-        <input type="hidden" name="repairerInfoid" value="${record.repairerInfoid}"/>
+      <form id="submitForm" class="form-horizontal" action="${ctx}/postbox/boxgroup/save" method="POST">
+        <input type="hidden" name="boxGroupId" value="${record.repairerInfoid}"/>
         <table class="table table-bordered table-hover">
-          <tr>
-            <td style="width:16%;text-align:right;">维修员编号：</td>
-            <td style="width:32%;padding:4px;">
-              <input name="repairerNo" class="form-control input-sm myspan6" type="text" placeholder="维修员编号" value="${record.repairerNo}">
-            </td>
-            <td rowspan="3" style="width:16%;text-align:right;">照片：</td>
-            <td rowspan="3" style="width:32%;padding:4px;">
-
-            </td>
-          </tr>
           <tr>
             <td style="width:16%;text-align:right;">维修员姓名：</td>
             <td style="width:32%;padding:4px;">
               <input name="realname" class="form-control input-sm myspan6" type="text" placeholder="维修员姓名" value="${record.realname}">
+            </td>
+            <td rowspan="3" style="width:16%;text-align:right;">照片：</td>
+            <td rowspan="3" style="width:32%;padding:4px;">
+
             </td>
           </tr>
           <tr>
@@ -47,6 +41,8 @@
                 <option value="中国" area-node="0">中国</option>
               </select>
             </td>
+          </tr>
+          <tr>
             <td style="text-align:right;">省份：</td>
             <td style="padding:4px;">
               <select name="province" class="form-control input-sm myspan6">
@@ -56,8 +52,6 @@
                 </c:forEach>
               </select>
             </td>
-          </tr>
-          <tr>
             <td style="text-align:right;">城市：</td>
             <td style="padding:4px;">
               <select name="city" class="form-control input-sm myspan6">
@@ -67,14 +61,17 @@
                 </c:forEach>
               </select>
             </td>
+          </tr>
+          <tr>
             <td style="text-align:right;">状态：</td>
             <td style="padding:4px;">
               <select name="status" class="form-control input-sm myspan6">
-                <c:forEach items="${statusList}" var="s">
-                  <option value="${s}"${record.status eq s?' selected="selected"':''}>${s.remark}</option>
-                </c:forEach>
+              <c:forEach items="${statusList}" var="s">
+                <option value="${s}"${record.status eq s?' selected="selected"':''}>${s.remark}</option>
+              </c:forEach>
               </select>
             </td>
+            <td colspan="2"></td>
           </tr>
         </table>
       </form>
@@ -85,5 +82,5 @@
     </div>
   </body>
   <jsp:include page="/WEB-INF/jsp/commons/editfooter.jsp" />
-  <script src="${ctx}/js/postbox/repairer/repairer-edit.js<c:if test='${not empty crm}'>?${crm}</c:if>" type="text/javascript"></script>
+  <script src="${ctx}/js/postbox/boxgroup/boxgroup-edit.js<c:if test='${not empty crm}'>?${crm}</c:if>" type="text/javascript"></script>
 </html>

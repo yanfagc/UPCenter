@@ -1,24 +1,23 @@
 var datatable;
 $(function() {
     // 定义操作变量
-    var $repairerNo=$('#repairerNo'), $realname=$('#realname'), $province=$('#province'),
-        $city=$('#city'), $mobilePhone=$('#mobilePhone'), $status=$('#status');
+    var $groupName=$('#groupName'),
+        $province=$('#province'),
+        $city=$('#city'),
+        $repairerInfoId=$('#repairerInfoId'),
+        $status=$('#status');
     // 构造datatable对象
     datatable=$('#dataList').dataTable(
         $.extend({},pageParams,{
-            sAjaxSource:$ctx+"/postbox/repairer/dataList",
+            sAjaxSource:$ctx+"/postbox/boxgroup/dataList",
             fnServerParams:function(aodata) {
                 aodata.push({
-                    "name":"repairerNo",
-                    "value":$repairerNo.val()
+                    "name":"groupName",
+                    "value":$groupName.val()
                 });
                 aodata.push({
-                    "name":"realname",
-                    "value":$realname.val()
-                });
-                aodata.push({
-                    "name":"mobilePhone",
-                    "value":$mobilePhone.val()
+                    "name":"repairerInfoId",
+                    "value":$repairerInfoId.val()
                 });
                 aodata.push({
                     "name":"province",
@@ -35,16 +34,7 @@ $(function() {
             },
             aoColumns:[
                 {
-                    mData:"repairerNo",
-                    mRender:function(data, display, record) {
-                        return data?data:'';
-                    }
-                },
-                {
-                    mData:"realname",
-                    mRender:function(data, display, record) {
-                        return data?data:'';
-                    }
+                    mData:"realname"
                 },
                 {
                     mData:"mobilePhone",
@@ -67,7 +57,9 @@ $(function() {
                 {
                     mData:"status",
                     mRender:function(data, display, record) {
-                        if(data=='NORMAL'){
+                        if(data=='NOACTIVE'){
+                            return '未激活';
+                        }else if(data=='NORMAL'){
                             return '<label style="color:green">正常</label>';
                         }else if(data=='FROZEN'){
                             return '<label style="color:red">冻结</label>';
@@ -89,18 +81,22 @@ $(function() {
                     sWidth:null,
                     mRender:function(data, display, record) {
                         var html="";
-                        if(record.status=='NORMAL'){
-                            html+='<a class="btn btn-primary btn-xs toEdit" fid="'+record.repairerInfoid+'" href="javascript:void(0);">&nbsp;编辑&nbsp;</a>&nbsp;';
-                            html+='<a class="btn btn-warning btn-xs toFrozen" fid="'+record.repairerInfoid+'" href="javascript:void(0);">&nbsp;冻结&nbsp;</a>&nbsp;';
-                            html+='<a class="btn btn-danger btn-xs toDemise" fid="'+record.repairerInfoid+'" href="javascript:void(0);">&nbsp;注销&nbsp;</a>';
+                        if(record.status=='NOACTIVE'){
+                            html+='<a class="btn btn-primary btn-xs toEdit" fid="'+record.boxGroupId+'" href="javascript:void(0);">&nbsp;编辑&nbsp;</a>&nbsp;';
+                            html+='<a class="btn btn-warning btn-xs toActive" fid="'+record.boxGroupId+'" href="javascript:void(0);">&nbsp;激活&nbsp;</a>&nbsp;';
+                            html+='<a class="btn btn-danger btn-xs toDemise" fid="'+record.boxGroupId+'" href="javascript:void(0);">&nbsp;注销&nbsp;</a>';
+                        }else if(record.status=='NORMAL'){
+                            html+='<a class="btn btn-primary btn-xs toEdit" fid="'+record.boxGroupId+'" href="javascript:void(0);">&nbsp;编辑&nbsp;</a>&nbsp;';
+                            html+='<a class="btn btn-warning btn-xs toFrozen" fid="'+record.boxGroupId+'" href="javascript:void(0);">&nbsp;冻结&nbsp;</a>&nbsp;';
+                            html+='<a class="btn btn-danger btn-xs toDemise" fid="'+record.boxGroupId+'" href="javascript:void(0);">&nbsp;注销&nbsp;</a>';
                         }else if(record.status=='DEMISE'){
-                            html+='<a class="btn btn-primary btn-xs toEdit" fid="'+record.repairerInfoid+'" href="javascript:void(0);">&nbsp;编辑&nbsp;</a>&nbsp;';
-                            html+='<a class="btn btn-success btn-xs toNormal" fid="'+record.repairerInfoid+'" href="javascript:void(0);">&nbsp;恢复&nbsp;</a>&nbsp;';
-                            html+='<a class="btn btn-warning btn-xs" fid="'+record.repairerInfoid+'" style="visibility:hidden">&nbsp;隐藏&nbsp;</a>';
+                            html+='<a class="btn btn-primary btn-xs toEdit" fid="'+record.boxGroupId+'" href="javascript:void(0);">&nbsp;编辑&nbsp;</a>&nbsp;';
+                            html+='<a class="btn btn-success btn-xs toNoActive" fid="'+record.boxGroupId+'" href="javascript:void(0);">&nbsp;恢复&nbsp;</a>&nbsp;';
+                            html+='<a class="btn btn-warning btn-xs" fid="'+record.boxGroupId+'" style="visibility:hidden">&nbsp;隐藏&nbsp;</a>';
                         }else if(record.status=='FROZEN'){
-                            html+='<a class="btn btn-primary btn-xs toEdit" fid="'+record.repairerInfoid+'" href="javascript:void(0);">&nbsp;编辑&nbsp;</a>&nbsp;';
-                            html+='<a class="btn btn-success btn-xs toNormal" fid="'+record.repairerInfoid+'" href="javascript:void(0);">&nbsp;恢复&nbsp;</a>&nbsp;';
-                            html+='<a class="btn btn-danger btn-xs toDemise" fid="'+record.repairerInfoid+'" href="javascript:void(0);">&nbsp;注销&nbsp;</a>';
+                            html+='<a class="btn btn-primary btn-xs toEdit" fid="'+record.boxGroupId+'" href="javascript:void(0);">&nbsp;编辑&nbsp;</a>&nbsp;';
+                            html+='<a class="btn btn-success btn-xs toNoActive" fid="'+record.boxGroupId+'" href="javascript:void(0);">&nbsp;恢复&nbsp;</a>&nbsp;';
+                            html+='<a class="btn btn-danger btn-xs toDemise" fid="'+record.boxGroupId+'" href="javascript:void(0);">&nbsp;注销&nbsp;</a>';
                         }
                         return html;
                     }
@@ -110,14 +106,21 @@ $(function() {
     $('.search').click(function() {
         search();
     });
-    // 新增维修员信息
+    // 新增箱子组数据
     $('.add-btn').click(function() {
-        openWindow($ctx+'/postbox/repairer/toEdit',750,350);
+        openWindow($ctx+'/postbox/boxgroup/toEdit',750,350);
     });
     // 编辑
     $('tbody').on("click", '.toEdit', function() {
         var id=$(this).attr("fid");
-        openWindow($ctx+'/postbox/repairer/toEdit?id='+id,750,350);
+        openWindow($ctx+'/postbox/boxgroup/toEdit?id='+id,750,350);
+    });
+    // 激活
+    $('tbody').on("click", '.toActive',function() {
+        var id=$(this).attr("fid");
+        showTipsDialog("提示信息","确定执行激活操作吗？",function() {
+            statusChange(id,'');
+        },true);
     });
     // 注销
     $('tbody').on("click", '.toDemise',function() {
@@ -127,10 +130,10 @@ $(function() {
         },true);
     });
     // 恢复
-    $('tbody').on("click",'.toNormal',function() {
+    $('tbody').on("click",'.toNoActive',function() {
         var id=$(this).attr("fid");
-        showTipsDialog("提示信息","确定执行恢复操作吗？",function() {
-            statusChange(id,'NORMAL');
+        showTipsDialog("提示信息","确定执行恢复操作吗？该操作会恢复至未激活状态",function() {
+            statusChange(id,'NOACTIVE');
         },true);
     });
     // 冻结
@@ -143,7 +146,7 @@ $(function() {
     // 状态变更
     function statusChange(id, toStatus) {
         $sessionAjax({
-            url:$ctx+'/postbox/repairer/updateStatus',
+            url:$ctx+'/postbox/boxgroup/updateStatus',
             data:{'repairerInfoid':id,'status':toStatus},
             success:function(rsp){
                 if(rsp.code=='1000'){

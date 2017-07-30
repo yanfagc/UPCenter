@@ -33,15 +33,15 @@ if(top.location!=self.location){
 				<form id="login_form" method="post" action="${ctx}/login">
 					<div class="form-group">
 						<label for="j_username" class="t">用户名：</label> 
-						<input id="j_username" value="" name="j_username" type="text" class="form-control x319 in" autocomplete="off">
+						<input id="j_username" value="sysadmin" name="j_username" type="text" class="form-control x319 in" autocomplete="off">
 					</div>
 					<div class="form-group">
 						<label for="j_password" class="t">密　码：</label> 
-						<input id="j_password" value="" name="j_password" type="password" class="password form-control x319 in">
+						<input id="j_password" value="111111" name="j_password" type="password" class="password form-control x319 in">
 					</div>
 					<div class="form-group">
 						<label for="j_captcha" class="t">验证码：</label> 
-						<input id="j_captcha" value="" name="j_captcha" type="text" class="password form-control x319 in">
+						<input id="j_captcha" value="1" name="j_captcha" type="text" class="password form-control x319 in">
 					</div>
 					<%-- <div class="form-group">
 						<label for="j_captcha" class="t">验证码：</label>

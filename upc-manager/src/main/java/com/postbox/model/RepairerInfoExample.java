@@ -267,6 +267,76 @@ public class RepairerInfoExample {
             return (Criteria) this;
         }
 
+        public Criteria andRepairerNoIsNull() {
+            addCriterion("REPAIRER_NO is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRepairerNoIsNotNull() {
+            addCriterion("REPAIRER_NO is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRepairerNoEqualTo(String value) {
+            addCriterion("REPAIRER_NO =", value, "repairerNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andRepairerNoNotEqualTo(String value) {
+            addCriterion("REPAIRER_NO <>", value, "repairerNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andRepairerNoGreaterThan(String value) {
+            addCriterion("REPAIRER_NO >", value, "repairerNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andRepairerNoGreaterThanOrEqualTo(String value) {
+            addCriterion("REPAIRER_NO >=", value, "repairerNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andRepairerNoLessThan(String value) {
+            addCriterion("REPAIRER_NO <", value, "repairerNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andRepairerNoLessThanOrEqualTo(String value) {
+            addCriterion("REPAIRER_NO <=", value, "repairerNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andRepairerNoLike(String value) {
+            addCriterion("REPAIRER_NO like", value, "repairerNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andRepairerNoNotLike(String value) {
+            addCriterion("REPAIRER_NO not like", value, "repairerNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andRepairerNoIn(List<String> values) {
+            addCriterion("REPAIRER_NO in", values, "repairerNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andRepairerNoNotIn(List<String> values) {
+            addCriterion("REPAIRER_NO not in", values, "repairerNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andRepairerNoBetween(String value1, String value2) {
+            addCriterion("REPAIRER_NO between", value1, value2, "repairerNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andRepairerNoNotBetween(String value1, String value2) {
+            addCriterion("REPAIRER_NO not between", value1, value2, "repairerNo");
+            return (Criteria) this;
+        }
+
         public Criteria andRealnameIsNull() {
             addCriterion("REALNAME is null");
             return (Criteria) this;
