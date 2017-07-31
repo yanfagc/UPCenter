@@ -20,6 +20,12 @@ public class BoxGroup implements Serializable {
     private Long companyInfoId;
 
     /**
+     * 箱子组编码,全局唯一: t_box_group.GROUP_CODE
+     * @author MyBatis Generator
+     */
+    private String groupCode;
+
+    /**
      * 名称: t_box_group.GROUP_NAME
      * @author MyBatis Generator
      */
@@ -50,10 +56,16 @@ public class BoxGroup implements Serializable {
     private String address;
 
     /**
-     * 经纬坐标,逗号分割: t_box_group.COORDINATE
+     * 经度: t_box_group.LONGITUDE
      * @author MyBatis Generator
      */
-    private String coordinate;
+    private String longitude;
+
+    /**
+     * 纬度: t_box_group.LATITUDE
+     * @author MyBatis Generator
+     */
+    private String latitude;
 
     /**
      * 维修人员ID: t_box_group.REPAIRER_INFO_ID
@@ -72,6 +84,24 @@ public class BoxGroup implements Serializable {
      * @author MyBatis Generator
      */
     private Date createtime;
+
+    /**
+     * 激活时间: t_box_group.ACTIVETIME
+     * @author MyBatis Generator
+     */
+    private Date activetime;
+
+    /**
+     * 冻结时间: t_box_group.FROZENTIME
+     * @author MyBatis Generator
+     */
+    private Date frozentime;
+
+    /**
+     * 注销时间: t_box_group.DEMISETIME
+     * @author MyBatis Generator
+     */
+    private Date demisetime;
 
     /**
      * 获取箱子组ID: t_box_group.BOX_GROUP_ID
@@ -107,6 +137,24 @@ public class BoxGroup implements Serializable {
      */
     public void setCompanyInfoId(Long companyInfoId) {
         this.companyInfoId = companyInfoId;
+    }
+
+    /**
+     * 获取箱子组编码,全局唯一: t_box_group.GROUP_CODE
+     * @return 箱子组编码,全局唯一: t_box_group.GROUP_CODE
+     * @author MyBatis Generator
+     */
+    public String getGroupCode() {
+        return groupCode;
+    }
+
+    /**
+     * 设置箱子组编码,全局唯一: t_box_group.GROUP_CODE
+     * @param groupCode 映射数据库字段: t_box_group.GROUP_CODE
+     * @author MyBatis Generator
+     */
+    public void setGroupCode(String groupCode) {
+        this.groupCode = groupCode == null ? null : groupCode.trim();
     }
 
     /**
@@ -200,21 +248,39 @@ public class BoxGroup implements Serializable {
     }
 
     /**
-     * 获取经纬坐标,逗号分割: t_box_group.COORDINATE
-     * @return 经纬坐标,逗号分割: t_box_group.COORDINATE
+     * 获取经度: t_box_group.LONGITUDE
+     * @return 经度: t_box_group.LONGITUDE
      * @author MyBatis Generator
      */
-    public String getCoordinate() {
-        return coordinate;
+    public String getLongitude() {
+        return longitude;
     }
 
     /**
-     * 设置经纬坐标,逗号分割: t_box_group.COORDINATE
-     * @param coordinate 映射数据库字段: t_box_group.COORDINATE
+     * 设置经度: t_box_group.LONGITUDE
+     * @param longitude 映射数据库字段: t_box_group.LONGITUDE
      * @author MyBatis Generator
      */
-    public void setCoordinate(String coordinate) {
-        this.coordinate = coordinate == null ? null : coordinate.trim();
+    public void setLongitude(String longitude) {
+        this.longitude = longitude == null ? null : longitude.trim();
+    }
+
+    /**
+     * 获取纬度: t_box_group.LATITUDE
+     * @return 纬度: t_box_group.LATITUDE
+     * @author MyBatis Generator
+     */
+    public String getLatitude() {
+        return latitude;
+    }
+
+    /**
+     * 设置纬度: t_box_group.LATITUDE
+     * @param latitude 映射数据库字段: t_box_group.LATITUDE
+     * @author MyBatis Generator
+     */
+    public void setLatitude(String latitude) {
+        this.latitude = latitude == null ? null : latitude.trim();
     }
 
     /**
@@ -269,5 +335,59 @@ public class BoxGroup implements Serializable {
      */
     public void setCreatetime(Date createtime) {
         this.createtime = createtime;
+    }
+
+    /**
+     * 获取激活时间: t_box_group.ACTIVETIME
+     * @return 激活时间: t_box_group.ACTIVETIME
+     * @author MyBatis Generator
+     */
+    public Date getActivetime() {
+        return activetime;
+    }
+
+    /**
+     * 设置激活时间: t_box_group.ACTIVETIME
+     * @param activetime 映射数据库字段: t_box_group.ACTIVETIME
+     * @author MyBatis Generator
+     */
+    public void setActivetime(Date activetime) {
+        this.activetime = activetime;
+    }
+
+    /**
+     * 获取冻结时间: t_box_group.FROZENTIME
+     * @return 冻结时间: t_box_group.FROZENTIME
+     * @author MyBatis Generator
+     */
+    public Date getFrozentime() {
+        return frozentime;
+    }
+
+    /**
+     * 设置冻结时间: t_box_group.FROZENTIME
+     * @param frozentime 映射数据库字段: t_box_group.FROZENTIME
+     * @author MyBatis Generator
+     */
+    public void setFrozentime(Date frozentime) {
+        this.frozentime = frozentime;
+    }
+
+    /**
+     * 获取注销时间: t_box_group.DEMISETIME
+     * @return 注销时间: t_box_group.DEMISETIME
+     * @author MyBatis Generator
+     */
+    public Date getDemisetime() {
+        return demisetime;
+    }
+
+    /**
+     * 设置注销时间: t_box_group.DEMISETIME
+     * @param demisetime 映射数据库字段: t_box_group.DEMISETIME
+     * @author MyBatis Generator
+     */
+    public void setDemisetime(Date demisetime) {
+        this.demisetime = demisetime;
     }
 }

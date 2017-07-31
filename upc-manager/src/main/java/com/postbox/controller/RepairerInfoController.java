@@ -129,6 +129,28 @@ public class RepairerInfoController extends ApplicationController {
     }
     
     /**
+     * 查找维修人员信息（一般用于ajax查找）
+     * @param province
+     * @param city
+     * @param searchKey
+     * @param response
+     * @return
+     */
+    @RequestMapping(value = "ajaxFind", method = RequestMethod.POST)
+    @ResponseBody
+    public Object ajaxFind(String province, String city, String searchKey, HttpServletResponse response) {
+        try {
+            List<RepairerInfo> dataList = this.repairerInfoService.queryForAjax(province, city, searchKey, DataStatus.NORMAL);
+            // 处理返回结果
+            return RespResult.create(respCode.SUCCESS, dataList);
+        }
+        catch (Exception ex) {
+            logger.error("根据区域查询维修人员失败，province：" + province + ", city: " + city, ex);
+            return RespResult.create(respCode.ERROR_EXCEPTION);
+        }
+    }
+    
+    /**
      * 保存维修人员信息
      * @param record
      * @param request

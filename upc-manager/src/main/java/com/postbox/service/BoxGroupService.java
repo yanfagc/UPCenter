@@ -89,8 +89,8 @@ public class BoxGroupService extends AbstractUpcService {
      * @param id
      * @return
      */
-    public BoxGroup queryById(Long id) {
-        return this.boxGroupMapperExt.selectByPrimaryKey(id);
+    public BoxGroupVo queryById(Long id) {
+        return this.boxGroupMapperExt.selectByGroupId(id);
     }
     
     /**
@@ -123,9 +123,32 @@ public class BoxGroupService extends AbstractUpcService {
      * @return
      */
     public boolean updateStatus(BoxGroup record) {
+        BoxGroup group = this.boxGroupMapperExt.selectByPrimaryKey(record.getBoxGroupId());
+        if (group == null) {
+            return false;
+        }
+        
         BoxGroup data = new BoxGroup();
         data.setBoxGroupId(record.getBoxGroupId());
         data.setStatus(record.getStatus());
+        if (data.getStatus() != group.getStatus()) {
+            switch (data.getStatus()) {
+                case NORMAL:
+                    data.setActivetime(new Date());
+                    break;
+                case NOACTIVE:
+                    break;
+                case FROZEN:
+                    data.setFrozentime(new Date());
+                    break;
+                case DEMISE:
+                    data.setDemisetime(new Date());
+                    break;
+                default:
+                    return false;
+            }
+        }
+        
         int count = this.boxGroupMapperExt.updateByPrimaryKeySelective(data);
         return count > 0;
     }

@@ -21,8 +21,12 @@
             <div class="box-header">
               <form class="form-inline legend">
                 <div class="form-group">
+                  <label class="sr-only" for="companyCode">企业编码</label>
+                  <input type="text" class="form-control" id="companyCode" placeholder="企业编码"/>
+                </div>
+                <div class="form-group">
                   <label class="sr-only" for="companyName">企业名称</label>
-                    <input type="text" class="form-control" id="companyName" placeholder="企业名称"/>
+                  <input type="text" class="form-control" id="companyName" placeholder="企业名称"/>
                 </div>
                 <div class="form-group">
                   <label class="sr-only" for="status">状态</label>
@@ -44,13 +48,14 @@
               <table id="dataList" class="table table-bordered table-hover">
                 <thead>
                   <tr>
-                    <th style="width:13%">企业名称</th>
+                    <th style="width:12%">企业编码</th>
+                    <th style="width:12%">企业名称</th>
                     <th style="width:15%">企业法人</th>
-                    <th style="width:13%">联系人</th>
-                    <th style="width:13%">联系方式</th>
+                    <th style="width:12%">联系人</th>
+                    <th style="width:12%">联系方式</th>
                     <th style="width:10%">状态</th>
                     <th style="width:10%">创建时间</th>
-                    <th style="width:16%">操作</th>
+                    <th style="width:15%">操作</th>
                   </tr>
                 </thead>
                 <tbody></tbody>

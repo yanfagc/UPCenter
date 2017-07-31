@@ -19,13 +19,13 @@
         <input type="hidden" name="companyInfoId" value="${record.companyInfoId}"/>
         <table class="table table-bordered table-hover">
           <tr>
+            <td style="width:16%;text-align:right;">企业编码：</td>
+            <td style="width:32%;padding:4px;">
+              <input name="companyCode" class="form-control input-sm myspan6" type="text" placeholder="企业编码" value="${record.companyCode}">
+            </td>
             <td style="width:16%;text-align:right;">企业名称：</td>
             <td style="width:32%;padding:4px;">
               <input name="companyName" class="form-control input-sm myspan6" type="text" placeholder="企业名称" value="${record.companyName}">
-            </td>
-            <td style="width:16%;text-align:right;">企业法人：</td>
-            <td style="width:32%;padding:4px;">
-              <input name="legalPersonName" class="form-control input-sm myspan6" type="text" placeholder="企业法人" value="${record.legalPersonName}">
             </td>
           </tr>
           <tr>
@@ -39,15 +39,18 @@
             </td>
           </tr>
           <tr>
+            <td style="width:16%;text-align:right;">企业法人：</td>
+            <td style="width:32%;padding:4px;">
+              <input name="legalPersonName" class="form-control input-sm myspan6" type="text" placeholder="企业法人" value="${record.legalPersonName}">
+            </td>
             <td style="text-align:right;">状态：</td>
             <td style="padding:4px;">
               <select name="status" class="form-control input-sm myspan6">
-              <c:forEach items="${statusList}" var="s">
-                <option value="${s}"${record.status eq s?' selected="selected"':''}>${s.remark}</option>
-              </c:forEach>
+                <c:forEach items="${statusList}" var="s">
+                  <option value="${s}"${record.status eq s?' selected="selected"':''}>${s.remark}</option>
+                </c:forEach>
               </select>
             </td>
-            <td colspan="2"></td>
           </tr>
         </table>
       </form>

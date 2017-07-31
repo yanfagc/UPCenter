@@ -9,13 +9,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.hanzhdy.manager.support.service.AbstractUpcService;
 import org.hanzhdy.web.bean.DatatableResult;
 import org.hanzhdy.web.throwable.BizException;
-import org.hanzhdy.web.throwable.BizStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by H.CAAHN on 2017/7/24.
@@ -92,6 +89,29 @@ public class RepairerInfoService extends AbstractUpcService {
             }
         }
         return this.repairerInfoMapperExt.selectByExample(example);
+    }
+    
+    public List<RepairerInfo> queryForAjax(String province, String city, String searchKey, DataStatus... status) {
+        Map<String, Object> search = new HashMap<String, Object>();
+        if (StringUtils.isNotBlank(province)) {
+            search.put("province", province);
+        }
+        if (StringUtils.isNotBlank(city)) {
+            search.put("city", city);
+        }
+        if (StringUtils.isNotBlank(searchKey)) {
+            search.put("searchKey", "%" + searchKey + "%");
+        }
+        if (status != null) {
+            if (status.length == 1) {
+                search.put("status", status[0]);
+            }
+            else if (status.length > 1) {
+                search.put("statusList", status);
+            }
+        }
+        search.put("limitSize", 20);
+        return this.repairerInfoMapperExt.selectForAjaxSearch(search);
     }
     
     public boolean insert(RepairerInfo record) {

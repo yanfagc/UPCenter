@@ -1,12 +1,16 @@
 var datatable;
 $(function() {
     // 定义操作变量
-    var $companyName=$('#companyName'),$status=$('#status');
+    var $companyCode=$('#companyCode'),$companyName=$('#companyName'),$status=$('#status');
     // 构造datatable对象
     datatable=$('#dataList').dataTable(
         $.extend({},pageParams,{
             sAjaxSource:$ctx+"/postbox/company/dataList",
             fnServerParams:function(aodata) {
+                aodata.push({
+                    "name":"companyCode",
+                    "value":$companyCode.val()
+                });
                 aodata.push({
                     "name":"companyName",
                     "value":$companyName.val()
@@ -17,6 +21,9 @@ $(function() {
                 });
             },
             aoColumns:[
+                {
+                    mData:"companyCode"
+                },
                 {
                     mData:"companyName"
                 },

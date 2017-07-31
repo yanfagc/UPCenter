@@ -1,18 +1,22 @@
 package com.postbox.service;
 
 import com.postbox.controller.params.CompanyInfoParams;
+import com.postbox.enums.BoxGroupStatus;
 import com.postbox.enums.DataStatus;
 import com.postbox.mapper.CompanyInfoMapperExt;
+import com.postbox.model.BoxGroupExample;
 import com.postbox.model.CompanyInfo;
 import com.postbox.model.CompanyInfoExample;
 import org.apache.commons.lang3.StringUtils;
 import org.hanzhdy.manager.support.enums.CommonStatus;
 import org.hanzhdy.manager.support.service.AbstractUpcService;
 import org.hanzhdy.web.bean.DatatableResult;
+import org.hanzhdy.web.throwable.BizException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.xml.crypto.Data;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -30,6 +34,9 @@ public class CompanyInfoService extends AbstractUpcService {
         CompanyInfoExample example = new CompanyInfoExample();
         example.setPage(params.getPage());
         CompanyInfoExample.Criteria criteria = example.createCriteria();
+        if (StringUtils.isNotBlank(params.getCompanyCode())) {
+            criteria.andCompanyCodeLike("%" + params.getCompanyCode() + "%");
+        }
         if (StringUtils.isNotBlank(params.getCompanyName())) {
             criteria.andCompanyNameLike("%" + params.getCompanyName() + "%");
         }
@@ -84,11 +91,51 @@ public class CompanyInfoService extends AbstractUpcService {
     }
     
     /**
+     * 根据企业唯一编码，查询企业信息
+     * @param code
+     * @return
+     */
+    public CompanyInfo queryByCode(String code) {
+        CompanyInfoExample example = new CompanyInfoExample();
+        example.createCriteria().andCompanyCodeEqualTo(code);
+        List<CompanyInfo> dataList = this.companyInfoMapperExt.selectByExample(example);
+        if (dataList != null && !dataList.isEmpty()) {
+            return dataList.get(0);
+        }
+        return null;
+    }
+    
+    /**
+     * 查询企业数据
+     * @param statusArray
+     * @return
+     */
+    public List<CompanyInfo> queryAsList(DataStatus... statusArray) {
+        CompanyInfoExample example = new CompanyInfoExample();
+        if (statusArray != null && statusArray.length > 0) {
+            CompanyInfoExample.Criteria criteria = example.createCriteria();
+            if (statusArray.length == 1) {
+                criteria.andStatusEqualTo(statusArray[0]);
+            }
+            else {
+                criteria.andStatusIn(Arrays.asList(statusArray));
+            }
+        }
+        
+        return this.companyInfoMapperExt.selectByExample(example);
+    }
+    
+    /**
      * 插入企业信息，并生产鉴权数据
      * @param record
      * @return
      */
     public boolean insert(CompanyInfo record) {
+        CompanyInfo companyInfo = this.queryByCode(record.getCompanyCode());
+        if (companyInfo != null) {
+            throw new BizException(respCode.SAVE_DUPLICATE);
+        }
+        
         if (record.getStatus() == null) {
             record.setStatus(DataStatus.NORMAL);
         }
@@ -104,6 +151,11 @@ public class CompanyInfoService extends AbstractUpcService {
      * @return
      */
     public boolean update(CompanyInfo record) {
+        CompanyInfo companyInfo = this.queryByCode(record.getCompanyCode());
+        if (companyInfo != null && record.getCompanyInfoId().longValue() != companyInfo.getCompanyInfoId().longValue()) {
+            throw new BizException(respCode.SAVE_DUPLICATE);
+        }
+        
         // 禁止修改鉴权信息
         record.setAuth(null);
         int count = this.companyInfoMapperExt.updateByPrimaryKeySelective(record);

@@ -5,23 +5,37 @@ $(function() {
         ignore:'',
         showText:true,
         rules:{
-            realname:{
+            groupCode:{
                 required:true,
-                maxlength:25
+                maxlength:32,
+                numOrLetterOrLine:true
             },
-            mobilePhone:{
+            groupName:{
                 required:true,
-                maxlength:12
+                maxlength:100
+            },
+            companyInfoId:{
+                required:true
+            },
+            repairerInfoId:{
+                required:true
             }
         },
         messages:{
-            realname:{
-                required:"维修员姓名不允许为空！",
-                maxlength:"最大长度不能长于25位！"
+            groupCode:{
+                required:'箱子组编码不允许为空！',
+                maxlength:'最大长度不允许超过32位！',
+                numOrLetterOrLine:'仅允许输入数字英文或下划线！'
             },
-            mobilePhone:{
-                required:"联系方式不允许为空！",
-                maxlength:"最大长度不能长于12位！"
+            groupName:{
+                required:'箱子组名称不允许为空！',
+                maxlength:'最大长度不能长于100位！'
+            },
+            companyInfoId:{
+                required:'所属企业不允许为空！'
+            },
+            repairerInfoId:{
+                required:'维修员不允许为空！'
             }
         }
     });
@@ -84,5 +98,29 @@ $(function() {
             }
         });
     });
+
+    var ajaxRepairer=new $.jme.autoComplete({
+        id:'ajaxRepairer',
+        url:$ctx+'/postbox/repairer/ajaxFind',
+        data:{
+            province:$(':input[name="province"]').val(),
+            city:$(':input[name="city"]').val()
+        },
+        reader:'input[name="repairerName"]',
+        writer:'input[name="repairerInfoId"]',
+        keyProps:{
+            key:'repairerInfoid',
+            title:'realname',
+            serverKey:'searchKey',
+            data:'body'
+        },
+        properties:{
+            width:137,
+            top:26,
+            left:0,
+            fontSize:12
+        }
+    });
+    ajaxRepairer.init();
 });
 

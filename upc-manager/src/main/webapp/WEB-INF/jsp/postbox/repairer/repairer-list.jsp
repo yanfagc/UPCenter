@@ -33,7 +33,7 @@
                   <input type="text" class="form-control" id="mobilePhone" placeholder="联系方式"/>
                 </div>
                 <div class="form-group">
-                  <label class="sr-only" for="province">省份</label>
+                  <label class="sr-only" for="province">省份/直辖市</label>
                   <select id="province" name="province" class="form-control">
                     <option value=""> --- 选择省份 --- </option>
                     <c:forEach items="${provinceList}" var="province">
@@ -42,7 +42,7 @@
                   </select>
                 </div>
                 <div class="form-group">
-                  <label class="sr-only" for="city">城市</label>
+                  <label class="sr-only" for="city">城市/地区</label>
                   <select id="city" name="city" class="form-control">
                     <option value=""> --- 选择城市 --- </option>
                   </select>

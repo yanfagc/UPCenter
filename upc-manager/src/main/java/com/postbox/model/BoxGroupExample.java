@@ -327,6 +327,76 @@ public class BoxGroupExample {
             return (Criteria) this;
         }
 
+        public Criteria andGroupCodeIsNull() {
+            addCriterion("GROUP_CODE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupCodeIsNotNull() {
+            addCriterion("GROUP_CODE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupCodeEqualTo(String value) {
+            addCriterion("GROUP_CODE =", value, "groupCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupCodeNotEqualTo(String value) {
+            addCriterion("GROUP_CODE <>", value, "groupCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupCodeGreaterThan(String value) {
+            addCriterion("GROUP_CODE >", value, "groupCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupCodeGreaterThanOrEqualTo(String value) {
+            addCriterion("GROUP_CODE >=", value, "groupCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupCodeLessThan(String value) {
+            addCriterion("GROUP_CODE <", value, "groupCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupCodeLessThanOrEqualTo(String value) {
+            addCriterion("GROUP_CODE <=", value, "groupCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupCodeLike(String value) {
+            addCriterion("GROUP_CODE like", value, "groupCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupCodeNotLike(String value) {
+            addCriterion("GROUP_CODE not like", value, "groupCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupCodeIn(List<String> values) {
+            addCriterion("GROUP_CODE in", values, "groupCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupCodeNotIn(List<String> values) {
+            addCriterion("GROUP_CODE not in", values, "groupCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupCodeBetween(String value1, String value2) {
+            addCriterion("GROUP_CODE between", value1, value2, "groupCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andGroupCodeNotBetween(String value1, String value2) {
+            addCriterion("GROUP_CODE not between", value1, value2, "groupCode");
+            return (Criteria) this;
+        }
+
         public Criteria andGroupNameIsNull() {
             addCriterion("GROUP_NAME is null");
             return (Criteria) this;
@@ -677,73 +747,143 @@ public class BoxGroupExample {
             return (Criteria) this;
         }
 
-        public Criteria andCoordinateIsNull() {
-            addCriterion("COORDINATE is null");
+        public Criteria andLongitudeIsNull() {
+            addCriterion("LONGITUDE is null");
             return (Criteria) this;
         }
 
-        public Criteria andCoordinateIsNotNull() {
-            addCriterion("COORDINATE is not null");
+        public Criteria andLongitudeIsNotNull() {
+            addCriterion("LONGITUDE is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCoordinateEqualTo(String value) {
-            addCriterion("COORDINATE =", value, "coordinate");
+        public Criteria andLongitudeEqualTo(String value) {
+            addCriterion("LONGITUDE =", value, "longitude");
             return (Criteria) this;
         }
 
-        public Criteria andCoordinateNotEqualTo(String value) {
-            addCriterion("COORDINATE <>", value, "coordinate");
+        public Criteria andLongitudeNotEqualTo(String value) {
+            addCriterion("LONGITUDE <>", value, "longitude");
             return (Criteria) this;
         }
 
-        public Criteria andCoordinateGreaterThan(String value) {
-            addCriterion("COORDINATE >", value, "coordinate");
+        public Criteria andLongitudeGreaterThan(String value) {
+            addCriterion("LONGITUDE >", value, "longitude");
             return (Criteria) this;
         }
 
-        public Criteria andCoordinateGreaterThanOrEqualTo(String value) {
-            addCriterion("COORDINATE >=", value, "coordinate");
+        public Criteria andLongitudeGreaterThanOrEqualTo(String value) {
+            addCriterion("LONGITUDE >=", value, "longitude");
             return (Criteria) this;
         }
 
-        public Criteria andCoordinateLessThan(String value) {
-            addCriterion("COORDINATE <", value, "coordinate");
+        public Criteria andLongitudeLessThan(String value) {
+            addCriterion("LONGITUDE <", value, "longitude");
             return (Criteria) this;
         }
 
-        public Criteria andCoordinateLessThanOrEqualTo(String value) {
-            addCriterion("COORDINATE <=", value, "coordinate");
+        public Criteria andLongitudeLessThanOrEqualTo(String value) {
+            addCriterion("LONGITUDE <=", value, "longitude");
             return (Criteria) this;
         }
 
-        public Criteria andCoordinateLike(String value) {
-            addCriterion("COORDINATE like", value, "coordinate");
+        public Criteria andLongitudeLike(String value) {
+            addCriterion("LONGITUDE like", value, "longitude");
             return (Criteria) this;
         }
 
-        public Criteria andCoordinateNotLike(String value) {
-            addCriterion("COORDINATE not like", value, "coordinate");
+        public Criteria andLongitudeNotLike(String value) {
+            addCriterion("LONGITUDE not like", value, "longitude");
             return (Criteria) this;
         }
 
-        public Criteria andCoordinateIn(List<String> values) {
-            addCriterion("COORDINATE in", values, "coordinate");
+        public Criteria andLongitudeIn(List<String> values) {
+            addCriterion("LONGITUDE in", values, "longitude");
             return (Criteria) this;
         }
 
-        public Criteria andCoordinateNotIn(List<String> values) {
-            addCriterion("COORDINATE not in", values, "coordinate");
+        public Criteria andLongitudeNotIn(List<String> values) {
+            addCriterion("LONGITUDE not in", values, "longitude");
             return (Criteria) this;
         }
 
-        public Criteria andCoordinateBetween(String value1, String value2) {
-            addCriterion("COORDINATE between", value1, value2, "coordinate");
+        public Criteria andLongitudeBetween(String value1, String value2) {
+            addCriterion("LONGITUDE between", value1, value2, "longitude");
             return (Criteria) this;
         }
 
-        public Criteria andCoordinateNotBetween(String value1, String value2) {
-            addCriterion("COORDINATE not between", value1, value2, "coordinate");
+        public Criteria andLongitudeNotBetween(String value1, String value2) {
+            addCriterion("LONGITUDE not between", value1, value2, "longitude");
+            return (Criteria) this;
+        }
+
+        public Criteria andLatitudeIsNull() {
+            addCriterion("LATITUDE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLatitudeIsNotNull() {
+            addCriterion("LATITUDE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLatitudeEqualTo(String value) {
+            addCriterion("LATITUDE =", value, "latitude");
+            return (Criteria) this;
+        }
+
+        public Criteria andLatitudeNotEqualTo(String value) {
+            addCriterion("LATITUDE <>", value, "latitude");
+            return (Criteria) this;
+        }
+
+        public Criteria andLatitudeGreaterThan(String value) {
+            addCriterion("LATITUDE >", value, "latitude");
+            return (Criteria) this;
+        }
+
+        public Criteria andLatitudeGreaterThanOrEqualTo(String value) {
+            addCriterion("LATITUDE >=", value, "latitude");
+            return (Criteria) this;
+        }
+
+        public Criteria andLatitudeLessThan(String value) {
+            addCriterion("LATITUDE <", value, "latitude");
+            return (Criteria) this;
+        }
+
+        public Criteria andLatitudeLessThanOrEqualTo(String value) {
+            addCriterion("LATITUDE <=", value, "latitude");
+            return (Criteria) this;
+        }
+
+        public Criteria andLatitudeLike(String value) {
+            addCriterion("LATITUDE like", value, "latitude");
+            return (Criteria) this;
+        }
+
+        public Criteria andLatitudeNotLike(String value) {
+            addCriterion("LATITUDE not like", value, "latitude");
+            return (Criteria) this;
+        }
+
+        public Criteria andLatitudeIn(List<String> values) {
+            addCriterion("LATITUDE in", values, "latitude");
+            return (Criteria) this;
+        }
+
+        public Criteria andLatitudeNotIn(List<String> values) {
+            addCriterion("LATITUDE not in", values, "latitude");
+            return (Criteria) this;
+        }
+
+        public Criteria andLatitudeBetween(String value1, String value2) {
+            addCriterion("LATITUDE between", value1, value2, "latitude");
+            return (Criteria) this;
+        }
+
+        public Criteria andLatitudeNotBetween(String value1, String value2) {
+            addCriterion("LATITUDE not between", value1, value2, "latitude");
             return (Criteria) this;
         }
 
@@ -934,6 +1074,186 @@ public class BoxGroupExample {
 
         public Criteria andCreatetimeNotBetween(Date value1, Date value2) {
             addCriterion("CREATETIME not between", value1, value2, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivetimeIsNull() {
+            addCriterion("ACTIVETIME is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivetimeIsNotNull() {
+            addCriterion("ACTIVETIME is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivetimeEqualTo(Date value) {
+            addCriterion("ACTIVETIME =", value, "activetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivetimeNotEqualTo(Date value) {
+            addCriterion("ACTIVETIME <>", value, "activetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivetimeGreaterThan(Date value) {
+            addCriterion("ACTIVETIME >", value, "activetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivetimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("ACTIVETIME >=", value, "activetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivetimeLessThan(Date value) {
+            addCriterion("ACTIVETIME <", value, "activetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivetimeLessThanOrEqualTo(Date value) {
+            addCriterion("ACTIVETIME <=", value, "activetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivetimeIn(List<Date> values) {
+            addCriterion("ACTIVETIME in", values, "activetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivetimeNotIn(List<Date> values) {
+            addCriterion("ACTIVETIME not in", values, "activetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivetimeBetween(Date value1, Date value2) {
+            addCriterion("ACTIVETIME between", value1, value2, "activetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivetimeNotBetween(Date value1, Date value2) {
+            addCriterion("ACTIVETIME not between", value1, value2, "activetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andFrozentimeIsNull() {
+            addCriterion("FROZENTIME is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFrozentimeIsNotNull() {
+            addCriterion("FROZENTIME is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFrozentimeEqualTo(Date value) {
+            addCriterion("FROZENTIME =", value, "frozentime");
+            return (Criteria) this;
+        }
+
+        public Criteria andFrozentimeNotEqualTo(Date value) {
+            addCriterion("FROZENTIME <>", value, "frozentime");
+            return (Criteria) this;
+        }
+
+        public Criteria andFrozentimeGreaterThan(Date value) {
+            addCriterion("FROZENTIME >", value, "frozentime");
+            return (Criteria) this;
+        }
+
+        public Criteria andFrozentimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("FROZENTIME >=", value, "frozentime");
+            return (Criteria) this;
+        }
+
+        public Criteria andFrozentimeLessThan(Date value) {
+            addCriterion("FROZENTIME <", value, "frozentime");
+            return (Criteria) this;
+        }
+
+        public Criteria andFrozentimeLessThanOrEqualTo(Date value) {
+            addCriterion("FROZENTIME <=", value, "frozentime");
+            return (Criteria) this;
+        }
+
+        public Criteria andFrozentimeIn(List<Date> values) {
+            addCriterion("FROZENTIME in", values, "frozentime");
+            return (Criteria) this;
+        }
+
+        public Criteria andFrozentimeNotIn(List<Date> values) {
+            addCriterion("FROZENTIME not in", values, "frozentime");
+            return (Criteria) this;
+        }
+
+        public Criteria andFrozentimeBetween(Date value1, Date value2) {
+            addCriterion("FROZENTIME between", value1, value2, "frozentime");
+            return (Criteria) this;
+        }
+
+        public Criteria andFrozentimeNotBetween(Date value1, Date value2) {
+            addCriterion("FROZENTIME not between", value1, value2, "frozentime");
+            return (Criteria) this;
+        }
+
+        public Criteria andDemisetimeIsNull() {
+            addCriterion("DEMISETIME is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDemisetimeIsNotNull() {
+            addCriterion("DEMISETIME is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDemisetimeEqualTo(Date value) {
+            addCriterion("DEMISETIME =", value, "demisetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andDemisetimeNotEqualTo(Date value) {
+            addCriterion("DEMISETIME <>", value, "demisetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andDemisetimeGreaterThan(Date value) {
+            addCriterion("DEMISETIME >", value, "demisetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andDemisetimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("DEMISETIME >=", value, "demisetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andDemisetimeLessThan(Date value) {
+            addCriterion("DEMISETIME <", value, "demisetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andDemisetimeLessThanOrEqualTo(Date value) {
+            addCriterion("DEMISETIME <=", value, "demisetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andDemisetimeIn(List<Date> values) {
+            addCriterion("DEMISETIME in", values, "demisetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andDemisetimeNotIn(List<Date> values) {
+            addCriterion("DEMISETIME not in", values, "demisetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andDemisetimeBetween(Date value1, Date value2) {
+            addCriterion("DEMISETIME between", value1, value2, "demisetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andDemisetimeNotBetween(Date value1, Date value2) {
+            addCriterion("DEMISETIME not between", value1, value2, "demisetime");
             return (Criteria) this;
         }
     }

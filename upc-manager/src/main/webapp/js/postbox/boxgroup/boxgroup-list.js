@@ -1,11 +1,8 @@
 var datatable;
 $(function() {
     // 定义操作变量
-    var $groupName=$('#groupName'),
-        $province=$('#province'),
-        $city=$('#city'),
-        $repairerInfoId=$('#repairerInfoId'),
-        $status=$('#status');
+    var $groupName=$('#groupName'), $province=$('#province'), $city=$('#city'),
+        $repairerInfoId=$('#repairerInfoId'), $status=$('#status');
     // 构造datatable对象
     datatable=$('#dataList').dataTable(
         $.extend({},pageParams,{
@@ -34,10 +31,13 @@ $(function() {
             },
             aoColumns:[
                 {
-                    mData:"realname"
+                    mData:"groupCode",
+                    mRender:function(data, display, record) {
+                        return data?data:'';
+                    }
                 },
                 {
-                    mData:"mobilePhone",
+                    mData:"groupName",
                     mRender:function(data, display, record) {
                         return data?data:'';
                     }
@@ -50,6 +50,12 @@ $(function() {
                 },
                 {
                     mData:"city",
+                    mRender:function(data, display, record) {
+                        return data?data:'';
+                    }
+                },
+                {
+                    mData:"repairerName",
                     mRender:function(data, display, record) {
                         return data?data:'';
                     }
@@ -71,6 +77,12 @@ $(function() {
                 },
                 {
                     mData:"createtime",
+                    mRender:function(data, display, record) {
+                        return data?formatDatetime(data):'';
+                    }
+                },
+                {
+                    mData:"activetime",
                     mRender:function(data, display, record) {
                         return data?formatDatetime(data):'';
                     }
@@ -108,18 +120,18 @@ $(function() {
     });
     // 新增箱子组数据
     $('.add-btn').click(function() {
-        openWindow($ctx+'/postbox/boxgroup/toEdit',750,350);
+        openWindow($ctx+'/postbox/boxgroup/toEdit',750,420);
     });
     // 编辑
     $('tbody').on("click", '.toEdit', function() {
         var id=$(this).attr("fid");
-        openWindow($ctx+'/postbox/boxgroup/toEdit?id='+id,750,350);
+        openWindow($ctx+'/postbox/boxgroup/toEdit?id='+id,750,420);
     });
     // 激活
     $('tbody').on("click", '.toActive',function() {
         var id=$(this).attr("fid");
         showTipsDialog("提示信息","确定执行激活操作吗？",function() {
-            statusChange(id,'');
+            statusChange(id,'NORMAL');
         },true);
     });
     // 注销
@@ -147,7 +159,7 @@ $(function() {
     function statusChange(id, toStatus) {
         $sessionAjax({
             url:$ctx+'/postbox/boxgroup/updateStatus',
-            data:{'repairerInfoid':id,'status':toStatus},
+            data:{'boxGroupId':id,'status':toStatus},
             success:function(rsp){
                 if(rsp.code=='1000'){
                     search();
@@ -184,6 +196,30 @@ $(function() {
             }
         });
     });
+
+    var ajaxRepairer=new $.jme.autoComplete({
+        id:'ajaxRepairer',
+        url:$ctx+'/postbox/repairer/ajaxFind',
+        data:{
+            province:$(':input[name="province"]').val(),
+            city:$(':input[name="city"]').val()
+        },
+        reader:'input[name="repairerName"]',
+        writer:'input[name="repairerInfoId"]',
+        keyProps:{
+            key:'repairerInfoid',
+            title:'realname',
+            serverKey:'searchKey',
+            data:'body'
+        },
+        properties:{
+            width:142,
+            top:26,
+            left:0,
+            fontSize:12
+        }
+    });
+    ajaxRepairer.init();
 });
 function search() {
     datatable.fnClearTable(0);

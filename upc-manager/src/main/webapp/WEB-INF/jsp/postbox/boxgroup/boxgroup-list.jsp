@@ -22,12 +22,12 @@
               <form class="form-inline legend">
                 <div class="form-group">
                   <label class="sr-only" for="groupName">箱子组名称</label>
-                    <input type="text" class="form-control" id="groupName" placeholder="箱子组名称"/>
+                  <input type="text" class="form-control" id="groupName" placeholder="箱子组名称"/>
                 </div>
                 <div class="form-group">
-                  <label class="sr-only" for="province">省份</label>
+                  <label class="sr-only" for="province">省份/直辖市</label>
                   <select id="province" name="province" class="form-control">
-                    <option value=""> --- 选择省份 --- </option>
+                    <option value=""> --- 选择省份/直辖市 --- </option>
                     <c:forEach items="${provinceList}" var="province">
                       <option value="${province.name}" area-node="${province.node}">${province.name}</option>
                     </c:forEach>
@@ -36,14 +36,13 @@
                 <div class="form-group">
                   <label class="sr-only" for="city">城市</label>
                   <select id="city" name="city" class="form-control">
-                    <option value=""> --- 选择城市 --- </option>
+                    <option value=""> --- 选择城市/地区 --- </option>
                   </select>
                 </div>
                 <div class="form-group">
-                  <label class="sr-only" for="repairerInfoId">维修员</label>
-                  <select id="repairerInfoId" name="city" class="form-control">
-                    <option value=""> --- 选择维修员 --- </option>
-                  </select>
+                  <label class="sr-only" for="repairerName">维修员</label>
+                  <input id="repairerName" name="repairerName" class="form-control" type="text" placeholder="维修员">
+                  <input id="repairerInfoId" name="repairerInfoId" type="hidden"/>
                 </div>
                 <div class="form-group">
                   <label class="sr-only" for="status">状态</label>
@@ -65,13 +64,15 @@
               <table id="dataList" class="table table-bordered table-hover">
                 <thead>
                   <tr>
-                    <th style="width:12%">箱子组名称</th>
-                    <th style="width:12%">联系方式</th>
-                    <th style="width:12%">省份</th>
-                    <th style="width:12%">城市</th>
-                    <th style="width:12%">状态</th>
-                    <th style="width:20%">创建时间</th>
-                    <th style="width:20%">操作</th>
+                    <th style="width:10%">箱子组编码</th>
+                    <th style="width:10%">箱子组名称</th>
+                    <th style="width:10%">省份/直辖市</th>
+                    <th style="width:10%">城市/地区</th>
+                    <th style="width:10%">维修员</th>
+                    <th style="width:10%">状态</th>
+                    <th style="width:12%">创建时间</th>
+                    <th style="width:12%">激活时间</th>
+                    <th style="width:15%">操作</th>
                   </tr>
                 </thead>
                 <tbody></tbody>
@@ -83,6 +84,7 @@
     </section><!-- /.content -->
 </div>
     <jsp:include page="/WEB-INF/jsp/commons/metafooter.jsp" />
+    <script src="${ctx}/js/jquery.myautocomplete.js<c:if test='${not empty crm}'>?${crm}</c:if>" type="text/javascript"></script>
     <script type="text/javascript" src="${ctx}/js/postbox/boxgroup/boxgroup-list.js<c:if test='${not empty crm}'>?${crm}</c:if>"></script>
   </body>
 </html>

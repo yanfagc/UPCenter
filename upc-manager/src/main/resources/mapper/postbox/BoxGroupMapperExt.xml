@@ -13,20 +13,23 @@ SELECT COUNT(1) FROM t_box_group t LEFT JOIN t_repairer_info r ON t.REPAIRER_INF
 SELECT
 	t.BOX_GROUP_ID AS boxGroupId,
 	t.COMPANY_INFO_ID AS companyInfoId,
+	t.GROUP_CODE AS groupCode,
 	t.GROUP_NAME AS groupName,
 	t.COUNTRY AS country,
 	t.PROVINCE AS province,
 	t.CITY AS city,
 	t.ADDRESS AS address,
-	t.COORDINATE AS coordinate,
+	t.LONGITUDE AS longitude,
+	t.LATITUDE AS latitude,
 	t.REPAIRER_INFO_ID AS repairerInfoId,
-	t. STATUS AS status,
+	t.STATUS AS status,
 	t.CREATETIME AS createtime,
+	t.ACTIVETIME AS activetime,
+	t.FROZENTIME AS frozentime,
+	t.DEMISETIME AS demisetime,
 	r.REALNAME AS repairerName,
-	r. STATUS AS repairerStatus
-FROM
-	t_box_group t
-LEFT JOIN t_repairer_info r ON t.REPAIRER_INFO_ID = r.REPAIRER_INFO_ID
+	r.STATUS AS repairerStatus
+FROM t_box_group t LEFT JOIN t_repairer_info r ON t.REPAIRER_INFO_ID = r.REPAIRER_INFO_ID
 		<include refid="sql_selectAsList" />
 		<include refid="Pageable_Suffix" />
 	</select>
@@ -56,4 +59,28 @@ LEFT JOIN t_repairer_info r ON t.REPAIRER_INFO_ID = r.REPAIRER_INFO_ID
 			</if>
 		</where>
     </sql>
+
+	<select id="selectByGroupId" parameterType="java.lang.Long" resultType="com.postbox.vo.BoxGroupVo">
+SELECT
+	t.BOX_GROUP_ID AS boxGroupId,
+	t.COMPANY_INFO_ID AS companyInfoId,
+	t.GROUP_CODE AS groupCode,
+	t.GROUP_NAME AS groupName,
+	t.COUNTRY AS country,
+	t.PROVINCE AS province,
+	t.CITY AS city,
+	t.ADDRESS AS address,
+	t.LONGITUDE AS longitude,
+	t.LATITUDE AS latitude,
+	t.REPAIRER_INFO_ID AS repairerInfoId,
+	t.STATUS AS status,
+	t.CREATETIME AS createtime,
+	t.ACTIVETIME AS activetime,
+	t.FROZENTIME AS frozentime,
+	t.DEMISETIME AS demisetime,
+	r.REALNAME AS repairerName,
+	r.STATUS AS repairerStatus
+FROM t_box_group t LEFT JOIN t_repairer_info r ON t.REPAIRER_INFO_ID = r.REPAIRER_INFO_ID
+WHERE t.BOX_GROUP_ID=#{boxGroupId}
+	</select>
 </mapper>

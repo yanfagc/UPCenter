@@ -74,6 +74,9 @@
             <columnOverride column="REPAIRER_INFO_ID" property="repairerInfoId" javaType="java.lang.Long" jdbcType="NUMERIC"/>
             <columnOverride column="STATUS" property="status" javaType="com.postbox.enums.BoxGroupStatus" jdbcType="VARCHAR"/>
             <columnOverride column="CREATETIME" property="createtime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <columnOverride column="ACTIVETIME" property="activetime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <columnOverride column="FROZENTIME" property="frozentime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <columnOverride column="DEMISETIME" property="demisetime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
         </table>
 
     </context>  

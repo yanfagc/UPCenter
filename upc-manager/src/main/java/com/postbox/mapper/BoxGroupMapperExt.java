@@ -19,4 +19,11 @@ public interface BoxGroupMapperExt extends BoxGroupMapper {
      * @return
      */
     List<BoxGroupVo> selectAsList(Map<String, Object> params);
+    
+    /**
+     * 根据boxGroupId查找箱子组信息
+     * @param boxGroupId
+     * @return
+     */
+    BoxGroupVo selectByGroupId(Long boxGroupId);
 }

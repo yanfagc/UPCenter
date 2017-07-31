@@ -251,6 +251,15 @@ $.extend($.fn, {
         	var reg=/^[a-zA-Z][0-9]+$/;
         	return reg.test(value);
         },
+        // 匹配英文数字或下划线
+        numOrLetterOrLine:function(item,name,param){
+            var value = item.val();
+            if(param != true || $.trim(value).length === 0){
+                return true;
+            }
+            var reg = /^[A-Za-z0-9_]+$/;
+            return reg.test(value);
+        },
         // 仅限中文
         cn_code:function(item,name,param) {
             var value=item.val();

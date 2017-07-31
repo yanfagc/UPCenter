@@ -1,3 +1,42 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.postbox.mapper.RepairerInfoMapperExt" />
+<mapper namespace="com.postbox.mapper.RepairerInfoMapperExt">
+    <!-- 根据条件，查询维修员信息，用于ajax查找 -->
+    <select id="selectForAjaxSearch" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+SELECT
+    t.REPAIRER_INFO_ID as repairerInfoid,
+    t.REPAIRER_NO as repairerNo,
+    t.REALNAME as realname,
+    t.MOBILE_PHONE as mobilePhone,
+    t.REPAIRER_IMG_PATH as repairerImgPath,
+    t.COUNTRY as country,
+    t.PROVINCE as province,
+    t.CITY as city,
+    t.STATUS as status,
+    t.CREATETIME as createtime
+FROM t_repairer_info t
+        <where>
+            <if test="status != null">
+                AND t.STATUS=#{status}
+            </if>
+            <if test="statusList!=null">
+                AND t.STATUS IN
+                <foreach collection="statusList" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                </foreach>
+            </if>
+            <if test="province!=null and province!=''">
+                AND t.PROVINCE=#{province}
+            </if>
+            <if test="city!=null and city!=''">
+                AND t.CITY=#{city}
+            </if>
+            <if test="searchKey!=null and searchKey!=''">
+                AND (t.REPAIRER_NO LIKE #{searchKey} OR t.REALNAME LIKE #{searchKey} OR t.MOBILE_PHONE LIKE #{searchKey})
+            </if>
+        </where>
+        <if test="limitSize">
+            LIMIT ${limitSize}
+        </if>
+    </select>
+</mapper>

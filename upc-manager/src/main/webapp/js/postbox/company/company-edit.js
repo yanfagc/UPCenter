@@ -5,15 +5,25 @@ $(function() {
         ignore:'',
         showText:true,
         rules:{
+            companyCode:{
+                required:true,
+                maxlength:32,
+                numOrLetterOrLine:true
+            },
             companyName:{
                 required:true,
-                maxlength:25
+                maxlength:100
             }
         },
         messages:{
+            companyCode:{
+                required:'企业编码不允许为空！',
+                maxlength:'最大长度不允许超过32位！',
+                numOrLetterOrLine:'仅允许输入数字英文或下划线！'
+            },
             companyName:{
                 required:"企业名称不允许为空！",
-                maxlength:"最大长度不能长于25位！"
+                maxlength:"最大长度不能超过25位！"
             }
         }
     });

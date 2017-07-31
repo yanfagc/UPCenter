@@ -7,6 +7,8 @@ import org.hanzhdy.web.bean.DatatableParams;
  * Created by H.CAAHN on 2017/7/20.
  */
 public class CompanyInfoParams extends DatatableParams {
+    private String companyCode;
+    
     private String companyName;
     
     private String legalPersonName;
@@ -16,6 +18,14 @@ public class CompanyInfoParams extends DatatableParams {
     private String contactPhone;
     
     private DataStatus status;
+    
+    public String getCompanyCode() {
+        return companyCode;
+    }
+    
+    public void setCompanyCode(String companyCode) {
+        this.companyCode = companyCode;
+    }
     
     public String getCompanyName() {
         return companyName;

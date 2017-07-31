@@ -4,7 +4,11 @@ import com.alibaba.fastjson.JSON;
 import com.postbox.controller.params.BoxGroupParams;
 import com.postbox.enums.BoxGroupStatus;
 import com.postbox.model.BoxGroup;
+import com.postbox.model.CompanyInfo;
 import com.postbox.service.BoxGroupService;
+import com.postbox.service.CompanyInfoService;
+import org.hanzhdy.manager.settings.model.Area;
+import org.hanzhdy.manager.settings.service.AreaService;
 import org.hanzhdy.manager.support.constants.resp.RespResult;
 import org.hanzhdy.manager.support.controller.ApplicationController;
 import org.hanzhdy.web.bean.DatatableResult;
@@ -19,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * 箱子组管理
@@ -28,7 +33,13 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/postbox/boxgroup")
 public class BoxGroupController extends ApplicationController {
     @Resource
-    private BoxGroupService boxGroupService;
+    private BoxGroupService     boxGroupService;
+    
+    @Resource
+    private CompanyInfoService  companyInfoService;
+    
+    @Resource
+    private AreaService         areaService;
     
     /** 日志对象 */
     private static final Logger logger = LoggerFactory.getLogger(BoxGroupController.class);
@@ -41,6 +52,8 @@ public class BoxGroupController extends ApplicationController {
      */
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public String toList(Model model, HttpServletRequest request) {
+        List<Area> provinceList = this.areaService.queryByParent(0l);
+        model.addAttribute("provinceList", provinceList);
         model.addAttribute("statusList", BoxGroupStatus.values());
         return "/postbox/boxgroup/boxgroup-list";
     }
@@ -76,11 +89,18 @@ public class BoxGroupController extends ApplicationController {
      */
     @RequestMapping(value = "toEdit", method = RequestMethod.GET)
     public String toEdit(Long id, Model model, HttpServletRequest request) {
+        List<Area> provinceList = this.areaService.queryByParent(0l);
+        List<CompanyInfo> companyInfoList = this.companyInfoService.queryAsList();
+        model.addAttribute("companyList", companyInfoList);
         model.addAttribute("statusList", BoxGroupStatus.values());
-        
+        model.addAttribute("provinceList", provinceList);
         if (id != null) {
             BoxGroup record = this.boxGroupService.queryById(id);
             if (record != null) {
+                if (record.getProvince() != null) {
+                    model.addAttribute("cityList", this.areaService.queryByParentName(record.getProvince()));
+                }
+                
                 model.addAttribute("record", record);
                 return "/postbox/boxgroup/boxgroup-edit";
             }

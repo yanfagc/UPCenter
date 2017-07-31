@@ -14,6 +14,12 @@ public class CompanyInfo implements Serializable {
     private Long companyInfoId;
 
     /**
+     * 企业简码,系统唯一: t_company_info.COMPANY_CODE
+     * @author MyBatis Generator
+     */
+    private String companyCode;
+
+    /**
      * 企业名称: t_company_info.COMPANY_NAME
      * @author MyBatis Generator
      */
@@ -71,6 +77,24 @@ public class CompanyInfo implements Serializable {
      */
     public void setCompanyInfoId(Long companyInfoId) {
         this.companyInfoId = companyInfoId;
+    }
+
+    /**
+     * 获取企业简码,系统唯一: t_company_info.COMPANY_CODE
+     * @return 企业简码,系统唯一: t_company_info.COMPANY_CODE
+     * @author MyBatis Generator
+     */
+    public String getCompanyCode() {
+        return companyCode;
+    }
+
+    /**
+     * 设置企业简码,系统唯一: t_company_info.COMPANY_CODE
+     * @param companyCode 映射数据库字段: t_company_info.COMPANY_CODE
+     * @author MyBatis Generator
+     */
+    public void setCompanyCode(String companyCode) {
+        this.companyCode = companyCode == null ? null : companyCode.trim();
     }
 
     /**
