@@ -14,7 +14,8 @@
 				id:'autoc',
 				url:null,
 				type:'post',
-				data:null,
+				data:null, // 静态数据
+				dynamicData:null, // 需要实时从表单中获取数据的字段
 				beforeSend:null,
 				complete:null,
 				success:null,
@@ -72,6 +73,18 @@
 				if(!ops.data){
 					ops.data={};
 				}
+				if(ops.dynamicData){
+					for(var key in ops.dynamicData){
+						var jQObj;
+						if(ops.dynamicData[key] instanceof jQuery){ // jQuery对象
+                            jQObj=ops.dynamicData[key];
+						}else if(typeof ops.dynamicData[key]=='string'){ // 字符串
+							jQObj=$(':input[name="'+ops.dynamicData[key]+'"]');
+						}
+						ops.data[key]=jQObj.val();
+					}
+				}
+
 				if(ops.data[ops.keyProps.serverKey]==ops.reader.val()){ //数据重复
 					return;
 				}
