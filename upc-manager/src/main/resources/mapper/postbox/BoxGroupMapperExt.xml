@@ -83,4 +83,46 @@ SELECT
 FROM t_box_group t LEFT JOIN t_repairer_info r ON t.REPAIRER_INFO_ID = r.REPAIRER_INFO_ID
 WHERE t.BOX_GROUP_ID=#{boxGroupId}
 	</select>
+
+	<!-- 根据条件，查询箱子组信息，用于ajax查找 -->
+	<select id="selectForAjaxSearch" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+SELECT
+	t.BOX_GROUP_ID AS boxGroupId,
+	t.COMPANY_INFO_ID AS companyInfoId,
+	t.GROUP_CODE AS groupCode,
+	t.GROUP_NAME AS groupName,
+	t.COUNTRY AS country,
+	t.PROVINCE AS province,
+	t.CITY AS city,
+	t.ADDRESS AS address,
+	t.LONGITUDE AS longitude,
+	t.LATITUDE AS latitude,
+	t.REPAIRER_INFO_ID AS repairerInfoId,
+	t.STATUS AS status,
+	t.CREATETIME AS createtime,
+	t.ACTIVETIME AS activetime,
+	t.FROZENTIME AS frozentime,
+	t.DEMISETIME AS demisetime
+FROM t_box_group t
+		<where>
+			<if test="province!=null and province!=''">
+				AND t.PROVINCE=#{province}
+			</if>
+			<if test="city!=null and city!=''">
+				AND t.CITY=#{city}
+			</if>
+			<if test="searchkey!=null and searchkey!=''">
+				AND (t.GROUP_CODE LIKE #{searchkey} OR t.GROUP_NAME LIKE #{searchkey})
+			</if>
+			<if test="status!=null">
+				AND t.STATUS=#{status}
+			</if>
+			<if test="statusList!=null">
+				AND t.STATUS IN
+				<foreach collection="statusList" item="listItem" open="(" close=")" separator="," >
+					#{listItem}
+				</foreach>
+			</if>
+		</where>
+	</select>
 </mapper>

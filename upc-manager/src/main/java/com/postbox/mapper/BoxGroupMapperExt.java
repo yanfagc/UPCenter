@@ -1,5 +1,6 @@
 package com.postbox.mapper;
 
+import com.postbox.model.BoxGroup;
 import com.postbox.vo.BoxGroupVo;
 
 import java.util.List;
@@ -26,4 +27,11 @@ public interface BoxGroupMapperExt extends BoxGroupMapper {
      * @return
      */
     BoxGroupVo selectByGroupId(Long boxGroupId);
+    
+    /**
+     * 根据条件，查询箱子组信息，用于ajax查找
+     * @param params
+     * @return
+     */
+    List<BoxGroup> selectForAjaxSearch(Map<String, Object> params);
 }

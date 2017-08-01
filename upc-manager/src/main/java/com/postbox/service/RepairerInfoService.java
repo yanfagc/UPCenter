@@ -24,6 +24,7 @@ public class RepairerInfoService extends AbstractUpcService {
     
     public DatatableResult queryAsDatatableResult(RepairerInfoParams params) {
         RepairerInfoExample example = new RepairerInfoExample();
+        example.setPage(params.getPage());
         RepairerInfoExample.Criteria criteria = example.createCriteria();
         if (StringUtils.isNotBlank(params.getRepairerNo())) {
             criteria.andRepairerNoLike("%" + params.getRepairerNo() + "%");

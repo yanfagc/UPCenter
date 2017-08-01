@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.postbox.mapper.BoxInfoMapperExt">
+    <!-- 查询符合条件的箱子总数 -->
+    <select id="countAsList" parameterType="java.util.HashMap" resultType="int">
+SELECT COUNT(1) FROM t_box_info b, t_box_group g WHERE b.BOX_GROUP_ID = g.BOX_GROUP_ID
+        <include refid="sql_selectAsList"/>
+    </select>
+
+    <!-- 查询符合条件的箱子信息（支持分页） -->
+    <select id="selectAsList" parameterType="java.util.HashMap" resultType="com.postbox.vo.BoxInfoVo">
+        <include refid="Pageable_Prefix" />
+SELECT
+	b.BOX_INFO_ID as boxInfoId,
+	b.BOX_NAME as boxName,
+	b.BOX_CODE as boxCode,
+	b.BOX_UNIQUE_CODE as boxUniqueCode,
+    b.BOX_GROUP_ID as boxGroupId,
+    b.SEC_KEY as secKey,
+    b.STATUS as status,
+    b.EXPRESS_STATUS as expressStatus,
+    b.MOBILE_PHONE as mobilePhone,
+    b.PROXY_CUSTOMER_INFO_ID as proxyCustomerInfoId,
+    b.LONGITUDE as longitude,
+    b.LATITUDE as latitude,
+    b.OPENTIME as opentime,
+    b.CHECKNUM as checknum,
+    b.CREATETIME as createtime,
+    b.ACTIVETIME as activetime,
+    b.REPAIRTIME as repairtime,
+    b.DEMISETIME as demisetime
+	g.PROVINCE AS province,
+	g.CITY AS city,
+	g.GROUP_CODE AS boxGroupCode,
+	g.GROUP_NAME AS boxGroupName
+FROM
+	t_box_info b,
+	t_box_group g
+WHERE
+	b.BOX_GROUP_ID = g.BOX_GROUP_ID
+	    <include refid="sql_selectAsList"/>
+        <include refid="Pageable_Suffix" />
+    </select>
+    <sql id="sql_selectAsList"></sql>
+
+    <select id="selectMoreById" parameterType="java.lang.Long" resultType="com.postbox.vo.BoxInfoVo">
+SELECT
+	b.BOX_INFO_ID as boxInfoId,
+	b.BOX_NAME as boxName,
+	b.BOX_CODE as boxCode,
+	b.BOX_UNIQUE_CODE as boxUniqueCode,
+    b.BOX_GROUP_ID as boxGroupId,
+    b.SEC_KEY as secKey,
+    b.STATUS as status,
+    b.EXPRESS_STATUS as expressStatus,
+    b.MOBILE_PHONE as mobilePhone,
+    b.PROXY_CUSTOMER_INFO_ID as proxyCustomerInfoId,
+    b.LONGITUDE as longitude,
+    b.LATITUDE as latitude,
+    b.OPENTIME as opentime,
+    b.CHECKNUM as checknum,
+    b.CREATETIME as createtime,
+    b.ACTIVETIME as activetime,
+    b.REPAIRTIME as repairtime,
+    b.DEMISETIME as demisetime
+	g.PROVINCE AS province,
+	g.CITY AS city,
+	g.GROUP_CODE AS boxGroupCode,
+	g.GROUP_NAME AS boxGroupName
+FROM
+	t_box_info b,
+	t_box_group g
+WHERE
+	b.BOX_GROUP_ID = g.BOX_GROUP_ID
+	AND t.BOX_INFO_ID=#{boxInfoId}
+    </select>
+</mapper>

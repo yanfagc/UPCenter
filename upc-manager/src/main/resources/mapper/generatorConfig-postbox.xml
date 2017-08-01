@@ -79,5 +79,19 @@
             <columnOverride column="DEMISETIME" property="demisetime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
         </table>
 
+        <table schema="" tableName="T_BOX_Info"          domainObjectName="BoxInfo">
+            <generatedKey column="BOX_INFO_ID" sqlStatement="JDBC" identity="false"/>
+            <columnOverride column="BOX_INFO_ID" property="boxInfoId" javaType="java.lang.Long" jdbcType="NUMERIC"/>
+            <columnOverride column="BOX_GROUP_ID" property="boxGroupId" javaType="java.lang.Long" jdbcType="NUMERIC"/>
+            <columnOverride column="STATUS" property="status" javaType="com.postbox.enums.BoxInfoStatus" jdbcType="VARCHAR"/>
+            <columnOverride column="EXPRESS_STATUS" property="expressStatus" javaType="com.postbox.enums.BoxExpressStatus" jdbcType="VARCHAR"/>
+            <columnOverride column="CHECKNUM" property="checknum" javaType="java.lang.Integer" jdbcType="NUMERIC"/>
+            <columnOverride column="OPENTIME" property="opentime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <columnOverride column="CREATETIME" property="createtime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <columnOverride column="ACTIVETIME" property="activetime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <columnOverride column="REPAIRTIME" property="repairtime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <columnOverride column="DEMISETIME" property="demisetime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+        </table>
+
     </context>  
 </generatorConfiguration>

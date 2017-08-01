@@ -1,12 +1,11 @@
 package com.postbox.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.postbox.controller.params.BoxGroupParams;
+import com.postbox.controller.params.BoxInfoParams;
 import com.postbox.enums.BoxGroupStatus;
-import com.postbox.model.BoxGroup;
-import com.postbox.model.CompanyInfo;
-import com.postbox.service.BoxGroupService;
-import com.postbox.service.CompanyInfoService;
+import com.postbox.model.BoxInfo;
+import com.postbox.service.BoxInfoService;
+import com.postbox.vo.BoxInfoVo;
 import org.hanzhdy.manager.settings.model.Area;
 import org.hanzhdy.manager.settings.service.AreaService;
 import org.hanzhdy.manager.support.constants.resp.RespResult;
@@ -23,27 +22,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
- * 箱子组管理
- * Created by H.CAAHN on 2017/7/28.
+ * Created by H.CAAHN on 2017/8/1.
  */
 @Controller
-@RequestMapping("/postbox/boxgroup")
-public class BoxGroupController extends ApplicationController {
+@RequestMapping("/postbox/boxinfo")
+public class BoxInfoController extends ApplicationController {
     @Resource
-    private BoxGroupService     boxGroupService;
+    private BoxInfoService       boxInfoService;
     
     @Resource
-    private CompanyInfoService  companyInfoService;
-    
-    @Resource
-    private AreaService         areaService;
+    private AreaService          areaService;
     
     /** 日志对象 */
-    private static final Logger logger = LoggerFactory.getLogger(BoxGroupController.class);
+    private static final Logger logger = LoggerFactory.getLogger(BoxInfoController.class);
     
     /**
      * 打开箱子组管理列表页面
@@ -56,27 +50,27 @@ public class BoxGroupController extends ApplicationController {
         List<Area> provinceList = this.areaService.queryByParent(0l);
         model.addAttribute("provinceList", provinceList);
         model.addAttribute("statusList", BoxGroupStatus.values());
-        return "/postbox/boxgroup/boxgroup-list";
+        return "/postbox/boxinfo/boxinfo-list";
     }
     
     /**
-     * 请求获取箱子组列表数据
+     * 请求获取箱子列表数据
      * @param params
      * @param request
      * @return
      */
     @RequestMapping(value = "dataList", method = RequestMethod.POST)
     @ResponseBody
-    public Object dataList(BoxGroupParams params, HttpServletRequest request) {
+    public Object dataList(BoxInfoParams params, HttpServletRequest request) {
         try {
-            DatatableResult dataResult = this.boxGroupService.queryAsDatatableResult(params);
+            DatatableResult dataResult = this.boxInfoService.queryAsDatatableResult(params);
             return JSON.toJSONString(dataResult);
         }
         catch (BizException ex) {
-            logger.error("查询箱子组列表数据失败，查询参数：{}, 错误信息：[{}, {}]", JSON.toJSONString(params), ex.getCode(), ex.getMsg());
+            logger.error("查询箱子列表数据失败，查询参数：{}, 错误信息：[{}, {}]", JSON.toJSONString(params), ex.getCode(), ex.getMsg());
         }
         catch (Exception ex) {
-            logger.error("查询箱子组列表数据失败，查询参数：" + JSON.toJSONString(params), ex);
+            logger.error("查询箱子列表数据失败，查询参数：" + JSON.toJSONString(params), ex);
         }
         return null;
     }
@@ -91,98 +85,76 @@ public class BoxGroupController extends ApplicationController {
     @RequestMapping(value = "toEdit", method = RequestMethod.GET)
     public String toEdit(Long id, Model model, HttpServletRequest request) {
         List<Area> provinceList = this.areaService.queryByParent(0l);
-        List<CompanyInfo> companyInfoList = this.companyInfoService.queryAsList();
-        model.addAttribute("companyList", companyInfoList);
         model.addAttribute("statusList", BoxGroupStatus.values());
         model.addAttribute("provinceList", provinceList);
         if (id != null) {
-            BoxGroup record = this.boxGroupService.queryById(id);
+            BoxInfoVo record = this.boxInfoService.queryById(id);
             if (record != null) {
                 if (record.getProvince() != null) {
                     model.addAttribute("cityList", this.areaService.queryByParentName(record.getProvince()));
                 }
                 
                 model.addAttribute("record", record);
-                return "/postbox/boxgroup/boxgroup-edit";
+                return "/postbox/boxinfo/boxinfo-edit";
             }
             return redirect(REDIRECT_404);
         }
         else {
-            return "/postbox/boxgroup/boxgroup-edit";
+            return "/postbox/boxinfo/boxinfo-edit";
         }
     }
     
     /**
-     * 查找箱子组信息（一般用于ajax查找，最多返回20条）
-     * @param params
-     * @param response
-     * @return
-     */
-    @RequestMapping(value = "ajaxFind", method = RequestMethod.POST)
-    @ResponseBody
-    public Object ajaxFind(BoxGroupParams params, HttpServletResponse response) {
-        try {
-            List<BoxGroup> dataList = this.boxGroupService.queryForAjax(params, BoxGroupStatus.NORMAL, BoxGroupStatus.NOACTIVE);
-            // 处理返回结果
-            return RespResult.create(respCode.SUCCESS, dataList);
-        }
-        catch (Exception ex) {
-            logger.error("根据区域查询箱子组人员失败，查询参数：" + JSON.toJSONString(params), ex);
-            return RespResult.create(respCode.ERROR_EXCEPTION);
-        }
-    }
-    
-    /**
-     * 保存箱子组数据
+     * 保存箱子数据
      * @param record
      * @param request
      * @return
      */
     @RequestMapping(value = "save", method = RequestMethod.POST)
     @ResponseBody
-    public Object saveBoxGroup(BoxGroup record, HttpServletRequest request) {
+    public Object saveBoxGroup(BoxInfo record, HttpServletRequest request) {
         try {
             // 执行新增或更新操作
             boolean result = false;
-            if (record.getBoxGroupId() == null) {
-                result = this.boxGroupService.insert(record);
+            if (record.getBoxInfoId() == null) {
+                result = this.boxInfoService.insert(record);
             }
             else {
-                result = this.boxGroupService.update(record);
+                result = this.boxInfoService.update(record);
             }
             
             // 处理返回结果
             return RespResult.create(result ? respCode.SUCCESS : respCode.SAVE_NORECORD);
         }
         catch (BizException ex) {
-            logger.error("保存箱子组信息失败，数据参数：{}, 错误信息：[{}, {}]", JSON.toJSONString(record), ex.getCode(), ex.getMsg());
+            logger.error("保存箱子信息失败，数据参数：{}, 错误信息：[{}, {}]", JSON.toJSONString(record), ex.getCode(), ex.getMsg());
             return RespResult.create(ex.getCode(), ex.getMsg());
         }
         catch (Exception ex) {
-            logger.error("保存箱子组信息失败，数据参数：" + JSON.toJSONString(record), ex);
+            logger.error("保存箱子信息失败，数据参数：" + JSON.toJSONString(record), ex);
             return RespResult.create(respCode.ERROR_EXCEPTION);
         }
     }
     
     /**
-     * 处理更新箱子组信息状态请求
+     * 处理更新箱子信息状态请求
      * @param record
      * @param request
      * @return
      */
     @RequestMapping(value = "updateStatus", method = RequestMethod.POST)
     @ResponseBody
-    public Object updateStatus(BoxGroup record, HttpServletRequest request) {
+    public Object updateStatus(BoxInfo record, HttpServletRequest request) {
         try {
-            this.boxGroupService.updateStatus(record);
+            this.boxInfoService.updateStatus(record);
             return RespResult.create(respCode.SUCCESS);
         }
         catch (BizException ex) {
-            logger.error("更新箱子组信息状态失败，数据参数：{}, 错误信息：[{}, {}]", JSON.toJSONString(record), ex.getCode(), ex.getMsg());
+            logger.error("更新箱子信息状态失败，数据参数：{}, 错误信息：[{}, {}]", JSON.toJSONString(record), ex.getCode(), ex.getMsg());
             return RespResult.create(ex.getCode(), ex.getMsg());
         }
         catch (Exception ex) {
-            logger.error("更新箱子组信息状态失败，数据参数：" + JSON.toJSONString(record), ex);
+            logger.error("更新箱子信息状态失败，数据参数：" + JSON.toJSONString(record), ex);
             return RespResult.create(respCode.ERROR_EXCEPTION);
         }
     }
