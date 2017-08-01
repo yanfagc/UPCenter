@@ -32,10 +32,9 @@
             <td style="text-align:right;">状态：</td>
             <td style="padding:4px;">
               <select name="status" class="form-control input-sm myspan6">
-                <option value="N" ${record.status eq 'N'?'selected="selected"':''}>正常</option>
-                <option value="F" ${record.status eq 'F'?'selected="selected"':''}>冻结</option>
-                <option value="L" ${record.status eq 'L'?'selected="selected"':''}>锁定</option>
-                <option value="D" ${record.status eq 'D'?'selected="selected"':''}>注销</option>
+                <c:forEach items="${statusList}" var="status">
+                  <option value="${status}" ${record.status eq status?'selected="selected"':''}>${status.remark}</option>
+                </c:forEach>
               </select>
             </td>
             <td style="width:16%;text-align:right;">访问地址：</td>

@@ -22,16 +22,16 @@
               <form class="form-inline legend">
                 <div class="form-group">
                   <label class="sr-only" for="searchkey">关键字</label>
-                    <input type="text" class="form-control" id="searchkey" placeholder="关键字"/>
+                  <input type="text" class="form-control" id="searchkey" placeholder="关键字"/>
                 </div>
                 
                 <div class="form-group">
                   <label class="sr-only" for="status">数据状态</label>
                     <select id="status" class="form-control">
-                    	<option value=""> --- 选择数据状态 --- </option>
-                    	<option value="N">正常</option>
-                    	<option value="F">冻结</option>
-                    	<option value="D">注销</option>
+                      <option value=""> --- 选择数据状态 --- </option>
+                      <c:forEach items="${statusList}" var="status">
+                        <option value="${status}">${status.remark}</option>
+                      </c:forEach>
                     </select>
                 </div>
                 <button type="button" class="btn btn-primary search">&nbsp;&nbsp;搜索&nbsp;&nbsp;</button>

@@ -1,10 +1,10 @@
 package org.hanzhdy.manager.upc.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
+import com.alibaba.fastjson.JSON;
 import org.hanzhdy.manager.support.bean.SessionUser;
 import org.hanzhdy.manager.support.constants.resp.RespResult;
 import org.hanzhdy.manager.support.controller.ApplicationController;
+import org.hanzhdy.manager.support.enums.CommonStatus;
 import org.hanzhdy.manager.upc.controller.params.AccessSystemParams;
 import org.hanzhdy.manager.upc.model.AccessSystem;
 import org.hanzhdy.manager.upc.service.AccessSystemService;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSON;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @description 接入系统管理Controller
@@ -40,7 +40,8 @@ public class AccessSystemController extends ApplicationController {
      * @return
      */
     @RequestMapping(value = "list", method = RequestMethod.GET)
-    public String toList() {
+    public String toList(Model model) {
+        model.addAttribute("statusList", CommonStatus.values());
         return "/basic/accsys/accesssystem-list";
     }
     
@@ -75,6 +76,8 @@ public class AccessSystemController extends ApplicationController {
      */
     @RequestMapping(value = "toEdit", method = RequestMethod.GET)
     public String toEdit(Long id, Model model, HttpServletRequest request) {
+        model.addAttribute("statusList", CommonStatus.values());
+        
         // 查询接入系统信息
         if (id != null && id > 0) {
             AccessSystem record = accessSystemService.queryById(id);
