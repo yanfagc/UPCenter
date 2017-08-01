@@ -2,7 +2,8 @@ package com.postbox.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.postbox.controller.params.BoxInfoParams;
-import com.postbox.enums.BoxGroupStatus;
+import com.postbox.enums.BoxExpressStatus;
+import com.postbox.enums.BoxInfoStatus;
 import com.postbox.model.BoxInfo;
 import com.postbox.service.BoxInfoService;
 import com.postbox.vo.BoxInfoVo;
@@ -49,7 +50,7 @@ public class BoxInfoController extends ApplicationController {
     public String toList(Model model, HttpServletRequest request) {
         List<Area> provinceList = this.areaService.queryByParent(0l);
         model.addAttribute("provinceList", provinceList);
-        model.addAttribute("statusList", BoxGroupStatus.values());
+        model.addAttribute("statusList", BoxInfoStatus.values());
         return "/postbox/boxinfo/boxinfo-list";
     }
     
@@ -85,7 +86,8 @@ public class BoxInfoController extends ApplicationController {
     @RequestMapping(value = "toEdit", method = RequestMethod.GET)
     public String toEdit(Long id, Model model, HttpServletRequest request) {
         List<Area> provinceList = this.areaService.queryByParent(0l);
-        model.addAttribute("statusList", BoxGroupStatus.values());
+        model.addAttribute("statusList", BoxInfoStatus.values());
+        model.addAttribute("expStatusList", BoxExpressStatus.values());
         model.addAttribute("provinceList", provinceList);
         if (id != null) {
             BoxInfoVo record = this.boxInfoService.queryById(id);

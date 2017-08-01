@@ -124,5 +124,6 @@ FROM t_box_group t
 				</foreach>
 			</if>
 		</where>
+LIMIT #{limitSize}
 	</select>
 </mapper>

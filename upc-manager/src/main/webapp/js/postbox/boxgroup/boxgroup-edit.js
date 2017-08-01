@@ -102,9 +102,9 @@ $(function() {
     var ajaxRepairer=new $.jme.autoComplete({
         id:'ajaxRepairer',
         url:$ctx+'/postbox/repairer/ajaxFind',
-        data:{
-            province:$(':input[name="province"]').val(),
-            city:$(':input[name="city"]').val()
+        dynamicData:{
+            province:$(':input[name="province"]'),
+            city:$(':input[name="city"]')
         },
         reader:'input[name="repairerName"]',
         writer:'input[name="repairerInfoId"]',
@@ -115,7 +115,7 @@ $(function() {
             data:'body'
         },
         properties:{
-            width:137,
+            width:140,
             top:26,
             left:0,
             fontSize:12

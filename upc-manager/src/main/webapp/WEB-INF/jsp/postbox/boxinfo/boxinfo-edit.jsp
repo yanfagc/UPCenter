@@ -19,13 +19,13 @@
         <input type="hidden" name="boxGroupId" value="${record.boxGroupId}"/>
         <table class="table table-bordered table-hover">
           <tr>
-            <td style="width:16%;text-align:right;">内部编码（唯一）：</td>
+            <td style="width:16%;text-align:right;">内部编码：</td>
             <td style="width:32%;padding:4px;">
-              <input name="groupCode" class="form-control input-sm myspan6" type="text" placeholder="箱子组编码" value="${record.groupCode}">
+              <input name="boxUniqueCode" class="form-control input-sm myspan6" type="text" placeholder="内部编码" value="${record.boxUniqueCode}">
             </td>
             <td style="width:16%;text-align:right;">箱子编码：</td>
             <td style="width:32%;padding:4px;">
-              <input name="groupName" class="form-control input-sm myspan6" type="text" placeholder="箱子组名称" value="${record.groupName}">
+              <input name="boxCode" class="form-control input-sm myspan6" type="text" placeholder="箱子编码" value="${record.boxCode}">
             </td>
           </tr>
           <tr>
@@ -70,8 +70,7 @@
             </td>
             <td style="text-align:right;">加密密钥：</td>
             <td style="width:32%;padding:4px;">
-              <input name="groupName" class="form-control input-sm myspan6" type="text" placeholder="所属箱子组" value="${record.groupName}">
-              <input name="boxGroupId" type="hidden" value="${record.boxGroupId}"/>
+              <input name="secKey" class="form-control input-sm myspan6" type="text" placeholder="加密密钥" value="${record.secKey}">
             </td>
           </tr>
           <tr>
@@ -86,8 +85,8 @@
             <td style="text-align:right;">快件状态：</td>
             <td style="padding:4px;">
               <select name="status" class="form-control input-sm myspan6">
-                <c:forEach items="${statusList}" var="s">
-                  <option value="${s}"${record.status eq s?' selected="selected"':''}>${s.remark}</option>
+                <c:forEach items="${expStatusList}" var="s">
+                  <option value="${s}"${record.expressStatus eq s?' selected="selected"':''}>${s.remark}</option>
                 </c:forEach>
               </select>
             </td>
@@ -112,5 +111,5 @@
   </body>
   <jsp:include page="/WEB-INF/jsp/commons/editfooter.jsp" />
   <script src="${ctx}/js/jquery.myautocomplete.js<c:if test='${not empty crm}'>?${crm}</c:if>" type="text/javascript"></script>
-  <script src="${ctx}/js/postbox/boxgroup/boxgroup-edit.js<c:if test='${not empty crm}'>?${crm}</c:if>" type="text/javascript"></script>
+  <script src="${ctx}/js/postbox/boxinfo/boxinfo-edit.js<c:if test='${not empty crm}'>?${crm}</c:if>" type="text/javascript"></script>
 </html>

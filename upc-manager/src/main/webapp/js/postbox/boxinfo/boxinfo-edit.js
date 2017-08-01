@@ -5,37 +5,63 @@ $(function() {
         ignore:'',
         showText:true,
         rules:{
-            groupCode:{
+            boxUniqueCode:{
+                required:true,
+                maxlength:32,
+                numOrLetterOrLine:true
+            },
+            boxCode:{
                 required:true,
                 maxlength:32,
                 numOrLetterOrLine:true
             },
             groupName:{
+                required:true
+            },
+            boxGroupId:{
+                required:true
+            },
+            secKey:{
                 required:true,
-                maxlength:100
+                maxlength:64,
+                numOrLetterOrLine:true
             },
-            companyInfoId:{
-                required:true
+            mobilePhone:{
+                mobile:true
             },
-            repairerInfoId:{
-                required:true
+            checknum:{
+                integer:true,
+                maxlength:10
             }
         },
         messages:{
-            groupCode:{
-                required:'箱子组编码不允许为空！',
+            boxUniqueCode:{
+                required:'内部编码不允许为空！',
+                maxlength:'最大长度不允许超过32位！',
+                numOrLetterOrLine:'仅允许输入数字英文或下划线！'
+            },
+            boxCode:{
+                required:'箱子编码不允许为空！',
                 maxlength:'最大长度不允许超过32位！',
                 numOrLetterOrLine:'仅允许输入数字英文或下划线！'
             },
             groupName:{
-                required:'箱子组名称不允许为空！',
-                maxlength:'最大长度不能长于100位！'
+                required:'所属箱子组不允许为空！'
             },
-            companyInfoId:{
-                required:'所属企业不允许为空！'
+            boxGroupId:{
+                required:'请选择正确的箱子组！'
             },
-            repairerInfoId:{
-                required:'维修员不允许为空！'
+            secKey:{
+                required:'加密密钥不允许为空',
+                maxlength:'最大长度不允许超过64位',
+                numOrLetterOrLine:'仅允许输入数字英文或下划线！'
+            },
+            mobilePhone:{
+                mobile:'请输入正确的手机号码！'
+            },
+            checknum:{
+                integer:'请输入正确的整型数值！',
+                maxlength:'最大长度不允许超过10位'
             }
         }
     });
@@ -101,21 +127,21 @@ $(function() {
 
     var ajaxRepairer=new $.jme.autoComplete({
         id:'ajaxRepairer',
-        url:$ctx+'/postbox/repairer/ajaxFind',
-        data:{
-            province:$(':input[name="province"]').val(),
-            city:$(':input[name="city"]').val()
+        url:$ctx+'/postbox/boxgroup/ajaxFind',
+        dynamicData:{
+            province:$(':input[name="province"]'),
+            city:$(':input[name="city"]')
         },
-        reader:'input[name="repairerName"]',
-        writer:'input[name="repairerInfoId"]',
+        reader:'input[name="groupName"]',
+        writer:'input[name="boxGroupId"]',
         keyProps:{
-            key:'repairerInfoid',
-            title:'realname',
+            key:'boxGroupId',
+            title:'groupName',
             serverKey:'searchKey',
             data:'body'
         },
         properties:{
-            width:137,
+            width:139,
             top:26,
             left:0,
             fontSize:12

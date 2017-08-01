@@ -28,7 +28,7 @@ SELECT
     b.CREATETIME as createtime,
     b.ACTIVETIME as activetime,
     b.REPAIRTIME as repairtime,
-    b.DEMISETIME as demisetime
+    b.DEMISETIME as demisetime,
 	g.PROVINCE AS province,
 	g.CITY AS city,
 	g.GROUP_CODE AS boxGroupCode,
@@ -62,7 +62,7 @@ SELECT
     b.CREATETIME as createtime,
     b.ACTIVETIME as activetime,
     b.REPAIRTIME as repairtime,
-    b.DEMISETIME as demisetime
+    b.DEMISETIME as demisetime,
 	g.PROVINCE AS province,
 	g.CITY AS city,
 	g.GROUP_CODE AS boxGroupCode,

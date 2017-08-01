@@ -195,9 +195,9 @@ $(function() {
     var ajaxBoxGroup=new $.jme.autoComplete({
         id:'ajaxBoxGroup',
         url:$ctx+'/postbox/boxgroup/ajaxFind',
-        data:{
-            province:$(':input[name="province"]').val(),
-            city:$(':input[name="city"]').val()
+        dynamicData:{
+            province:$(':input[name="province"]'),
+            city:$(':input[name="city"]')
         },
         reader:'input[name="groupName"]',
         writer:'input[name="boxGroupId"]',
