@@ -15,8 +15,9 @@
       </div>
     </nav>
     <div class="container" style="width:100%;margin-top:50px;padding-left:10px;padding-right:10px;">
-      <form id="submitForm" class="form-horizontal" action="${ctx}/postbox/boxgroup/save" method="POST">
-        <input type="hidden" name="boxGroupId" value="${record.boxGroupId}"/>
+      <form id="submitForm" class="form-horizontal" action="${ctx}/postbox/boxinfo/save" method="POST">
+        <input type="hidden" name="boxInfoId" value="${record.boxInfoId}"/>
+        <input type="hidden" name="boxName" value="${record.boxName}"/>
         <table class="table table-bordered table-hover">
           <tr>
             <td style="width:16%;text-align:right;">内部编码：</td>
@@ -38,7 +39,7 @@
             <td style="text-align:right;">省份/直辖市：</td>
             <td style="padding:4px;">
               <select name="province" class="form-control input-sm myspan6">
-                <option value="" area-node=""> --- 选择省份 --- </option>
+                <option value="" area-node=""> --- 省份/直辖市 --- </option>
                 <c:forEach items="${provinceList}" var="province">
                   <option value="${province.name}" area-node="${province.node}" ${province.name eq record.province?'selected="selected"':''}>${province.name}</option>
                 </c:forEach>
@@ -49,7 +50,7 @@
             <td style="text-align:right;">城市/地区：</td>
             <td style="padding:4px;">
               <select name="city" class="form-control input-sm myspan6">
-                <option value="" area-node=""> --- 选择城市 --- </option>
+                <option value="" area-node=""> --- 选择城市/地区 --- </option>
                 <c:forEach items="${cityList}" var="city">
                   <option value="${city.name}" area-node="${city.node}" ${city.name eq record.city?'selected="selected"':''}>${city.name}</option>
                 </c:forEach>
@@ -57,7 +58,7 @@
             </td>
             <td style="text-align:right;">所属箱子组：</td>
             <td style="width:32%;padding:4px;">
-              <input name="groupName" class="form-control input-sm myspan6" type="text" placeholder="所属箱子组" value="${record.groupName}">
+              <input name="groupName" class="form-control input-sm myspan6" type="text" placeholder="所属箱子组" value="${record.boxGroupName}">
               <input name="boxGroupId" type="hidden" value="${record.boxGroupId}"/>
             </td>
           </tr>
@@ -92,13 +93,13 @@
             </td>
           </tr>
           <tr>
-            <td style="text-align:right;">快件隶属手机号：</td>
+            <td style="text-align:right;">隶属手机号：</td>
             <td style="width:32%;padding:4px;">
-              <input name="mobilePhone" class="form-control input-sm myspan6" type="text" placeholder="快件隶属手机号" value="${record.mobilePhone}">
+              <input name="mobilePhone" class="form-control input-sm myspan6" type="text" placeholder="隶属手机号" value="${record.mobilePhone}">
             </td>
             <td style="width:16%;text-align:right;">校验数值：</td>
             <td style="width:32%;padding:4px;">
-              <input name="checknum" class="form-control input-sm myspan6" type="text" placeholder="校验数值" value="${record.checknum}">
+              <input name="checknum" class="form-control input-sm myspan6" type="text" placeholder="校验数值" value="${not empty record.checknum?record.checknum:'0'}">
             </td>
           </tr>
         </table>

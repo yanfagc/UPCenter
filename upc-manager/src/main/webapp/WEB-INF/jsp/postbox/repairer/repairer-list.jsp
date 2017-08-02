@@ -35,7 +35,7 @@
                 <div class="form-group">
                   <label class="sr-only" for="province">省份/直辖市</label>
                   <select id="province" name="province" class="form-control">
-                    <option value=""> --- 选择省份 --- </option>
+                    <option value=""> --- 选择省份/直辖市 --- </option>
                     <c:forEach items="${provinceList}" var="province">
                       <option value="${province.name}" area-node="${province.node}">${province.name}</option>
                     </c:forEach>
@@ -44,7 +44,7 @@
                 <div class="form-group">
                   <label class="sr-only" for="city">城市/地区</label>
                   <select id="city" name="city" class="form-control">
-                    <option value=""> --- 选择城市 --- </option>
+                    <option value=""> --- 选择城市/地区 --- </option>
                   </select>
                 </div>
                 <div class="form-group">

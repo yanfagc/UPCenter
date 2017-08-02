@@ -72,6 +72,6 @@ FROM
 	t_box_group g
 WHERE
 	b.BOX_GROUP_ID = g.BOX_GROUP_ID
-	AND t.BOX_INFO_ID=#{boxInfoId}
+	AND b.BOX_INFO_ID=#{boxInfoId}
     </select>
 </mapper>

@@ -4,14 +4,14 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>箱子组管理</title>
+    <title>箱子管理</title>
     <jsp:include page="/WEB-INF/jsp/commons/metaheader.jsp" />
     <link href="${ctx}/css/list.css" rel="stylesheet" type="text/css" />
   </head>
   <body class="skin-blue sidebar-mini">
   <div id="content" style="background-color:#ecf0f5">
     <section class="content-header">
-      <h1><small>单元柜管理 &gt; 箱子组管理</small></h1>
+      <h1><small>单元柜管理 &gt; 箱子管理</small></h1>
     </section>
   <!-- Main content -->
     <section class="content">

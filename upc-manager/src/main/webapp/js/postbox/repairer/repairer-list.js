@@ -159,7 +159,7 @@ $(function() {
     $('.form-inline').on('change','select[name="province"]',function(){
         var province=$(this).find(":selected").attr("area-node");
         if(!province){
-            $('select[name="city"]').html('<option value="" area-node=""> --- 选择城市 --- </option>');
+            $('select[name="city"]').html('<option value="" area-node=""> --- 选择城市/地区 --- </option>');
             return;
         }
         $sessionAjax({
@@ -167,7 +167,7 @@ $(function() {
             type:'get',
             success:function(rsp){
                 var html=[];
-                html.push('<option value="" area-node=""> --- 选择城市 --- </option>');
+                html.push('<option value="" area-node=""> --- 选择城市/地区 --- </option>');
                 for(var i=0;i<rsp.body.length;i++){
                     html.push('<option value="');
                     html.push(rsp.body[i].name);
@@ -185,4 +185,7 @@ $(function() {
 function search() {
     datatable.fnClearTable(0);
     datatable.fnDraw();
+}
+function resetForm() {
+    
 }
