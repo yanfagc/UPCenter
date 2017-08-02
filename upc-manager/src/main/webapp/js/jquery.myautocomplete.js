@@ -20,6 +20,7 @@
 				complete:null,
 				success:null,
 				error:null,
+				onclick:null,
 				reader:null,// 页面查询数据来源，当用户点击确定后，数据将反写到该输入框内
 				writer:null,// 实际数据输入框
 				renderTo:null,
@@ -36,6 +37,11 @@
 					fontSize:12
 				}
 			};
+
+			this.server={
+				result:null, // 当前服务器传回的数据
+				data:null // 当前服务器数据存放
+			}
 			
 			$.extend($this.options,options);
 			
@@ -107,6 +113,7 @@
 			
 			$this.load=function(){
 				var ops=$this.options;
+				var server=$this.server;
 				if(!ops.data[ops.keyProps.serverKey]){
 					if(ops.writer){
 						ops.writer.val('');
@@ -129,16 +136,19 @@
 					beforeSend:ops.beforeSend,
 					complete:ops.complete,
 					success:function(result){
+						server.result=result; // 缓存数据
+
+						// 调用自定义success方法
 						if(ops.success && typeof ops.success=='function'){
 							ops.success(result);
 						}
-						onSuccess(ops,result);
+						onSuccess(ops,server,result);
 					},
 					error:ops.error
 				});
 			};
 			
-			function onSuccess(ops,result){
+			function onSuccess(ops,server,result){
 				if(!result){
 					return;
 				}
@@ -150,10 +160,10 @@
 					return;
 				}
 				
-				buildComplete(ops,result);
+				buildComplete(ops,server,result);
 			}
 			
-			function buildComplete(ops,result){
+			function buildComplete(ops,server,result){
 				var top=ops.properties.top;
 				var left=ops.properties.left;
 				var width=ops.properties.width;
@@ -175,14 +185,21 @@
 				
 				html+='"';
 				html+='>';
+
+				server.data={};
 				for(var i=0;i<result.length;i++){
-					html+='<div class="jme_autocomplete_item"  rv='+result[i][key]+' style="height:25px;padding-left:5px;padding-top:5px;">';
+					html+='<div class="jme_autocomplete_item"  rid="'+result[i][key]+'"';
+                    html+=' style="height:25px;padding-left:5px;padding-top:5px;">';
 					html+=result[i][title];
 					html+='</div>';
+
+					// 缓存数据
+					server.data[result[i][key]]=result[i];
 				}
 				html+='</div>';
 				$('body').append(html);
-				
+
+				// 鼠标响应事件
 				$('.jme_autocomplete_item').mouseover(function(){
 					this.style.backgroundColor='#DFDFDF';
 				});
@@ -190,10 +207,19 @@
 					this.style.backgroundColor='#FFFFFF';
 				});
 				$('.jme_autocomplete_item').on('click',function(){
-					ops.writer.val($(this).attr('rv'));
-					ops.reader.val($(this).html());
-					$('#'+ops.id).remove();
+					var $this=$(this),rid=$this.attr('rid'),rtext=$(this).html();
+					ops.writer.val(rid);
+					ops.reader.val(rtext);
+
+					// 移除供用户选择的选择框
+                    $('#'+ops.id).remove();
+
+                    // 删除当前已记录的查询数据
 					ops.data[ops.keyProps.serverKey]='';
+					// 调用用户自定义响应函数
+					if(ops.onclick && typeof ops.onclick=='function'){
+						ops.onclick(rid,server.data[rid],server.result);
+					}
 				});
 				$(document).on('click',function(){
 					$('#'+ops.id).remove();
