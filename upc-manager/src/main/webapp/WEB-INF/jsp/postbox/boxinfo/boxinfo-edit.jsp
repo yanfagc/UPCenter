@@ -85,7 +85,7 @@
             </td>
             <td style="text-align:right;">快件状态：</td>
             <td style="padding:4px;">
-              <select name="status" class="form-control input-sm myspan6">
+              <select name="expressStatus" class="form-control input-sm myspan6">
                 <c:forEach items="${expStatusList}" var="s">
                   <option value="${s}"${record.expressStatus eq s?' selected="selected"':''}>${s.remark}</option>
                 </c:forEach>

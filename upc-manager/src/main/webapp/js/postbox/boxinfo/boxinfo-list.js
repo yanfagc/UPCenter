@@ -50,7 +50,7 @@ $(function() {
                     }
                 },
                 {
-                    mData:"groupName",
+                    mData:"boxGroupName",
                     mRender:function(data, display, record) {
                         return data?data:'';
                     }
@@ -90,19 +90,19 @@ $(function() {
                         var html="";
                         if(record.status=='NOACTIVE'){
                             html+='<a class="btn btn-primary btn-xs toEdit" fid="'+record.boxInfoId+'" href="javascript:void(0);">&nbsp;编辑&nbsp;</a>&nbsp;';
-                            html+='<a class="btn btn-warning btn-xs toActive" fid="'+record.boxInfoId+'" href="javascript:void(0);">&nbsp;激活&nbsp;</a>&nbsp;';
+                            html+='<a class="btn btn-success btn-xs toActive" fid="'+record.boxInfoId+'" href="javascript:void(0);">&nbsp;激活&nbsp;</a>&nbsp;';
                             html+='<a class="btn btn-danger btn-xs toDemise" fid="'+record.boxInfoId+'" href="javascript:void(0);">&nbsp;注销&nbsp;</a>';
                         }else if(record.status=='NORMAL'){
                             html+='<a class="btn btn-primary btn-xs toEdit" fid="'+record.boxInfoId+'" href="javascript:void(0);">&nbsp;编辑&nbsp;</a>&nbsp;';
-                            html+='<a class="btn btn-warning btn-xs toFrozen" fid="'+record.boxInfoId+'" href="javascript:void(0);">&nbsp;冻结&nbsp;</a>&nbsp;';
+                            html+='<a class="btn btn-warning btn-xs toRepair" fid="'+record.boxInfoId+'" href="javascript:void(0);">&nbsp;维修&nbsp;</a>&nbsp;';
                             html+='<a class="btn btn-danger btn-xs toDemise" fid="'+record.boxInfoId+'" href="javascript:void(0);">&nbsp;注销&nbsp;</a>';
                         }else if(record.status=='DEMISE'){
                             html+='<a class="btn btn-primary btn-xs toEdit" fid="'+record.boxInfoId+'" href="javascript:void(0);">&nbsp;编辑&nbsp;</a>&nbsp;';
                             html+='<a class="btn btn-success btn-xs toNoActive" fid="'+record.boxInfoId+'" href="javascript:void(0);">&nbsp;恢复&nbsp;</a>&nbsp;';
                             html+='<a class="btn btn-warning btn-xs" fid="'+record.boxInfoId+'" style="visibility:hidden">&nbsp;隐藏&nbsp;</a>';
-                        }else if(record.status=='FROZEN'){
+                        }else if(record.status=='REPAIR'){
                             html+='<a class="btn btn-primary btn-xs toEdit" fid="'+record.boxInfoId+'" href="javascript:void(0);">&nbsp;编辑&nbsp;</a>&nbsp;';
-                            html+='<a class="btn btn-success btn-xs toNoActive" fid="'+record.boxInfoId+'" href="javascript:void(0);">&nbsp;恢复&nbsp;</a>&nbsp;';
+                            html+='<a class="btn btn-success btn-xs toNormal" fid="'+record.boxInfoId+'" href="javascript:void(0);">&nbsp;恢复&nbsp;</a>&nbsp;';
                             html+='<a class="btn btn-danger btn-xs toDemise" fid="'+record.boxInfoId+'" href="javascript:void(0);">&nbsp;注销&nbsp;</a>';
                         }
                         return html;
@@ -136,25 +136,32 @@ $(function() {
             statusChange(id,'DEMISE');
         },true);
     });
-    // 恢复
+    // 恢复为未激活
     $('tbody').on("click",'.toNoActive',function() {
         var id=$(this).attr("fid");
         showTipsDialog("提示信息","确定执行恢复操作吗？该操作会恢复至未激活状态",function() {
             statusChange(id,'NOACTIVE');
         },true);
     });
-    // 冻结
-    $('tbody').on("click",'.toFrozen',function() {
+    // 恢复为激活
+    $('tbody').on("click",'.toNormal',function() {
         var id=$(this).attr("fid");
-        showTipsDialog("提示信息","确定执行冻结操作吗？",function() {
-            statusChange(id,'FROZEN');
+        showTipsDialog("提示信息","确定执行恢复操作吗？该操作会恢复至激活状态",function() {
+            statusChange(id,'NORMAL');
+        },true);
+    });
+    // 维修
+    $('tbody').on("click",'.toRepair',function() {
+        var id=$(this).attr("fid");
+        showTipsDialog("提示信息","确定执行维修操作吗？",function() {
+            statusChange(id,'REPAIR');
         },true);
     });
     // 状态变更
     function statusChange(id, toStatus) {
         $sessionAjax({
             url:$ctx+'/postbox/boxinfo/updateStatus',
-            data:{'boxGroupId':id,'status':toStatus},
+            data:{'boxInfoId':id,'status':toStatus},
             success:function(rsp){
                 if(rsp.code=='1000'){
                     search();

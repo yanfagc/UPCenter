@@ -41,7 +41,23 @@ WHERE
 	    <include refid="sql_selectAsList"/>
         <include refid="Pageable_Suffix" />
     </select>
-    <sql id="sql_selectAsList"></sql>
+    <sql id="sql_selectAsList">
+        <if test="boxCode!=null and boxCode!=''">
+            AND b.BOX_CODE LIKE #{boxCode}
+        </if>
+        <if test="boxUniqueCode!=null and boxUniqueCode!=''">
+            AND b.BOX_UNIQUE_CODE LIKE #{boxUniqueCode}
+        </if>
+        <if test="province!=null and province!=''">
+            AND g.PROVINCE=#{province}
+        </if>
+        <if test="city!=null and city!=''">
+            AND g.CITY=#{city}
+        </if>
+        <if test="status!=null and status!=''">
+            AND b.STATUS=#{status}
+        </if>
+    </sql>
 
     <select id="selectMoreById" parameterType="java.lang.Long" resultType="com.postbox.vo.BoxInfoVo">
 SELECT
