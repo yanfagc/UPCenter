@@ -7,6 +7,7 @@ import com.postbox.model.BoxGroup;
 import com.postbox.model.CompanyInfo;
 import com.postbox.service.BoxGroupService;
 import com.postbox.service.CompanyInfoService;
+import org.apache.commons.lang3.StringUtils;
 import org.hanzhdy.manager.settings.model.Area;
 import org.hanzhdy.manager.settings.service.AreaService;
 import org.hanzhdy.manager.support.constants.resp.RespResult;
@@ -130,6 +131,29 @@ public class BoxGroupController extends ApplicationController {
             logger.error("根据区域查询箱子组人员失败，查询参数：" + JSON.toJSONString(params), ex);
             return RespResult.create(respCode.ERROR_EXCEPTION);
         }
+    }
+    
+    /**
+     * 弹出框-查找箱子组
+     * @param model
+     * @param province
+     * @param city
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "dialogfind", method = RequestMethod.GET)
+    public Object dialogfind(Model model, String province, String city, Long id, HttpServletRequest request) {
+        List<Area> provinceList = this.areaService.queryByParent(0l);
+        model.addAttribute("provinceList", provinceList);
+        if (StringUtils.isNotBlank(province)) {
+            List<Area> cityList = this.areaService.queryByParentName(province);
+            model.addAttribute("cityList", cityList);
+        }
+        model.addAttribute("statusList", BoxGroupStatus.values());
+        model.addAttribute("province", province);
+        model.addAttribute("city", city);
+        model.addAttribute("checkedId", id);
+        return "/postbox/boxgroup/boxgroup-dialog";
     }
     
     /**

@@ -11,6 +11,8 @@ import com.postbox.service.BoxGroupService;
 import com.postbox.service.BoxInfoService;
 import com.postbox.service.RepairRecordService;
 import com.postbox.service.RepairStepService;
+import org.hanzhdy.manager.settings.model.Area;
+import org.hanzhdy.manager.settings.service.AreaService;
 import org.hanzhdy.manager.support.bean.SessionUser;
 import org.hanzhdy.manager.support.constants.resp.RespResult;
 import org.hanzhdy.manager.support.controller.ApplicationController;
@@ -34,7 +36,7 @@ import java.util.List;
  * Created by H.CAAHN on 2017/8/3.
  */
 @Controller
-@RequestMapping("/postbox/repairRecord")
+@RequestMapping("/postbox/repair")
 public class RepairRecordController extends ApplicationController {
     @Resource
     private RepairRecordService repairRecordService;
@@ -48,6 +50,9 @@ public class RepairRecordController extends ApplicationController {
     @Resource
     private RepairStepService repairStepService;
     
+    @Resource
+    private AreaService areaService;
+    
     private static final Logger logger = LoggerFactory.getLogger(RepairRecordController.class);
     
     /**
@@ -58,8 +63,10 @@ public class RepairRecordController extends ApplicationController {
      */
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public String toList(Model model, HttpServletRequest request) {
+        List<Area> provinceList = this.areaService.queryByParent(0l);
+        model.addAttribute("provinceList", provinceList);
         model.addAttribute("statusList", new RepairStatus[] {RepairStatus.CHECKING, RepairStatus.PENDING, RepairStatus.REPAIRING});
-        return "/postbox/repairRecord/repairRecord-list";
+        return "/postbox/repair/repairRecord-list";
     }
     
     /**
@@ -71,7 +78,7 @@ public class RepairRecordController extends ApplicationController {
     @RequestMapping(value = "historyList", method = RequestMethod.GET)
     public String toHistoryList(Model model, HttpServletRequest request) {
         model.addAttribute("statusList", new RepairStatus[] {RepairStatus.COMPLETE, RepairStatus.CANCEL});
-        return "/postbox/repairRecord/repairHistory-list";
+        return "/postbox/repair/repairHistory-list";
     }
     
     /**
@@ -123,7 +130,7 @@ public class RepairRecordController extends ApplicationController {
             model.addAttribute("record", record);
             model.addAttribute("boxInfo", boxInfo);
             model.addAttribute("group", group);
-            return "/postbox/repairRecord/repairRecord-audit";
+            return "/postbox/repair/repairRecord-audit";
         }
         return redirect(REDIRECT_404);
     }
@@ -147,7 +154,7 @@ public class RepairRecordController extends ApplicationController {
             model.addAttribute("record", record);
             model.addAttribute("boxInfo", boxInfo);
             model.addAttribute("group", group);
-            return "/postbox/repairRecord/repairRecord-detail";
+            return "/postbox/repair/repairRecord-detail";
         }
         return redirect(REDIRECT_404);
     }

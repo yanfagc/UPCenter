@@ -70,8 +70,8 @@
                     <th style="width:12%">维修员编号</th>
                     <th style="width:12%">维修员姓名</th>
                     <th style="width:12%">联系方式</th>
-                    <th style="width:12%">省份</th>
-                    <th style="width:12%">城市</th>
+                    <th style="width:12%">省份/直辖市</th>
+                    <th style="width:12%">城市/地区</th>
                     <th style="width:12%">状态</th>
                     <th style="width:14%">创建时间</th>
                     <th style="width:14%">操作</th>

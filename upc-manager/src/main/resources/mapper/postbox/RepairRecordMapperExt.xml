@@ -26,7 +26,8 @@ SELECT
 	b.EXPRESS_STATUS AS expressStatus,
 	g.COUNTRY AS country,
 	g.PROVINCE AS province,
-	g.CITY AS city
+	g.CITY AS city,
+    g.GROUP_NAME AS boxGroupName
 FROM
 	t_repair_record r,
 	t_box_info b,

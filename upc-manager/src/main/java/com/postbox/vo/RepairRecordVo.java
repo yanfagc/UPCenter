@@ -17,6 +17,8 @@ public class RepairRecordVo extends RepairRecord {
     
     private String city;
     
+    private String boxGroupName;
+    
     public String getBoxCode() {
         return boxCode;
     }
@@ -55,5 +57,13 @@ public class RepairRecordVo extends RepairRecord {
     
     public void setCity(String city) {
         this.city = city;
+    }
+    
+    public String getBoxGroupName() {
+        return boxGroupName;
+    }
+    
+    public void setBoxGroupName(String boxGroupName) {
+        this.boxGroupName = boxGroupName;
     }
 }

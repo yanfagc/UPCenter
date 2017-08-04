@@ -7,11 +7,6 @@
     <title>箱子管理</title>
     <jsp:include page="/WEB-INF/jsp/commons/metaheader.jsp" />
     <link href="${ctx}/css/list.css" rel="stylesheet" type="text/css" />
-    <style>
-      .form-control[readonly]{
-        background-color:#fff
-      }
-    </style>
   </head>
   <body class="skin-blue sidebar-mini">
   <div id="content" style="background-color:#ecf0f5">
@@ -40,13 +35,10 @@
                     <option value=""> --- 选择城市/地区 --- </option>
                   </select>
                 </div>
-                <div id="groupName_div" class="form-group input-group">
+                <div class="form-group">
                   <label class="sr-only" for="groupName">箱子组</label>
-                  <input id="groupName" name="groupName" class="form-control" type="text" placeholder="箱子组" readonly="readonly">
-                  <span class="input-group-addon">
-                    <i class="fa fa-search"></i>
-                  </span>
-                  <input id="boxGroupId" name="boxGroupId" type="text" style="display:none;"/>
+                  <input id="groupName" name="groupName" class="form-control" type="text" placeholder="箱子组">
+                  <input id="boxGroupId" name="boxGroupId" type="hidden"/>
                 </div>
                 <div class="form-group">
                   <label class="sr-only" for="status">状态</label>
@@ -60,9 +52,6 @@
                 <button type="button" class="btn btn-primary search">&nbsp;&nbsp;搜索&nbsp;&nbsp;</button>
                 <button type="reset" class="btn btn-warning reset">&nbsp;&nbsp;重置&nbsp;&nbsp;</button>
               </form>
-              <!-- <div class="btn-group"> -->
-                <button class="btn btn-info add-btn">&nbsp;&nbsp;新增&nbsp;&nbsp;</button>
-              <!-- </div> -->
             </div><!-- /.box-header -->
             <div class="box-body">
               <table id="dataList" class="table table-bordered table-hover">
@@ -74,8 +63,7 @@
                     <th style="width:10%">城市/地区</th>
                     <th style="width:10%">所属箱子组</th>
                     <th style="width:10%">状态</th>
-                    <th style="width:12%">创建时间</th>
-                    <th style="width:12%">激活时间</th>
+                    <th style="width:12%">申请时间</th>
                     <th style="width:15%">操作</th>
                   </tr>
                 </thead>
@@ -88,6 +76,7 @@
     </section><!-- /.content -->
 </div>
     <jsp:include page="/WEB-INF/jsp/commons/metafooter.jsp" />
-    <script type="text/javascript" src="${ctx}/js/postbox/boxinfo/boxinfo-list.js<c:if test='${not empty crm}'>?${crm}</c:if>"></script>
+    <script src="${ctx}/js/jquery.myautocomplete.js<c:if test='${not empty crm}'>?${crm}</c:if>" type="text/javascript"></script>
+    <script type="text/javascript" src="${ctx}/js/postbox/repair/repairRecord-list.js<c:if test='${not empty crm}'>?${crm}</c:if>"></script>
   </body>
 </html>

@@ -5,16 +5,14 @@ import com.postbox.enums.RepairStatus;
 import com.postbox.mapper.RepairRecordMapperExt;
 import com.postbox.model.RepairRecord;
 import com.postbox.model.RepairStep;
+import com.postbox.vo.RepairRecordVo;
 import org.apache.commons.lang3.StringUtils;
 import org.hanzhdy.manager.support.service.AbstractUpcService;
 import org.hanzhdy.web.bean.DatatableResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by H.CAAHN on 2017/8/3.
@@ -71,7 +69,11 @@ public class RepairRecordService extends AbstractUpcService {
             search.put("endApplytime", calendar.getTime());
         }
         
+        int total = this.repairRecordMapperExt.countAsList(search);
+        List<RepairRecordVo> data = this.repairRecordMapperExt.selectAsList(search);
         DatatableResult result = new DatatableResult();
+        result.setTotal(total);
+        result.setAaData(data);
         return result;
     }
     

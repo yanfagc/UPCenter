@@ -5,8 +5,12 @@ $(function() {
     // 构造datatable对象
     datatable=$('#dataList').dataTable(
         $.extend({},pageParams,{
-            sAjaxSource:$ctx+"/postbox/boxinfo/dataList",
+            sAjaxSource:$ctx+"/postbox/repair/dataList",
             fnServerParams:function(aodata) {
+                aodata.push({
+                    "name":"history",
+                    "value":0
+                });
                 aodata.push({
                     "name":"boxGroupId",
                     "value":$boxGroupId.val()
@@ -77,12 +81,6 @@ $(function() {
                     }
                 },
                 {
-                    mData:"activetime",
-                    mRender:function(data, display, record) {
-                        return data?formatDatetime(data):'';
-                    }
-                },
-                {
                     mData:null,
                     sClass:"text-center",
                     sWidth:null,
@@ -113,27 +111,8 @@ $(function() {
     $('.search').click(function() {
         search();
     });
-    // 新增箱子数据
-    $('.add-btn').click(function() {
-        openWindow($ctx+'/postbox/boxinfo/toEdit',750,420);
-    });
-    $('form').on('click','#groupName_div',function(){
-        var params='',$province=$('#province').val(),$city=$('#city').val(),$boxGroupId=$('#boxGroupId').val();
-        if($province){
-            params+='?';
-            params+='province='+$province;
-        }
-        if($city){
-            params+=params?'&':'?';
-            params+='city='+$city;
-        }
-        if($boxGroupId){
-            params+=params?'&':'?';
-            params+='id='+$boxGroupId;
-        }
-        openWindow($ctx+'/postbox/boxgroup/dialogfind'+params,780,480);
-    });
-    // 编辑
+
+    // 审核
     $('tbody').on("click", '.toEdit', function() {
         var id=$(this).attr("fid");
         openWindow($ctx+'/postbox/boxinfo/toEdit?id='+id,750,420);
@@ -152,32 +131,11 @@ $(function() {
             statusChange(id,'DEMISE');
         },true);
     });
-    // 恢复为未激活
-    $('tbody').on("click",'.toNoActive',function() {
-        var id=$(this).attr("fid");
-        showTipsDialog("提示信息","确定执行恢复操作吗？该操作会恢复至未激活状态",function() {
-            statusChange(id,'NOACTIVE');
-        },true);
-    });
-    // 恢复为激活
-    $('tbody').on("click",'.toNormal',function() {
-        var id=$(this).attr("fid");
-        showTipsDialog("提示信息","确定执行恢复操作吗？该操作会恢复至激活状态",function() {
-            statusChange(id,'NORMAL');
-        },true);
-    });
-    // 维修
-    $('tbody').on("click",'.toRepair',function() {
-        var id=$(this).attr("fid");
-        showTipsDialog("提示信息","确定执行维修操作吗？",function() {
-            statusChange(id,'REPAIR');
-        },true);
-    });
     // 状态变更
     function statusChange(id, toStatus) {
         $sessionAjax({
-            url:$ctx+'/postbox/boxinfo/updateStatus',
-            data:{'boxInfoId':id,'status':toStatus},
+            url:$ctx+'/postbox/repair/updateStatus',
+            data:{'id':id,'status':toStatus},
             success:function(rsp){
                 if(rsp.code=='1000'){
                     search();
@@ -214,14 +172,31 @@ $(function() {
             }
         });
     });
+
+    var ajaxBoxGroup=new $.jme.autoComplete({
+        id:'ajaxBoxGroup',
+        url:$ctx+'/postbox/boxgroup/ajaxFind',
+        dynamicData:{
+            province:$(':input[name="province"]'),
+            city:$(':input[name="city"]')
+        },
+        reader:'input[name="groupName"]',
+        writer:'input[name="boxGroupId"]',
+        keyProps:{
+            key:'boxGroupId',
+            title:'groupName',
+            serverKey:'searchkey',
+            data:'body'
+        },
+        properties:{
+            width:142,
+            top:26,
+            left:0,
+            fontSize:12
+        }
+    });
+    ajaxBoxGroup.init();
 });
-
-// 选择箱子组的回调函数
-function $callback_selectBoxGroup(id,name){
-    $('#boxGroupId').val(id);
-    $('#groupName').val(name);
-}
-
 function search() {
     datatable.fnClearTable(0);
     datatable.fnDraw();

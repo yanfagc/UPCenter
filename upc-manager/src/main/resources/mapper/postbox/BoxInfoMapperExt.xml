@@ -57,6 +57,9 @@ WHERE
         <if test="status!=null and status!=''">
             AND b.STATUS=#{status}
         </if>
+        <if test="boxGroupId!=null">
+            AND b.BOX_GROUP_ID=#{boxGroupId}
+        </if>
     </sql>
 
     <select id="selectMoreById" parameterType="java.lang.Long" resultType="com.postbox.vo.BoxInfoVo">

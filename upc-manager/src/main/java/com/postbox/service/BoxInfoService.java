@@ -48,6 +48,9 @@ public class BoxInfoService extends AbstractUpcService {
         if (StringUtils.isNotBlank(params.getCity())) {
             search.put("city", params.getCity());
         }
+        if (params.getBoxGroupId() != null) {
+            search.put("boxGroupId", params.getBoxGroupId());
+        }
         if (params.getStatus() != null) {
             search.put("status", params.getStatus());
         }
