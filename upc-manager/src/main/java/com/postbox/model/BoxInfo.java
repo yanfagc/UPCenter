@@ -27,7 +27,7 @@ public class BoxInfo implements Serializable {
     private String boxCode;
 
     /**
-     * 内部唯一代码: t_box_info.BOX_UNIQUE_CODE
+     * 箱子芯片的唯一代码: t_box_info.BOX_UNIQUE_CODE
      * @author MyBatis Generator
      */
     private String boxUniqueCode;
@@ -171,8 +171,8 @@ public class BoxInfo implements Serializable {
     }
 
     /**
-     * 获取内部唯一代码: t_box_info.BOX_UNIQUE_CODE
-     * @return 内部唯一代码: t_box_info.BOX_UNIQUE_CODE
+     * 获取箱子芯片的唯一代码: t_box_info.BOX_UNIQUE_CODE
+     * @return 箱子芯片的唯一代码: t_box_info.BOX_UNIQUE_CODE
      * @author MyBatis Generator
      */
     public String getBoxUniqueCode() {
@@ -180,7 +180,7 @@ public class BoxInfo implements Serializable {
     }
 
     /**
-     * 设置内部唯一代码: t_box_info.BOX_UNIQUE_CODE
+     * 设置箱子芯片的唯一代码: t_box_info.BOX_UNIQUE_CODE
      * @param boxUniqueCode 映射数据库字段: t_box_info.BOX_UNIQUE_CODE
      * @author MyBatis Generator
      */

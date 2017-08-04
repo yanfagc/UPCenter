@@ -93,5 +93,25 @@
             <columnOverride column="DEMISETIME" property="demisetime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
         </table>
 
+        <table schema="" tableName="T_REPAIR_RECORD"          domainObjectName="RepairRecord">
+            <generatedKey column="REPAIR_RECORD_ID" sqlStatement="JDBC" identity="false"/>
+            <columnOverride column="REPAIR_RECORD_ID" property="repairRecordId" javaType="java.lang.Long" jdbcType="NUMERIC"/>
+            <columnOverride column="CUSTOMER_INFO_ID" property="customerInfoId" javaType="java.lang.Long" jdbcType="NUMERIC"/>
+            <columnOverride column="REPAIRER_INFO_ID" property="repairerInfoId" javaType="java.lang.Long" jdbcType="NUMERIC"/>
+            <columnOverride column="BOX_INFO_ID" property="boxInfoId" javaType="java.lang.Long" jdbcType="NUMERIC"/>
+            <columnOverride column="STATUS" property="status" javaType="com.postbox.enums.RepairStatus" jdbcType="VARCHAR"/>
+            <columnOverride column="APPLYTIME" property="applytime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <columnOverride column="AUDITTIME" property="audittime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <columnOverride column="REPAIRTIME" property="repairtime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <columnOverride column="COMPLETETIME" property="completetime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+        </table>
+
+        <table schema="" tableName="T_REPAIR_STEP"          domainObjectName="RepairStep">
+            <generatedKey column="REPAIR_STEP_ID" sqlStatement="JDBC" identity="false"/>
+            <columnOverride column="REPAIR_STEP_ID" property="repairStepId" javaType="java.lang.Long" jdbcType="NUMERIC"/>
+            <columnOverride column="REPAIR_RECORD_ID" property="repairRecordId" javaType="java.lang.Long" jdbcType="NUMERIC"/>
+            <columnOverride column="OPTYPE" property="optype" javaType="com.postbox.enums.RepairOptype" jdbcType="VARCHAR"/>
+            <columnOverride column="OPTIME" property="optime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+        </table>
     </context>  
 </generatorConfiguration>

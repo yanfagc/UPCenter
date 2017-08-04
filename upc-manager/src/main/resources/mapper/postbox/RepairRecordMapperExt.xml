@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.postbox.mapper.RepairRecordMapperExt">
+    <select id="countAsList" parameterType="java.util.HashMap" resultType="int">
+SELECT COUNT(1) FROM t_repair_record r,t_box_info b,t_box_group g WHERE r.BOX_INFO_ID = b.BOX_INFO_ID AND b.BOX_GROUP_ID = g.BOX_GROUP_ID
+        <include refid="sql_selectAsList"/>
+    </select>
+
+    <select id="selectAsList" parameterType="java.util.HashMap" resultType="com.postbox.vo.RepairRecordVo">
+        <include refid="Pageable_Prefix" />
+SELECT
+	r.REPAIR_RECORD_ID as repairRecordId,
+	r.CUSTOMER_INFO_ID as customerInfoId,
+	r.REPAIRER_INFO_ID as repairerInfoId,
+    r.BOX_INFO_ID as boxInfoId,
+    r.BOX_UNIQUE_CODE as boxUniqueCode,
+    r.REPAIR_IMG_PATH as repairImgPath,
+    r.REMARK as remark,
+    r.STATUS as status,
+    r.APPLYTIME as applytime,
+    r.AUTO_REMARK as autoRemark,
+    r.AUDITTIME as audittime,
+    r.REPAIRTIME as repairtime,
+    r.COMPLETETIME as completetime,
+    b.BOX_CODE AS boxCode,
+	b.EXPRESS_STATUS AS expressStatus,
+	g.COUNTRY AS country,
+	g.PROVINCE AS province,
+	g.CITY AS city
+FROM
+	t_repair_record r,
+	t_box_info b,
+	t_box_group g
+WHERE
+	r.BOX_INFO_ID = b.BOX_INFO_ID
+AND b.BOX_GROUP_ID = g.BOX_GROUP_ID
+        <include refid="sql_selectAsList"/>
+        <include refid="Pageable_Suffix" />
+    </select>
+
+    <sql id="sql_selectAsList">
+        <if test="boxUniqueCode!=null and boxUniqueCode!=''">
+            AND r.BOX_UNIQUE_CODE=#{boxUniqueCode}
+        </if>
+        <if test="country!=null and country!=''">
+            AND g.COUNTRY=#{country}
+        </if>
+        <if test="province!=null and province!=''">
+            AND g.PROVINCE=#{province}
+        </if>
+        <if test="city!=null and city!=''">
+            AND g.CITY=#{city}
+        </if>
+        <if test="status!=null">
+            AND r.STATUS=#{status}
+        </if>
+        <if test="beginApplytime!=null">
+            AND r.APPLYTIME<![CDATA[>=]]>#{beginApplytime}
+        </if>
+        <if test="endApplytime!=null">
+            AND r.APPLYTIME<![CDATA[<]]>#{endApplytime}
+        </if>
+    </sql>
+</mapper>
