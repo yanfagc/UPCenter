@@ -117,7 +117,8 @@ $(function() {
     $('.add-btn').click(function() {
         openWindow($ctx+'/postbox/boxinfo/toEdit',750,420);
     });
-    $('form').on('click','#groupName_div',function(){
+    // 弹出箱子组查询界面
+    $('form').on('click','#groupName',function(){
         var params='',$province=$('#province').val(),$city=$('#city').val(),$boxGroupId=$('#boxGroupId').val();
         if($province){
             params+='?';
@@ -133,6 +134,13 @@ $(function() {
         }
         openWindow($ctx+'/postbox/boxgroup/dialogfind'+params,780,480);
     });
+
+    // 清除箱子组的选择数据
+    $('form').on('click','.input-group-addon',function(){
+        $('#boxGroupId').val('');
+        $('#groupName').val('');
+    });
+
     // 编辑
     $('tbody').on("click", '.toEdit', function() {
         var id=$(this).attr("fid");

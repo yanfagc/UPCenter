@@ -40,12 +40,10 @@
                     <option value=""> --- 选择城市/地区 --- </option>
                   </select>
                 </div>
-                <div id="groupName_div" class="form-group input-group">
+                <div class="form-group input-group">
                   <label class="sr-only" for="groupName">箱子组</label>
                   <input id="groupName" name="groupName" class="form-control" type="text" placeholder="箱子组" readonly="readonly">
-                  <span class="input-group-addon">
-                    <i class="fa fa-search"></i>
-                  </span>
+                  <span class="input-group-addon" style="font-weight:bold">C</span>
                   <input id="boxGroupId" name="boxGroupId" type="text" style="display:none;"/>
                 </div>
                 <div class="form-group">

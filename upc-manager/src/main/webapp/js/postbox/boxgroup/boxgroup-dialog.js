@@ -39,6 +39,7 @@ $(function() {
                         html.push('" text="');
                         html.push(record['groupName']);
                         html.push('"/>');
+                        console.log(html.join(''));
                         return html.join('');
                     }
                 },
