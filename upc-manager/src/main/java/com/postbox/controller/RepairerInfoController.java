@@ -151,6 +151,30 @@ public class RepairerInfoController extends ApplicationController {
     }
     
     /**
+     * 弹出层-查找维修员
+     * @param model
+     * @param province
+     * @param city
+     * @param id
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "dialogfind", method = RequestMethod.GET)
+    public Object dialogfind(Model model, String province, String city, Long id, HttpServletRequest request) {
+        List<Area> provinceList = this.areaService.queryByParent(0l);
+        model.addAttribute("provinceList", provinceList);
+        if (StringUtils.isNotBlank(province)) {
+            List<Area> cityList = this.areaService.queryByParentName(province);
+            model.addAttribute("cityList", cityList);
+        }
+        model.addAttribute("statusList", DataStatus.values());
+        model.addAttribute("province", province);
+        model.addAttribute("city", city);
+        model.addAttribute("checkedId", id);
+        return "/postbox/repairer/repairer-dialog";
+    }
+    
+    /**
      * 保存维修人员信息
      * @param record
      * @param request

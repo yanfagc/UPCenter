@@ -7,6 +7,11 @@
     <title>箱子组管理</title>
     <jsp:include page="/WEB-INF/jsp/commons/metaheader.jsp" />
     <link href="${ctx}/css/list.css" rel="stylesheet" type="text/css" />
+    <style>
+      .form-control[readonly]{
+        background-color:#fff
+      }
+    </style>
   </head>
   <body class="skin-blue sidebar-mini">
   <div id="content" style="background-color:#ecf0f5">
@@ -39,10 +44,11 @@
                     <option value=""> --- 选择城市/地区 --- </option>
                   </select>
                 </div>
-                <div class="form-group">
+                <div class="form-group input-group">
                   <label class="sr-only" for="repairerName">维修员</label>
-                  <input id="repairerName" name="repairerName" class="form-control" type="text" placeholder="维修员">
-                  <input id="repairerInfoId" name="repairerInfoId" type="hidden"/>
+                  <input id="repairerName" name="repairerName" class="form-control" type="text" placeholder="维修员" readonly="readonly">
+                  <span class="input-group-addon" style="font-weight:bold">C</span>
+                  <input id="repairerInfoId" name="repairerInfoId" type="text" style="display: none;"/>
                 </div>
                 <div class="form-group">
                   <label class="sr-only" for="status">状态</label>

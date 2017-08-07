@@ -122,6 +122,30 @@ $(function() {
     $('.add-btn').click(function() {
         openWindow($ctx+'/postbox/boxgroup/toEdit',750,420);
     });
+    // 弹出箱子组查询界面
+    $('form').on('click','#repairerName',function(){
+        var params='',$province=$('#province').val(),$city=$('#city').val(),$repairerInfoId=$('#repairerInfoId').val();
+        if($province){
+            params+='?';
+            params+='province='+$province;
+        }
+        if($city){
+            params+=params?'&':'?';
+            params+='city='+$city;
+        }
+        if($repairerInfoId){
+            params+=params?'&':'?';
+            params+='id='+$repairerInfoId;
+        }
+        openWindow($ctx+'/postbox/repairer/dialogfind'+params,780,480);
+    });
+
+    // 清除箱子组的选择数据
+    $('form').on('click','.input-group-addon',function(){
+        $('#repairerInfoId').val('');
+        $('#repairerName').val('');
+    });
+
     // 编辑
     $('tbody').on("click", '.toEdit', function() {
         var id=$(this).attr("fid");
@@ -197,31 +221,14 @@ $(function() {
         });
     });
 
-    var ajaxRepairer=new $.jme.autoComplete({
-        id:'ajaxRepairer',
-        url:$ctx+'/postbox/repairer/ajaxFind',
-        dynamicData:{
-            province:$(':input[name="province"]'),
-            city:$(':input[name="city"]')
-        },
-        reader:'input[name="repairerName"]',
-        writer:'input[name="repairerInfoId"]',
-        keyProps:{
-            key:'repairerInfoid',
-            title:'realname',
-            serverKey:'searchKey',
-            data:'body'
-        },
-        properties:{
-            width:142,
-            top:26,
-            left:0,
-            fontSize:12
-        }
-    });
-    ajaxRepairer.init();
+
 });
 function search() {
     datatable.fnClearTable(0);
     datatable.fnDraw();
+}
+
+function $callback_selectRepairer(value,text) {
+    $('#repairerName').val(text);
+    $('#repairerInfoId').val(value);
 }
