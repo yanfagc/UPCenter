@@ -1,3 +1,9 @@
+/**
+ * UPC通用JS方法、常量
+ * @author H.CAAHN
+ */
+
+// 获取路径中的contextPath参数
 var js=document.scripts;
 var url=js[js.length-1].src;
 var $ctx=getQueryString(url,'contextPath');
@@ -8,6 +14,8 @@ function getQueryString(url, name) {
         return unescape(r[2]);
     return null;
 }
+
+// jQuery.dataTables通用参数
 var pageParams={
     bPaginate:true,
     bProcessing:true,
@@ -35,6 +43,8 @@ var pageParams={
         }
     }
 };
+
+// 使用windown.open打开一个新的窗口
 function openWindow(url, width, height) {
     if(!height){
         height=500;
@@ -53,8 +63,9 @@ function openWindow(url, width, height) {
     arguments.push(",toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no");
     window.open(url,"openWindow",arguments.join(""));
 }
+
+// 操作结果提示框
 function showTipsDialog(title, message, yesFn, noFn) {
-    // 操作结果提示框
     easyDialog.open({
         container:{
             header:'<div style="font-size:15px;">'+title+'</div>',
@@ -67,10 +78,12 @@ function showTipsDialog(title, message, yesFn, noFn) {
     });
 }
 
+// 关闭easyDialog
 function closeDialog(){
     easyDialog.close();
 }
 
+// ajax提交，如果session已失效，则提示超时信息
 function $sessionAjax(params){
     if(!params){
         return;
@@ -97,6 +110,7 @@ function $sessionAjax(params){
     });
 }
 
+// ajax form 提交，如果session已失效，则提示超时信息
 function $sessionAjaxSubmit($element,params){
     if(!$element||!params){
         return;
@@ -129,6 +143,7 @@ function $sessionAjaxSubmit($element,params){
     $element.ajaxSubmit(options);
 }
 
+// 格式化时间
 function formatDatetime(datetime) {
     try{
         var date=new Date(datetime),m=date.getMonth()+1,d=date.getDate(),h=date.getHours(),min=date.getMinutes(),s=date.getSeconds();
@@ -150,3 +165,4 @@ function formatDatetime(datetime) {
         return '无法格式化: ' + datetime;
     }
 }
+

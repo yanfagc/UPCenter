@@ -2,6 +2,7 @@ package com.postbox.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.postbox.controller.params.RepairRecordParams;
+import com.postbox.enums.RepairOptype;
 import com.postbox.enums.RepairStatus;
 import com.postbox.model.BoxGroup;
 import com.postbox.model.BoxInfo;
@@ -126,10 +127,11 @@ public class RepairRecordController extends ApplicationController {
             BoxGroup group = this.boxGroupService.queryById(boxInfo.getBoxGroupId());
             List<RepairStep> stepList = this.repairStepService.queryByRepairRecordId(id);
             
-            model.addAttribute("steopList", stepList);
+            model.addAttribute("stepList", stepList);
             model.addAttribute("record", record);
             model.addAttribute("boxInfo", boxInfo);
             model.addAttribute("group", group);
+            model.addAttribute("optypeList", RepairOptype.values());
             return "/postbox/repair/repairRecord-audit";
         }
         return redirect(REDIRECT_404);

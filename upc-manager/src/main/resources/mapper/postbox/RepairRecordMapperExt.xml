@@ -52,6 +52,9 @@ AND b.BOX_GROUP_ID = g.BOX_GROUP_ID
         <if test="city!=null and city!=''">
             AND g.CITY=#{city}
         </if>
+        <if test="boxGroupId!=null">
+            AND g.BOX_GROUP_ID=#{boxGroupId}
+        </if>
         <if test="status!=null">
             AND r.STATUS=#{status}
         </if>

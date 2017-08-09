@@ -48,6 +48,9 @@ public class RepairRecordService extends AbstractUpcService {
         if (params.getStatus() != null) {
             search.put("status", params.getStatus());
         }
+        if (params.getBoxGroupId() != null) {
+            search.put("boxGroupId", params.getBoxGroupId());
+        }
         if (params.getStatusArray() != null && params.getStatusArray().length > 0) {
             if (params.getStatusArray().length == 0) {
                 search.put("status", params.getStatusArray()[0]);

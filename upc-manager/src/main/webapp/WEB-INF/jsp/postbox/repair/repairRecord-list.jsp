@@ -4,14 +4,19 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>箱子管理</title>
+    <title>报修管理</title>
     <jsp:include page="/WEB-INF/jsp/commons/metaheader.jsp" />
     <link href="${ctx}/css/list.css" rel="stylesheet" type="text/css" />
+    <style>
+      .form-control[readonly]{
+        background-color:#fff
+      }
+    </style>
   </head>
   <body class="skin-blue sidebar-mini">
   <div id="content" style="background-color:#ecf0f5">
     <section class="content-header">
-      <h1><small>单元柜管理 &gt; 箱子管理</small></h1>
+      <h1><small>单元柜管理 &gt; 报修管理</small></h1>
     </section>
   <!-- Main content -->
     <section class="content">
@@ -35,10 +40,11 @@
                     <option value=""> --- 选择城市/地区 --- </option>
                   </select>
                 </div>
-                <div class="form-group">
+                <div class="form-group input-group">
                   <label class="sr-only" for="groupName">箱子组</label>
-                  <input id="groupName" name="groupName" class="form-control" type="text" placeholder="箱子组">
-                  <input id="boxGroupId" name="boxGroupId" type="hidden"/>
+                  <input id="groupName" name="groupName" class="form-control" type="text" placeholder="箱子组" readonly="readonly">
+                  <span class="input-group-addon" style="font-weight:bold">C</span>
+                  <input id="boxGroupId" name="boxGroupId" type="text" style="display: none;"/>
                 </div>
                 <div class="form-group">
                   <label class="sr-only" for="status">状态</label>
@@ -57,8 +63,8 @@
               <table id="dataList" class="table table-bordered table-hover">
                 <thead>
                   <tr>
-                    <th style="width:10%">内部编码</th>
-                    <th style="width:10%">箱子编码</th>
+                    <th style="width:12%">内部编码</th>
+                    <th style="width:12%">箱子编码</th>
                     <th style="width:10%">省份/直辖市</th>
                     <th style="width:10%">城市/地区</th>
                     <th style="width:10%">所属箱子组</th>

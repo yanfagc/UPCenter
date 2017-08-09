@@ -27,6 +27,8 @@ public class RepairRecordParams extends DatatableParams {
     
     private Date endApplytime;
     
+    private Long boxGroupId;
+    
     private int history;
     
     public String getBoxUniqueCode() {
@@ -91,6 +93,14 @@ public class RepairRecordParams extends DatatableParams {
     
     public void setEndApplytime(Date endApplytime) {
         this.endApplytime = endApplytime;
+    }
+    
+    public Long getBoxGroupId() {
+        return boxGroupId;
+    }
+    
+    public void setBoxGroupId(Long boxGroupId) {
+        this.boxGroupId = boxGroupId;
     }
     
     public int getHistory() {
