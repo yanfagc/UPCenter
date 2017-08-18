@@ -75,6 +75,19 @@ LEFT JOIN R_USER_ROLE ur ON (
 	AND ur.USERID = 1
 )
   </select>
+
+  <!-- 根据用户和系统ID查询该用于在系统中所拥有的角色信息 -->
+  <select id="selectByUserAndSysId" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+SELECT
+	r.*
+FROM
+	r_role r,
+	r_user_role ur
+WHERE
+	ur.USERID = #{userid}
+AND ur.ROLEID = r.ID
+AND r.SYSTEMID = #{systemid}
+  </select>
   
   <update id="updateGroupId2ZeroByGroupId" parameterType="java.lang.Long">
     UPDATE r_role SET GROUPID=0 WHERE GROUPID=#{groupId}

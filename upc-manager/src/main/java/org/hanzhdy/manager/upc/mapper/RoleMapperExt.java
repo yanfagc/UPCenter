@@ -1,5 +1,7 @@
 package org.hanzhdy.manager.upc.mapper;
 
+import org.apache.ibatis.annotations.Param;
+import org.hanzhdy.manager.upc.model.Role;
 import org.hanzhdy.manager.upc.vo.RoleVo;
 
 import java.util.List;
@@ -26,6 +28,14 @@ public interface RoleMapperExt extends RoleMapper {
      * @return
      */
     List<RoleVo> selectRolesForUserSetting(Long userid);
+    
+    /**
+     * 根据用户和系统ID查询该用于在系统中所拥有的角色信息
+     * @param userid
+     * @param systemid
+     * @return
+     */
+    List<Role> selectByUserAndSysId(@Param("userid") Long userid, @Param("systemid") Long systemid);
     
     /**
      * 将GroupId值设置为NULL

@@ -35,6 +35,11 @@ public class MenuItemService extends AbstractUpcService {
     @Autowired
     private RoleMenuItemMapperExt roleMenuItemMapperExt;
     
+    /**
+     * 根据条件查询菜单权限信息，并返回符合jQuery.dataTables格式要求的数据
+     * @param params
+     * @return
+     */
     public DatatableResult queryAsDatatableResult(MenuParams params) {
         Map<String, Object> search = new HashMap<String, Object>();
         search.put("page", params.createPage());
@@ -77,6 +82,16 @@ public class MenuItemService extends AbstractUpcService {
         MenuItemExample example = new MenuItemExample();
         example.createCriteria().andMenuIdEqualTo(menuid);
         return this.menuItemMapperExt.selectByExample(example);
+    }
+    
+    /**
+     * 根据用户ID和系统ID查询该用户在系统中所拥有的权限
+     * @param userid
+     * @param systemid
+     * @return
+     */
+    public List<MenuItem> queryByUserAndSysid(Long userid, Long systemid) {
+        return this.menuItemMapperExt.selectByUserAndSysId(userid, systemid);
     }
     
     /**

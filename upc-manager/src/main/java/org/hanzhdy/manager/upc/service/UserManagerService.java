@@ -302,7 +302,7 @@ public class UserManagerService extends AbstractUpcService {
      * @param encryptPwd
      * @return
      */
-    protected boolean checkPwd(String account, String password, String encryptPwd) {
+    public boolean checkPwd(String account, String password, String encryptPwd) {
         String pwdstr = password + "$" + account;
         String encstr = SecurityUtils.encryptSHA256String(pwdstr);
         return StringUtils.equalsIgnoreCase(encstr, encryptPwd);

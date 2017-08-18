@@ -33,4 +33,29 @@
     AND STATUS=#{status}
     </if>
   </sql>
+
+  <!-- 根据用户和系统ID查询该用于在系统中所拥有的权限信息 -->
+  <select id="selectByUserAndSysId" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+SELECT DISTINCT
+	mi.*
+FROM
+	r_role r,
+	r_menu m,
+	r_menuitem mi,
+	r_role_menu rm,
+	r_role_menuitem rmi,
+	r_user_role ur
+WHERE
+	r.SYSTEMID = #{systemid}
+AND ur.USERID = #{userid}
+AND ur.ROLEID = r.ID
+AND r.`STATUS` = 'N'
+AND r.ID = rm.ROLEID
+AND m.ID = rm.MENUID
+AND m.`STATUS` = 'N'
+AND mi.MENUID = M.ID
+AND mi.`STATUS` = 'N'
+AND rmi.ROLEID = r.ID
+AND rmi.ITEMID = mi.ID
+  </select>
 </mapper>

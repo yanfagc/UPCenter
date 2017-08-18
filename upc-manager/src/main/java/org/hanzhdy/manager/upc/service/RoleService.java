@@ -163,6 +163,16 @@ public class RoleService extends AbstractUpcService {
     }
     
     /**
+     * 根据用户和系统ID查询该用于在系统中所拥有的角色信息
+     * @param userid
+     * @param systemid
+     * @return
+     */
+    public List<Role> queryByUserAndSysId(Long userid, Long systemid) {
+        return this.roleMapperExt.selectByUserAndSysId(userid, systemid);
+    }
+    
+    /**
      * 插入新的角色信息
      * @param record
      * @return

@@ -7,6 +7,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpStatus;
 import org.hanzhdy.manager.support.bean.SessionUser;
 import org.hanzhdy.manager.support.service.AbstractUpcService;
+import org.hanzhdy.manager.upc.model.MenuItem;
+import org.hanzhdy.manager.upc.model.Role;
 import org.hanzhdy.manager.upc.vo.UserVo;
 import org.hanzhdy.utils.HttpUtils;
 import org.hanzhdy.utils.HttpUtils.HttpResult;
@@ -17,8 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @description 手机验证码
@@ -32,7 +33,16 @@ public class LoginService extends AbstractUpcService {
     private Map<String, String> headers;
     
     @Autowired
+    private RoleService         roleService;
+    
+    @Autowired
     private UserManagerService  userManagerService;
+    
+    @Autowired
+    private MenuItemService     menuItemService;
+    
+    @Autowired
+    private AccessSystemService accessSystemService;
     
     private static final Logger logger   = LoggerFactory.getLogger(LoginService.class);
     
@@ -69,6 +79,52 @@ public class LoginService extends AbstractUpcService {
         su.setNickname(user.getNickname());
         su.setStatus(user.getStatus());
         return su;
+    }
+    
+    /**
+     * 查询指定帐号所拥有的角色集合
+     * @param userid
+     * @param systemid
+     * @return
+     */
+    public Set<String> queryUserRoles(Long userid, Long systemid) {
+        Set<String> result = new HashSet<>();
+        if (userid == null || systemid == null) {
+            return result;
+        }
+        
+        List<Role> roleList = roleService.queryByUserAndSysId(userid, systemid);
+        if (roleList != null && !roleList.isEmpty()) {
+            for (Role role : roleList) {
+                result.add(role.getRolecode());
+            }
+        }
+        
+        return result;
+    }
+    
+    /**
+     * 查询指定帐号所拥有的权限信息
+     * @param userid
+     * @param systemid
+     * @return
+     */
+    public Set<String> queryUserResources(Long userid, Long systemid) {
+        Set<String> result = new HashSet<>();
+        if (userid == null || systemid == null) {
+            return result;
+        }
+        
+        List<MenuItem> itemList = this.menuItemService.queryByUserAndSysid(userid, systemid);
+        if (itemList != null && !itemList.isEmpty()) {
+            for (MenuItem item : itemList) {
+                if (StringUtils.isNotBlank(item.getItemurl())) {
+                    result.add(item.getItemurl());
+                }
+            }
+        }
+    
+        return result;
     }
     
     /**

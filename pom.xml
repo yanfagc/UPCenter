@@ -35,7 +35,6 @@
         <jstl.version>1.2</jstl.version>
         <junit.version>4.11</junit.version>
         <mybatisSpring.version>1.2.3</mybatisSpring.version>
-        <cassandra.jdbc.version>1.2.5</cassandra.jdbc.version>
         <ehcache.spring.annotations.version>1.2.0</ehcache.spring.annotations.version>
         <javax.servlet.version>2.5</javax.servlet.version>
         <javax.servletJsp.version>2.1</javax.servletJsp.version>
@@ -51,7 +50,6 @@
         <javax.mail.version>1.4.7</javax.mail.version>
         <mysql-connector.version>5.1.31</mysql-connector.version>
         <oracleOjdbc.version>11.2.0.1.0</oracleOjdbc.version>
-        <cassandra.jdbc.version>1.2.5</cassandra.jdbc.version>
         <aspectjweaver.version>1.8.0</aspectjweaver.version>
         <ant.version>1.9.3</ant.version>
         <aspectjrt.version>1.7.4</aspectjrt.version>
@@ -60,6 +58,7 @@
         <activiti>5.16.1</activiti>
         <dom4j.version>1.6.1</dom4j.version>
         <jackson.version>2.2.3</jackson.version>
+        <shiro.version>1.4.0</shiro.version>
 
         <spring.data.redis.version>1.5.0.RELEASE</spring.data.redis.version>
         <redis.clients.version>2.6.2</redis.clients.version>
@@ -269,6 +268,28 @@
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-oxm</artifactId>
                 <version>${spring.version}</version>
+            </dependency>
+
+            <!-- shiro -->
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-core</artifactId>
+                <version>${shiro.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-web</artifactId>
+                <version>${shiro.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-quartz</artifactId>
+                <version>${shiro.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-spring</artifactId>
+                <version>${shiro.version}</version>
             </dependency>
 
             <!-- Servlet -->
