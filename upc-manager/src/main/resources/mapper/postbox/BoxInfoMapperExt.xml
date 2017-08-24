@@ -12,22 +12,16 @@ SELECT COUNT(1) FROM t_box_info b, t_box_group g WHERE b.BOX_GROUP_ID = g.BOX_GR
         <include refid="Pageable_Prefix" />
 SELECT
 	b.BOX_INFO_ID as boxInfoId,
-	b.BOX_NAME as boxName,
-	b.BOX_CODE as boxCode,
-	b.BOX_UNIQUE_CODE as boxUniqueCode,
     b.BOX_GROUP_ID as boxGroupId,
     b.SEC_KEY as secKey,
     b.STATUS as status,
-    b.EXPRESS_STATUS as expressStatus,
-    b.MOBILE_PHONE as mobilePhone,
-    b.PROXY_CUSTOMER_INFO_ID as proxyCustomerInfoId,
     b.LONGITUDE as longitude,
     b.LATITUDE as latitude,
-    b.OPENTIME as opentime,
+    b.ADDRESS AS address,
     b.CHECKNUM as checknum,
     b.CREATETIME as createtime,
     b.ACTIVETIME as activetime,
-    b.REPAIRTIME as repairtime,
+    b.FROZENTIME as frozentime,
     b.DEMISETIME as demisetime,
 	g.PROVINCE AS province,
 	g.CITY AS city,
@@ -42,12 +36,6 @@ WHERE
         <include refid="Pageable_Suffix" />
     </select>
     <sql id="sql_selectAsList">
-        <if test="boxCode!=null and boxCode!=''">
-            AND b.BOX_CODE LIKE #{boxCode}
-        </if>
-        <if test="boxUniqueCode!=null and boxUniqueCode!=''">
-            AND b.BOX_UNIQUE_CODE LIKE #{boxUniqueCode}
-        </if>
         <if test="province!=null and province!=''">
             AND g.PROVINCE=#{province}
         </if>
@@ -65,22 +53,15 @@ WHERE
     <select id="selectMoreById" parameterType="java.lang.Long" resultType="com.postbox.vo.BoxInfoVo">
 SELECT
 	b.BOX_INFO_ID as boxInfoId,
-	b.BOX_NAME as boxName,
-	b.BOX_CODE as boxCode,
-	b.BOX_UNIQUE_CODE as boxUniqueCode,
     b.BOX_GROUP_ID as boxGroupId,
     b.SEC_KEY as secKey,
     b.STATUS as status,
-    b.EXPRESS_STATUS as expressStatus,
-    b.MOBILE_PHONE as mobilePhone,
-    b.PROXY_CUSTOMER_INFO_ID as proxyCustomerInfoId,
     b.LONGITUDE as longitude,
     b.LATITUDE as latitude,
-    b.OPENTIME as opentime,
     b.CHECKNUM as checknum,
     b.CREATETIME as createtime,
     b.ACTIVETIME as activetime,
-    b.REPAIRTIME as repairtime,
+    b.FROZENTIME as frozentime,
     b.DEMISETIME as demisetime,
 	g.PROVINCE AS province,
 	g.CITY AS city,

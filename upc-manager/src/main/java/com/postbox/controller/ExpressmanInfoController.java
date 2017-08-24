@@ -2,8 +2,8 @@ package com.postbox.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.postbox.controller.params.ExpressmanInfoParams;
+import com.postbox.enums.ActiveStatus;
 import com.postbox.enums.DataStatus;
-import com.postbox.enums.ExpressmanStatus;
 import com.postbox.enums.Sex;
 import com.postbox.model.CustomerInfo;
 import com.postbox.model.ExpressmanInfo;
@@ -43,7 +43,7 @@ public class ExpressmanInfoController extends ApplicationController {
     
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public String toList(Model model, HttpServletRequest request) {
-        model.addAttribute("statusList", ExpressmanStatus.values());
+        model.addAttribute("statusList", ActiveStatus.values());
         return "/postbox/expressman/expressman-list";
     }
     
@@ -83,7 +83,7 @@ public class ExpressmanInfoController extends ApplicationController {
             if (record != null) {
                 model.addAttribute("sexList", Sex.values());
                 model.addAttribute("statusList", DataStatus.values());
-                model.addAttribute("expressStatusList", ExpressmanStatus.values());
+                model.addAttribute("expressStatusList", ActiveStatus.values());
                 model.addAttribute("record", record);
                 model.addAttribute("customer", customer);
                 return "/postbox/expressman/expressman-detail";
@@ -106,10 +106,10 @@ public class ExpressmanInfoController extends ApplicationController {
             if (record != null) {
                 model.addAttribute("sexList", Sex.values());
                 model.addAttribute("statusList", DataStatus.values());
-                model.addAttribute("expressStatusList", ExpressmanStatus.values());
+                model.addAttribute("expressStatusList", ActiveStatus.values());
                 model.addAttribute("record", record);
                 model.addAttribute("customer", customer);
-                if (record.getStatus() == ExpressmanStatus.NOACTIVE) {
+                if (record.getStatus() == ActiveStatus.NOACTIVE) {
                     model.addAttribute("audit", true);
                 }
                 return "/postbox/expressman/expressman-detail";

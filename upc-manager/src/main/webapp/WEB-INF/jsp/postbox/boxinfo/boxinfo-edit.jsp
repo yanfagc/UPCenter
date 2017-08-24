@@ -16,17 +16,16 @@
     </nav>
     <div class="container" style="width:100%;margin-top:50px;padding-left:10px;padding-right:10px;">
       <form id="submitForm" class="form-horizontal" action="${ctx}/postbox/boxinfo/save" method="POST">
-        <input type="hidden" name="boxInfoId" value="${record.boxInfoId}"/>
-        <input type="hidden" name="boxName" value="${record.boxName}"/>
+        <input type="hidden" name="edit" value="${not empty record.boxInfoId?'true':'false'}"/>
         <table class="table table-bordered table-hover">
           <tr>
-            <td style="width:16%;text-align:right;">内部编码：</td>
+            <td style="width:16%;text-align:right;">箱子ID：</td>
             <td style="width:32%;padding:4px;">
-              <input name="boxUniqueCode" class="form-control input-sm myspan6" type="text" placeholder="内部编码" value="${record.boxUniqueCode}">
+              <input name="boxInfoId" class="form-control input-sm myspan6" type="text" placeholder="箱子ID" value="${record.boxInfoId}">
             </td>
-            <td style="width:16%;text-align:right;">箱子编码：</td>
+            <td style="text-align:right;">加密密钥：</td>
             <td style="width:32%;padding:4px;">
-              <input name="boxCode" class="form-control input-sm myspan6" type="text" placeholder="箱子编码" value="${record.boxCode}">
+              <input name="secKey" class="form-control input-sm myspan6" type="text" placeholder="加密密钥" value="${record.secKey}">
             </td>
           </tr>
           <tr>
@@ -63,15 +62,13 @@
             </td>
           </tr>
           <tr>
-            <td style="width:16%;text-align:right;">经纬坐标：</td>
+            <td style="width:16%;text-align:right;">经度坐标：</td>
             <td style="width:32%;padding:4px;">
-              <input name="longitude" class="form-control input-sm myspan4" type="text" placeholder="经度" value="${record.longitude}">
-              ×
-              <input name="latitude" class="form-control input-sm myspan4" type="text" placeholder="纬度" value="${record.latitude}">
+              <input name="longitude" class="form-control input-sm myspan6" type="text" placeholder="经度" value="${record.longitude}">
             </td>
-            <td style="text-align:right;">加密密钥：</td>
+            <td style="width:16%;text-align:right;">纬度坐标：</td>
             <td style="width:32%;padding:4px;">
-              <input name="secKey" class="form-control input-sm myspan6" type="text" placeholder="加密密钥" value="${record.secKey}">
+              <input name="latitude" class="form-control input-sm myspan6" type="text" placeholder="纬度" value="${record.latitude}">
             </td>
           </tr>
           <tr>
@@ -82,20 +79,6 @@
                   <option value="${s}"${record.status eq s?' selected="selected"':''}>${s.remark}</option>
                 </c:forEach>
               </select>
-            </td>
-            <td style="text-align:right;">快件状态：</td>
-            <td style="padding:4px;">
-              <select name="expressStatus" class="form-control input-sm myspan6">
-                <c:forEach items="${expStatusList}" var="s">
-                  <option value="${s}"${record.expressStatus eq s?' selected="selected"':''}>${s.remark}</option>
-                </c:forEach>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td style="text-align:right;">隶属手机号：</td>
-            <td style="width:32%;padding:4px;">
-              <input name="mobilePhone" class="form-control input-sm myspan6" type="text" placeholder="隶属手机号" value="${record.mobilePhone}">
             </td>
             <td style="width:16%;text-align:right;">校验数值：</td>
             <td style="width:32%;padding:4px;">

@@ -1,6 +1,6 @@
 package com.postbox.controller.params;
 
-import com.postbox.enums.BoxInfoStatus;
+import com.postbox.enums.ActiveStatus;
 import org.hanzhdy.web.bean.DatatableParams;
 
 /**
@@ -13,11 +13,7 @@ public class BoxInfoParams extends DatatableParams {
     
     private Long boxGroupId;
     
-    private String boxCode;
-    
-    private String boxUniqueCode;
-    
-    private BoxInfoStatus status;
+    private ActiveStatus status;
     
     public String getProvince() {
         return province;
@@ -43,27 +39,11 @@ public class BoxInfoParams extends DatatableParams {
         this.boxGroupId = boxGroupId;
     }
     
-    public String getBoxCode() {
-        return boxCode;
-    }
-    
-    public void setBoxCode(String boxCode) {
-        this.boxCode = boxCode;
-    }
-    
-    public String getBoxUniqueCode() {
-        return boxUniqueCode;
-    }
-    
-    public void setBoxUniqueCode(String boxUniqueCode) {
-        this.boxUniqueCode = boxUniqueCode;
-    }
-    
-    public BoxInfoStatus getStatus() {
+    public ActiveStatus getStatus() {
         return status;
     }
     
-    public void setStatus(BoxInfoStatus status) {
+    public void setStatus(ActiveStatus status) {
         this.status = status;
     }
 }

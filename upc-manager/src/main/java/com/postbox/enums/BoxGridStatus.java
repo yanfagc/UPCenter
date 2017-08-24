@@ -3,7 +3,7 @@ package com.postbox.enums;
 /**
  * Created by H.CAAHN on 2017/7/31.
  */
-public enum BoxInfoStatus {
+public enum BoxGridStatus {
     /** 未激活 */
     NOACTIVE("未激活"),
     
@@ -18,7 +18,7 @@ public enum BoxInfoStatus {
     
     private String remark;
     
-    private BoxInfoStatus(String remark) {
+    private BoxGridStatus(String remark) {
         this.remark = remark;
     }
     

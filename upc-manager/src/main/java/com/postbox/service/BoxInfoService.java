@@ -1,11 +1,9 @@
 package com.postbox.service;
 
 import com.postbox.controller.params.BoxInfoParams;
-import com.postbox.enums.BoxGroupStatus;
-import com.postbox.enums.BoxInfoStatus;
+import com.postbox.enums.ActiveStatus;
 import com.postbox.mapper.BoxInfoMapperExt;
 import com.postbox.model.BoxInfo;
-import com.postbox.model.BoxInfoExample;
 import com.postbox.vo.BoxInfoVo;
 import org.apache.commons.lang3.StringUtils;
 import org.hanzhdy.manager.support.service.AbstractUpcService;
@@ -36,12 +34,6 @@ public class BoxInfoService extends AbstractUpcService {
     public DatatableResult queryAsDatatableResult(BoxInfoParams params) {
         Map<String, Object> search = new HashMap<>();
         search.put("page", params.getPage());
-        if (StringUtils.isNotBlank(params.getBoxCode())) {
-            search.put("boxCode", "%" + params.getBoxCode() + "%");
-        }
-        if (StringUtils.isNotBlank(params.getBoxUniqueCode())) {
-            search.put("boxUniqueCode", "%" + params.getBoxUniqueCode() + "%");
-        }
         if (StringUtils.isNotBlank(params.getProvince())) {
             search.put("province", params.getProvince());
         }
@@ -73,44 +65,24 @@ public class BoxInfoService extends AbstractUpcService {
     }
     
     /**
-     * 根据箱子的唯一编码，查询箱子信息
-     * @param code
-     * @return
-     */
-    public BoxInfo queryByUniqueCode(String code) {
-        BoxInfoExample example = new BoxInfoExample();
-        example.createCriteria().andBoxUniqueCodeEqualTo(code);
-        List<BoxInfo> dataList = this.boxInfoMapperExt.selectByExample(example);
-        if (dataList != null && !dataList.isEmpty()) {
-            return dataList.get(0);
-        }
-        return null;
-    }
-    
-    /**
      * 插入新的箱子信息
      * @param record
      * @return
      */
     public boolean insert(BoxInfo record) {
-        BoxInfo box = this.queryByUniqueCode(record.getBoxUniqueCode());
-        if (box != null) {
-            throw new BizException(respCode.SAVE_DUPLICATE);
-        }
-    
         Date nowtime = new Date();
         switch (record.getStatus()) {
             case NORMAL:
                 record.setActivetime(nowtime);
                 break;
-            case REPAIR:
-                record.setRepairtime(nowtime);
+            case FROZEN:
+                record.setFrozentime(nowtime);
                 break;
             case DEMISE:
                 record.setDemisetime(nowtime);
                 break;
             default:
-                record.setStatus(BoxInfoStatus.NOACTIVE);
+                record.setStatus(ActiveStatus.NOACTIVE);
                 break;
         }
     
@@ -126,14 +98,9 @@ public class BoxInfoService extends AbstractUpcService {
      * @return
      */
     public boolean update(BoxInfo record) {
-        BoxInfo box = this.queryByUniqueCode(record.getBoxUniqueCode());
-        if (box != null) {
-            if (box.getBoxInfoId().longValue() != record.getBoxInfoId()) {
-                throw new BizException(respCode.SAVE_DUPLICATE);
-            }
-        }
-        else {
-            box = this.boxInfoMapperExt.selectByPrimaryKey(record.getBoxInfoId());
+        BoxInfo box = this.boxInfoMapperExt.selectByPrimaryKey(record.getBoxInfoId());
+        if (box == null) {
+            throw new BizException(respCode.SAVE_NORECORD);
         }
         
         if (box.getStatus() != record.getStatus()) {
@@ -142,8 +109,8 @@ public class BoxInfoService extends AbstractUpcService {
                 case NORMAL:
                     record.setActivetime(nowtime);
                     break;
-                case REPAIR:
-                    record.setRepairtime(nowtime);
+                case FROZEN:
+                    record.setFrozentime(nowtime);
                     break;
                 case DEMISE:
                     record.setDemisetime(nowtime);
@@ -178,8 +145,8 @@ public class BoxInfoService extends AbstractUpcService {
                 case NORMAL:
                     record.setActivetime(nowtime);
                     break;
-                case REPAIR:
-                    record.setRepairtime(nowtime);
+                case FROZEN:
+                    record.setFrozentime(nowtime);
                     break;
                 case DEMISE:
                     record.setDemisetime(nowtime);

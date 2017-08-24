@@ -1,6 +1,6 @@
 package com.postbox.controller.params;
 
-import com.postbox.enums.BoxGroupStatus;
+import com.postbox.enums.ActiveStatus;
 import org.hanzhdy.web.bean.DatatableParams;
 
 /**
@@ -19,7 +19,7 @@ public class BoxGroupParams extends DatatableParams {
     
     private Long repairerInfoId;
     
-    private BoxGroupStatus status;
+    private ActiveStatus status;
     
     public String getGroupName() {
         return groupName;
@@ -69,11 +69,11 @@ public class BoxGroupParams extends DatatableParams {
         this.repairerInfoId = repairerInfoId;
     }
     
-    public BoxGroupStatus getStatus() {
+    public ActiveStatus getStatus() {
         return status;
     }
     
-    public void setStatus(BoxGroupStatus status) {
+    public void setStatus(ActiveStatus status) {
         this.status = status;
     }
 }

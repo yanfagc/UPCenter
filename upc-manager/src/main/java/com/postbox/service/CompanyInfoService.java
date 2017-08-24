@@ -1,21 +1,17 @@
 package com.postbox.service;
 
 import com.postbox.controller.params.CompanyInfoParams;
-import com.postbox.enums.BoxGroupStatus;
 import com.postbox.enums.DataStatus;
 import com.postbox.mapper.CompanyInfoMapperExt;
-import com.postbox.model.BoxGroupExample;
 import com.postbox.model.CompanyInfo;
 import com.postbox.model.CompanyInfoExample;
 import org.apache.commons.lang3.StringUtils;
-import org.hanzhdy.manager.support.enums.CommonStatus;
 import org.hanzhdy.manager.support.service.AbstractUpcService;
 import org.hanzhdy.web.bean.DatatableResult;
 import org.hanzhdy.web.throwable.BizException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.xml.crypto.Data;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;

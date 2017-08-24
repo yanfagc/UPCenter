@@ -1,6 +1,6 @@
 package com.postbox.controller.params;
 
-import com.postbox.enums.ExpressmanStatus;
+import com.postbox.enums.ActiveStatus;
 import org.hanzhdy.web.bean.DatatableParams;
 
 /**
@@ -11,7 +11,7 @@ public class ExpressmanInfoParams extends DatatableParams {
     
     private String mobilePhone;
     
-    private ExpressmanStatus status;
+    private ActiveStatus status;
     
     public String getRealName() {
         return realName;
@@ -29,11 +29,11 @@ public class ExpressmanInfoParams extends DatatableParams {
         this.mobilePhone = mobilePhone;
     }
     
-    public ExpressmanStatus getStatus() {
+    public ActiveStatus getStatus() {
         return status;
     }
     
-    public void setStatus(ExpressmanStatus status) {
+    public void setStatus(ActiveStatus status) {
         this.status = status;
     }
 }

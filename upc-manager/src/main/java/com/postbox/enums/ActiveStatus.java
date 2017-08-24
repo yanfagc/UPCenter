@@ -1,9 +1,9 @@
 package com.postbox.enums;
 
 /**
- * Created by H.CAAHN on 2017/7/21.
+ * Created by H.CAAHN on 2017/8/22.
  */
-public enum BoxGroupStatus {
+public enum ActiveStatus {
     /** 未激活 */
     NOACTIVE("未激活"),
     
@@ -18,7 +18,7 @@ public enum BoxGroupStatus {
     
     private String remark;
     
-    private BoxGroupStatus(String remark) {
+    private ActiveStatus(String remark) {
         this.remark = remark;
     }
     

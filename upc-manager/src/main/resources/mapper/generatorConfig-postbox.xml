@@ -55,7 +55,7 @@
             <generatedKey column="EXPRESSMAN_INFO_ID" sqlStatement="JDBC" identity="false"/>
             <columnOverride column="EXPRESSMAN_INFO_ID" property="expressmanInfoId" javaType="java.lang.Long" jdbcType="NUMERIC"/>
             <columnOverride column="CUSTOMER_INFO_ID" property="customerInfoId" javaType="java.lang.Long" jdbcType="NUMERIC"/>
-            <columnOverride column="STATUS" property="status" javaType="com.postbox.enums.ExpressmanStatus" jdbcType="VARCHAR"/>
+            <columnOverride column="STATUS" property="status" javaType="com.postbox.enums.ActiveStatus" jdbcType="VARCHAR"/>
             <columnOverride column="APPLYTIME" property="applytime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
             <columnOverride column="ACTIVETIME" property="activetime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
         </table>
@@ -72,25 +72,34 @@
             <columnOverride column="BOX_GROUP_ID" property="boxGroupId" javaType="java.lang.Long" jdbcType="NUMERIC"/>
             <columnOverride column="COMPANY_INFO_ID" property="companyInfoId" javaType="java.lang.Long" jdbcType="NUMERIC"/>
             <columnOverride column="REPAIRER_INFO_ID" property="repairerInfoId" javaType="java.lang.Long" jdbcType="NUMERIC"/>
-            <columnOverride column="STATUS" property="status" javaType="com.postbox.enums.BoxGroupStatus" jdbcType="VARCHAR"/>
+            <columnOverride column="STATUS" property="status" javaType="com.postbox.enums.ActiveStatus" jdbcType="VARCHAR"/>
             <columnOverride column="CREATETIME" property="createtime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
             <columnOverride column="ACTIVETIME" property="activetime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
             <columnOverride column="FROZENTIME" property="frozentime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
             <columnOverride column="DEMISETIME" property="demisetime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
         </table>
 
-        <table schema="" tableName="T_BOX_Info"          domainObjectName="BoxInfo">
-            <generatedKey column="BOX_INFO_ID" sqlStatement="JDBC" identity="false"/>
+        <table schema="" tableName="T_BOX_INFO"          domainObjectName="BoxInfo">
             <columnOverride column="BOX_INFO_ID" property="boxInfoId" javaType="java.lang.Long" jdbcType="NUMERIC"/>
             <columnOverride column="BOX_GROUP_ID" property="boxGroupId" javaType="java.lang.Long" jdbcType="NUMERIC"/>
-            <columnOverride column="STATUS" property="status" javaType="com.postbox.enums.BoxInfoStatus" jdbcType="VARCHAR"/>
-            <columnOverride column="EXPRESS_STATUS" property="expressStatus" javaType="com.postbox.enums.BoxExpressStatus" jdbcType="VARCHAR"/>
+            <columnOverride column="STATUS" property="status" javaType="com.postbox.enums.ActiveStatus" jdbcType="VARCHAR"/>
             <columnOverride column="CHECKNUM" property="checknum" javaType="java.lang.Integer" jdbcType="NUMERIC"/>
-            <columnOverride column="OPENTIME" property="opentime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
             <columnOverride column="CREATETIME" property="createtime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
             <columnOverride column="ACTIVETIME" property="activetime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
-            <columnOverride column="REPAIRTIME" property="repairtime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <columnOverride column="FROZENTIME" property="frozentime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
             <columnOverride column="DEMISETIME" property="demisetime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+        </table>
+
+        <table schema="" tableName="T_BOX_GRID"          domainObjectName="BoxGrid">
+            <generatedKey column="BOX_GRID_ID" sqlStatement="JDBC" identity="false"/>
+            <columnOverride column="BOX_GRID_ID" property="boxGridId" javaType="java.lang.Long" jdbcType="NUMERIC"/>
+            <columnOverride column="BOX_INFO_ID" property="boxInfoId" javaType="java.lang.Long" jdbcType="NUMERIC"/>
+            <columnOverride column="BOX_SIZE" property="boxSize" javaType="com.postbox.enums.BoxSize" jdbcType="VARCHAR"/>
+            <columnOverride column="STATUS" property="status" javaType="com.postbox.enums.BoxGridStatus" jdbcType="VARCHAR"/>
+            <columnOverride column="EXPRESS_STATUS" property="expressStatus" javaType="com.postbox.enums.BoxExpressStatus" jdbcType="VARCHAR"/>
+            <columnOverride column="GRID_SIZE" property="gridSize" javaType="com.postbox.enums.GridSize" jdbcType="VARCHAR"/>
+            <columnOverride column="SORT" property="sort" javaType="java.lang.Integer" jdbcType="NUMERIC"/>
+            <columnOverride column="OPENTIME" property="opentime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
         </table>
 
         <table schema="" tableName="T_REPAIR_RECORD"          domainObjectName="RepairRecord">

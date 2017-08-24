@@ -1,7 +1,7 @@
 package com.postbox.service;
 
 import com.postbox.controller.params.ExpressmanInfoParams;
-import com.postbox.enums.ExpressmanStatus;
+import com.postbox.enums.ActiveStatus;
 import com.postbox.mapper.ExpressmanInfoMapperExt;
 import com.postbox.model.ExpressmanInfo;
 import com.postbox.vo.ExpressmanInfoVo;
@@ -60,7 +60,7 @@ public class ExpressmanInfoService extends AbstractUpcService {
         ExpressmanInfo data = new ExpressmanInfo();
         data.setExpressmanInfoId(record.getExpressmanInfoId());
         data.setStatus(record.getStatus());
-        if (record.getStatus() == ExpressmanStatus.NORMAL) {
+        if (record.getStatus() == ActiveStatus.NORMAL) {
             record.setActivetime(new Date());
         }
         int count = this.expressmanInfoMapperExt.updateByPrimaryKeySelective(record);

@@ -1,6 +1,6 @@
 package com.postbox.model;
 
-import com.postbox.enums.ExpressmanStatus;
+import com.postbox.enums.ActiveStatus;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -547,62 +547,62 @@ public class ExpressmanInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andStatusEqualTo(ExpressmanStatus value) {
+        public Criteria andStatusEqualTo(ActiveStatus value) {
             addCriterion("STATUS =", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotEqualTo(ExpressmanStatus value) {
+        public Criteria andStatusNotEqualTo(ActiveStatus value) {
             addCriterion("STATUS <>", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusGreaterThan(ExpressmanStatus value) {
+        public Criteria andStatusGreaterThan(ActiveStatus value) {
             addCriterion("STATUS >", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusGreaterThanOrEqualTo(ExpressmanStatus value) {
+        public Criteria andStatusGreaterThanOrEqualTo(ActiveStatus value) {
             addCriterion("STATUS >=", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLessThan(ExpressmanStatus value) {
+        public Criteria andStatusLessThan(ActiveStatus value) {
             addCriterion("STATUS <", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLessThanOrEqualTo(ExpressmanStatus value) {
+        public Criteria andStatusLessThanOrEqualTo(ActiveStatus value) {
             addCriterion("STATUS <=", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLike(ExpressmanStatus value) {
+        public Criteria andStatusLike(ActiveStatus value) {
             addCriterion("STATUS like", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotLike(ExpressmanStatus value) {
+        public Criteria andStatusNotLike(ActiveStatus value) {
             addCriterion("STATUS not like", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusIn(List<ExpressmanStatus> values) {
+        public Criteria andStatusIn(List<ActiveStatus> values) {
             addCriterion("STATUS in", values, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotIn(List<ExpressmanStatus> values) {
+        public Criteria andStatusNotIn(List<ActiveStatus> values) {
             addCriterion("STATUS not in", values, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusBetween(ExpressmanStatus value1, ExpressmanStatus value2) {
+        public Criteria andStatusBetween(ActiveStatus value1, ActiveStatus value2) {
             addCriterion("STATUS between", value1, value2, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotBetween(ExpressmanStatus value1, ExpressmanStatus value2) {
+        public Criteria andStatusNotBetween(ActiveStatus value1, ActiveStatus value2) {
             addCriterion("STATUS not between", value1, value2, "status");
             return (Criteria) this;
         }

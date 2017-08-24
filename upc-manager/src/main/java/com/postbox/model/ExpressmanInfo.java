@@ -1,6 +1,6 @@
 package com.postbox.model;
 
-import com.postbox.enums.ExpressmanStatus;
+import com.postbox.enums.ActiveStatus;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -41,7 +41,7 @@ public class ExpressmanInfo implements Serializable {
      * 状态,NOACTIVE未激活,NORMAL正常,FROZEN冻结,DEMISE销户: t_expressman_info.STATUS
      * @author MyBatis Generator
      */
-    private ExpressmanStatus status;
+    private ActiveStatus status;
 
     /**
      * 申请时间: t_expressman_info.APPLYTIME
@@ -150,7 +150,7 @@ public class ExpressmanInfo implements Serializable {
      * @return 状态,NOACTIVE未激活,NORMAL正常,FROZEN冻结,DEMISE销户: t_expressman_info.STATUS
      * @author MyBatis Generator
      */
-    public ExpressmanStatus getStatus() {
+    public ActiveStatus getStatus() {
         return status;
     }
 
@@ -159,7 +159,7 @@ public class ExpressmanInfo implements Serializable {
      * @param status 映射数据库字段: t_expressman_info.STATUS
      * @author MyBatis Generator
      */
-    public void setStatus(ExpressmanStatus status) {
+    public void setStatus(ActiveStatus status) {
         this.status = status;
     }
 

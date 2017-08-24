@@ -5,15 +5,11 @@ $(function() {
         ignore:'',
         showText:true,
         rules:{
-            boxUniqueCode:{
+            boxInfoId:{
                 required:true,
-                maxlength:32,
-                numOrLetterOrLine:true
-            },
-            boxCode:{
-                required:true,
-                maxlength:32,
-                numOrLetterOrLine:true
+                maxlength:10,
+                integer:true,
+                morethanzero:true
             },
             groupName:{
                 required:true
@@ -26,24 +22,17 @@ $(function() {
                 maxlength:64,
                 numOrLetterOrLine:true
             },
-            mobilePhone:{
-                mobile:true
-            },
             checknum:{
                 integer:true,
                 maxlength:10
             }
         },
         messages:{
-            boxUniqueCode:{
+            boxInfoId:{
                 required:'内部编码不允许为空！',
-                maxlength:'最大长度不允许超过32位！',
-                numOrLetterOrLine:'仅允许输入数字英文或下划线！'
-            },
-            boxCode:{
-                required:'箱子编码不允许为空！',
-                maxlength:'最大长度不允许超过32位！',
-                numOrLetterOrLine:'仅允许输入数字英文或下划线！'
+                maxlength:'最大长度不允许超过10位！',
+                integer:'仅允许输入大于0的整数值！',
+                morethanzero:'仅允许输入大于0的整数值！'
             },
             groupName:{
                 required:'所属箱子组不允许为空！'
@@ -55,9 +44,6 @@ $(function() {
                 required:'加密密钥不允许为空',
                 maxlength:'最大长度不允许超过64位',
                 numOrLetterOrLine:'仅允许输入数字英文或下划线！'
-            },
-            mobilePhone:{
-                mobile:'请输入正确的手机号码！'
             },
             checknum:{
                 integer:'请输入正确的整型数值！',

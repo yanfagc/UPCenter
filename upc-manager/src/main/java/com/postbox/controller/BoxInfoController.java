@@ -2,8 +2,8 @@ package com.postbox.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.postbox.controller.params.BoxInfoParams;
+import com.postbox.enums.ActiveStatus;
 import com.postbox.enums.BoxExpressStatus;
-import com.postbox.enums.BoxInfoStatus;
 import com.postbox.model.BoxInfo;
 import com.postbox.service.BoxInfoService;
 import com.postbox.vo.BoxInfoVo;
@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -50,7 +51,7 @@ public class BoxInfoController extends ApplicationController {
     public String toList(Model model, HttpServletRequest request) {
         List<Area> provinceList = this.areaService.queryByParent(0l);
         model.addAttribute("provinceList", provinceList);
-        model.addAttribute("statusList", BoxInfoStatus.values());
+        model.addAttribute("statusList", ActiveStatus.values());
         return "/postbox/boxinfo/boxinfo-list";
     }
     
@@ -86,7 +87,7 @@ public class BoxInfoController extends ApplicationController {
     @RequestMapping(value = "toEdit", method = RequestMethod.GET)
     public String toEdit(Long id, Model model, HttpServletRequest request) {
         List<Area> provinceList = this.areaService.queryByParent(0l);
-        model.addAttribute("statusList", BoxInfoStatus.values());
+        model.addAttribute("statusList", ActiveStatus.values());
         model.addAttribute("expStatusList", BoxExpressStatus.values());
         model.addAttribute("provinceList", provinceList);
         if (id != null) {
@@ -114,15 +115,15 @@ public class BoxInfoController extends ApplicationController {
      */
     @RequestMapping(value = "save", method = RequestMethod.POST)
     @ResponseBody
-    public Object saveBoxGroup(BoxInfo record, HttpServletRequest request) {
+    public Object saveBoxGroup(@RequestParam("edit")boolean edit, BoxInfo record, HttpServletRequest request) {
         try {
             // 执行新增或更新操作
             boolean result = false;
-            if (record.getBoxInfoId() == null) {
-                result = this.boxInfoService.insert(record);
+            if (edit) {
+                result = this.boxInfoService.update(record);
             }
             else {
-                result = this.boxInfoService.update(record);
+                result = this.boxInfoService.insert(record);
             }
             
             // 处理返回结果

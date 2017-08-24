@@ -1,6 +1,6 @@
 package com.postbox.model;
 
-import com.postbox.enums.BoxGroupStatus;
+import com.postbox.enums.ActiveStatus;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -77,7 +77,7 @@ public class BoxGroup implements Serializable {
      * 状态,NOACTIVE未激活,NORMAL正常,FROZEN冻结,DEMISE销户: t_box_group.STATUS
      * @author MyBatis Generator
      */
-    private BoxGroupStatus status;
+    private ActiveStatus status;
 
     /**
      * 创建时间: t_box_group.CREATETIME
@@ -306,7 +306,7 @@ public class BoxGroup implements Serializable {
      * @return 状态,NOACTIVE未激活,NORMAL正常,FROZEN冻结,DEMISE销户: t_box_group.STATUS
      * @author MyBatis Generator
      */
-    public BoxGroupStatus getStatus() {
+    public ActiveStatus getStatus() {
         return status;
     }
 
@@ -315,7 +315,7 @@ public class BoxGroup implements Serializable {
      * @param status 映射数据库字段: t_box_group.STATUS
      * @author MyBatis Generator
      */
-    public void setStatus(BoxGroupStatus status) {
+    public void setStatus(ActiveStatus status) {
         this.status = status;
     }
 

@@ -1,7 +1,7 @@
 package com.postbox.service;
 
 import com.postbox.controller.params.BoxGroupParams;
-import com.postbox.enums.BoxGroupStatus;
+import com.postbox.enums.ActiveStatus;
 import com.postbox.mapper.BoxGroupMapperExt;
 import com.postbox.model.BoxGroup;
 import com.postbox.model.BoxGroupExample;
@@ -85,7 +85,7 @@ public class BoxGroupService extends AbstractUpcService {
         return dataList != null && !dataList.isEmpty() ? dataList.get(0) : null;
     }
     
-    public List<BoxGroup> queryForAjax(BoxGroupParams params, BoxGroupStatus... status) {
+    public List<BoxGroup> queryForAjax(BoxGroupParams params, ActiveStatus... status) {
         Map<String, Object> search = new HashMap<String, Object>();
         if (params.getProvince() != null) {
             search.put("province", params.getProvince());
@@ -133,7 +133,7 @@ public class BoxGroupService extends AbstractUpcService {
                 record.setDemisetime(nowtime);
                 break;
             default:
-                record.setStatus(BoxGroupStatus.NOACTIVE);
+                record.setStatus(ActiveStatus.NOACTIVE);
                 break;
         }
         

@@ -1,6 +1,6 @@
 package com.postbox.model;
 
-import com.postbox.enums.BoxGroupStatus;
+import com.postbox.enums.ActiveStatus;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -957,62 +957,62 @@ public class BoxGroupExample {
             return (Criteria) this;
         }
 
-        public Criteria andStatusEqualTo(BoxGroupStatus value) {
+        public Criteria andStatusEqualTo(ActiveStatus value) {
             addCriterion("STATUS =", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotEqualTo(BoxGroupStatus value) {
+        public Criteria andStatusNotEqualTo(ActiveStatus value) {
             addCriterion("STATUS <>", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusGreaterThan(BoxGroupStatus value) {
+        public Criteria andStatusGreaterThan(ActiveStatus value) {
             addCriterion("STATUS >", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusGreaterThanOrEqualTo(BoxGroupStatus value) {
+        public Criteria andStatusGreaterThanOrEqualTo(ActiveStatus value) {
             addCriterion("STATUS >=", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLessThan(BoxGroupStatus value) {
+        public Criteria andStatusLessThan(ActiveStatus value) {
             addCriterion("STATUS <", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLessThanOrEqualTo(BoxGroupStatus value) {
+        public Criteria andStatusLessThanOrEqualTo(ActiveStatus value) {
             addCriterion("STATUS <=", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLike(BoxGroupStatus value) {
+        public Criteria andStatusLike(ActiveStatus value) {
             addCriterion("STATUS like", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotLike(BoxGroupStatus value) {
+        public Criteria andStatusNotLike(ActiveStatus value) {
             addCriterion("STATUS not like", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusIn(List<BoxGroupStatus> values) {
+        public Criteria andStatusIn(List<ActiveStatus> values) {
             addCriterion("STATUS in", values, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotIn(List<BoxGroupStatus> values) {
+        public Criteria andStatusNotIn(List<ActiveStatus> values) {
             addCriterion("STATUS not in", values, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusBetween(BoxGroupStatus value1, BoxGroupStatus value2) {
+        public Criteria andStatusBetween(ActiveStatus value1, ActiveStatus value2) {
             addCriterion("STATUS between", value1, value2, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotBetween(BoxGroupStatus value1, BoxGroupStatus value2) {
+        public Criteria andStatusNotBetween(ActiveStatus value1, ActiveStatus value2) {
             addCriterion("STATUS not between", value1, value2, "status");
             return (Criteria) this;
         }

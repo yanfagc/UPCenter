@@ -66,14 +66,14 @@
               <table id="dataList" class="table table-bordered table-hover">
                 <thead>
                   <tr>
-                    <th style="width:10%">内部编码</th>
-                    <th style="width:10%">箱子编码</th>
+                    <th style="width:10%">箱子ID</th>
                     <th style="width:10%">省份/直辖市</th>
                     <th style="width:10%">城市/地区</th>
                     <th style="width:10%">所属箱子组</th>
                     <th style="width:10%">状态</th>
                     <th style="width:12%">创建时间</th>
                     <th style="width:12%">激活时间</th>
+                    <th style="width:12%">格子维护</th>
                     <th style="width:15%">操作</th>
                   </tr>
                 </thead>

@@ -2,7 +2,7 @@ package com.postbox.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.postbox.controller.params.BoxGroupParams;
-import com.postbox.enums.BoxGroupStatus;
+import com.postbox.enums.ActiveStatus;
 import com.postbox.model.BoxGroup;
 import com.postbox.model.CompanyInfo;
 import com.postbox.service.BoxGroupService;
@@ -56,7 +56,7 @@ public class BoxGroupController extends ApplicationController {
     public String toList(Model model, HttpServletRequest request) {
         List<Area> provinceList = this.areaService.queryByParent(0l);
         model.addAttribute("provinceList", provinceList);
-        model.addAttribute("statusList", BoxGroupStatus.values());
+        model.addAttribute("statusList", ActiveStatus.values());
         return "/postbox/boxgroup/boxgroup-list";
     }
     
@@ -94,7 +94,7 @@ public class BoxGroupController extends ApplicationController {
         List<Area> provinceList = this.areaService.queryByParent(0l);
         List<CompanyInfo> companyInfoList = this.companyInfoService.queryAsList();
         model.addAttribute("companyList", companyInfoList);
-        model.addAttribute("statusList", BoxGroupStatus.values());
+        model.addAttribute("statusList", ActiveStatus.values());
         model.addAttribute("provinceList", provinceList);
         if (id != null) {
             BoxGroup record = this.boxGroupService.queryById(id);
@@ -123,7 +123,7 @@ public class BoxGroupController extends ApplicationController {
     @ResponseBody
     public Object ajaxFind(BoxGroupParams params, HttpServletResponse response) {
         try {
-            List<BoxGroup> dataList = this.boxGroupService.queryForAjax(params, BoxGroupStatus.NORMAL, BoxGroupStatus.NOACTIVE);
+            List<BoxGroup> dataList = this.boxGroupService.queryForAjax(params, ActiveStatus.NORMAL, ActiveStatus.NOACTIVE);
             // 处理返回结果
             return RespResult.create(respCode.SUCCESS, dataList);
         }
@@ -149,7 +149,7 @@ public class BoxGroupController extends ApplicationController {
             List<Area> cityList = this.areaService.queryByParentName(province);
             model.addAttribute("cityList", cityList);
         }
-        model.addAttribute("statusList", BoxGroupStatus.values());
+        model.addAttribute("statusList", ActiveStatus.values());
         model.addAttribute("province", province);
         model.addAttribute("city", city);
         model.addAttribute("checkedId", id);
