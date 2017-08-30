@@ -78,6 +78,8 @@ $(function() {
                 },
                 {
                     mData:null,
+                    sClass:"text-center",
+                    sWidth:null,
                     mRender:function(data, display, record) {
                         return '<a class="btn btn-primary btn-xs toGridList" fid="'+record.boxInfoId
                             +'" href="javascript:void(0);">&nbsp;格子维护&nbsp;</a>';
@@ -118,6 +120,7 @@ $(function() {
     $('.add-btn').click(function() {
         openWindow($ctx+'/postbox/boxinfo/toEdit',750,420);
     });
+
     // 弹出箱子组查询界面
     $('form').on('click','#groupName',function(){
         var params='',$province=$('#province').val(),$city=$('#city').val(),$boxGroupId=$('#boxGroupId').val();
@@ -140,6 +143,12 @@ $(function() {
     $('form').on('click','.input-group-addon',function(){
         $('#boxGroupId').val('');
         $('#groupName').val('');
+    });
+
+    // 快递格子管理
+    $('tbody').on("click", '.toGridList', function() {
+        var id=$(this).attr("fid");
+        window.location.href=$ctx+'/postbox/boxgrid/list?boxInfoId='+id;
     });
 
     // 编辑

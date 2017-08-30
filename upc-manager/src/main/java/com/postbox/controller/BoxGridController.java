@@ -2,7 +2,9 @@ package com.postbox.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.postbox.controller.params.BoxGridParams;
+import com.postbox.enums.BoxExpressStatus;
 import com.postbox.enums.BoxGridStatus;
+import com.postbox.enums.GridSize;
 import com.postbox.model.BoxGrid;
 import com.postbox.service.BoxGridService;
 import org.hanzhdy.manager.support.constants.resp.RespResult;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -42,7 +45,7 @@ public class BoxGridController extends ApplicationController {
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public String toList(Model model, HttpServletRequest request) {
         model.addAttribute("statusList", BoxGridStatus.values());
-        return "/postbox/boxgroup/boxgroup-list";
+        return "/postbox/boxgrid/boxgrid-list";
     }
     
     /**
@@ -75,8 +78,11 @@ public class BoxGridController extends ApplicationController {
      * @return
      */
     @RequestMapping(value = "toEdit", method = RequestMethod.GET)
-    public String toEdit(Long id, Model model, HttpServletRequest request) {
+    public String toEdit(@RequestParam("boxInfoId") Long boxInfoId, Long id, Model model, HttpServletRequest request) {
         model.addAttribute("statusList", BoxGridStatus.values());
+        model.addAttribute("boxExpressStatus", BoxExpressStatus.values());
+        model.addAttribute("gridSize", GridSize.values());
+        model.addAttribute("boxInfoId", boxInfoId);
         if (id != null) {
             BoxGrid record = this.boxGridService.queryById(id);
             if (record != null) {
@@ -98,7 +104,7 @@ public class BoxGridController extends ApplicationController {
      */
     @RequestMapping(value = "save", method = RequestMethod.POST)
     @ResponseBody
-    public Object saveBoxGroup(BoxGrid record, HttpServletRequest request) {
+    public Object saveBoxGrid(BoxGrid record, HttpServletRequest request) {
         try {
             // 执行新增或更新操作
             boolean result = false;

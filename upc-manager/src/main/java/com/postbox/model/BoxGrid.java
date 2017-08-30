@@ -22,7 +22,7 @@ public class BoxGrid implements Serializable {
     private Long boxInfoId;
 
     /**
-     * 箱子编号: t_box_grid.GRID_CODE
+     * 格子编号: t_box_grid.GRID_CODE
      * @author MyBatis Generator
      */
     private String gridCode;
@@ -106,8 +106,8 @@ public class BoxGrid implements Serializable {
     }
 
     /**
-     * 获取箱子编号: t_box_grid.GRID_CODE
-     * @return 箱子编号: t_box_grid.GRID_CODE
+     * 获取格子编号: t_box_grid.GRID_CODE
+     * @return 格子编号: t_box_grid.GRID_CODE
      * @author MyBatis Generator
      */
     public String getGridCode() {
@@ -115,7 +115,7 @@ public class BoxGrid implements Serializable {
     }
 
     /**
-     * 设置箱子编号: t_box_grid.GRID_CODE
+     * 设置格子编号: t_box_grid.GRID_CODE
      * @param gridCode 映射数据库字段: t_box_grid.GRID_CODE
      * @author MyBatis Generator
      */
