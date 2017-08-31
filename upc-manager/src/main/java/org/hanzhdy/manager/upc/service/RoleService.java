@@ -76,8 +76,14 @@ public class RoleService extends AbstractUpcService {
         result.setAaData(data);
         return result;
     }
-    
-    public List<ZTreeNode> queryRoleResourceById(Long roleid, Long systemid) {
+
+    /**
+     * 角色管理页面，设置角色菜单功能，查询所有菜单信息
+     * @param roleid
+     * @param systemid
+     * @return
+     */
+    public List<ZTreeNode> queryRoleMenuById(Long roleid, Long systemid) {
         List<ZTreeNode> dataList = this.menuMapperExt.selectAsZTreeNodeByRoleAndSystemid(roleid, systemid);
         List<ZTreeNode> result = new ArrayList<ZTreeNode>();
         if (dataList != null && !dataList.isEmpty()) {
@@ -100,7 +106,55 @@ public class RoleService extends AbstractUpcService {
         
         return result;
     }
-    
+
+    /**
+     * 角色管理页面，设置角色资源功能，查询指定角色关联的所有菜单数据
+     * @param roleid
+     * @param systemid
+     * @return
+     */
+    public List<ZTreeNode> queryRoleMenuByIdForSettingItem(Long roleid, Long systemid) {
+        List<ZTreeNode> dataList = this.menuMapperExt.selectAsZTreeNodeByRoleAndSystemidForSettingItem(roleid, systemid);
+        List<ZTreeNode> result = new ArrayList<ZTreeNode>();
+        if (dataList != null && !dataList.isEmpty()) {
+            Map<String, ZTreeNode> map = new HashMap<String, ZTreeNode>();
+            for (ZTreeNode node : dataList) {
+                if (node.isParent()) {
+                    if (StringUtils.isBlank(node.getpId()) || "0".equals(node.getpId())) {
+                        result.add(node);
+                    }
+                    map.put(node.getId(), node);
+                }
+            }
+            for (ZTreeNode node : dataList) {
+                ZTreeNode p = map.get(node.getpId());
+                if (p != null) {
+                    p.addChild(node);
+                }
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * 角色管理页面，设置角色资源功能，查询指定角色和菜单关联的权限数据
+     * @param roleid
+     * @param menuid
+     * @return
+     */
+    public DatatableResult queryRoleResourceForSettingItem(Long roleid, Long menuid) {
+
+
+        DatatableResult result = new DatatableResult();
+        return result;
+    }
+
+    /**
+     * 用户管理页面，设置用户角色功能，查询所有角色信息
+     * @param userid
+     * @return
+     */
     public List<ZTreeNode> queryRoleForUserSetting(Long userid) {
         List<RoleGroup> groupList = this.roleGroupMapperExt.selectByExample(new RoleGroupExample());
         if (groupList == null || groupList.isEmpty()) {
@@ -193,7 +247,8 @@ public class RoleService extends AbstractUpcService {
         Role old = this.roleMapperExt.selectByPrimaryKey(record.getId());
         // 一个角色只能关联一个接入系统中的菜单
         if (old.getSystemId() != null && old.getSystemId().longValue() != record.getSystemId()) {
-            this.deleteRoleResource(record.getId());
+            this.deleteRoleMenus(record.getId());
+            this.deleteRoleMenuItems(record.getId(), null);
         }
         
         record.setUpdatetime(new Date());
@@ -215,37 +270,49 @@ public class RoleService extends AbstractUpcService {
     }
     
     /**
-     * 更新角色菜单、角色菜单项关联信息
+     * 更新角色菜单关联信息
      * @param id
-     * @param resources
+     * @param menus
      * @return
      */
-    public boolean updateRoleResource(Long id, String resources) {
-        this.deleteRoleResource(id);
-        JSONArray array = JSON.parseArray(resources);
+    public boolean updateRoleMenu(Long id, String menus) {
+        this.deleteRoleMenus(id);
+        List<String> array = JSON.parseArray(menus, String.class);
         if (array != null && !array.isEmpty()) {
-            for (int i = 0, s = array.size(); i < s; i++) {
-                JSONObject obj = array.getJSONObject(i);
+            for (String _menuid : array) {
                 try {
-                    // 菜单
-                    if ("m".equalsIgnoreCase(obj.getString("type"))) {
-                        Long mid = Long.valueOf(obj.getString("id").substring(2));
-                        RoleMenuKey r = new RoleMenuKey();
-                        r.setRoleId(id);
-                        r.setMenuId(mid);
-                        this.roleMenuMapperExt.insert(r);
-                    }
-                    // 菜单项
-                    else {
-                        Long mid = Long.valueOf(obj.getString("id").substring(3));
-                        RoleMenuItemKey r = new RoleMenuItemKey();
-                        r.setRoleId(id);
-                        r.setItemId(mid);
-                        this.roleMenuItemMapperExt.insert(r);
-                    }
+                    RoleMenuKey r = new RoleMenuKey();
+                    r.setRoleId(id);
+                    r.setMenuId(Long.valueOf(_menuid.substring(2)));
+                    this.roleMenuMapperExt.insert(r);
                 }
                 catch (NumberFormatException ex) {
                     
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 更新角色菜单项关联信息
+     * @param id
+     * @param menuid
+     * @param items
+     * @return
+     */
+    public boolean updateRoleItem(Long id, Long menuid, String items) {
+        this.deleteRoleMenuItems(id, menuid);
+        List<String> array = JSON.parseArray(items, String.class);
+        if (array != null && !array.isEmpty()) {
+            for (String _itemid : array) {
+                try {
+                    RoleMenuItemKey key = new RoleMenuItemKey();
+                    key.setRoleId(id);
+                    key.setItemId(Long.valueOf(_itemid.substring(3)));
+                }
+                catch (NumberFormatException ex) {
+
                 }
             }
         }
@@ -258,22 +325,37 @@ public class RoleService extends AbstractUpcService {
      * @return
      */
     public boolean delete(Long id) {
-        this.deleteRoleResource(id);
+        this.deleteRoleMenus(id);
+        this.deleteRoleMenuItems(id, null);
         this.roleMapperExt.deleteByPrimaryKey(id);
         return true;
     }
     
     /**
-     * 根据指定的角色ID，删除角色资源（角色菜单、角色菜单项信息）
+     * 根据指定的角色ID，删除其绑定的菜单数据
      * @param id
      */
-    private void deleteRoleResource(Long id) {
+    private void deleteRoleMenus(Long id) {
         RoleMenuExample rme = new RoleMenuExample();
         rme.createCriteria().andRoleIdEqualTo(id);
         roleMenuMapperExt.deleteByExample(rme);
-        
-        RoleMenuItemExample rmie = new RoleMenuItemExample();
-        rmie.createCriteria().andRoleIdEqualTo(id);
-        roleMenuItemMapperExt.deleteByExample(rmie);
+    }
+
+    /**
+     * 根据指定的角色ID，删除其绑定的菜单项数据<br/>
+     * 如果菜单ID不为空，则只删除属于该菜单的菜单项数据<br/>
+     * 反之则删除该角色绑定的所有菜单项信息
+     * @param id
+     * @param menuid
+     */
+    private void deleteRoleMenuItems(Long id, Long menuid) {
+        if (menuid != null) {
+            this.roleMenuItemMapperExt.deleteByRoleAndMenuid(id, menuid);
+        }
+        else {
+            RoleMenuItemExample rmie = new RoleMenuItemExample();
+            rmie.createCriteria().andRoleIdEqualTo(id);
+            this.roleMenuItemMapperExt.deleteByExample(rmie);
+        }
     }
 }

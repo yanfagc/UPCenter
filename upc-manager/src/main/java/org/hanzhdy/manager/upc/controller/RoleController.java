@@ -20,6 +20,7 @@ import org.hanzhdy.web.bean.ZTreeNode;
 import org.hanzhdy.web.throwable.BizException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.helpers.MessageFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -79,17 +80,19 @@ public class RoleController extends ApplicationController {
     @RequestMapping(value = "dataList", method = RequestMethod.POST)
     @ResponseBody
     public Object dataList(RoleParams params, HttpServletRequest request) {
+        DatatableResult dataResult = null;
         try {
-            DatatableResult dataResult = roleService.queryAsDatatableResult(params);
-            return JSON.toJSONString(dataResult);
+            dataResult = roleService.queryAsDatatableResult(params);
         }
         catch (BizException ex) {
+            dataResult = super.getEmptyDatatableResult();
             logger.error("查询角色数据失败，查询参数：{}, 错误信息：[{}, {}]", JSON.toJSONString(params), ex.getCode(), ex.getMsg());
         }
         catch (Exception ex) {
+            dataResult = super.getEmptyDatatableResult();
             logger.error("查询角色数据失败，查询参数：" + JSON.toJSONString(params), ex);
         }
-        return null;
+        return JSON.toJSONString(dataResult);
     }
     
     /**
@@ -156,32 +159,101 @@ public class RoleController extends ApplicationController {
     }
     
     /**
-     * 跳转到设置角色权限的页面
+     * 跳转到设置菜单的页面
      * @param roleid
      * @param sysid
      * @return
      */
-    @RequestMapping(value = "toSettingResources", method = RequestMethod.GET)
-    public String toSettingResources(Model model, @RequestParam("roleid") Long roleid,
+    @RequestMapping(value = "toSettingMenus", method = RequestMethod.GET)
+    public String toSettingMenus(Model model, @RequestParam("roleid") Long roleid,
             @RequestParam("sysid") Long sysid) {
-        List<ZTreeNode> nodeList = this.roleService.queryRoleResourceById(roleid, sysid);
+        List<ZTreeNode> nodeList = this.roleService.queryRoleMenuById(roleid, sysid);
         model.addAttribute("roleid", roleid);
         model.addAttribute("sysid", sysid);
         model.addAttribute("nodeList", nodeList);
-        return "/basic/role/role-setting";
+        return "/basic/role/role-settingMenu";
     }
     
     /**
-     * 根据角色权限信息
+     * 保存角色菜单信息
      * @param roleid
      * @param resources
      * @return
      */
-    @RequestMapping(value = "saveResources", method = RequestMethod.POST)
+    @RequestMapping(value = "saveRoleMenus", method = RequestMethod.POST)
     @ResponseBody
-    public Object saveResources(@RequestParam("roleid") Long roleid, @RequestParam("resources") String resources) {
+    public Object saveRoleMenus(@RequestParam("roleid") Long roleid, @RequestParam("resources") String resources) {
         try {
-            this.roleService.updateRoleResource(roleid, resources);
+            this.roleService.updateRoleMenu(roleid, resources);
+            return RespResult.create(respCode.SUCCESS);
+        }
+        catch (BizException ex) {
+            logger.error("更新角色菜单失败，角色ID：{}, 错误信息：[{}, {}]", roleid, ex.getCode(), ex.getMsg());
+            return RespResult.create(ex.getCode(), ex.getMsg());
+        }
+        catch (Exception ex) {
+            logger.error("更新角色菜单失败，角色ID：" + roleid, ex);
+            return RespResult.create(respCode.ERROR_EXCEPTION);
+        }
+    }
+
+    /**
+     * 跳转到设置权限的页面
+     * @param model
+     * @param roleid
+     * @param sysid
+     * @return
+     */
+    @RequestMapping(value = "toSettingItems", method = RequestMethod.GET)
+    public String toSettingItem(Model model, @RequestParam("roleid") Long roleid,
+                                @RequestParam("sysid") Long sysid) {
+        List<ZTreeNode> nodeList = this.roleService.queryRoleMenuByIdForSettingItem(roleid, sysid);
+        model.addAttribute("roleid", roleid);
+        model.addAttribute("sysid", sysid);
+        model.addAttribute("nodeList", nodeList);
+        return "/basic/role/role-settingItem";
+    }
+
+    /**
+     * 角色管理页面，权限设置中，根据角色和菜单查询菜单项数据
+     * @param roleid
+     * @param menuid
+     * @return
+     */
+    @RequestMapping(value = "roleItemList", method = RequestMethod.GET)
+    @ResponseBody
+    public Object roleItemList(@RequestParam("roleid") Long roleid, @RequestParam("menuid") Long menuid) {
+        DatatableResult dataResult = null;
+        try {
+            dataResult = roleService.queryAsDatatableResult(params);
+        }
+        catch (BizException ex) {
+            dataResult = super.getEmptyDatatableResult();
+            String params = MessageFormatter.format("角色ID: {0}, 菜单ID: {1}", roleid, menuid).toString();
+            logger.error("查询角色权限数据失败，查询参数>>{}, 错误信息：[{}, {}]", JSON.toJSONString(params), ex.getCode(), ex.getMsg());
+        }
+        catch (Exception ex) {
+            dataResult = super.getEmptyDatatableResult();
+            String params = MessageFormatter.format("角色ID: {0}, 菜单ID: {1}", roleid, menuid).toString();
+            logger.error("查询角色权限数据失败，查询参数>>" + params, ex);
+        }
+
+        return JSON.toJSONString(dataResult);
+    }
+
+    /**
+     * 保存角色权限信息
+     * @param roleid
+     * @param menuid
+     * @param resources
+     * @return
+     */
+    @RequestMapping(value = "saveRoleItems", method = RequestMethod.POST)
+    @ResponseBody
+    public Object saveRoleItems(@RequestParam("roleid") Long roleid, @RequestParam("menuid") Long menuid,
+                                @RequestParam("resources") String resources) {
+        try {
+            this.roleService.updateRoleItem(roleid, menuid, resources);
             return RespResult.create(respCode.SUCCESS);
         }
         catch (BizException ex) {

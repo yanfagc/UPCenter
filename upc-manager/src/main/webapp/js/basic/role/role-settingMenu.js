@@ -62,10 +62,7 @@ function settingResource(){
     var checked=$.fn.zTree.getZTreeObj('menuTree').getCheckedNodes();
     var resources=[];
     for(var i=0;i<checked.length;i++){
-        resources.push({
-            "id":checked[i].id,
-            "type":checked[i].isParent?'m':'mi'
-        });
+        resources.push(checked[i].id);
     }
     if(resources.length>0){
         $('#resources').val(JSON.stringify(resources));

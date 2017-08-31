@@ -38,8 +38,7 @@
   </sql>
   
   <select id="selectAsZTreeNodeByRoleAndSystemid" parameterType="java.util.HashMap" resultType="org.hanzhdy.web.bean.ZTreeNode">
-  SELECT * FROM ((
-	SELECT
+  SELECT
 		concat('m_',m.ID) AS id,
 		m.MENUNAME AS NAME,
 	IF(m.PARENTID IS NULL OR m.PARENTID='0','0',concat('m_',m.PARENTID)) AS pId,
@@ -61,37 +60,30 @@
 	WHERE
 		m.SYSTEMID = #{systemid}
 	AND m.`STATUS` <![CDATA[<>]]> 'D'
-)
-UNION ALL
-	(
-		SELECT
-			concat('mi_',mi.ID) AS id,
-			mi.ITEMNAME AS NAME,
-			concat('m_',mi.MENUID) AS pId,
-			'false' AS OPEN,
-			'false' AS parent,
-			mi.SORT AS sort,
-		IF (
-			rmi.ROLEID IS NOT NULL
-			AND rmi.ROLEID <![CDATA[<>]]> '',
-			'true',
-			'false'
-		) AS checked
-		FROM
-			r_menu m,
-			r_menuitem mi
-		LEFT JOIN r_role_menuitem rmi ON (
-			mi.ID = rmi.ITEMID
-			AND rmi.ROLEID = #{roleid}
-		)
-		WHERE
-			mi.MENUID = m.ID
-		AND m.SYSTEMID = #{systemid}
-		AND m. STATUS <![CDATA[<>]]> 'D'
-		AND mi. STATUS <![CDATA[<>]]> 'D'
-	)) t ORDER BY t.SORT ASC
+  ORDER BY m.SORT ASC
   
   </select>
+
+  <select id="selectAsZTreeNodeByRoleAndSystemidForSettingItem" parameterType="java.util.HashMap" resultType="org.hanzhdy.web.bean.ZTreeNode">
+  SELECT
+		concat('m_',m.ID) AS id,
+		m.MENUNAME AS NAME,
+	IF(m.PARENTID IS NULL OR m.PARENTID='0','0',concat('m_',m.PARENTID)) AS pId,
+		'true' AS OPEN,
+		'true' AS parent,
+	    'false' AS checked,
+		m.SORT AS sort
+	FROM
+		r_menu m,
+		r_role_menu rm
+	WHERE
+		m.SYSTEMID = #{systemid}
+	  AND m.`STATUS` <![CDATA[<>]]> 'D'
+	  AND m.ID = rm.MENUID
+	  AND rm.ROLEID = #{roleid}
+  ORDER BY m.SORT ASC
+  </select>
+
   <select id="selectByUserAndSystemid" parameterType="java.util.HashMap" resultType="org.hanzhdy.manager.upc.vo.Resource">
 SELECT
 	m.ID AS id,

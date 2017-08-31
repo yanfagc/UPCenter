@@ -6,6 +6,7 @@ import org.hanzhdy.manager.engine.EngineContext;
 import org.hanzhdy.manager.support.bean.SessionUser;
 import org.hanzhdy.manager.support.constants.WebConstants;
 import org.hanzhdy.manager.support.constants.resp.RespCode;
+import org.hanzhdy.web.bean.DatatableResult;
 import org.hanzhdy.web.controller.AbstractController;
 import org.hanzhdy.web.throwable.BizStatus;
 import org.springframework.beans.factory.annotation.Value;
@@ -52,5 +53,12 @@ public class ApplicationController extends AbstractController {
         EngineContext context = new EngineContext(request);
         
         return context;
+    }
+
+    protected DatatableResult getEmptyDatatableResult() {
+        DatatableResult datatableResult = new DatatableResult();
+        datatableResult.setTotal(0);
+        datatableResult.setAaData(new Object[0]);
+        return datatableResult;
     }
 }

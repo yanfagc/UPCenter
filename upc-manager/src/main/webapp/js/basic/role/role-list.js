@@ -50,15 +50,15 @@ $(function() {
                 	mData:null,
                 	sClass:"text-center",
                 	mRender:function(data, display, record) {
-                		return '<a class="btn btn-primary btn-xs toSettingResources" fid="'+record.id
+                		return '<a class="btn btn-primary btn-xs toSettingMenus" fid="'+record.id
                 				+'" sysid="'+record.systemId+'" href="javascript:void(0);">&nbsp;菜单权限&nbsp;</a>&nbsp;';
                 	}
                 },{
                 	mData:null,
                 	sClass:"text-center",
                 	mRender:function(data, display, record) {
-                		return '<a class="btn btn-primary btn-xs toEdit" fid="'+record.id
-                        		+'" href="javascript:void(0);">&nbsp;权限设置&nbsp;</a>&nbsp;';
+                		return '<a class="btn btn-primary btn-xs toSettingItems" fid="'+record.id
+                            +'" sysid="'+record.systemId+'" href="javascript:void(0);">&nbsp;权限设置&nbsp;</a>&nbsp;';
                 	}
                 },{
                     mData:null,
@@ -101,11 +101,18 @@ $(function() {
         openWindow($ctx+'/basic/role/toEdit',750,350);
     });
     
-    // 菜单权限
-    $('tbody').on("click", '.toSettingResources', function(){
+    // 角色菜单
+    $('tbody').on("click", '.toSettingMenus', function(){
     	var roleid=$(this).attr("fid");
     	var sysid=$(this).attr("sysid");
-    	openWindow($ctx+'/basic/role/toSettingResources?roleid='+roleid+'&sysid='+sysid,550,480);
+    	openWindow($ctx+'/basic/role/toSettingMenus?roleid='+roleid+'&sysid='+sysid,550,480);
+    });
+
+    // 角色权限
+    $('tbody').on("click", '.toSettingItems', function(){
+        var roleid=$(this).attr("fid");
+        var sysid=$(this).attr("sysid");
+        openWindow($ctx+'/basic/role/toSettingItems?roleid='+roleid+'&sysid='+sysid,850,480);
     });
     
     // 编辑

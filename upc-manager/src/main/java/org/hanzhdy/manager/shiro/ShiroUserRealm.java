@@ -69,6 +69,10 @@ public class ShiroUserRealm extends AuthorizingRealm {
         if (LoginUserStatus.D == user.getStatus()) {
             throw new DisabledAccountException("帐号被注销，禁止访问！");
         }
+
+        if (LoginUserStatus.N != user.getStatus()) {
+            throw new DisabledAccountException("帐号状态异常，禁止访问！");
+        }
     
 //        String password = null;
 //        if (token.getCredentials() instanceof String) {

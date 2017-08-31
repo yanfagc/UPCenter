@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>角色权限设置</title>
+    <title>角色菜单设置</title>
     <jsp:include page="/WEB-INF/jsp/commons/editheader.jsp" />
     <link href="${ctx}/plugins/ztree_v3/css/zTreeStyle.css" rel="stylesheet" type="text/css" />
   </head>
@@ -11,12 +11,12 @@
     <nav class="navbar navbar-default navbar-fixed-top" style="min-height:40px;">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="javascript:void(0);" style="height:40px;line-height:8px;">角色权限设置</a>
+          <a class="navbar-brand" href="javascript:void(0);" style="height:40px;line-height:8px;">角色菜单设置</a>
         </div>
       </div>
     </nav>
     <div class="container" style="width:100%;margin-top:50px;padding-left:10px;padding-right:10px;height:430px;overflow-y:auto;">
-      <form id="submitForm" class="form-horizontal" action="${ctx}/basic/role/saveResources" method="POST">
+      <form id="submitForm" class="form-horizontal" action="${ctx}/basic/role/saveRoleMenus" method="POST">
         <input type="hidden" name="roleid" value="${roleid}"/>
         <input type="hidden" name="resources" id="resources"/>
       </form>
@@ -34,5 +34,5 @@
   <jsp:include page="/WEB-INF/jsp/commons/editfooter.jsp" />
   <script type="text/javascript">var zNodes=${nodeList};</script>
   <script type="text/javascript" src="${ctx}/plugins/ztree_v3/js/jquery.ztree.all.js"></script>
-  <script src="${ctx}/js/basic/role/role-setting.js<c:if test='${not empty crm}'>?${crm}</c:if>" type="text/javascript"></script>
+  <script src="${ctx}/js/basic/role/role-settingMenu.js<c:if test='${not empty crm}'>?${crm}</c:if>" type="text/javascript"></script>
 </html>

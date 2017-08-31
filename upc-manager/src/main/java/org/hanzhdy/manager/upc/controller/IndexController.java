@@ -1,10 +1,7 @@
 package org.hanzhdy.manager.upc.controller;
 
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.ExcessiveAttemptsException;
-import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
 import org.hanzhdy.manager.support.bean.SessionUser;
 import org.hanzhdy.manager.support.constants.WebConstants;
@@ -98,11 +95,11 @@ public class IndexController extends ApplicationController {
             UsernamePasswordToken token = new UsernamePasswordToken(username, password);
             Subject subject = SecurityUtils.getSubject();
             subject.login(token);
-            
+
             SessionUser user = this.loginService.getSessionUserByAccount(username);
-//            super.setSessionUser(request, user);
+            // super.setSessionUser(request, user);
             subject.getSession().setAttribute(WebConstants.SESSION_USER, user);
-            
+
             // 记录日志
             this.loginLogService.insert(user, HttpUtils.getRealIp(request), "用户[" + username + "]登录系统");
             
@@ -119,6 +116,14 @@ public class IndexController extends ApplicationController {
         catch (ExcessiveAttemptsException ex) {
             logger.warn("用户: {} 登录失败: 登录次数过多", username);
             return RespResult.create(respCode.LOGIN_EXCESSIVE_ATTEMPTS);
+        }
+        catch (LockedAccountException ex) {
+            logger.warn("用户: {} 登录失败：帐号被锁定", username);
+            return RespResult.create(respCode.LOGIN_USER_LOCKED);
+        }
+        catch (DisabledAccountException ex) {
+            logger.warn("用户: {} 登录失败，状态冻结或注销", username);
+            return RespResult.create(respCode.LOGIN_USER_FROZEN);
         }
         catch (IncorrectCredentialsException | UnknownAccountException ex) {
             logger.warn("用户: {} 登录失败: 错误的用户名或密码", username);
