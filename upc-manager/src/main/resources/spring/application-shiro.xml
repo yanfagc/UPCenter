@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!-- cacheManager -->
     <bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager">
@@ -12,7 +19,7 @@
     </bean>
 
     <!-- Realm实现 -->
-    <bean id="userRealm" class="org.hanzhdy.manager.shiro.ShrioUserRealm">
+    <bean id="userRealm" class="org.hanzhdy.manager.shiro.ShiroUserRealm">
         <property name="credentialsMatcher" ref="credentialsMatcher"/>
         <!--<property name="cachingEnabled" value="true"/>
         <property name="authenticationCachingEnabled" value="true"/>
@@ -24,6 +31,13 @@
     <!-- 会话ID生成器 -->
     <bean id="sessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator"/>
 
+    <!-- 会话Cookie模板 -->
+    <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <constructor-arg value="sid"/>
+        <property name="httpOnly" value="true"/>
+        <property name="maxAge" value="${shiro.session.timeout}"/>
+    </bean>
+
     <!-- 会话DAO -->
     <bean id="sessionDAO"
           class="org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO">
@@ -34,17 +48,19 @@
     <!-- 会话验证调度器 -->
     <bean id="sessionValidationScheduler"
           class="org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler">
-        <property name="sessionValidationInterval" value="1800000"/>
+        <property name="sessionValidationInterval" value="${shiro.session.timeout}"/>
         <property name="sessionManager" ref="sessionManager"/>
     </bean>
 
     <!-- 会话管理器 -->
-    <bean id="sessionManager" class="org.apache.shiro.session.mgt.DefaultSessionManager">
-        <property name="globalSessionTimeout" value="1800000"/>
+    <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+        <property name="globalSessionTimeout" value="${shiro.session.timeout}"/>
         <property name="deleteInvalidSessions" value="true"/>
         <property name="sessionValidationSchedulerEnabled" value="true"/>
         <property name="sessionValidationScheduler" ref="sessionValidationScheduler"/>
         <property name="sessionDAO" ref="sessionDAO"/>
+        <property name="sessionIdCookieEnabled" value="true"/>
+        <property name="sessionIdCookie" ref="sessionIdCookie"/>
     </bean>
 
     <!-- 安全管理器 -->
@@ -58,11 +74,29 @@
         <property name="cacheManager" ref="cacheManager"/>
     </bean>
 
+    <!-- 基于Form表单的身份验证过滤器 -->
+    <bean id="formAuthenticationFilter"
+          class="org.apache.shiro.web.filter.authc.FormAuthenticationFilter">
+        <property name="usernameParam" value="j_username"/>
+        <property name="passwordParam" value="j_password"/>
+        <property name="loginUrl" value="${shiro.login}"/>
+    </bean>
+
+    <!-- 权限验证 -->
+    <bean id="shiroPermissionFilter" class="org.hanzhdy.manager.shiro.ShiroPermissionFilter"></bean>
+
     <!-- web.xml shiroFilter -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
-        <property name="loginUrl" value="/login"/>
-        <property name="unauthorizedUrl" value="/unauthorized"/>
+        <property name="loginUrl" value="${shiro.login}"/>
+        <property name="unauthorizedUrl" value="${shiro.unauthorized}"/>
+
+        <property name="filters">
+            <util:map>
+                <entry key="authc" value-ref="formAuthenticationFilter"/>
+                <entry key="permission" value-ref="shiroPermissionFilter"/>
+            </util:map>
+        </property>
 
         <property name="filterChainDefinitions">
             <value>
@@ -73,6 +107,8 @@
                 /logo.png    = anon
                 /login       = anon
                 /logout      = logout
+                /index       = authc
+                /            = authc
                 /**          = authc
             </value>
         </property>

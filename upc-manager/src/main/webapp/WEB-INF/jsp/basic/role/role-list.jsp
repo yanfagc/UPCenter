@@ -62,15 +62,14 @@
               <table id="dataList" class="table table-bordered table-hover">
                 <thead>
                   <tr>
-                    <th class="text-center" style="width:10%">角色编码</th>
-                    <th class="text-center" style="width:12%">角色名称</th>
-                    <th class="text-center" style="width:12%">角色分组</th>
-                    <th class="text-center" style="width:12%">接入系统</th>
+                    <th class="text-center" style="width:12%">角色编码</th>
+                    <th class="text-center" style="width:14%">角色名称</th>
+                    <th class="text-center" style="width:14%">角色分组</th>
+                    <th class="text-center" style="width:15%">接入系统</th>
                     <th class="text-center" style="width:10%">状态</th>
-                    <th class="text-center" style="width:12%">创建时间</th>
                     <th class="text-center" style="width:10%">菜单设置</th>
                     <th class="text-center" style="width:10%">权限设置</th>
-                    <th class="text-center" style="width:12%">操作</th>
+                    <th class="text-center" style="width:15%">操作</th>
                   </tr>
                 </thead>
                 <tbody></tbody>

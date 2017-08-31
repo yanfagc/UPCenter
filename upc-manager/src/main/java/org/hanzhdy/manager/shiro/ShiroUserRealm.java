@@ -20,7 +20,7 @@ import java.util.Set;
  * User Realm
  * Created by H.CAAHN on 2017/8/12.
  */
-public class ShrioUserRealm extends AuthorizingRealm {
+public class ShiroUserRealm extends AuthorizingRealm {
     @Autowired
     private LoginService loginService;
     

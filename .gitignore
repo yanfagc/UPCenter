@@ -3,3 +3,6 @@
 upc.iml
 upc-manager/upc-manager.iml
 upc-manager/target
+
+upc-client/upc-client.iml
+upc-client/target
