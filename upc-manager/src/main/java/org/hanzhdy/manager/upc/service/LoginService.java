@@ -81,6 +81,19 @@ public class LoginService extends AbstractUpcService {
         return su;
     }
     
+    public SessionUser getSessionUserByAccount(String account) {
+        UserVo user = userManagerService.queryByAccount(account);
+        if (user == null) {
+            throw new LocalBizException(respCode.LOGIN_ILLEGAL_USER_PWD);
+        }
+        SessionUser su = new SessionUser();
+        su.setAccount(user.getAccount());
+        su.setId(user.getId());
+        su.setNickname(user.getNickname());
+        su.setStatus(user.getStatus());
+        return su;
+    }
+    
     /**
      * 查询指定帐号所拥有的角色集合
      * @param userid
@@ -118,8 +131,8 @@ public class LoginService extends AbstractUpcService {
         List<MenuItem> itemList = this.menuItemService.queryByUserAndSysid(userid, systemid);
         if (itemList != null && !itemList.isEmpty()) {
             for (MenuItem item : itemList) {
-                if (StringUtils.isNotBlank(item.getItemurl())) {
-                    result.add(item.getItemurl());
+                if (StringUtils.isNotBlank(item.getResource())) {
+                    result.add(item.getResource());
                 }
             }
         }

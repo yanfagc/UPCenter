@@ -20,8 +20,14 @@ public class RetryLimitHashedCredentialsMatcher extends HashedCredentialsMatcher
     @Override
     public boolean doCredentialsMatch(AuthenticationToken token, AuthenticationInfo info) {
         String account = (String)token.getPrincipal();
-        String password = (String)token.getCredentials();
-        boolean matches = this.userManagerService.checkPwd(account, (String)info.getCredentials(), password);
+        String password = null;
+        if (token.getCredentials() instanceof String) {
+            password = (String)token.getCredentials();
+        }
+        else {
+            password = new String((char[]) token.getCredentials());
+        }
+        boolean matches = this.userManagerService.checkPwd(account, password, (String)info.getCredentials());
         return matches;
     }
 }

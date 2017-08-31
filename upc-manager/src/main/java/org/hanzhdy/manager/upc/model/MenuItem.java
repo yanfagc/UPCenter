@@ -3,7 +3,6 @@ package org.hanzhdy.manager.upc.model;
 import java.io.Serializable;
 import java.util.Date;
 import org.hanzhdy.manager.support.enums.CommonStatus;
-import org.hanzhdy.manager.support.enums.URLType;
 
 public class MenuItem implements Serializable {
     public static final long serialVersionUID = -1628638626L;
@@ -39,16 +38,10 @@ public class MenuItem implements Serializable {
     private String itemicon;
 
     /**
-     * 地址类型.M菜单目录(无地址),R相对地址,A绝对地址: r_menuitem.URLTYPE
+     * URL地址: r_menuitem.RESOURCE
      * @author MyBatis Generator
      */
-    private URLType urltype;
-
-    /**
-     * URL地址: r_menuitem.ITEMURL
-     * @author MyBatis Generator
-     */
-    private String itemurl;
+    private String resource;
 
     /**
      * 排序: r_menuitem.SORT
@@ -177,39 +170,21 @@ public class MenuItem implements Serializable {
     }
 
     /**
-     * 获取地址类型.M菜单目录(无地址),R相对地址,A绝对地址: r_menuitem.URLTYPE
-     * @return 地址类型.M菜单目录(无地址),R相对地址,A绝对地址: r_menuitem.URLTYPE
+     * 获取URL地址: r_menuitem.RESOURCE
+     * @return URL地址: r_menuitem.RESOURCE
      * @author MyBatis Generator
      */
-    public URLType getUrltype() {
-        return urltype;
+    public String getResource() {
+        return resource;
     }
 
     /**
-     * 设置地址类型.M菜单目录(无地址),R相对地址,A绝对地址: r_menuitem.URLTYPE
-     * @param urltype 映射数据库字段: r_menuitem.URLTYPE
+     * 设置URL地址: r_menuitem.RESOURCE
+     * @param resource 映射数据库字段: r_menuitem.RESOURCE
      * @author MyBatis Generator
      */
-    public void setUrltype(URLType urltype) {
-        this.urltype = urltype;
-    }
-
-    /**
-     * 获取URL地址: r_menuitem.ITEMURL
-     * @return URL地址: r_menuitem.ITEMURL
-     * @author MyBatis Generator
-     */
-    public String getItemurl() {
-        return itemurl;
-    }
-
-    /**
-     * 设置URL地址: r_menuitem.ITEMURL
-     * @param itemurl 映射数据库字段: r_menuitem.ITEMURL
-     * @author MyBatis Generator
-     */
-    public void setItemurl(String itemurl) {
-        this.itemurl = itemurl == null ? null : itemurl.trim();
+    public void setResource(String resource) {
+        this.resource = resource == null ? null : resource.trim();
     }
 
     /**

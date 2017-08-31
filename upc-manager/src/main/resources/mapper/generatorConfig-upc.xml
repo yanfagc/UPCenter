@@ -61,7 +61,6 @@
         	<columnOverride column="ID" property="id" javaType="java.lang.Long" jdbcType="NUMERIC" />
         	<columnOverride column="MENUID" property="menuId" javaType="java.lang.Long" jdbcType="NUMERIC" />
         	<columnOverride column="SORT" property="sort" javaType="java.lang.Short" jdbcType="NUMERIC" />
-        	<columnOverride column="URLTYPE" property="urltype" javaType="org.hanzhdy.manager.support.enums.URLType" jdbcType="VARCHAR" />
         	<columnOverride column="STATUS" property="status" javaType="org.hanzhdy.manager.support.enums.CommonStatus" jdbcType="VARCHAR" />
 			<columnOverride column="CREATETIME" property="createtime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
 			<columnOverride column="UPDATETIME" property="updatetime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>

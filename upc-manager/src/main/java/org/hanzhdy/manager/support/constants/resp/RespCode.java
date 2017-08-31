@@ -42,6 +42,9 @@ public class RespCode {
 
     /** 登录失败，用户被冻结 */
     public final BizStatus        LOGIN_USER_FROZEN         = null;
+    
+    /** 登录失败，登录次数过多 */
+    public final BizStatus        LOGIN_EXCESSIVE_ATTEMPTS = null;
 
     /** 数据保存失败，未找到记录 */
     public final BizStatus        SAVE_NORECORD             = null;

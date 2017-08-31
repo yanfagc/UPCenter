@@ -69,7 +69,22 @@ public class ShrioUserRealm extends AuthorizingRealm {
         if (LoginUserStatus.D == user.getStatus()) {
             throw new DisabledAccountException("帐号被注销，禁止访问！");
         }
-        
+    
+//        String password = null;
+//        if (token.getCredentials() instanceof String) {
+//            password = (String)token.getCredentials();
+//        }
+//        else {
+//            password = new String((char[]) token.getCredentials());
+//        }
+//
+//        String pwdstr = password + "$" + account;
+//        String encstr = SecurityUtils.encryptSHA256String(pwdstr);
+//        boolean check = StringUtils.equalsIgnoreCase(encstr, user.getPassword());
+//
+//        if (!check) {
+//            throw new UnknownAccountException("用户名或密码错误");
+//        }
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user.getAccount(), user.getPassword(), getName());
         return authenticationInfo;
     }

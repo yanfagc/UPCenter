@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.hanzhdy.manager.support.enums.CommonStatus;
-import org.hanzhdy.manager.support.enums.URLType;
 import org.hanzhdy.web.bean.Page;
 
 public class MenuItemExample {
@@ -538,143 +537,73 @@ public class MenuItemExample {
             return (Criteria) this;
         }
 
-        public Criteria andUrltypeIsNull() {
-            addCriterion("URLTYPE is null");
+        public Criteria andResourceIsNull() {
+            addCriterion("RESOURCE is null");
             return (Criteria) this;
         }
 
-        public Criteria andUrltypeIsNotNull() {
-            addCriterion("URLTYPE is not null");
+        public Criteria andResourceIsNotNull() {
+            addCriterion("RESOURCE is not null");
             return (Criteria) this;
         }
 
-        public Criteria andUrltypeEqualTo(URLType value) {
-            addCriterion("URLTYPE =", value, "urltype");
+        public Criteria andResourceEqualTo(String value) {
+            addCriterion("RESOURCE =", value, "resource");
             return (Criteria) this;
         }
 
-        public Criteria andUrltypeNotEqualTo(URLType value) {
-            addCriterion("URLTYPE <>", value, "urltype");
+        public Criteria andResourceNotEqualTo(String value) {
+            addCriterion("RESOURCE <>", value, "resource");
             return (Criteria) this;
         }
 
-        public Criteria andUrltypeGreaterThan(URLType value) {
-            addCriterion("URLTYPE >", value, "urltype");
+        public Criteria andResourceGreaterThan(String value) {
+            addCriterion("RESOURCE >", value, "resource");
             return (Criteria) this;
         }
 
-        public Criteria andUrltypeGreaterThanOrEqualTo(URLType value) {
-            addCriterion("URLTYPE >=", value, "urltype");
+        public Criteria andResourceGreaterThanOrEqualTo(String value) {
+            addCriterion("RESOURCE >=", value, "resource");
             return (Criteria) this;
         }
 
-        public Criteria andUrltypeLessThan(URLType value) {
-            addCriterion("URLTYPE <", value, "urltype");
+        public Criteria andResourceLessThan(String value) {
+            addCriterion("RESOURCE <", value, "resource");
             return (Criteria) this;
         }
 
-        public Criteria andUrltypeLessThanOrEqualTo(URLType value) {
-            addCriterion("URLTYPE <=", value, "urltype");
+        public Criteria andResourceLessThanOrEqualTo(String value) {
+            addCriterion("RESOURCE <=", value, "resource");
             return (Criteria) this;
         }
 
-        public Criteria andUrltypeLike(URLType value) {
-            addCriterion("URLTYPE like", value, "urltype");
+        public Criteria andResourceLike(String value) {
+            addCriterion("RESOURCE like", value, "resource");
             return (Criteria) this;
         }
 
-        public Criteria andUrltypeNotLike(URLType value) {
-            addCriterion("URLTYPE not like", value, "urltype");
+        public Criteria andResourceNotLike(String value) {
+            addCriterion("RESOURCE not like", value, "resource");
             return (Criteria) this;
         }
 
-        public Criteria andUrltypeIn(List<URLType> values) {
-            addCriterion("URLTYPE in", values, "urltype");
+        public Criteria andResourceIn(List<String> values) {
+            addCriterion("RESOURCE in", values, "resource");
             return (Criteria) this;
         }
 
-        public Criteria andUrltypeNotIn(List<URLType> values) {
-            addCriterion("URLTYPE not in", values, "urltype");
+        public Criteria andResourceNotIn(List<String> values) {
+            addCriterion("RESOURCE not in", values, "resource");
             return (Criteria) this;
         }
 
-        public Criteria andUrltypeBetween(URLType value1, URLType value2) {
-            addCriterion("URLTYPE between", value1, value2, "urltype");
+        public Criteria andResourceBetween(String value1, String value2) {
+            addCriterion("RESOURCE between", value1, value2, "resource");
             return (Criteria) this;
         }
 
-        public Criteria andUrltypeNotBetween(URLType value1, URLType value2) {
-            addCriterion("URLTYPE not between", value1, value2, "urltype");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemurlIsNull() {
-            addCriterion("ITEMURL is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemurlIsNotNull() {
-            addCriterion("ITEMURL is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemurlEqualTo(String value) {
-            addCriterion("ITEMURL =", value, "itemurl");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemurlNotEqualTo(String value) {
-            addCriterion("ITEMURL <>", value, "itemurl");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemurlGreaterThan(String value) {
-            addCriterion("ITEMURL >", value, "itemurl");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemurlGreaterThanOrEqualTo(String value) {
-            addCriterion("ITEMURL >=", value, "itemurl");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemurlLessThan(String value) {
-            addCriterion("ITEMURL <", value, "itemurl");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemurlLessThanOrEqualTo(String value) {
-            addCriterion("ITEMURL <=", value, "itemurl");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemurlLike(String value) {
-            addCriterion("ITEMURL like", value, "itemurl");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemurlNotLike(String value) {
-            addCriterion("ITEMURL not like", value, "itemurl");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemurlIn(List<String> values) {
-            addCriterion("ITEMURL in", values, "itemurl");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemurlNotIn(List<String> values) {
-            addCriterion("ITEMURL not in", values, "itemurl");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemurlBetween(String value1, String value2) {
-            addCriterion("ITEMURL between", value1, value2, "itemurl");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemurlNotBetween(String value1, String value2) {
-            addCriterion("ITEMURL not between", value1, value2, "itemurl");
+        public Criteria andResourceNotBetween(String value1, String value2) {
+            addCriterion("RESOURCE not between", value1, value2, "resource");
             return (Criteria) this;
         }
 

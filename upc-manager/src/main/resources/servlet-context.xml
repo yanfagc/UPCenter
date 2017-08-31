@@ -88,8 +88,8 @@
 	</bean>  
 	
 	<!-- 拦截器  -->
-    <mvc:interceptors>
-        <!--登录拦截器-->
+    <!--<mvc:interceptors>
+        &lt;!&ndash;登录拦截器&ndash;&gt;
         <mvc:interceptor>
             <mvc:mapping path="/"/>
             <mvc:mapping path="/index"/>
@@ -97,7 +97,7 @@
             <mvc:mapping path="/basic/**"/>
             <bean class="org.hanzhdy.manager.support.session.CheckSessionInterceptor"/>
         </mvc:interceptor>
-    </mvc:interceptors>
+    </mvc:interceptors>-->
 	
     <mvc:annotation-driven conversion-service="conversionService"></mvc:annotation-driven>
     <mvc:default-servlet-handler/>

@@ -50,19 +50,9 @@
             <td style="width:32%;padding:4px;">
               <input name="sort" class="form-control input-sm myspan6" type="text" placeholder="排序（0~999）" value="${record.sort}">
             </td>
-            <td style="width:16%;text-align:right;"><span class="red">&nbsp;*&nbsp;</span>地址类型：</td>
-            <td style="width:32%;padding:4px;">
-              <select name="urltype" class="form-control input-sm myspan6">
-                <option value="0" ${record.urltype eq '0'?'selected="selected"':''}>无地址</option>
-                <option value="1" ${record.urltype eq '1'?'selected="selected"':''}>内部地址</option>
-                <option value="2" ${record.urltype eq '2'?'selected="selected"':''}>外部地址</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td style="width:16%;text-align:right;">访问地址：</td>
-            <td colspan="3" style="padding:4px;">
-              <input name="itemurl" class="form-control input-sm myspanAll" type="text" placeholder="访问地址" value="${record.itemurl}">
+            <td style="width:16%;text-align:right;">权限资源：</td>
+            <td style="padding:4px;">
+              <input name="resource" class="form-control input-sm myspan6" type="text" placeholder="权限资源" value="${record.resource}">
             </td>
           </tr>
         </table>

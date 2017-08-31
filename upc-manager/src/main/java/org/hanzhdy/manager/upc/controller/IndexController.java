@@ -1,6 +1,13 @@
 package org.hanzhdy.manager.upc.controller;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.ExcessiveAttemptsException;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.hanzhdy.manager.support.bean.SessionUser;
+import org.hanzhdy.manager.support.constants.WebConstants;
 import org.hanzhdy.manager.support.constants.resp.RespResult;
 import org.hanzhdy.manager.support.controller.ApplicationController;
 import org.hanzhdy.manager.upc.model.AccessSystem;
@@ -88,9 +95,14 @@ public class IndexController extends ApplicationController {
     public Object login(@RequestParam("j_username") String username, @RequestParam("j_password") String password,
             @RequestParam("j_captcha") String captcha, HttpServletRequest request) {
         try {
-            SessionUser user = this.loginService.insertByCheckLogin(username, password, captcha);
-            super.setSessionUser(request, user);
-    
+            UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+            Subject subject = SecurityUtils.getSubject();
+            subject.login(token);
+            
+            SessionUser user = this.loginService.getSessionUserByAccount(username);
+//            super.setSessionUser(request, user);
+            subject.getSession().setAttribute(WebConstants.SESSION_USER, user);
+            
             // 记录日志
             this.loginLogService.insert(user, HttpUtils.getRealIp(request), "用户[" + username + "]登录系统");
             
@@ -100,9 +112,17 @@ public class IndexController extends ApplicationController {
         catch (BizException ex) {
             int code = ex.getCode();
             if (code == respCode.LOGIN_ILLEGAL_IMGTOKEN.getCode()) {
-                logger.error("验证码错误：{}, {}", username, captcha);
+                logger.warn("用户: {} 登录失败: 验证码错误：{}", username, captcha);
             }
             return RespResult.create(ex.getStatus());
+        }
+        catch (ExcessiveAttemptsException ex) {
+            logger.warn("用户: {} 登录失败: 登录次数过多", username);
+            return RespResult.create(respCode.LOGIN_EXCESSIVE_ATTEMPTS);
+        }
+        catch (IncorrectCredentialsException | UnknownAccountException ex) {
+            logger.warn("用户: {} 登录失败: 错误的用户名或密码", username);
+            return RespResult.create(respCode.LOGIN_ILLEGAL_USER_PWD);
         }
         catch (Exception ex) {
             logger.error("登录失败，内部服务错误", ex);

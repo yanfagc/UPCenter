@@ -1,5 +1,7 @@
 package org.hanzhdy.manager.support.controller;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.hanzhdy.manager.engine.EngineContext;
 import org.hanzhdy.manager.support.bean.SessionUser;
 import org.hanzhdy.manager.support.constants.WebConstants;
@@ -9,7 +11,6 @@ import org.hanzhdy.web.throwable.BizStatus;
 import org.springframework.beans.factory.annotation.Value;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 /**
  * @description 应用Controller
@@ -29,18 +30,22 @@ public class ApplicationController extends AbstractController {
     }
     
     protected void setSessionUser(HttpServletRequest request, SessionUser sessionUser) {
-        HttpSession session = request.getSession();
-        session.setAttribute(WebConstants.SESSION_USER, sessionUser);
+        Subject subject = SecurityUtils.getSubject();
+        subject.getSession().setAttribute(WebConstants.SESSION_USER, sessionUser);
     }
     
     protected void removeSessionUser(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        session.removeAttribute(WebConstants.SESSION_USER);
+//        HttpSession session = request.getSession();
+//        session.removeAttribute(WebConstants.SESSION_USER);
+        Subject subject = SecurityUtils.getSubject();
+        subject.getSession().removeAttribute(WebConstants.SESSION_USER);
     }
     
     protected SessionUser getSessionUser(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        return (SessionUser)session.getAttribute(WebConstants.SESSION_USER);
+//        HttpSession session = request.getSession();
+//        return (SessionUser)session.getAttribute(WebConstants.SESSION_USER);
+        Subject subject = SecurityUtils.getSubject();
+        return (SessionUser) subject.getSession().getAttribute(WebConstants.SESSION_USER);
     }
     
     protected EngineContext getEngineContext(HttpServletRequest request) {

@@ -11,8 +11,8 @@
       i.ID AS id,
       i.ITEMCODE AS CODE,
       i.ITEMNAME AS NAME,
-      i.URLTYPE AS urltype,
-      i.ITEMURL AS url,
+      'RES' AS urltype,
+      i.RESOURCE AS url,
       i.STATUS AS status,
       i.SORT AS sort
     FROM r_menuitem i
@@ -25,9 +25,6 @@
   WHERE i.MENUID = #{parentid}
     <if test="searchkey!=null and searchkey!=''">
     AND (ITEMCODE LIKE #{searchkey} OR ITEMCODE LIKE #{searchkey})
-    </if>
-    <if test="urltype!=null and urltype!=''">
-    AND URLTYPE=#{urltype}
     </if>
     <if test="status!=null and status!=''">
     AND STATUS=#{status}

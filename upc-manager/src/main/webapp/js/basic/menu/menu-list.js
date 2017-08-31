@@ -61,6 +61,8 @@ $(function() {
                             return '内部地址';
                         }else if(data=='A'){
                             return '外部地址';
+                        }else if(data=='RES'){
+                            return '权限资源';
                         }
                         return data?'未知('+data+')':'未知(空)';
                     }

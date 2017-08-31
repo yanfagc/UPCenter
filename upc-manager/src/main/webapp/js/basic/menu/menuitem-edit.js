@@ -18,7 +18,7 @@ $(function() {
                 min:0,
                 max:999
             },
-            itemurl:{
+            resource:{
                 maxlength:128
             }
         },
@@ -36,8 +36,8 @@ $(function() {
                 min:"排序值不能小于0",
                 max:"排序值不能大于999"
             },
-            itemurl:{
-                maxlength:"访问地址不能大于128位"
+            resource:{
+                maxlength:"权限资源不能大于128位"
             }
         }
     });

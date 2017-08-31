@@ -24,6 +24,8 @@ $(function() {
                 },
                 {
                     mData:"logintime",
+                    sClass:"text-center",
+                    sWidth:null,
                     mRender:function(data, display, record) {
                         return data?formatDatetime(data):'';
                     }
