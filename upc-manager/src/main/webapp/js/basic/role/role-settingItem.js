@@ -26,25 +26,25 @@ $(function() {
                     mData:null,
                     sClass:"text-center",
                     mRender:function(data, display, record){
-                        return '<input type="checkbox" value="'+record.id+'"/>';
+                        return '<input name="checkedId" type="checkbox" value="mi_'+record.id+'"'+(record.checked?'checked="checked"':'')+'/>';
                     }
                 },{
-                    mData:"itemcode",
+                    mData:"name",
                     mRender:function(data, display, record){
                         return (data==0||data)?data:'';
                     }
                 },{
-                    mData:"itemname",
-                    mRender:function(data, display, record){
-                        return (data==0||data)?data:'';
-                    }
-                },{
-                    mData:"resource",
+                    mData:"url",
                     mRender:function(data, display, record){
                         return (data==0||data)?data:'';
                     }
                 }]
         }));
+
+    $('#dataList').on('click','tbody tr',function(){
+        var $this=$(this);
+        $this
+    });
 
 	// 提交按钮事件
     $(".submit").on("click",function() {
@@ -57,11 +57,7 @@ $(function() {
                 if(rsp.code=='1000'){
                     showTipsDialog("保存成功","数据保存成功！",function() {
                         closeDialog();
-                        window.close();
                     });
-                    if(window.opener){
-                        opener.search();
-                    }
                 }else{
                     var msg=rsp.msg?rsp.msg:"数据保存失败，请联系管理员或稍后再试！";
                     showTipsDialog("错误信息",msg,true);
@@ -83,7 +79,14 @@ function initZTree(data) {
     var setting = {
     	check:{
     		enable:false
-    	}
+    	},
+        callback:{
+    	    onClick:function(event,treeId,node,clickFlag){
+    	        $('#menuid').val(node.id.substr(2));
+                datatable.fnClearTable(0);
+                datatable.fnDraw();
+            }
+        }
     };
     zNodeFilter(data,1);
     $.fn.zTree.init($("#menuTree"), setting, data);
@@ -103,12 +106,13 @@ function zNodeFilter(dataList,deep){
 }
 
 function settingResource(){
-    var checked=$.fn.zTree.getZTreeObj('menuTree').getCheckedNodes();
     var resources=[];
-    for(var i=0;i<checked.length;i++){
-        resources.push(checked[i].id);
-    }
+    $.each($('input[name="checkedId"]:checked'),function(i,v){
+        resources.push($(v).val());
+    });
     if(resources.length>0){
         $('#resources').val(JSON.stringify(resources));
+    }else{
+        $('#resources').val('');
     }
 }

@@ -15,9 +15,6 @@ $(function() {
                         closeDialog();
                         window.close();
                     });
-                    if(window.opener){
-                        opener.search();
-                    }
                 }else{
                     var msg=rsp.msg?rsp.msg:"数据保存失败，请联系管理员或稍后再试！";
                     showTipsDialog("错误信息",msg,true);
@@ -66,5 +63,7 @@ function settingResource(){
     }
     if(resources.length>0){
         $('#resources').val(JSON.stringify(resources));
+    }else{
+        $('#resources').val('');
     }
 }

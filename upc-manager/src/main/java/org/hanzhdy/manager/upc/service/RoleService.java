@@ -8,6 +8,7 @@ import org.hanzhdy.manager.support.service.AbstractUpcService;
 import org.hanzhdy.manager.upc.controller.params.RoleParams;
 import org.hanzhdy.manager.upc.mapper.*;
 import org.hanzhdy.manager.upc.model.*;
+import org.hanzhdy.manager.upc.vo.Resource;
 import org.hanzhdy.manager.upc.vo.RoleVo;
 import org.hanzhdy.web.bean.DatatableResult;
 import org.hanzhdy.web.bean.ZTreeNode;
@@ -144,9 +145,10 @@ public class RoleService extends AbstractUpcService {
      * @return
      */
     public DatatableResult queryRoleResourceForSettingItem(Long roleid, Long menuid) {
-
-
+        List<Resource> dataList = this.roleMenuItemMapperExt.selectForSettingRoleResource(roleid, menuid);
         DatatableResult result = new DatatableResult();
+        result.setTotal(dataList.size());
+        result.setAaData(dataList);
         return result;
     }
 
@@ -277,20 +279,23 @@ public class RoleService extends AbstractUpcService {
      */
     public boolean updateRoleMenu(Long id, String menus) {
         this.deleteRoleMenus(id);
-        List<String> array = JSON.parseArray(menus, String.class);
-        if (array != null && !array.isEmpty()) {
-            for (String _menuid : array) {
-                try {
-                    RoleMenuKey r = new RoleMenuKey();
-                    r.setRoleId(id);
-                    r.setMenuId(Long.valueOf(_menuid.substring(2)));
-                    this.roleMenuMapperExt.insert(r);
-                }
-                catch (NumberFormatException ex) {
-                    
+        if (StringUtils.isNotBlank(menus)) {
+            List<String> array = JSON.parseArray(menus, String.class);
+            if (array != null && !array.isEmpty()) {
+                for (String _menuid : array) {
+                    try {
+                        RoleMenuKey r = new RoleMenuKey();
+                        r.setRoleId(id);
+                        r.setMenuId(Long.valueOf(_menuid.substring(2)));
+                        this.roleMenuMapperExt.insert(r);
+                    }
+                    catch (NumberFormatException ex) {
+
+                    }
                 }
             }
         }
+
         return true;
     }
 
@@ -303,16 +308,19 @@ public class RoleService extends AbstractUpcService {
      */
     public boolean updateRoleItem(Long id, Long menuid, String items) {
         this.deleteRoleMenuItems(id, menuid);
-        List<String> array = JSON.parseArray(items, String.class);
-        if (array != null && !array.isEmpty()) {
-            for (String _itemid : array) {
-                try {
-                    RoleMenuItemKey key = new RoleMenuItemKey();
-                    key.setRoleId(id);
-                    key.setItemId(Long.valueOf(_itemid.substring(3)));
-                }
-                catch (NumberFormatException ex) {
+        if (StringUtils.isNotBlank(items)) {
+            List<String> array = JSON.parseArray(items, String.class);
+            if (array != null && !array.isEmpty()) {
+                for (String _itemid : array) {
+                    try {
+                        RoleMenuItemKey key = new RoleMenuItemKey();
+                        key.setRoleId(id);
+                        key.setItemId(Long.valueOf(_itemid.substring(3)));
+                        this.roleMenuItemMapperExt.insert(key);
+                    }
+                    catch (NumberFormatException ex) {
 
+                    }
                 }
             }
         }

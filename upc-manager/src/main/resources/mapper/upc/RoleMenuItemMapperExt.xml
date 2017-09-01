@@ -11,15 +11,16 @@
     DELETE FROM r_role_menuitem WHERE roleid=#{roleid} AND itemid in (SELECT ID FROM r_menuitem WHERE menuid=#{menuid})
     </delete>
 
-    <select id="">
+	<!-- 角色权限设置页面，根据角色和菜单ID，查询资源信息 -->
+    <select id="selectForSettingRoleResource" parameterType="java.util.HashMap" resultType="org.hanzhdy.manager.upc.vo.Resource">
 SELECT
 	rmi.ID AS id,
-	rmi.ITEMCODE AS itemcode,
-	rmi.ITEMNAME AS itemname,
-	rmi.MENUID AS menuid,
-	rmi.RESOURCE AS resource,
+	rmi.ITEMCODE AS code,
+	rmi.ITEMNAME AS name,
+	rmi.MENUID AS parentid,
+	rmi.RESOURCE AS url,
 	rmi.SORT AS sort,
-	r.ROLEID AS roleid
+	IF(r.ROLEID IS NOT NULL, 'true', 'false') AS checked
 FROM
 	(
 		SELECT
@@ -27,12 +28,13 @@ FROM
 		FROM
 			r_menuitem rmi
 		WHERE
-			rmi.MENUID = 10
+			rmi.MENUID = #{menuid}
 		AND rmi. STATUS = 'N'
 	) rmi
 LEFT JOIN r_role_menuitem r ON (
-	r.ROLEID = 1
+	r.ROLEID = #{roleid}
 	AND r.ITEMID = rmi.ID
 )
+ORDER BY rmi.SORT
     </select>
 </mapper>

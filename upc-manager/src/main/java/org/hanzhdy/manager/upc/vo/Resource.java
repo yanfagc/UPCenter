@@ -18,7 +18,9 @@ public class Resource {
     private String url;
     
     private String urltype;
-    
+
+    private Boolean checked;
+
     private Long parentid;
     
     private List<Resource> children;
@@ -85,7 +87,15 @@ public class Resource {
     public void setParentid(Long parentid) {
         this.parentid = parentid;
     }
-    
+
+    public Boolean getChecked() {
+        return checked;
+    }
+
+    public void setChecked(Boolean checked) {
+        this.checked = checked;
+    }
+
     public List<Resource> getChildren() {
         return children;
     }

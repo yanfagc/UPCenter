@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hanzhdy.manager.support.bean.SessionUser;
 import org.hanzhdy.manager.support.constants.resp.RespResult;
 import org.hanzhdy.manager.support.controller.ApplicationController;
@@ -30,6 +31,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+
+import static com.sun.tools.doclint.Entity.and;
 
 /**
  * @description 角色管理
@@ -207,7 +210,11 @@ public class RoleController extends ApplicationController {
     @RequestMapping(value = "toSettingItems", method = RequestMethod.GET)
     public String toSettingItem(Model model, @RequestParam("roleid") Long roleid,
                                 @RequestParam("sysid") Long sysid) {
+        // 查询数据
         List<ZTreeNode> nodeList = this.roleService.queryRoleMenuByIdForSettingItem(roleid, sysid);
+        if (nodeList != null && !nodeList.isEmpty()) {
+            model.addAttribute("menuid", nodeList.get(0).getId().substring(2));
+        }
         model.addAttribute("roleid", roleid);
         model.addAttribute("sysid", sysid);
         model.addAttribute("nodeList", nodeList);
@@ -225,7 +232,7 @@ public class RoleController extends ApplicationController {
     public Object roleItemList(@RequestParam("roleid") Long roleid, @RequestParam("menuid") Long menuid) {
         DatatableResult dataResult = null;
         try {
-            dataResult = roleService.queryAsDatatableResult(params);
+            dataResult = roleService.queryRoleResourceForSettingItem(roleid, menuid);
         }
         catch (BizException ex) {
             dataResult = super.getEmptyDatatableResult();

@@ -1,6 +1,9 @@
 package org.hanzhdy.manager.upc.mapper;
 
 import org.apache.ibatis.annotations.Param;
+import org.hanzhdy.manager.upc.vo.Resource;
+
+import java.util.List;
 
 public interface RoleMenuItemMapperExt extends RoleMenuItemMapper {
     /**
@@ -17,4 +20,12 @@ public interface RoleMenuItemMapperExt extends RoleMenuItemMapper {
      * @return
      */
     int deleteByRoleAndMenuid(@Param("roleid") Long roleid, @Param("menuid") Long menuid);
+
+    /**
+     * 角色权限设置页面，根据角色和菜单ID，查询资源信息
+     * @param roleid
+     * @param menuid
+     * @return
+     */
+    List<Resource> selectForSettingRoleResource(@Param("roleid") Long roleid, @Param("menuid") Long menuid);
 }
