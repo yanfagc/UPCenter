@@ -1,6 +1,7 @@
 package org.hanzhdy.manager.upc.controller;
 
 import com.alibaba.fastjson.JSON;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.hanzhdy.manager.support.bean.SessionUser;
 import org.hanzhdy.manager.support.constants.resp.RespResult;
 import org.hanzhdy.manager.support.controller.ApplicationController;
@@ -51,6 +52,7 @@ public class MenuController extends ApplicationController {
      * 转到菜单资源列表页面
      * @return
      */
+    @RequiresPermissions("basic:menu:list")
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public String toList(Model model, @RequestParam("systemid") Long systemid) {
         try {
@@ -77,6 +79,7 @@ public class MenuController extends ApplicationController {
      * @param pid
      * @return
      */
+    @RequiresPermissions("basic:menu:list")
     @RequestMapping(value = "zTreeData", method = RequestMethod.POST)
     @ResponseBody
     public Object zTreeData(Long pid, @RequestParam("systemid") Long systemid) {
@@ -99,6 +102,7 @@ public class MenuController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:menu:list")
     @RequestMapping(value = "dataList", method = RequestMethod.POST)
     @ResponseBody
     public Object dataList(MenuParams params, HttpServletRequest request) {
@@ -128,6 +132,7 @@ public class MenuController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:menu:edit")
     @RequestMapping(value = "toEdit", method = RequestMethod.GET)
     public String toEdit(Long id, Long parentid, @RequestParam("systemid") Long systemid, Model model,
             HttpServletRequest request) {
@@ -177,6 +182,7 @@ public class MenuController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:menu:edit")
     @RequestMapping(value = "save", method = RequestMethod.POST)
     @ResponseBody
     public Object save(Menu record, HttpServletRequest request) {
@@ -212,6 +218,7 @@ public class MenuController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:menu:edit")
     @RequestMapping(value = "updateStatus", method = RequestMethod.POST)
     @ResponseBody
     public Object updateStatus(Menu record, HttpServletRequest request) {

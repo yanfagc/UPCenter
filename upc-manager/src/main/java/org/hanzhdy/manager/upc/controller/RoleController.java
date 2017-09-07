@@ -1,10 +1,7 @@
 package org.hanzhdy.manager.upc.controller;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.lang3.StringUtils;
+import com.alibaba.fastjson.JSON;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.hanzhdy.manager.support.bean.SessionUser;
 import org.hanzhdy.manager.support.constants.resp.RespResult;
 import org.hanzhdy.manager.support.controller.ApplicationController;
@@ -30,9 +27,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSON;
-
-import static com.sun.tools.doclint.Entity.and;
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @description 角色管理
@@ -58,6 +54,7 @@ public class RoleController extends ApplicationController {
      * 转到接入系统管理列表页面
      * @return
      */
+    @RequiresPermissions("basic:role:list")
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public String toList(Model model) {
         try {
@@ -80,6 +77,7 @@ public class RoleController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:role:list")
     @RequestMapping(value = "dataList", method = RequestMethod.POST)
     @ResponseBody
     public Object dataList(RoleParams params, HttpServletRequest request) {
@@ -105,6 +103,7 @@ public class RoleController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:role:edit")
     @RequestMapping(value = "toEdit", method = RequestMethod.GET)
     public String toEdit(Long id, Model model, HttpServletRequest request) {
         // 查询接入系统以及角色分组信息
@@ -132,6 +131,7 @@ public class RoleController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:role:edit")
     @RequestMapping(value = "save", method = RequestMethod.POST)
     @ResponseBody
     public Object saveUser(Role record, HttpServletRequest request) {
@@ -167,6 +167,7 @@ public class RoleController extends ApplicationController {
      * @param sysid
      * @return
      */
+    @RequiresPermissions("basic:role:edit")
     @RequestMapping(value = "toSettingMenus", method = RequestMethod.GET)
     public String toSettingMenus(Model model, @RequestParam("roleid") Long roleid,
             @RequestParam("sysid") Long sysid) {
@@ -183,6 +184,7 @@ public class RoleController extends ApplicationController {
      * @param resources
      * @return
      */
+    @RequiresPermissions("basic:role:edit")
     @RequestMapping(value = "saveRoleMenus", method = RequestMethod.POST)
     @ResponseBody
     public Object saveRoleMenus(@RequestParam("roleid") Long roleid, @RequestParam("resources") String resources) {
@@ -207,6 +209,7 @@ public class RoleController extends ApplicationController {
      * @param sysid
      * @return
      */
+    @RequiresPermissions("basic:role:edit")
     @RequestMapping(value = "toSettingItems", method = RequestMethod.GET)
     public String toSettingItem(Model model, @RequestParam("roleid") Long roleid,
                                 @RequestParam("sysid") Long sysid) {
@@ -227,6 +230,7 @@ public class RoleController extends ApplicationController {
      * @param menuid
      * @return
      */
+    @RequiresPermissions("basic:role:edit")
     @RequestMapping(value = "roleItemList", method = RequestMethod.GET)
     @ResponseBody
     public Object roleItemList(@RequestParam("roleid") Long roleid, @RequestParam("menuid") Long menuid) {
@@ -255,6 +259,7 @@ public class RoleController extends ApplicationController {
      * @param resources
      * @return
      */
+    @RequiresPermissions("basic:role:edit")
     @RequestMapping(value = "saveRoleItems", method = RequestMethod.POST)
     @ResponseBody
     public Object saveRoleItems(@RequestParam("roleid") Long roleid, @RequestParam("menuid") Long menuid,
@@ -279,6 +284,7 @@ public class RoleController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:role:edit")
     @RequestMapping(value = "updateStatus", method = RequestMethod.POST)
     @ResponseBody
     public Object updateStatus(Role record, HttpServletRequest request) {
@@ -304,6 +310,7 @@ public class RoleController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:role:delete")
     @RequestMapping(value = "delete", method = RequestMethod.POST)
     @ResponseBody
     public Object delete(@RequestParam("id") Long id, HttpServletRequest request) {

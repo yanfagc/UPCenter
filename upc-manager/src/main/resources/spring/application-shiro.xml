@@ -82,9 +82,6 @@
         <property name="loginUrl" value="${shiro.login}"/>
     </bean>
 
-    <!-- 权限验证 -->
-    <bean id="shiroPermissionFilter" class="org.hanzhdy.manager.shiro.ShiroPermissionFilter"></bean>
-
     <!-- web.xml shiroFilter -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
@@ -93,8 +90,7 @@
 
         <property name="filters">
             <util:map>
-                <entry key="authc" value-ref="formAuthenticationFilter"/>
-                <entry key="permission" value-ref="shiroPermissionFilter"/>
+                <entry key="authcxxx" value-ref="formAuthenticationFilter"/>
             </util:map>
         </property>
 
@@ -106,10 +102,11 @@
                 /plugins/**  = anon
                 /logo.png    = anon
                 /login       = anon
+                /doLogin     = anon
                 /logout      = logout
                 /index       = authc
                 /            = authc
-                /**          = authc
+                /**          = perms
             </value>
         </property>
     </bean>

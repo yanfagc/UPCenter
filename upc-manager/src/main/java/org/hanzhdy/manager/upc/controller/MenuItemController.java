@@ -1,7 +1,7 @@
 package org.hanzhdy.manager.upc.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
+import com.alibaba.fastjson.JSON;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.hanzhdy.manager.support.bean.SessionUser;
 import org.hanzhdy.manager.support.constants.resp.RespResult;
 import org.hanzhdy.manager.support.controller.ApplicationController;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSON;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @description 菜单项Controller
@@ -44,6 +44,7 @@ public class MenuItemController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:menuitem:edit")
     @RequestMapping(value = "toEdit", method = RequestMethod.GET)
     public String toEdit(Long id, @RequestParam("menuid") Long menuid, Model model, HttpServletRequest request) {
         try {
@@ -74,6 +75,7 @@ public class MenuItemController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:menuitem:edit")
     @RequestMapping(value = "save", method = RequestMethod.POST)
     @ResponseBody
     public Object save(MenuItem record, HttpServletRequest request) {
@@ -105,6 +107,7 @@ public class MenuItemController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:menuitem:edit")
     @RequestMapping(value = "updateStatus", method = RequestMethod.POST)
     @ResponseBody
     public Object updateStatus(MenuItem record, HttpServletRequest request) {

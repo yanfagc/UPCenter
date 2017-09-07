@@ -1,5 +1,6 @@
 package org.hanzhdy.manager.settings.controller;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.hanzhdy.manager.settings.model.Area;
 import org.hanzhdy.manager.settings.service.AreaService;
 import org.hanzhdy.manager.support.constants.resp.RespResult;
@@ -33,6 +34,7 @@ public class AreaController extends ApplicationController {
      * @param response
      * @return
      */
+    @RequiresPermissions("basic:area:find")
     @RequestMapping("findByParent")
     @ResponseBody
     public Object findByParent(Long parent, HttpServletResponse response) {

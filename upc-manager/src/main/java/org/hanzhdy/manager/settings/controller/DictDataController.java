@@ -1,6 +1,7 @@
 package org.hanzhdy.manager.settings.controller;
 
 import com.alibaba.fastjson.JSON;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.hanzhdy.manager.settings.controller.params.DictDataParams;
 import org.hanzhdy.manager.settings.model.DictData;
 import org.hanzhdy.manager.settings.model.DictType;
@@ -45,6 +46,7 @@ public class DictDataController extends ApplicationController {
      * 转到数据字典管理列表页面
      * @return
      */
+    @RequiresPermissions("basic:dictdata:list")
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public String toList(Model model) {
         try {
@@ -64,6 +66,7 @@ public class DictDataController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:dictdata:list")
     @RequestMapping(value = "dataList", method = RequestMethod.POST)
     @ResponseBody
     public Object dataList(DictDataParams params, HttpServletRequest request) {
@@ -87,6 +90,7 @@ public class DictDataController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:dictdata:edit")
     @RequestMapping(value = "toEdit", method = RequestMethod.GET)
     public String toEdit(Long id, Model model, HttpServletRequest request) {
         // 查询字典类型
@@ -111,6 +115,7 @@ public class DictDataController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:dictdata:edit")
     @RequestMapping(value = "save", method = RequestMethod.POST)
     @ResponseBody
     public Object saveUser(DictData record, HttpServletRequest request) {
@@ -146,6 +151,7 @@ public class DictDataController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:dictdata:edit")
     @RequestMapping(value = "updateStatus", method = RequestMethod.POST)
     @ResponseBody
     public Object updateStatus(DictData record, HttpServletRequest request) {

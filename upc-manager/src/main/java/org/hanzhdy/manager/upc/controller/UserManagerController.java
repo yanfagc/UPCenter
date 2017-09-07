@@ -1,6 +1,7 @@
 package org.hanzhdy.manager.upc.controller;
 
 import com.alibaba.fastjson.JSON;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.hanzhdy.manager.engine.EngineContext;
 import org.hanzhdy.manager.engine.FormHtml;
 import org.hanzhdy.manager.form.model.FormInfo;
@@ -59,6 +60,7 @@ public class UserManagerController extends ApplicationController {
      * 转到用户管理列表页面
      * @return
      */
+    @RequiresPermissions("basic:user:list")
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public String toList(Model model) {
         model.addAttribute("userStatus", LoginUserStatus.values());
@@ -72,6 +74,7 @@ public class UserManagerController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:user:edit")
     @RequestMapping(value = "toEdit", method = RequestMethod.GET)
     public String toEdit(Long id, Model model, HttpServletRequest request) {
         try {
@@ -99,6 +102,7 @@ public class UserManagerController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:user:list")
     @RequestMapping(value = "dataList", method = RequestMethod.POST)
     @ResponseBody
     public Object dataList(UserParams params, HttpServletRequest request) {
@@ -120,6 +124,7 @@ public class UserManagerController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:user:edit")
     @RequestMapping(value = "toUserProps", method = RequestMethod.GET)
     public String toUserProps(Model model, @RequestParam("userid") Long userid, Long formid,
             HttpServletRequest request) {
@@ -161,6 +166,7 @@ public class UserManagerController extends ApplicationController {
      * @param userid
      * @return
      */
+    @RequiresPermissions("basic:user:role")
     @RequestMapping(value = "toEditRole", method = RequestMethod.GET)
     public String toEditRole(Model model, @RequestParam("userid") Long userid) {
         UserVo record = userManagerService.queryById(userid);
@@ -176,6 +182,7 @@ public class UserManagerController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:user:edit")
     @RequestMapping(value = "save", method = RequestMethod.POST)
     @ResponseBody
     public Object saveUser(UserVo record, HttpServletRequest request) {
@@ -208,6 +215,7 @@ public class UserManagerController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:user:edit")
     @RequestMapping(value = "saveExtendUserData", method = RequestMethod.POST)
     @ResponseBody
     public Object saveExtendUserData(@RequestParam("id") Long id, Long formid,
@@ -228,6 +236,7 @@ public class UserManagerController extends ApplicationController {
      * @param roles
      * @return
      */
+    @RequiresPermissions("basic:user:role")
     @RequestMapping(value = "saveUserRole", method = RequestMethod.POST)
     @ResponseBody
     public Object saveUserRole(@RequestParam("userid") Long userid, @RequestParam("roles") String roles) {
@@ -251,6 +260,7 @@ public class UserManagerController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:user:edit")
     @RequestMapping(value = "updateStatus", method = RequestMethod.POST)
     @ResponseBody
     public Object updateStatus(UserStatus record, HttpServletRequest request) {

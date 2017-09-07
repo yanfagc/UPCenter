@@ -87,7 +87,7 @@ public class IndexController extends ApplicationController {
      * @param captcha
      * @return
      */
-    @RequestMapping(value = "login", method = RequestMethod.POST)
+    @RequestMapping(value = "doLogin", method = RequestMethod.POST)
     @ResponseBody
     public Object login(@RequestParam("j_username") String username, @RequestParam("j_password") String password,
             @RequestParam("j_captcha") String captcha, HttpServletRequest request) {

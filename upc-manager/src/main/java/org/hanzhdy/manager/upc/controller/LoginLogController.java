@@ -1,6 +1,7 @@
 package org.hanzhdy.manager.upc.controller;
 
 import com.alibaba.fastjson.JSON;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.hanzhdy.manager.support.controller.ApplicationController;
 import org.hanzhdy.manager.upc.controller.params.LoginLogParams;
 import org.hanzhdy.manager.upc.service.LoginLogService;
@@ -29,11 +30,24 @@ public class LoginLogController extends ApplicationController {
     /** 日志对象 */
     private static final Logger logger = LoggerFactory.getLogger(LoginLogController.class);
     
+    /**
+     * 打开系统登录日志页面
+     * @param model
+     * @return
+     */
+    @RequiresPermissions("basic:loginlog:list")
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public String toList(Model model) {
         return "/basic/loginlog/loginlog-list";
     }
     
+    /**
+     * 分页获取系统日志列表数据
+     * @param params
+     * @param request
+     * @return
+     */
+    @RequiresPermissions("basic:loginlog:list")
     @RequestMapping(value = "dataList", method = RequestMethod.POST)
     @ResponseBody
     public Object dataList(LoginLogParams params, HttpServletRequest request) {

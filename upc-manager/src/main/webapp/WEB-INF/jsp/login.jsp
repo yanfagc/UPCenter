@@ -30,7 +30,7 @@ if(top.location!=self.location){
 			</div>
 		
 			<div class="login_form">
-				<form id="login_form" method="post" action="${ctx}/login">
+				<form id="login_form" method="post" action="${ctx}/doLogin">
 					<div class="form-group">
 						<label for="j_username" class="t">用户名：</label> 
 						<input id="j_username" value="" name="j_username" type="text" class="form-control x319 in" autocomplete="off">

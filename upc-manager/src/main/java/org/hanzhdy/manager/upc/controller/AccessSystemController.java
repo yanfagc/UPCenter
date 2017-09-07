@@ -1,6 +1,7 @@
 package org.hanzhdy.manager.upc.controller;
 
 import com.alibaba.fastjson.JSON;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.hanzhdy.manager.support.bean.SessionUser;
 import org.hanzhdy.manager.support.constants.resp.RespResult;
 import org.hanzhdy.manager.support.controller.ApplicationController;
@@ -39,6 +40,7 @@ public class AccessSystemController extends ApplicationController {
      * 转到接入系统管理列表页面
      * @return
      */
+    @RequiresPermissions("basic:accesssys:list")
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public String toList(Model model) {
         model.addAttribute("statusList", CommonStatus.values());
@@ -51,6 +53,7 @@ public class AccessSystemController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:accesssys:list")
     @RequestMapping(value = "dataList", method = RequestMethod.POST)
     @ResponseBody
     public Object dataList(AccessSystemParams params, HttpServletRequest request) {
@@ -74,6 +77,7 @@ public class AccessSystemController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:accesssys:edit")
     @RequestMapping(value = "toEdit", method = RequestMethod.GET)
     public String toEdit(Long id, Model model, HttpServletRequest request) {
         model.addAttribute("statusList", CommonStatus.values());
@@ -96,6 +100,7 @@ public class AccessSystemController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:accesssys:edit")
     @RequestMapping(value = "save", method = RequestMethod.POST)
     @ResponseBody
     public Object saveUser(AccessSystem record, HttpServletRequest request) {
@@ -131,6 +136,7 @@ public class AccessSystemController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:accesssys:edit")
     @RequestMapping(value = "updateStatus", method = RequestMethod.POST)
     @ResponseBody
     public Object updateStatus(AccessSystem record, HttpServletRequest request) {

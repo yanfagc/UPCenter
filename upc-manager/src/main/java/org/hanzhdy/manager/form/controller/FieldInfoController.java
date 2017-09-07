@@ -2,6 +2,7 @@ package org.hanzhdy.manager.form.controller;
 
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.hanzhdy.manager.engine.constants.InputMacrosType;
 import org.hanzhdy.manager.engine.constants.NormalMacrosType;
 import org.hanzhdy.manager.form.controller.params.FieldInfoParams;
@@ -47,6 +48,7 @@ public class FieldInfoController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:field:list")
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public String toList(Model model, HttpServletRequest request) {
         return "/basic/field/field-list";
@@ -59,6 +61,7 @@ public class FieldInfoController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:field:edit")
     @RequestMapping(value = "toAdd", method = RequestMethod.GET)
     public String toAdd(Model model, @RequestParam("type") FieldType type, HttpServletRequest request) {
         if (type == FieldType.INPUT) {
@@ -91,6 +94,7 @@ public class FieldInfoController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:field:edit")
     @RequestMapping(value = "toEdit", method = RequestMethod.GET)
     public String toEdit(@RequestParam("id") Long id, Model model, HttpServletRequest request) {
         if (id == 0 || id <= 0) {
@@ -148,6 +152,7 @@ public class FieldInfoController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:field:edit")
     @RequestMapping(value = "toEditRule", method = RequestMethod.GET)
     public String toEditRule(Model model, @RequestParam("id") Long id, HttpServletRequest request) {
         if (id == 0 || id <= 0) {
@@ -213,6 +218,7 @@ public class FieldInfoController extends ApplicationController {
      * 请求获取表单字段列表数据
      * @return
      */
+    @RequiresPermissions("basic:field:edit")
     @RequestMapping(value = "dataList", method = RequestMethod.POST)
     @ResponseBody
     public Object dataList(FieldInfoParams params, HttpServletRequest request) {
@@ -235,6 +241,7 @@ public class FieldInfoController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:field:find")
     @RequestMapping(value = "ajaxFieldInfo", method = RequestMethod.GET)
     @ResponseBody
     public Object ajaxFieldInfo(String key, HttpServletRequest request) {
@@ -254,6 +261,7 @@ public class FieldInfoController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:field:edit")
     @RequestMapping(value = "save", method = RequestMethod.POST)
     @ResponseBody
     public Object saveFieldInfo(FieldInfoVo record, HttpServletRequest request) {
@@ -286,6 +294,7 @@ public class FieldInfoController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:field:edit")
     @RequestMapping(value = "saveFieldRule", method = RequestMethod.POST)
     @ResponseBody
     public Object saveFieldRule(FieldInfo record, HttpServletRequest request) {
@@ -307,6 +316,7 @@ public class FieldInfoController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:field:edit")
     @RequestMapping(value = "updateStatus", method = RequestMethod.POST)
     @ResponseBody
     public Object updateStatus(FieldInfo record, HttpServletRequest request) {

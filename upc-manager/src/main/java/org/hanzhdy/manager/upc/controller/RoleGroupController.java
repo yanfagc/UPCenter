@@ -1,7 +1,7 @@
 package org.hanzhdy.manager.upc.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
+import com.alibaba.fastjson.JSON;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.hanzhdy.manager.support.bean.SessionUser;
 import org.hanzhdy.manager.support.constants.resp.RespResult;
 import org.hanzhdy.manager.support.controller.ApplicationController;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSON;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @description 角色类型控制器
@@ -39,6 +39,7 @@ public class RoleGroupController extends ApplicationController {
      * 转到角色分组管理列表页面
      * @return
      */
+    @RequiresPermissions("basic:group:list")
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public String toList() {
         return "/basic/rolegroup/rolegroup-list";
@@ -50,6 +51,7 @@ public class RoleGroupController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:group:list")
     @RequestMapping(value = "dataList", method = RequestMethod.POST)
     @ResponseBody
     public Object dataList(RoleGroupParams params, HttpServletRequest request) {
@@ -70,6 +72,7 @@ public class RoleGroupController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:group:edit")
     @RequestMapping(value = "toEdit", method = RequestMethod.GET)
     public String toEdit(Long id, Model model, HttpServletRequest request) {
         // 查询角色分组信息
@@ -90,6 +93,7 @@ public class RoleGroupController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:group:edit")
     @RequestMapping(value = "save", method = RequestMethod.POST)
     @ResponseBody
     public Object saveUser(RoleGroup record, HttpServletRequest request) {
@@ -125,10 +129,11 @@ public class RoleGroupController extends ApplicationController {
     
     /**
      * 处理删除角色分组数据请求
-     * @param record
+     * @param id
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:group:delete")
     @RequestMapping(value = "delete", method = RequestMethod.POST)
     @ResponseBody
     public Object delete(@RequestParam("id") Long id, HttpServletRequest request) {

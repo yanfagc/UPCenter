@@ -1,6 +1,7 @@
 package org.hanzhdy.manager.settings.controller;
 
 import com.alibaba.fastjson.JSON;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.hanzhdy.manager.settings.controller.params.DictTypeParams;
 import org.hanzhdy.manager.settings.model.DictType;
 import org.hanzhdy.manager.settings.service.DictTypeService;
@@ -38,6 +39,7 @@ public class DictTypeController extends ApplicationController {
      * 转到字典类型管理列表页面
      * @return
      */
+    @RequiresPermissions("basic:dictdata:list")
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public String toList() {
         return "/basic/dicttype/dicttype-list";
@@ -49,6 +51,7 @@ public class DictTypeController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:dictdata:list")
     @RequestMapping(value = "dataList", method = RequestMethod.POST)
     @ResponseBody
     public Object dataList(DictTypeParams params, HttpServletRequest request) {
@@ -72,6 +75,7 @@ public class DictTypeController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:dictdata:edit")
     @RequestMapping(value = "toEdit", method = RequestMethod.GET)
     public String toEdit(Long id, Model model, HttpServletRequest request) {
         // 查询字典类型信息
@@ -92,6 +96,7 @@ public class DictTypeController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:dictdata:edit")
     @RequestMapping(value = "save", method = RequestMethod.POST)
     @ResponseBody
     public Object saveUser(DictType record, HttpServletRequest request) {
@@ -127,6 +132,7 @@ public class DictTypeController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:dictdata:edit")
     @RequestMapping(value = "updateStatus", method = RequestMethod.POST)
     @ResponseBody
     public Object updateStatus(DictType record, HttpServletRequest request) {

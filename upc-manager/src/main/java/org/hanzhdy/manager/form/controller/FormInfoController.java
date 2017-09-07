@@ -1,8 +1,8 @@
 package org.hanzhdy.manager.form.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
+import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.hanzhdy.manager.engine.EngineContext;
 import org.hanzhdy.manager.engine.FormHtml;
 import org.hanzhdy.manager.form.controller.params.FieldInfoParams;
@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSON;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @description 表单管理的Controller
@@ -56,6 +56,7 @@ public class FormInfoController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:form:list")
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public String toList(Model model, HttpServletRequest request) {
         return "/basic/form/form-list";
@@ -68,6 +69,7 @@ public class FormInfoController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:form:list")
     @RequestMapping(value = "preview", method = RequestMethod.GET)
     public String preview(Model model, @RequestParam("id") Long id, HttpServletRequest request) {
         try {
@@ -94,6 +96,7 @@ public class FormInfoController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:form:list")
     @RequestMapping(value = "formFieldList", method = RequestMethod.GET)
     public String toFormFieldList(Long id, Model model, HttpServletRequest request) {
         try {
@@ -119,6 +122,7 @@ public class FormInfoController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:form:edit")
     @RequestMapping(value = "addFormField", method = RequestMethod.GET)
     public String toAddFormField(Model model, @RequestParam("formid") Long formid, HttpServletRequest request) {
         model.addAttribute("formid", formid);
@@ -133,6 +137,7 @@ public class FormInfoController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:form:edit")
     @RequestMapping(value = "editFormField", method = RequestMethod.GET)
     public String toEditFormField(Model model, @RequestParam("formid") Long formid,
             @RequestParam("fieldid") Long fieldid, HttpServletRequest request) {
@@ -159,6 +164,7 @@ public class FormInfoController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:form:edit")
     @RequestMapping(value = "toEdit", method = RequestMethod.GET)
     public String toEdit(Long id, Model model, HttpServletRequest request) {
         if (id != null) {
@@ -180,6 +186,7 @@ public class FormInfoController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:form:list")
     @RequestMapping(value = "dataList", method = RequestMethod.POST)
     @ResponseBody
     public Object dataList(FormInfoParams params, HttpServletRequest request) {
@@ -202,6 +209,7 @@ public class FormInfoController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:form:list")
     @RequestMapping(value = "formFieldList", method = RequestMethod.POST)
     @ResponseBody
     public Object formFieldList(FieldInfoParams params, HttpServletRequest request) {
@@ -224,6 +232,7 @@ public class FormInfoController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:form:list")
     @RequestMapping(value = "canAddList", method = RequestMethod.POST)
     @ResponseBody
     public Object canAddList(FieldInfoParams params, HttpServletRequest request) {
@@ -247,6 +256,7 @@ public class FormInfoController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:form:edit")
     @RequestMapping(value = "save", method = RequestMethod.POST)
     @ResponseBody
     public Object saveFormInfo(FormInfo record, HttpServletRequest request) {
@@ -282,6 +292,7 @@ public class FormInfoController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:form:edit")
     @RequestMapping(value = "updateStatus", method = RequestMethod.POST)
     @ResponseBody
     public Object updateStatus(FormInfo record, HttpServletRequest request) {
@@ -308,6 +319,7 @@ public class FormInfoController extends ApplicationController {
      * @param reqeust
      * @return
      */
+    @RequiresPermissions("basic:form:edit")
     @RequestMapping(value = "addFormField", method = RequestMethod.POST)
     @ResponseBody
     public Object addFormField(Long formid, String fieldid, String colspan, HttpServletRequest reqeust) {
@@ -336,6 +348,7 @@ public class FormInfoController extends ApplicationController {
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:form:edit")
     @RequestMapping(value = "saveFormField", method = RequestMethod.POST)
     @ResponseBody
     public Object saveFormField(FormField record, HttpServletRequest request) {
@@ -360,10 +373,12 @@ public class FormInfoController extends ApplicationController {
     
     /**
      * 处理删除表单字段关联关系请求
-     * @param record
+     * @param formid
+     * @param fieldid
      * @param request
      * @return
      */
+    @RequiresPermissions("basic:form:delete")
     @RequestMapping(value = "deleteFormField", method = RequestMethod.POST)
     @ResponseBody
     public Object deleteFormField(Long formid, Long fieldid, HttpServletRequest request) {
