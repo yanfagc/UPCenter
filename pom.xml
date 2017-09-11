@@ -362,13 +362,24 @@
     </dependencyManagement>
     <repositories>
         <repository>
-            <id>nexus</id>
-            <url>http://192.168.80.128:8081/repository/maven-public/</url>
+            <id>jme nexus</id>
+            <name>jme Nexus Public Mirror</name>
+            <url>http://192.168.10.6:8081/nexus/content/groups/public</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>Releases</id>
+            <url>http://192.168.10.6:8081/nexus/content/groups/public</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+            </releases>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
-        </repository>
-    </repositories>
+        </pluginRepository>
+    </pluginRepositories>
     <build>
         <plugins>
             <plugin>
