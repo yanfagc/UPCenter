@@ -1,10 +1,10 @@
 package org.hanzhdy.manager.support.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @description 错误页面
@@ -23,5 +23,10 @@ public class ErrorController extends ApplicationController {
     @RequestMapping("/404")
     public String to404(Model model, HttpServletRequest request) {
         return REDIRECT_404;
+    }
+    
+    @RequestMapping("/403")
+    public String to403(Model model, HttpServletRequest request) {
+        return REDIRECT_403;
     }
 }

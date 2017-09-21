@@ -21,6 +21,8 @@ import javax.servlet.http.HttpServletRequest;
 public class ApplicationController extends AbstractController {
     protected String                REDIRECT_404 = "/error/404";
     
+    protected String                REDIRECT_403 = "/error/403";
+    
     @Value("${system.code}")
     protected String                systemCode;
     
