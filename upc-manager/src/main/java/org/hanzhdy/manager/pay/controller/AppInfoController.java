@@ -4,16 +4,11 @@ import com.alibaba.fastjson.JSON;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.hanzhdy.manager.pay.controller.params.AppInfoParams;
 import org.hanzhdy.manager.pay.model.AppInfo;
-import org.hanzhdy.manager.pay.service.PayService;
-import org.hanzhdy.manager.support.bean.SessionUser;
+import org.hanzhdy.manager.pay.service.AppInfoService;
 import org.hanzhdy.manager.support.constants.resp.RespResult;
 import org.hanzhdy.manager.support.controller.ApplicationController;
 import org.hanzhdy.manager.support.enums.CommonStatus;
 import org.hanzhdy.manager.upc.controller.RoleController;
-import org.hanzhdy.manager.upc.model.AccessSystem;
-import org.hanzhdy.manager.upc.model.RoleGroup;
-import org.hanzhdy.manager.upc.service.AccessSystemService;
-import org.hanzhdy.manager.upc.service.RoleGroupService;
 import org.hanzhdy.web.bean.DatatableResult;
 import org.hanzhdy.web.throwable.BizException;
 import org.slf4j.Logger;
@@ -27,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 /**
  * @author wangchengzhi
@@ -36,16 +30,10 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/pay/appInfo")
-public class PayController extends ApplicationController {
+public class AppInfoController extends ApplicationController {
 
     @Autowired
-    private PayService payService;
-
-    @Autowired
-    private RoleGroupService roleGroupService;
-
-    @Autowired
-    private AccessSystemService accessSystemService;
+    private AppInfoService appInfoservice;
 
     /**
      * 日志对象
@@ -61,10 +49,6 @@ public class PayController extends ApplicationController {
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public String toList(Model model) {
         try {
-//            List<AccessSystem> sysList = accessSystemService.queryNormalList();
-//            List<RoleGroup> groupList = roleGroupService.queryAllList();
-//            model.addAttribute("sysList", sysList);
-//            model.addAttribute("groupList", groupList);
             model.addAttribute("statusList", CommonStatus.values());
         } catch (Exception ex) {
             logger.error("转到角色管理列表页面失败", ex);
@@ -86,7 +70,7 @@ public class PayController extends ApplicationController {
     public Object dataList(AppInfoParams params, HttpServletRequest request) {
         DatatableResult dataResult = null;
         try {
-            dataResult = payService.queryAsDatatableResult(params);
+            dataResult = appInfoservice.queryAsDatatableResult(params);
         } catch (BizException ex) {
             dataResult = super.getEmptyDatatableResult();
             logger.error("查询支付应用账号信息数据失败，查询参数：{}, 错误信息：[{}, {}]", JSON.toJSONString(params), ex.getCode(), ex.getMsg());
@@ -108,16 +92,12 @@ public class PayController extends ApplicationController {
     @RequiresPermissions("pay:appInfo:edit")
     @RequestMapping(value = "toEdit", method = RequestMethod.GET)
     public String toEdit(String appId, Model model, HttpServletRequest request) {
-        // 查询接入系统以及角色分组信息
-        List<AccessSystem> sysList = accessSystemService.queryNormalList();
-        List<RoleGroup> groupList = roleGroupService.queryAllList();
-        model.addAttribute("sysList", sysList);
-        model.addAttribute("groupList", groupList);
+        // 查询账号状态信息
         model.addAttribute("statusList", CommonStatus.values());
 
         // 查询支付应用账号信息
         if (appId != null && appId != "") {
-            AppInfo record = payService.queryById(appId);
+            AppInfo record = appInfoservice.queryById(appId);
             if (record != null) {
                 model.addAttribute("record", record);
                 return "pay/appInfo/appInfo-edit";
@@ -142,9 +122,9 @@ public class PayController extends ApplicationController {
             // 执行新增或更新操作
             boolean result = false;
             if (oldAppId == null || oldAppId == "") {
-                result = this.payService.insert(record);
+                result = this.appInfoservice.insert(record);
             }else {
-                result = this.payService.updateAppId(record, oldAppId);
+                result = this.appInfoservice.updateAppId(record, oldAppId);
             }
 
             // 处理返回结果
@@ -169,7 +149,7 @@ public class PayController extends ApplicationController {
     @ResponseBody
     public Object updateStatus(AppInfo record, HttpServletRequest request) {
         try {
-            this.payService.updateStatus(record);
+            this.appInfoservice.updateStatus(record);
             return RespResult.create(respCode.SUCCESS);
         }
         catch (BizException ex) {

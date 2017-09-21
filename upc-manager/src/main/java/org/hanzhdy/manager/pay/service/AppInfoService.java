@@ -19,7 +19,7 @@ import java.util.Map;
  * @createtime 2017年9月8日
  */
 @Service
-public class PayService {
+public class AppInfoService {
 
     @Autowired
     private AppInfoMapperExt appInfoMapperExt;

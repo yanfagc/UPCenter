@@ -1,3 +1,119 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="org.hanzhdy.manager.pay.mapper.PayOrderWxMapperExt" />
+<mapper namespace="org.hanzhdy.manager.pay.mapper.PayOrderWxMapperExt" >
+
+    <select id="countAsList" parameterType="java.util.HashMap" resultType="int">
+        SELECT COUNT(1) FROM prepay_info pri,pay_info pi,pay_order_wx pow
+        <include refid="selectAsList_wherecause"></include>
+    </select>
+
+    <select id="selectByParamsSelective" parameterType="java.util.HashMap" resultType="org.hanzhdy.manager.pay.vo.PayOrderWxVo">
+        <include refid="Pageable_Prefix"/>
+        SELECT
+        pri.PREPAY_INFO_ID AS prepayInfoId,
+        pri.APP_TRADE_NO AS appTradeNo,
+        pri.APP_ID AS preAppId,
+        pri.CREATE_TIME AS prepayCreateTime,
+        pri.AMOUNT AS amount,
+        pri.APP_IP AS appIp,
+        pow.PAY_INFO_ID AS payInfoId,
+        pi.PAY_AMOUNT AS payAmount,
+        pi.CHANNEL AS channel,
+        pi.PAY_CHANNEL_ORDER_ID AS payChannelOrderId,
+        pi.PAY_DETAIL_ID AS payDetailId,
+        pi.BIZ_TYPE AS bizType,
+        pi.BIZ_ID AS bizId,
+        pi.PAY_SUCCESS_NOTIFIED_TIMES AS paySuccessNotifiedTimes,
+        pi.STATUS AS status,
+        pi.STATUS_HISTORY AS statusHistory,
+        pi.TIME_START AS payTimeStart,
+        pi.TIME_EXPIRE AS payTimeExpire,
+        pi.REFUND_STATUS AS refundStatus,
+        pi.REFUNDED_PRICE AS refundedPrice,
+        pi.CREATE_TIME AS createTime,
+        pi.UPDATE_TIME AS updateTime,
+        pi.PAY_SUCCESS_TIME AS paySuccessTime,
+        pi.REFUND_APPLY_TIME AS refundApplyTime,
+        pi.REFUND_SUCCESS_TIME AS refundSuccessTime,
+        pi.QUERY_TIME AS queryTime,
+        pow.PAY_ORDER_WX_ID AS payOrderWxId,
+        pow.APPID AS appid,
+        pow.MCH_ID AS mchId,
+        pow.DEVICE_INFO AS deviceInfo,
+        pow.BODY AS body,
+        pow.DETAIL AS detail,
+        pow.ATTACH AS attach,
+        pow.FEE_TYPE AS feeType,
+        pow.TOTAL_FEE AS totalFee,
+        pow.SPBILL_CREATE_IP AS spbillCreateIp,
+        pow.TIME_START AS timeStart,
+        pow.TIME_EXPIRE AS timeExpire,
+        pow.GOODS_TAG AS goodsTag,
+        pow.TRADE_TYPE AS tradeType,
+        pow.PRODUCT_ID AS productId,
+        pow.LIMIT_PAY AS limitPay,
+        pow.OPENID AS openid,
+        pow.PREPAY_ID AS prepayId,
+        pow.CODE_URL AS codeUrl,
+        pow.PREPAY_RESULT_CODE AS prepayResultCode,
+        pow.PAY_TRANSACTION_ID AS payTransactionId,
+        pow.PAY_RESULT_CODE AS payResultCode,
+        pow.BANK_TYPE AS bankType,
+        pow.SETTLEMENT_TOTAL_FEE AS settlementTotalFee,
+        pow.CASH_FEE AS cashFee,
+        pow.CASH_FEE_TYPE AS cashFeeType,
+        pow.COUPON_FEE AS couponFee,
+        pow.COUPON_COUNT AS couponCount,
+        pow.COUPON_DETAIL_LIST AS couponDetailList,
+        pow.TIME_END AS timeEnd,
+        pow.IS_VALID AS isValid
+        FROM
+        prepay_info pri,
+        pay_info pi,
+        pay_order_wx pow
+        <include refid="selectAsList_wherecause"></include>
+        <include refid="Pageable_Suffix"/>
+    </select>
+
+    <sql id="selectAsList_wherecause">
+        WHERE
+        pri.PAY_INFO_ID = pi.PAY_INFO_ID
+        AND pi.PAY_CHANNEL_ORDER_ID = pow.PAY_ORDER_WX_ID
+        AND pi.PAY_INFO_ID IS NOT NULL
+        AND pow.PAY_ORDER_WX_ID IS NOT NULL
+        <if test="prepayInfoId!=null and prepayInfoId!=''">
+            AND pri.PREPAY_INFO_ID=#{prepayInfoId}
+        </if>
+        <if test="appTradeNo!=null and appTradeNo!=''">
+            AND pri.APP_TRADE_NO=#{appTradeNo}
+        </if>
+        <if test="appId!=null and appId!=''">
+            AND pri.APP_ID=#{appId}
+        </if>
+        <if test="payInfoId!=null and payInfoId!=''">
+            AND pri.PAY_INFO_ID=#{payInfoId}
+        </if>
+        <if test="channel!=null and channel!=''">
+            AND pi.CHANNEL = #{channel}
+        </if>
+        <if test="payChannelOrderId!=null and payChannelOrderId!=''">
+            AND pi.PAY_CHANNEL_ORDER_ID=#{payChannelOrderId}
+        </if>
+        <if test="createTime!=null">
+            AND pi.CREATE_TIME<![CDATA[>=]]>#{createTime}
+        </if>
+        <if test="paySuccessTime!=null">
+            AND pi.PAY_SUCCESS_TIME<![CDATA[<=]]>#{paySuccessTime}
+        </if>
+        <if test="status!=null and status!=''">
+            AND pi.STATUS=#{status}
+        </if>
+        <if test="bizType!=null and bizType!=''">
+            AND pi.BIZ_TYPE LIKE #{bizType}
+        </if>
+        <if test="bizId!=null and bizId!=''">
+            AND pi.BIZ_ID LIKE #{bizId}
+        </if>
+    </sql>
+
+</mapper>

@@ -28,7 +28,9 @@
             </list>
         </property>
 	</bean>
-	
+
+	<bean class="org.hanzhdy.manager.engine.utils.ApplicationContextUtil"></bean>
+
 	<!-- 引入其他xml配置文件 -->
 	<import resource="spring/*.xml" />
 </beans>

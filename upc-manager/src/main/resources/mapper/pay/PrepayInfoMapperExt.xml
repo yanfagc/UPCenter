@@ -1,3 +1,79 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="org.hanzhdy.manager.pay.mapper.PrepayInfoMapperExt" />
+<mapper namespace="org.hanzhdy.manager.pay.mapper.PrepayInfoMapperExt" >
+
+    <select id="countAsList" parameterType="java.util.HashMap" resultType="int">
+        SELECT COUNT(1) FROM prepay_info pri,pay_info pi,pay_order_wx pow
+        <include refid="selectAsList_wherecause"></include>
+    </select>
+
+    <select id="selectAsList" parameterType="java.util.HashMap" resultType="org.hanzhdy.manager.pay.vo.PayInfoVo">
+        <include refid="Pageable_Prefix"/>
+        SELECT
+        pri.PREPAY_INFO_ID AS prepayInfoId,
+        pri.APP_TRADE_NO AS appTradeNo,
+        pri.APP_ID AS appId,
+        pri.AMOUNT AS amount,
+        pri.APP_IP AS appIp,
+        pi.PAY_INFO_ID AS payInfoId,
+        pi.PAY_AMOUNT AS payAmount,
+        pi.CHANNEL AS channel,
+        pi.PAY_CHANNEL_ORDER_ID AS payChannelOrderId,
+        pi.PAY_DETAIL_ID AS payDetailId,
+        pi.BIZ_TYPE AS bizType,
+        pi.BIZ_ID AS bizId,
+        pi.PAY_SUCCESS_TIME AS paySuccessTime,
+        pi.CREATE_TIME AS createTime,
+        pi.STATUS_HISTORY AS statusHistory,
+        pi.STATUS AS status
+        FROM
+        prepay_info pri,
+        pay_info pi,
+        pay_order_wx pow
+        <include refid="selectAsList_wherecause"></include>
+        <include refid="Pageable_Suffix"/>
+    </select>
+
+    <sql id="selectAsList_wherecause">
+        WHERE
+        pri.PAY_INFO_ID = pi.PAY_INFO_ID
+        AND pi.PAY_CHANNEL_ORDER_ID = pow.PAY_ORDER_WX_ID
+        AND pi.PAY_INFO_ID IS NOT NULL
+        AND pow.PAY_ORDER_WX_ID IS NOT NULL
+        <if test="prepayInfoId!=null and prepayInfoId!=''">
+            AND pri.PREPAY_INFO_ID=#{prepayInfoId}
+        </if>
+        <if test="appTradeNo!=null and appTradeNo!=''">
+            AND pri.APP_TRADE_NO=#{appTradeNo}
+        </if>
+        <if test="appId!=null and appId!=''">
+            AND pri.APP_ID=#{appId}
+        </if>
+        <if test="payInfoId!=null and payInfoId!=''">
+            AND pri.PAY_INFO_ID=#{payInfoId}
+        </if>
+        <if test="channel!=null and channel!=''">
+            AND pi.CHANNEL = #{channel}
+        </if>
+        <if test="payChannelOrderId!=null and payChannelOrderId!=''">
+            AND pi.PAY_CHANNEL_ORDER_ID=#{payChannelOrderId}
+        </if>
+        <if test="createTime!=null">
+            AND pi.CREATE_TIME<![CDATA[>=]]>#{createTime}
+        </if>
+        <if test="paySuccessTime!=null">
+            AND pi.PAY_SUCCESS_TIME<![CDATA[<=]]>#{paySuccessTime}
+        </if>
+        <if test="status!=null and status!=''">
+            AND pi.STATUS=#{status}
+        </if>
+        <if test="bizType!=null and bizType!=''">
+            AND pi.BIZ_TYPE LIKE #{bizType}
+        </if>
+        <if test="bizId!=null and bizId!=''">
+            AND pi.BIZ_ID LIKE #{bizId}
+        </if>
+    </sql>
+
+
+</mapper>
