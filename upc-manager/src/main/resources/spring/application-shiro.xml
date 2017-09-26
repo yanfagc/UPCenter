@@ -103,6 +103,7 @@
                 /logo.png    = anon
                 /login       = anon
                 /doLogin     = anon
+                /error/**    = anon
                 /logout      = logout
                 /index       = authc
                 /            = authc
@@ -119,4 +120,12 @@
 
     <!-- Shiro生命周期处理器-->
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="org.apache.shiro.authz.UnauthorizedException">${shiro.unauthorized}</prop>
+            </props>
+        </property>
+    </bean>
 </beans>

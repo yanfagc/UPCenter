@@ -306,7 +306,7 @@
         	
       </aside>
       <div class="content-wrapper">
-        <iframe id="content-iframe" src="${activeUrl}" style="border:none; width:100%;height:100%;"></iframe>
+        <iframe id="content-iframe" src="${activeUrl}" style="border:none; width:100%;height:100%;background-color:#ecf0f5"></iframe>
       </div>
       
     </div>

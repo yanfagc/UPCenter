@@ -22,11 +22,17 @@ public class ErrorController extends ApplicationController {
      */
     @RequestMapping("/404")
     public String to404(Model model, HttpServletRequest request) {
-        return REDIRECT_404;
+        return "error/404";
     }
     
+    /**
+     * 403无权页面
+     * @param model
+     * @param request
+     * @return
+     */
     @RequestMapping("/403")
     public String to403(Model model, HttpServletRequest request) {
-        return REDIRECT_403;
+        return "error/403";
     }
 }
