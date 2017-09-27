@@ -41,13 +41,9 @@ if(top.location!=self.location){
 					</div>
 					<div class="form-group">
 						<label for="j_captcha" class="t">验证码：</label> 
-						<input id="j_captcha" value="" name="j_captcha" type="text" class="password form-control x319 in">
+						<input id="j_captcha" value="" name="j_captcha" type="text" class="password form-control x229 in">
+						<img id="captcha_img" alt="点击更换" title="点击更换" src="${ctx}/getVCode" class="m"/>
 					</div>
-					<%-- <div class="form-group">
-						<label for="j_captcha" class="t">验证码：</label>
-						 <input id="j_captcha" name="j_captcha" type="text" class="form-control x164 in">
-						<img id="captcha_img" alt="点击更换" title="点击更换" src="${ctx}/images/login/captcha.jpeg" class="m">
-					</div> --%>
 					<div class="form-group">
 						<label class="t"></label>
 						<label for="j_remember" class="m">

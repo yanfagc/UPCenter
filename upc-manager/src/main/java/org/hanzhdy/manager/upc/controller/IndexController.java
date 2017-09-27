@@ -1,5 +1,6 @@
 package org.hanzhdy.manager.upc.controller;
 
+import com.alibaba.druid.util.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
@@ -14,10 +15,12 @@ import org.hanzhdy.manager.upc.service.LoginService;
 import org.hanzhdy.manager.upc.service.MenuService;
 import org.hanzhdy.manager.upc.vo.Resource;
 import org.hanzhdy.utils.HttpUtils;
+import org.hanzhdy.utils.images.VerifyCode;
 import org.hanzhdy.web.throwable.BizException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -47,6 +51,9 @@ public class IndexController extends ApplicationController {
     
     @Autowired
     private LoginLogService     loginLogService;
+    
+    @Value("${system.vcode.verify}")
+    public boolean              checkVCode;
     
     /** 日志对象 */
     private static final Logger logger = LoggerFactory.getLogger(IndexController.class);
@@ -81,6 +88,23 @@ public class IndexController extends ApplicationController {
     }
     
     /**
+     * 获取图片验证码
+     * @param request
+     * @param response
+     */
+    @RequestMapping(value = "getVCode", method = RequestMethod.GET)
+    public void getVCode(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            String vcode = VerifyCode.generateVerifyCode(4);
+            VerifyCode.outputImage(80, 30, response.getOutputStream(), vcode);
+            super.setSessionVal(request, WebConstants.SESSION_LOGIN_VCODE, vcode);
+        }
+        catch (Exception ex) {
+            logger.error("获取图形验证码失败", ex);
+        }
+    }
+    
+    /**
      * 执行登录过程
      * @param username
      * @param password
@@ -92,6 +116,14 @@ public class IndexController extends ApplicationController {
     public Object login(@RequestParam("j_username") String username, @RequestParam("j_password") String password,
             @RequestParam("j_captcha") String captcha, HttpServletRequest request) {
         try {
+            // 校验图形验证码
+            if (checkVCode) {
+                String vcode = (String) super.getSessionVal(request, WebConstants.SESSION_LOGIN_VCODE);
+                if (!StringUtils.equalsIgnoreCase(captcha, vcode)) {
+                    return RespResult.create(respCode.LOGIN_ILLEGAL_IMGTOKEN);
+                }
+            }
+            
             UsernamePasswordToken token = new UsernamePasswordToken(username, password);
             Subject subject = SecurityUtils.getSubject();
             subject.login(token);
@@ -99,7 +131,7 @@ public class IndexController extends ApplicationController {
             SessionUser user = this.loginService.getSessionUserByAccount(username);
             // super.setSessionUser(request, user);
             subject.getSession().setAttribute(WebConstants.SESSION_USER, user);
-
+            
             // 记录日志
             this.loginLogService.insert(user, HttpUtils.getRealIp(request), "用户[" + username + "]登录系统");
             

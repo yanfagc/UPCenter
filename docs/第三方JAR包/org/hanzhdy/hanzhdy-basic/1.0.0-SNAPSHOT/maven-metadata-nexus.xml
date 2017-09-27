@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata modelVersion="1.1.0">
+  <groupId>org.hanzhdy</groupId>
+  <artifactId>hanzhdy-basic</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <versioning>
+    <snapshot>
+      <timestamp>20170919.063523</timestamp>
+      <buildNumber>1</buildNumber>
+    </snapshot>
+    <lastUpdated>20170919063523</lastUpdated>
+    <snapshotVersions>
+      <snapshotVersion>
+        <extension>jar</extension>
+        <value>1.0.0-20170919.063523-1</value>
+        <updated>20170919063523</updated>
+      </snapshotVersion>
+      <snapshotVersion>
+        <extension>pom</extension>
+        <value>1.0.0-20170919.063523-1</value>
+        <updated>20170919063523</updated>
+      </snapshotVersion>
+    </snapshotVersions>
+  </versioning>
+</metadata>

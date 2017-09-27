@@ -42,4 +42,9 @@ $(function(){
 	        });	
 		}
 	});
+
+	/** 切换图片验证码 */
+	$('form').on('click','#captcha_img',function(){
+		$('#captcha_img').attr('src',$ctx+'/getVCode?_t='+new Date());
+	});
 });

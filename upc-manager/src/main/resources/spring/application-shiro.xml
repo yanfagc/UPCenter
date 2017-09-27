@@ -102,6 +102,7 @@
                 /plugins/**  = anon
                 /logo.png    = anon
                 /login       = anon
+                /getVCode    = anon
                 /doLogin     = anon
                 /error/**    = anon
                 /logout      = logout

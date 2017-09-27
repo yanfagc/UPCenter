@@ -51,6 +51,16 @@ public class ApplicationController extends AbstractController {
         return (SessionUser) subject.getSession().getAttribute(WebConstants.SESSION_USER);
     }
     
+    protected void setSessionVal(HttpServletRequest request, String key, Object value) {
+        Subject subject = SecurityUtils.getSubject();
+        subject.getSession().setAttribute(key, value);
+    }
+    
+    protected Object getSessionVal(HttpServletRequest request, String key) {
+        Subject subject = SecurityUtils.getSubject();
+        return subject.getSession().getAttribute(key);
+    }
+    
     protected EngineContext getEngineContext(HttpServletRequest request) {
         EngineContext context = new EngineContext(request);
         
