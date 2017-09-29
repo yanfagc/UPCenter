@@ -25,7 +25,13 @@
                 <input type="hidden" name="parentid" value="0"/>
                 <div class="form-group">
                   <label class="sr-only" for="searchkey">登录名</label>
-                    <input type="text" class="form-control" id="searchkey" placeholder="登录名"/>
+                  <input type="text" class="form-control" id="searchkey" placeholder="登录名"/>
+                </div>
+                <div class="form-group">
+                  <label class="sr-only" for="searchkey">登录时间</label>
+                  <input type="text" class="form-control Wdate" id="beginLogintime" placeholder="登录时间：开始" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',startDate:'%y-%M-%d 00:00:00'})" style="height:34px;border:1px solid #ccc"/>
+                  ~
+                  <input type="text" class="form-control Wdate" id="endLogintime" placeholder="登录时间：结束" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',startDate:'%y-%M-%d 23:59:59'})" style="height:34px;border:1px solid #ccc"/>
                 </div>
                 <button type="button" class="btn btn-primary search">&nbsp;&nbsp;搜索&nbsp;&nbsp;</button>
                 <button type="reset" class="btn btn-warning reset">&nbsp;&nbsp;重置&nbsp;&nbsp;</button>
@@ -51,6 +57,7 @@
     </section><!-- /.content -->
 </div>
     <jsp:include page="/WEB-INF/jsp/commons/metafooter.jsp" />
+    <script src="${ctx}/plugins/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
     <script type="text/javascript" src="${ctx}/js/basic/loginlog/loginlog-list.js<c:if test='${not empty crm}'>?${crm}</c:if>"></script>
   </body>
 </html>

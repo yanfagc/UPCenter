@@ -33,16 +33,10 @@ public class LoginLogService extends AbstractUpcService {
             criteria.andLogintimeGreaterThanOrEqualTo(params.getBeginLogintime());
         }
         if (params.getEndLogintime() != null) {
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(params.getEndLogintime());
-            calendar.add(Calendar.DAY_OF_MONTH, 1);
-            calendar.set(Calendar.HOUR_OF_DAY, 0);
-            calendar.set(Calendar.MINUTE, 0);
-            calendar.set(Calendar.SECOND, 0);
-            calendar.set(Calendar.MILLISECOND, 0);
             criteria.andLogintimeLessThan(params.getEndLogintime());
         }
         
+        example.setPage(params.getPage());
         example.setOrderByClause(" ID DESC ");
         int count = this.loginLogMapperExt.countByExample(example);
         List<LoginLog> dataList = this.loginLogMapperExt.selectByExample(example);

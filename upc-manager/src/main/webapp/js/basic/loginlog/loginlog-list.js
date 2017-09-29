@@ -1,7 +1,7 @@
 var datatable;
 $(function() {
     // 定义操作变量
-    var $searchkey=$('#searchkey');
+    var $searchkey=$('#searchkey'),$beginLogintime=$('#beginLogintime'),$endLogintime=$('#endLogintime');
     // 构造datatable对象
     datatable=$('#dataList').dataTable(
         $.extend({},pageParams,{
@@ -10,6 +10,14 @@ $(function() {
                 aodata.push({
                     "name":"searchkey",
                     "value":$searchkey.val()
+                });
+                aodata.push({
+                    "name":"beginLogintime",
+                    "value":$beginLogintime.val()
+                });
+                aodata.push({
+                    "name":"endLogintime",
+                    "value":$endLogintime.val()
                 });
             },
             aoColumns:[

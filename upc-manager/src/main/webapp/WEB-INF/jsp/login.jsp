@@ -47,7 +47,7 @@ if(top.location!=self.location){
 					<div class="form-group">
 						<label class="t"></label>
 						<label for="j_remember" class="m">
-						<input id="j_remember" type="checkbox" value="true">&nbsp;记住登陆账号!</label>
+						<input id="j_remember" type="checkbox" value="true">&nbsp;记住登录账号!</label>
 					</div>
 					<div class="form-group space">
 						<label class="t"></label>　　　

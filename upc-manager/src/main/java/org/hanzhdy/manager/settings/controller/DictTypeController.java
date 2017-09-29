@@ -39,7 +39,7 @@ public class DictTypeController extends ApplicationController {
      * 转到字典类型管理列表页面
      * @return
      */
-    @RequiresPermissions("basic:dictdata:list")
+    @RequiresPermissions("basic:dicttype:list")
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public String toList() {
         return "/basic/dicttype/dicttype-list";
@@ -51,7 +51,7 @@ public class DictTypeController extends ApplicationController {
      * @param request
      * @return
      */
-    @RequiresPermissions("basic:dictdata:list")
+    @RequiresPermissions("basic:dicttype:list")
     @RequestMapping(value = "dataList", method = RequestMethod.POST)
     @ResponseBody
     public Object dataList(DictTypeParams params, HttpServletRequest request) {
@@ -75,7 +75,7 @@ public class DictTypeController extends ApplicationController {
      * @param request
      * @return
      */
-    @RequiresPermissions("basic:dictdata:edit")
+    @RequiresPermissions("basic:dicttype:edit")
     @RequestMapping(value = "toEdit", method = RequestMethod.GET)
     public String toEdit(Long id, Model model, HttpServletRequest request) {
         // 查询字典类型信息
@@ -96,7 +96,7 @@ public class DictTypeController extends ApplicationController {
      * @param request
      * @return
      */
-    @RequiresPermissions("basic:dictdata:edit")
+    @RequiresPermissions("basic:dicttype:edit")
     @RequestMapping(value = "save", method = RequestMethod.POST)
     @ResponseBody
     public Object saveUser(DictType record, HttpServletRequest request) {
@@ -132,7 +132,7 @@ public class DictTypeController extends ApplicationController {
      * @param request
      * @return
      */
-    @RequiresPermissions("basic:dictdata:edit")
+    @RequiresPermissions("basic:dicttype:edit")
     @RequestMapping(value = "updateStatus", method = RequestMethod.POST)
     @ResponseBody
     public Object updateStatus(DictType record, HttpServletRequest request) {
