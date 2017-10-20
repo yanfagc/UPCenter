@@ -90,7 +90,7 @@ public class RoleService extends AbstractUpcService {
         if (dataList != null && !dataList.isEmpty()) {
             Map<String, ZTreeNode> map = new HashMap<String, ZTreeNode>();
             for (ZTreeNode node : dataList) {
-                if (node.isParent()) {
+                if (node.isIsParent()) {
                     if (StringUtils.isBlank(node.getpId()) || "0".equals(node.getpId())) {
                         result.add(node);
                     }
@@ -120,7 +120,7 @@ public class RoleService extends AbstractUpcService {
         if (dataList != null && !dataList.isEmpty()) {
             Map<String, ZTreeNode> map = new HashMap<String, ZTreeNode>();
             for (ZTreeNode node : dataList) {
-                if (node.isParent()) {
+                if (node.isIsParent()) {
                     if (StringUtils.isBlank(node.getpId()) || "0".equals(node.getpId())) {
                         result.add(node);
                     }
@@ -169,7 +169,7 @@ public class RoleService extends AbstractUpcService {
             ZTreeNode node = new ZTreeNode();
             node.setId("g_" + group.getId());
             node.setName(group.getGroupname());
-            node.setParent(true);
+            node.setIsParent(true);
             node.setOpen(true);
             resultList.add(node);
             map.put(group.getId(), node);

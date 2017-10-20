@@ -14,7 +14,7 @@ public enum URLType {
     
     private String remark;
     
-    private URLType(String remark) {
+    URLType(String remark) {
         this.remark = remark;
     }
     

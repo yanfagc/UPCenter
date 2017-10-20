@@ -80,12 +80,13 @@ public class MenuService extends AbstractUpcService {
         
         List<ZTreeNode> resultList = new ArrayList<ZTreeNode>();
         if (menuList != null && !menuList.isEmpty()) {
+            String pid = (parentId == null || parentId == 0) ? "sys-" + systemid : String.valueOf(parentId);
             for (Menu menu : menuList) {
                 ZTreeNode node = new ZTreeNode();
                 node.setId(String.valueOf(menu.getId()));
                 node.setName(menu.getMenuname());
-                node.setpId(String.valueOf(menu.getParentId()));
-                node.setParent(true);
+                node.setpId(pid);
+                node.setIsParent(true);
                 resultList.add(node);
             }
         }

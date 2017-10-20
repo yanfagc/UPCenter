@@ -80,13 +80,21 @@ function $sessionAjax(params){
         type:params.type?params.type:'post',
         data:params.data?params.data:{},
         success:function(rsp){
-            if(rsp.code=='2000'){
-                showTipsDialog('系统提示','登录超时，请重新登录',function(){
-                    location.href=$ctx+'/login';
-                });
-            }
-            else if(params.success && typeof params.success == 'function'){
-                params.success(rsp);
+            try {
+                if (typeof rsp === 'string') {
+                    rsp = eval("("+rsp+")");
+                }
+
+                if(rsp.code=='2000'){
+                    showTipsDialog('系统提示','登录超时，请重新登录',function(){
+                        location.href=$ctx+'/login';
+                    });
+                }
+                else if(params.success && typeof params.success == 'function'){
+                    params.success(rsp);
+                }
+            }catch(e){
+                showTipsDialog("错误信息","前端JS错误，请联系管理员",true);
             }
         },
         error:function(data){
@@ -111,13 +119,21 @@ function $sessionAjaxSubmit($element,params){
         	}
         },
         success:function(rsp){
-            if(rsp.code=='2000'){
-                showTipsDialog('系统提示','登录超时，请重新登录',function(){
-                    location.href=$ctx+'/login';
-                });
+            try {
+                if (typeof rsp === 'string') {
+                    rsp = eval("("+rsp+")");
+                }
+                if(rsp.code=='2000'){
+                    showTipsDialog('系统提示','登录超时，请重新登录',function(){
+                        location.href=$ctx+'/login';
+                    });
+                }
+                else if(params.success && typeof params.success == 'function'){
+                    params.success(rsp);
+                }
             }
-            else if(params.success && typeof params.success == 'function'){
-                params.success(rsp);
+            catch (e) {
+                showTipsDialog("错误信息","前端JS错误，请联系管理员",true);
             }
         },
         error:function(rsp){

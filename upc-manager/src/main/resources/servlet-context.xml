@@ -88,6 +88,15 @@
         </property>
 	</bean>
 
+	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="org.apache.shiro.authz.UnauthorizedException">${shiro.unauthorized}</prop>
+				<prop key="org.apache.shiro.authz.AuthorizationException">${shiro.authorization}</prop>
+			</props>
+		</property>
+	</bean>
+
 	<aop:config proxy-target-class="true"/>
 	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
 		<property name="securityManager" ref="securityManager"/>

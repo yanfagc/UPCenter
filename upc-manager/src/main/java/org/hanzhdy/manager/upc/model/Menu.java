@@ -3,6 +3,7 @@ package org.hanzhdy.manager.upc.model;
 import java.io.Serializable;
 import java.util.Date;
 import org.hanzhdy.manager.support.enums.CommonStatus;
+import org.hanzhdy.manager.support.enums.ShowFlag;
 import org.hanzhdy.manager.support.enums.URLType;
 
 public class Menu implements Serializable {
@@ -49,6 +50,12 @@ public class Menu implements Serializable {
      * @author MyBatis Generator
      */
     private URLType urltype;
+
+    /**
+     * : r_menu.SHOWFLAG
+     * @author MyBatis Generator
+     */
+    private ShowFlag showflag;
 
     /**
      * 菜单地址: r_menu.MENUURL
@@ -216,6 +223,24 @@ public class Menu implements Serializable {
      */
     public void setUrltype(URLType urltype) {
         this.urltype = urltype;
+    }
+
+    /**
+     * 获取: r_menu.SHOWFLAG
+     * @return : r_menu.SHOWFLAG
+     * @author MyBatis Generator
+     */
+    public ShowFlag getShowflag() {
+        return showflag;
+    }
+
+    /**
+     * 设置: r_menu.SHOWFLAG
+     * @param showflag 映射数据库字段: r_menu.SHOWFLAG
+     * @author MyBatis Generator
+     */
+    public void setShowflag(ShowFlag showflag) {
+        this.showflag = showflag;
     }
 
     /**

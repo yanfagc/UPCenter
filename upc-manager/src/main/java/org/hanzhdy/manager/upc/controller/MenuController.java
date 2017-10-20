@@ -57,9 +57,15 @@ public class MenuController extends ApplicationController {
     public String toList(Model model, @RequestParam("systemid") Long systemid) {
         try {
             AccessSystem system = this.accessSystemService.queryById(systemid);
-            
             List<ZTreeNode> nodeList = this.menuService.queryMenuAsZTreeNode(0l, systemid);
-            model.addAttribute("nodeList", JSON.toJSONString(nodeList));
+            ZTreeNode treeNode = new ZTreeNode();
+            treeNode.setpId("0");
+            treeNode.setId("sys-" + system.getId());
+            treeNode.setName(system.getSysname());
+            treeNode.setIsParent(true);
+            treeNode.setChildren(nodeList);
+            treeNode.setOpen(true);
+            model.addAttribute("nodeList", treeNode);
             model.addAttribute("systemid", systemid);
             model.addAttribute("system", system);
             return "/basic/menu/menu-list";

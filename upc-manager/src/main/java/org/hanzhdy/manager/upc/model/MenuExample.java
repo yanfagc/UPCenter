@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.hanzhdy.manager.support.enums.CommonStatus;
+import org.hanzhdy.manager.support.enums.ShowFlag;
 import org.hanzhdy.manager.support.enums.URLType;
 import org.hanzhdy.web.bean.Page;
 
@@ -665,6 +666,76 @@ public class MenuExample {
 
         public Criteria andUrltypeNotBetween(URLType value1, URLType value2) {
             addCriterion("URLTYPE not between", value1, value2, "urltype");
+            return (Criteria) this;
+        }
+
+        public Criteria andShowflagIsNull() {
+            addCriterion("SHOWFLAG is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShowflagIsNotNull() {
+            addCriterion("SHOWFLAG is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShowflagEqualTo(ShowFlag value) {
+            addCriterion("SHOWFLAG =", value, "showflag");
+            return (Criteria) this;
+        }
+
+        public Criteria andShowflagNotEqualTo(ShowFlag value) {
+            addCriterion("SHOWFLAG <>", value, "showflag");
+            return (Criteria) this;
+        }
+
+        public Criteria andShowflagGreaterThan(ShowFlag value) {
+            addCriterion("SHOWFLAG >", value, "showflag");
+            return (Criteria) this;
+        }
+
+        public Criteria andShowflagGreaterThanOrEqualTo(ShowFlag value) {
+            addCriterion("SHOWFLAG >=", value, "showflag");
+            return (Criteria) this;
+        }
+
+        public Criteria andShowflagLessThan(ShowFlag value) {
+            addCriterion("SHOWFLAG <", value, "showflag");
+            return (Criteria) this;
+        }
+
+        public Criteria andShowflagLessThanOrEqualTo(ShowFlag value) {
+            addCriterion("SHOWFLAG <=", value, "showflag");
+            return (Criteria) this;
+        }
+
+        public Criteria andShowflagLike(ShowFlag value) {
+            addCriterion("SHOWFLAG like", value, "showflag");
+            return (Criteria) this;
+        }
+
+        public Criteria andShowflagNotLike(ShowFlag value) {
+            addCriterion("SHOWFLAG not like", value, "showflag");
+            return (Criteria) this;
+        }
+
+        public Criteria andShowflagIn(List<ShowFlag> values) {
+            addCriterion("SHOWFLAG in", values, "showflag");
+            return (Criteria) this;
+        }
+
+        public Criteria andShowflagNotIn(List<ShowFlag> values) {
+            addCriterion("SHOWFLAG not in", values, "showflag");
+            return (Criteria) this;
+        }
+
+        public Criteria andShowflagBetween(ShowFlag value1, ShowFlag value2) {
+            addCriterion("SHOWFLAG between", value1, value2, "showflag");
+            return (Criteria) this;
+        }
+
+        public Criteria andShowflagNotBetween(ShowFlag value1, ShowFlag value2) {
+            addCriterion("SHOWFLAG not between", value1, value2, "showflag");
             return (Criteria) this;
         }
 

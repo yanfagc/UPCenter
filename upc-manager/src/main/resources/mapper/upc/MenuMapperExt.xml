@@ -43,7 +43,7 @@
 		m.MENUNAME AS NAME,
 	IF(m.PARENTID IS NULL OR m.PARENTID='0','0',concat('m_',m.PARENTID)) AS pId,
 		'true' AS OPEN,
-		'true' AS parent,
+		'true' AS isParent,
 		m.SORT AS sort,
 	IF (
 		rm.ROLEID IS NOT NULL
@@ -70,7 +70,7 @@
 		m.MENUNAME AS NAME,
 	IF(m.PARENTID IS NULL OR m.PARENTID='0','0',concat('m_',m.PARENTID)) AS pId,
 		'true' AS OPEN,
-		'true' AS parent,
+		'true' AS isParent,
 	    'false' AS checked,
 		m.SORT AS sort
 	FROM

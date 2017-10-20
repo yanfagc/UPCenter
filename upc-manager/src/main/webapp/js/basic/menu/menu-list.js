@@ -53,6 +53,17 @@ $(function() {
                     }
                 },
                 {
+                    mData:"showflag",
+                    mRender:function(data, display, record) {
+                        if(data=='SHOW'){
+                            return '显示';
+                        }else if(data=='HIDDEN'){
+                            return '隐藏';
+                        }
+                        return data?'未知('+data+')':'未知(空)';
+                    }
+                },
+                {
                     mData:"urltype",
                     mRender:function(data, display, record) {
                         if(data=='M'){
@@ -208,28 +219,20 @@ function initZTree(data) {
             enable: true,
             url:$ctx+'/basic/menu/zTreeData?systemid='+$('input[name="systemid"]').val(),
             autoParam:["id=pid"],
-            type:'post',
-            dataFilter:zNodeFilter
+            type:'post'
         },
         callback:{
             onClick:function(event, treeId, treeNode){
-                $('input[name="parentid"]').val(treeNode.id);
+                if(/^[0-9]*$/.test(treeNode.id)){
+                    $('input[name="parentid"]').val(treeNode.id);
+                }else{
+                    $('input[name="parentid"]').val(0);
+                }
                 search();
             }
         }
     };
-    zNodeFilter(null,null,data);
     $.fn.zTree.init($("#menuTree"), setting, data);
 }
 
-function zNodeFilter(id,pNode,dataList){
-    if($.isArray(dataList)){
-        for(var i=0;i<dataList.length;i++){
-            dataList[i].isParent=true;
-        }
-    }else if(dataList){
-        dataList.isParent=true;
-    }
-    return dataList;
-}
 

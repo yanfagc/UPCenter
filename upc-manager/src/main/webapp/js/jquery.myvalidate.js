@@ -110,9 +110,23 @@ $.extend($.fn, {
                 });
             }else{
                 $.each(value, function(i,v){
-                    if(i=='required'){
-                        alert(msg[i]);
+                    if(i=='required' && v==true){
+                        try{
+                            easyDialog.open({
+                                container:{
+                                    header:'<div style="font-size:15px;">操作提示</div>',
+                                    content:'<div style="font-size:15px;">'+msg[i]+'</div>',
+                                    yesFn:function(){
+                                        closeDialog();
+                                    },
+                                    noFn:false
+                                }
+                            });
+                        }catch(e){
+                            alert(msg[i]);
+                        }
                         success=false;
+                        return false;
                     }
                 });
             }
