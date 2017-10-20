@@ -14,6 +14,10 @@
 <link rel="stylesheet" href="${ctx}/css/login/supersized.css">
 <link rel="stylesheet" href="${ctx}/css/login/login.css"><script type="text/javascript">
 var $ctx='${ctx}';
+if(window.opener){
+    window.opener.location=self.location;
+    window.close();
+}
 if(top.location!=self.location){
 	top.location = self.location;
 }

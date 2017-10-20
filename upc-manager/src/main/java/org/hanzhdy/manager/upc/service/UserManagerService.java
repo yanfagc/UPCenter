@@ -6,6 +6,7 @@ import org.hanzhdy.manager.form.mapper.FormDataMapperExt;
 import org.hanzhdy.manager.form.model.FormData;
 import org.hanzhdy.manager.form.model.FormDataExample;
 import org.hanzhdy.manager.form.service.FormEngineService;
+import org.hanzhdy.manager.support.bean.SessionUser;
 import org.hanzhdy.manager.support.constants.DBConstants;
 import org.hanzhdy.manager.support.service.AbstractUpcService;
 import org.hanzhdy.manager.upc.controller.params.UserParams;
@@ -284,15 +285,49 @@ public class UserManagerService extends AbstractUpcService {
     }
     
     /**
-     * 根据用户名和密码，对密码进行组合加密，并返回加密后字符串
-     * @param account
-     * @param password
+     * 修改自己的密码
+     * @param sessionUser
+     * @param oldPassword
+     * @param newPassword
      * @return
      */
-    protected String encryptPwd(String account, String password) {
-        String pwdstr = password + "$" + account;
-        String encstr = SecurityUtils.encryptSHA256String(pwdstr);
-        return encstr;
+    public boolean updateMinePw(SessionUser sessionUser, String oldPassword, String newPassword) {
+        UserBasic userBasic = this.userBasicMapperExt.selectByPrimaryKey(sessionUser.getId());
+        boolean check = this.checkPwd(userBasic.getAccount(), oldPassword, userBasic.getPassword());
+        if (!check) {
+            throw new BizException(respCode.UPDATE_PW_ILLEGAL_OLDPW);
+        }
+        
+        String password = encryptPwd(userBasic.getAccount(), newPassword);
+        UserBasic record = new UserBasic();
+        record.setId(sessionUser.getId());
+        record.setPassword(password);
+        int count = this.userBasicMapperExt.updateByPrimaryKeySelective(record);
+        return count > 0;
+    }
+    
+    /**
+     * 修改用户密码
+     * @param sessionUser
+     * @param userId
+     * @param account
+     * @param newPassword
+     * @return
+     */
+    public boolean updateUserPw(SessionUser sessionUser, Long userId, String account, String adminPassword,
+                                String newPassword) {
+        UserBasic userBasic = this.userBasicMapperExt.selectByPrimaryKey(sessionUser.getId());
+        boolean check = this.checkPwd(userBasic.getAccount(), adminPassword, userBasic.getPassword());
+        if (!check) {
+            throw new BizException(respCode.UPDATE_PW_ILLEGAL_ADMINPW);
+        }
+    
+        String password = encryptPwd(account, newPassword);
+        UserBasic record = new UserBasic();
+        record.setId(userId);
+        record.setPassword(password);
+        int count = this.userBasicMapperExt.updateByPrimaryKeySelective(record);
+        return count > 0;
     }
     
     /**
@@ -303,9 +338,20 @@ public class UserManagerService extends AbstractUpcService {
      * @return
      */
     public boolean checkPwd(String account, String password, String encryptPwd) {
+        String encstr = encryptPwd(account, password);
+        return StringUtils.equalsIgnoreCase(encstr, encryptPwd);
+    }
+    
+    /**
+     * 根据用户名和密码，对密码进行组合加密，并返回加密后字符串
+     * @param account
+     * @param password
+     * @return
+     */
+    protected String encryptPwd(String account, String password) {
         String pwdstr = password + "$" + account;
         String encstr = SecurityUtils.encryptSHA256String(pwdstr);
-        return StringUtils.equalsIgnoreCase(encstr, encryptPwd);
+        return encstr;
     }
     
     public static void main(String[] args) {

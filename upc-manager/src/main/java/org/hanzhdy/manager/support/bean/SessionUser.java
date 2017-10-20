@@ -2,6 +2,8 @@ package org.hanzhdy.manager.support.bean;
 
 import org.hanzhdy.manager.support.enums.LoginUserStatus;
 
+import java.util.Date;
+
 /**
  * @description 登录用户信息
  * @author H.CAAHN
@@ -15,6 +17,10 @@ public class SessionUser {
     private String          nickname;
     
     private LoginUserStatus status;
+    
+    private Date            logintime;
+    
+    private String          loginip;
     
     public Long getId() {
         return id;
@@ -46,5 +52,21 @@ public class SessionUser {
 
     public void setStatus(LoginUserStatus status) {
         this.status = status;
+    }
+    
+    public Date getLogintime() {
+        return logintime;
+    }
+    
+    public void setLogintime(Date logintime) {
+        this.logintime = logintime;
+    }
+    
+    public String getLoginip() {
+        return loginip;
+    }
+    
+    public void setLoginip(String loginip) {
+        this.loginip = loginip;
     }
 }

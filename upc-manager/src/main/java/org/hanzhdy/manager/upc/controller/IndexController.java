@@ -1,6 +1,7 @@
 package org.hanzhdy.manager.upc.controller;
 
 import com.alibaba.druid.util.StringUtils;
+import com.alibaba.fastjson.JSON;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
@@ -9,10 +10,7 @@ import org.hanzhdy.manager.support.constants.WebConstants;
 import org.hanzhdy.manager.support.constants.resp.RespResult;
 import org.hanzhdy.manager.support.controller.ApplicationController;
 import org.hanzhdy.manager.upc.model.AccessSystem;
-import org.hanzhdy.manager.upc.service.AccessSystemService;
-import org.hanzhdy.manager.upc.service.LoginLogService;
-import org.hanzhdy.manager.upc.service.LoginService;
-import org.hanzhdy.manager.upc.service.MenuService;
+import org.hanzhdy.manager.upc.service.*;
 import org.hanzhdy.manager.upc.vo.Resource;
 import org.hanzhdy.utils.HttpUtils;
 import org.hanzhdy.utils.images.VerifyCode;
@@ -30,6 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -52,6 +51,9 @@ public class IndexController extends ApplicationController {
     @Autowired
     private LoginLogService     loginLogService;
     
+    @Autowired
+    private UserManagerService  userManagerService;
+    
     @Value("${system.vcode.verify}")
     public boolean              checkVCode;
     
@@ -71,6 +73,8 @@ public class IndexController extends ApplicationController {
                 List<Resource> resourceList = this.menuService.queryMenuResourceByUserAndSysid(user.getId(), system.getId());
                 model.addAttribute("resourceList", resourceList);
             }
+            model.addAttribute("user", user);
+            model.addAttribute("system", system);
         }
         catch (Exception ex) {
             logger.error("首页打开失败", ex);
@@ -128,12 +132,14 @@ public class IndexController extends ApplicationController {
             Subject subject = SecurityUtils.getSubject();
             subject.login(token);
 
+            String realip = HttpUtils.getRealIp(request);
             SessionUser user = this.loginService.getSessionUserByAccount(username);
-            // super.setSessionUser(request, user);
+            user.setLoginip(realip);
+            user.setLogintime(new Date());
             subject.getSession().setAttribute(WebConstants.SESSION_USER, user);
             
             // 记录日志
-            this.loginLogService.insert(user, HttpUtils.getRealIp(request), "用户[" + username + "]登录系统");
+            this.loginLogService.insert(user, realip, "用户[" + username + "]登录系统");
             
             // 返回登录成功
             return RespResult.create(respCode.SUCCESS);
@@ -175,5 +181,37 @@ public class IndexController extends ApplicationController {
     public String logout(HttpServletRequest request) {
         super.removeSessionUser(request);
         return redirect("login");
+    }
+    
+    /**
+     * 打开修改个人密码页面
+     * @return
+     */
+    @RequestMapping(value = "modifyPw", method = RequestMethod.GET)
+    public String toModifyPw() {
+        return "basic/user/user-modifyPw-mine";
+    }
+    
+    /**
+     * 处理修改个人密码请求
+     * @return
+     */
+    @RequestMapping(value = "modifyPw", method = RequestMethod.POST)
+    @ResponseBody
+    public Object modifyPw(@RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword,
+                           HttpServletRequest request) {
+        SessionUser user = super.getSessionUser(request);
+        try {
+            boolean result = this.userManagerService.updateMinePw(user, oldPassword, newPassword);
+            return RespResult.create(result ? respCode.SUCCESS : respCode.UPDATE_PW_NORECORD);
+        }
+        catch (BizException ex) {
+            logger.warn("修改个人[" + user.getAccount() + "]密码失败，错误原因：" + JSON.toJSONString(ex.getStatus()));
+            return RespResult.create(ex.getStatus());
+        }
+        catch (Exception ex) {
+            logger.error("修改个人[" + user.getAccount() + "]密码失败，服务器出现异常", ex);
+            return RespResult.create(respCode.ERROR_EXCEPTION);
+        }
     }
 }

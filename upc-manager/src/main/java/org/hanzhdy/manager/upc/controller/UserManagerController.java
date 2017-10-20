@@ -275,4 +275,48 @@ public class UserManagerController extends ApplicationController {
             return RespResult.create(respCode.ERROR_EXCEPTION);
         }
     }
+    
+    /**
+     * 打开修改用户密码的页面
+     * @param account
+     * @param userid
+     * @return
+     */
+    @RequiresPermissions("basic:user:edit")
+    @RequestMapping(value = "updatePassword", method = RequestMethod.GET)
+    public String updatePassword(Model model, @RequestParam("account") String account, @RequestParam("userid") Long userid) {
+        model.addAttribute("account", account);
+        model.addAttribute("userid", userid);
+        return "basic/user/user-modifyPw";
+    }
+    
+    /**
+     * 处理修改用户密码的请求
+     * @param account
+     * @param userid
+     * @param adminPassword
+     * @param newPassword
+     * @param request
+     * @return
+     */
+    @RequiresPermissions("basic:user:edit")
+    @RequestMapping(value = "updatePassword", method = RequestMethod.POST)
+    @ResponseBody
+    public Object modifyPw(@RequestParam("account") String account, @RequestParam("userid") Long userid,
+                           @RequestParam("adminPassword") String adminPassword, @RequestParam("newPassword") String newPassword,
+                           HttpServletRequest request) {
+        SessionUser user = super.getSessionUser(request);
+        try {
+            boolean result = this.userManagerService.updateUserPw(user, userid, account, adminPassword, newPassword);
+            return RespResult.create(result ? respCode.SUCCESS : respCode.UPDATE_PW_NORECORD);
+        }
+        catch (BizException ex) {
+            logger.warn("修改用户[" + user.getAccount() + "]密码失败，错误原因：" + JSON.toJSONString(ex.getStatus()));
+            return RespResult.create(ex.getStatus());
+        }
+        catch (Exception ex) {
+            logger.error("修改用户[" + user.getAccount() + "]密码失败，服务器出现异常", ex);
+            return RespResult.create(respCode.ERROR_EXCEPTION);
+        }
+    }
 }

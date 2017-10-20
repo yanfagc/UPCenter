@@ -73,6 +73,7 @@ $(function() {
                     mRender:function(data, display, record) {
                         var html="";
                         if(record.status=='N'){
+                            html+='<a class="btn btn-info btn-xs toUpdatePw" fid="'+record.id+'" fcode="'+record.account+'" href="javascript:void(0);">&nbsp;修改密码&nbsp;</a>&nbsp;';
                             html+='<a class="btn btn-primary btn-xs toEdit" fid="'+record.id+'" href="javascript:void(0);">&nbsp;编辑&nbsp;</a>&nbsp;';
                             html+='<a class="btn btn-warning btn-xs toFrozen" fid="'+record.id+'" href="javascript:void(0);">&nbsp;冻结&nbsp;</a>&nbsp;';
                             html+='<a class="btn btn-danger btn-xs toDemise" fid="'+record.id+'" href="javascript:void(0);">&nbsp;注销&nbsp;</a>';
@@ -119,6 +120,12 @@ $(function() {
     $('tbody').on("click", '.toUserRole', function() {
         var id=$(this).attr("fid");
         openWindow($ctx+'/basic/user/toEditRole?userid='+id);
+    });
+    // 修改用户登录密码
+    $('tbody').on("click", '.toUpdatePw', function() {
+        var id=$(this).attr("fid");
+        var account=$(this).attr("fcode");
+        openWindow($ctx+'/basic/user/updatePassword?userid='+id+'&account='+account,550,300);
     });
     // 注销
     $('tbody').on("click", '.toDemise',function() {

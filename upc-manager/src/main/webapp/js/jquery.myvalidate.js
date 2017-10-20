@@ -8,6 +8,10 @@ $.extend($.fn, {
     initOpts:{
         showText:true//错误提示的label框中是否显示错误文本
     },
+    args:{
+        wi:[7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2, 1 ],
+        valideCode:[1, 0, 10, 9, 8, 7, 6, 5, 4, 3, 2 ]
+    },
     //全量更新校验规则，即将新规则完全覆盖旧的规则
     //举例：字段field原来存在有required和minlength两项，新规则设置required后，minlength也将失效
     //@see updateSelective
@@ -224,7 +228,7 @@ $.extend($.fn, {
                 return $.trim(value).length > 0;
             }
         },
-        // 匹配整数
+        // 匹配整数（包含负数）
         integer:function(item,name,param) {
             var value=item.val();
             if(param!=true || $.trim(value).length==0){
@@ -233,7 +237,7 @@ $.extend($.fn, {
             var reg=/^\-?(0|([1-9][0-9]*))$/;
             return reg.test(value);
         },
-        // 匹配小数
+        // 匹配小数（包含负数、整数）
         float:function(item,name,param) {
             var value=item.val();
             if(param!=true || $.trim(value).length==0){
@@ -242,7 +246,7 @@ $.extend($.fn, {
             var reg=/^\-?(0|([1-9][0-9]*))(\.[0-9]+)?$/;
             return reg.test(value);
         },
-        // 匹配英文或数字
+        // 匹配英文或数字（英文大小写均可）
         numberOrLetter:function(item,name,param){
         	var value=item.val();
         	if(param!=true || $.trim(value).length==0){
@@ -251,7 +255,7 @@ $.extend($.fn, {
         	var reg=/^[a-zA-Z][0-9]+$/;
         	return reg.test(value);
         },
-        // 仅限中文
+        // 仅限中文（unicode汉字字符，部分特殊汉字可能未包含在其中）
         cn_code:function(item,name,param) {
             var value=item.val();
             if(param!=true || $.trim(value).length==0){
@@ -260,7 +264,7 @@ $.extend($.fn, {
             var reg=/^[\u4E00-\u9FA5]+$/;
             return reg.test(value);
         },
-        // 大于0的数值
+        // 匹配大于0的数值（包含整数和小数）
         morethanzero:function(item,name,param) {
             var value=item.val();
             if(param!=true || $.trim(value).length==0){
@@ -272,21 +276,28 @@ $.extend($.fn, {
         // 最小值
         min: function(item, name, param) {
             var value=item.val();
+            if(!value){
+                return true;
+            }
+
             return value >= param;
         },
         // 最大值
         max: function(item, name, param) {
             var value=item.val();
+            if(!value){
+                return true;
+            }
             return value <= param;
         },
         // 对比最小值，如结束时间不得小于开始时间
         minlimit: function(item, name, param) {
-            var value=item.val(),pv=$("input[name='"+param+"'],textarea[name='"+param+"']").val();
+            var value=item.val(),pv=$(":input[name='"+param+"'],textarea[name='"+param+"']").val();
             return $.trim(value)>=$.trim(pv);
         },
         // 对比最大值，如开始时间不得大于结束时间
         maxlimit: function(item, name, param) {
-            var value=item.val(),pv=$("input[name='"+param+"'],textarea[name='"+param+"']").val();
+            var value=item.val(),pv=$(":input[name='"+param+"'],textarea[name='"+param+"']").val();
             return $.trim(value)<=$.trim(pv);
         },
         // 最小长度
@@ -317,14 +328,17 @@ $.extend($.fn, {
     	   var value=item.val().replace(/[^\x00-\xff]/g,"aaa");
     	   return $.trim(value).length <= param;
         },
+        // 最小unicode长度，一个中文两个字节长度计算
         mincodes: function (item, name, param) { // 一个中文两个字节长度计算，用于配合界面展示宽度限定
     	   var value=item.val().replace(/[^\x00-\xff]/g,"aa");
     	   return $.trim(value).length >= param;
         },
+        // 最大unicode长度，一个中文两个字节长度计算
         maxcodes: function (item, name, param) { // 一个中文两个字节长度计算，用于配合界面展示宽度限定
     	   var value=item.val().replace(/[^\x00-\xff]/g,"aa");
     	   return $.trim(value).length <= param;
         },
+        // 匹配金额
         money: function(item, name, param) {
     	   var value=item.val();
     	   if(param!=true || $.trim(value).length==0){
@@ -333,6 +347,7 @@ $.extend($.fn, {
     	   var reg=/(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/;
     	   return reg.test(value);
         },
+        // 匹配Email地址
         email:function(item,name,param) {
             var value=item.val();
             if(param!=true || $.trim(value).length==0){
@@ -341,14 +356,16 @@ $.extend($.fn, {
             var reg=/^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/;
             return reg.test(value);
         },
+        // 匹配身份证号
         idcard:function(item,name,param){
             var value=item.val();
             if(param!=true || $.trim(value).length==0){
                 return true;
             }
             
-            return idCardValidate(value);
+            return $.fn.idCardValidate(value);
         },
+        // 匹配手机号码
         mobile:function(item,name,param){
             var value=item.val();
             if(param!=true || $.trim(value).length==0){
@@ -357,6 +374,7 @@ $.extend($.fn, {
             var reg=/^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
             return reg.test(value);
         },
+        // 匹配电话号码
         phone:function(item,name,param){
             var value=item.val();
             if(param!=true || $.trim(value).length==0){
@@ -365,6 +383,7 @@ $.extend($.fn, {
             var reg=/^(\(\d{3,4}\)|\d{3,4}-|\s)?\d{8}$/;
             return reg.test(value);
         },
+        // 匹配邮政编码
         zipcode:function(item,name,param){
             var value=item.val();
             if(param!=true || $.trim(value).length==0){
@@ -372,6 +391,16 @@ $.extend($.fn, {
             }
             var reg=/^[1-9]\d{5}(?!\d)$/;
             return reg.test(value);
+        },
+        // 匹配两个输入项是否相等
+        equalTo:function(item,name,param){
+            var value=item.val(),compareValue=$(':input[name="'+param+'"]').val();
+            return value==compareValue;
+        },
+        // 匹配两个输入项是否不相等
+        notEqualTo:function(item,name,param){
+            var value=item.val(),compareValue=$(':input[name="'+param+'"]').val();
+            return value!=compareValue;
         }
     },
     isMultiple: function(item) {
@@ -467,39 +496,33 @@ $.extend($.fn, {
             options.rules[names[i]]=initOpts.rules[names[i]]?initOpts.rules[names[i]]:{};
             options.messages[names[i]]=initOpts.messages[names[i]]?initOpts.messages[names[i]]:{};
         }
+    },
+    idCardValidate:function(idCard){
+        idCard = $.trim(idCard.replace(/ /g, ""));
+        if (idCard.length == 18) {
+            var a_idCard = idCard.split("");
+            if($.fn.validateCodeBy18IdCard(a_idCard)){
+                return true;
+            }else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    },
+    validateCodeBy18IdCard:function(a_idCard){
+        var sum = 0;
+        if (a_idCard[17].toLowerCase() == 'x') {
+            a_idCard[17] = 10;
+        }
+        for ( var i = 0; i < 17; i++) {
+            sum += $.fn.args.wi[i] * a_idCard[i];
+        }
+        if (a_idCard[17] == $.fn.args.valideCode[sum % 11]) {
+            return true;
+        } else {
+            return false;
+        }
     }
 });
 }(jQuery));
-
-//身份证校验
-var Wi = [ 7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2, 1 ];   
-var ValideCode = [ 1, 0, 10, 9, 8, 7, 6, 5, 4, 3, 2 ];  
-function idCardValidate(idCard){
-    idCard = $.trim(idCard.replace(/ /g, ""));   
-    if (idCard.length == 18) {   
-        var a_idCard = idCard.split("");   
-        if(validateCodeBy18IdCard(a_idCard)){   
-            return true;   
-        }else {   
-            return false;   
-        }   
-    } else {   
-        return false;   
-    }   
-}
-
-function validateCodeBy18IdCard(a_idCard){
-    var sum = 0;   
-    if (a_idCard[17].toLowerCase() == 'x') {   
-        a_idCard[17] = 10;
-    }   
-    for ( var i = 0; i < 17; i++) {   
-        sum += Wi[i] * a_idCard[i]; 
-    }   
-    valCodePosition = sum % 11;  
-    if (a_idCard[17] == ValideCode[valCodePosition]) {   
-        return true;   
-    } else {   
-        return false;   
-    }   
-}

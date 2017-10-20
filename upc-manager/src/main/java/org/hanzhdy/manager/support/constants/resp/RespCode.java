@@ -45,7 +45,22 @@ public class RespCode {
     
     /** 登录失败，登录次数过多 */
     public final BizStatus        LOGIN_EXCESSIVE_ATTEMPTS = null;
-
+    
+    /** 密码修改失败，新密码不允许为空 */
+    public final BizStatus        UPDATE_PW_EMPTY_NEWPW    = null;
+    
+    /** 密码修改失败，数据记录不存在 */
+    public final BizStatus        UPDATE_PW_NORECORD       = null;
+    
+    /** 密码修改失败，当前密码输入错误 */
+    public final BizStatus        UPDATE_PW_ILLEGAL_OLDPW  = null;
+    
+    /** 密码修改失败，当前密码不符合要求 */
+    public final BizStatus        UPDATE_PW_ILLEGAL_RULE   = null;
+    
+    /** 密码修改失败，管理员密码输入错误 */
+    public final BizStatus        UPDATE_PW_ILLEGAL_ADMINPW= null;
+    
     /** 数据保存失败，未找到记录 */
     public final BizStatus        SAVE_NORECORD             = null;
 

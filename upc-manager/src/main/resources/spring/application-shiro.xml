@@ -109,8 +109,9 @@
                 /logo.png    = anon
                 /login       = anon
                 /getVCode    = anon
-                /doLogin     = authc
                 /error/**    = anon
+                /doLogin     = authc
+                /modifyPw    = authc
                 /logout      = logout
                 /index       = user <!-- user代表登录过，authc代表认证过，使用remember me功能的时候，user支持，而authc则不支持 -->
                 /            = user
@@ -132,6 +133,7 @@
         <property name="exceptionMappings">
             <props>
                 <prop key="org.apache.shiro.authz.UnauthorizedException">${shiro.unauthorized}</prop>
+                <prop key="org.apache.shiro.authz.AuthorizationException">${shiro.login}</prop>
             </props>
         </property>
     </bean>

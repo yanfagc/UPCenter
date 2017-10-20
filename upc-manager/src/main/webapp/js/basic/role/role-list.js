@@ -105,7 +105,7 @@ $(function() {
     $('tbody').on("click", '.toSettingMenus', function(){
     	var roleid=$(this).attr("fid");
     	var sysid=$(this).attr("sysid");
-    	openWindow($ctx+'/basic/role/toSettingMenus?roleid='+roleid+'&sysid='+sysid,550,480);
+    	openWindow($ctx+'/basic/role/toSettingMenus?roleid='+roleid+'&sysid='+sysid,550,560);
     });
 
     // 角色权限

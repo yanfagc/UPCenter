@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>用户权限管理中心</title>
+    <title>${system.sysname}</title>
     <jsp:include page="/WEB-INF/jsp/commons/metaheader.jsp" />
   </head>
   <body class="skin-blue sidebar-mini">
@@ -12,7 +12,7 @@
       <header class="main-header">
         <a href="javascript:void(0)" class="logo">
           <span class="logo-mini">UPC</span>
-          <span class="logo-lg">用户权限管理中心</span>
+          <span class="logo-lg">${system.sysname}</span>
         </a>
         <nav class="navbar navbar-static-top" role="navigation">
           <a href="javascript:void(0)" class="sidebar-toggle" data-toggle="offcanvas" role="button">
@@ -215,15 +215,15 @@
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <img src="${ctx}/plugins/dist/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
-                  <span class="hidden-xs">Alexander Pierce</span>
+                  <span class="hidden-xs">${user.nickname}</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
                     <img src="${ctx}/plugins/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
                     <p>
-                      Alexander Pierce - Web Developer
-                      <small>Member since Nov. 2012</small>
+                      ${user.nickname} - ${user.account}
+                      <small>登录时间：<fmt:formatDate value="${user.logintime}" pattern="yyyy-MM-dd HH:mm:ss"/></small>
                     </p>
                   </li>
                   <!-- Menu Body -->
@@ -241,7 +241,7 @@
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-left">
-                      <a href="#" class="btn btn-default btn-flat">Profile</a>
+                      <a href="javascript:void(0);" class="btn btn-default btn-flat modifyPassword">修改密码</a>
                     </div>
                     <div class="pull-right">
                       <a href="${ctx}/logout" class="btn btn-default btn-flat">退出</a>
@@ -265,16 +265,16 @@
               <img src="${ctx}/plugins/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
             </div>
             <div class="pull-left info">
-              <p>超级管理员</p>
+              <p>${user.nickname}</p>
 
-              <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+              <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
             </div>
           </div>
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <%--<c:set var="activeUrl"/>
           <c:set var="activeUrlType"/>--%>
           <ul class="sidebar-menu">
-            <li class="header">用户权限管理</li>
+            <li class="header">${system.sysname}</li>
             <c:forEach items="${resourceList}" var="item" varStatus="status">
               <li class="treeview ${status.index eq 0?'active':''}">
                 <a href="javascript:void(0);">
@@ -313,82 +313,8 @@
     <script src="${ctx}/plugins/jquery/jquery-1.11.3.min.js" type="text/javascript"></script>
     <script src="${ctx}/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="${ctx}/plugins/dist/js/app.min.js" type="text/javascript"></script>
-    <script src="${ctx}/plugins/dist/js/demo.js" type="text/javascript"></script>
-    <script type="text/javascript">
-    $.browser={};
-    $.browser.mozilla = /firefox/.test(navigator.userAgent.toLowerCase());
-    $.browser.webkit = /webkit/.test(navigator.userAgent.toLowerCase());
-    $.browser.opera = /opera/.test(navigator.userAgent.toLowerCase());
-    $.browser.msie = /msie/.test(navigator.userAgent.toLowerCase());
-    
-    $(function() {
-        var iframe = document.getElementById("content-iframe");
-        if (iframe.attachEvent) {
-            iframe.attachEvent("onload", function () {
-                resetSize();
-            });
-        } else {
-            iframe.onload = function () {
-                resetSize();
-            };
-        }
-
-        $(window).resize(function () {
-            resetSize();
-        });
-    });
-    
-    function goPage(url) {
-    	document.getElementById('content-iframe').src=url;
-    }
-    
-    function resetSize() {
-    	var $window=$(window);
-    	var h1=$window.height() - 60;
-//    	var w1=$window.width()-230;
-    	$('#content-iframe').css("height",h1);//.css("width",w1);
-    	var doc=getDocument("content-iframe");
-    	if(doc){
-    		var h2=getScrollHeight(doc);
-    		var contentdiv=$(doc.getElementById('content'));
-    		if(contentdiv[0]){
-    			contentdiv.css("height", h2);
-    		}
-    	}
-    }
-    function getDocument(id) {
-    	if($.browser.msie){
-    		return document.frames[id].document;
-    	}
-    	
-    	var iframe=document.getElementById(id);
-    	if(iframe.document){
-    		return iframe.document;
-    	}else{
-    		return iframe.contentWindow.document;
-    	}
-    }
-    function getWindow(id){
-    	var iframe=document.getElementById(id);
-    	if(iframe.window){
-    		return iframe.window;
-    	}else{
-    		return iframe.contentWindow;
-    	}
-    }
-    function getScrollHeight(doc)
-    {
-        var scrollHeight=0;
-        if(doc.documentElement&&doc.documentElement.scrollHeight)
-        {
-        	scrollHeight=doc.documentElement.scrollHeight;
-        }
-        else if(doc.body)
-        {
-        	scrollHeight=doc.body.scrollHeight;
-        }
-        return scrollHeight;
-    }
-    </script>
+    <%--<script src="${ctx}/plugins/dist/js/demo.js" type="text/javascript"></script>--%>
+    <script src="${ctx}/js/global.js?contextPath=${ctx}<c:if test='${not empty crm}'>&${crm}</c:if>" type="text/javascript"></script>
+    <script src="${ctx}/js/index.js" type="text/javascript"></script>
   </body>
 </html>

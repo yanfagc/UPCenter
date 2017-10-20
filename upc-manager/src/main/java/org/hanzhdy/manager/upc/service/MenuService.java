@@ -116,7 +116,9 @@ public class MenuService extends AbstractUpcService {
         for (Resource data : dataList) {
             if (data.getParentid() != null && data.getParentid() != 0) {
                 Resource parent = map.get(data.getParentid());
-                parent.addChild(data);
+                if (parent != null) {
+                    parent.addChild(data);
+                }
             }
         }
         return resultList;

@@ -26,6 +26,7 @@
         </div>
       </div>
     </div>
+    <div style="height:80px;">&nbsp;</div>
     <div class="well center-block" style="left:10px;right:10px;position:fixed;bottom:0px;padding:10px;">
       <button type="button" class="btn btn-primary submit">&nbsp;&nbsp;保&nbsp;存&nbsp;&nbsp;</button>
       <button type="button" class="btn btn-warning" onclick="window.close();" style="float:right">&nbsp;&nbsp;关&nbsp;闭&nbsp;&nbsp;</button>
