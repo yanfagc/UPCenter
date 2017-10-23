@@ -72,7 +72,7 @@ FROM
 	R_ROLE r
 LEFT JOIN R_USER_ROLE ur ON (
 	r.ID = ur.ROLEID
-	AND ur.USERID = 1
+	AND ur.USERID = #{userid}
 )
   </select>
 
