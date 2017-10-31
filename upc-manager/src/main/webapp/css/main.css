@@ -44,8 +44,61 @@ span.red{
 	width: 100%;
 }
 
-
 .easyDialog_title {
 	margin-top: 0px;
 	margin-bottom: 0px;
+}
+
+.a-upload {
+	padding: 4px 10px;
+	margin-top:8px;
+	height: 30px;
+	line-height: 20px;
+	position: relative;
+	cursor: pointer;
+	color: #888;
+	background: #fafafa;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	overflow: hidden;
+	display: inline-block;
+	*display: inline;
+	*zoom: 1
+}
+
+.a-upload input {
+	position: absolute;
+	font-size: 100px;
+	right: 0;
+	top: 0;
+	opacity: 0;
+	filter: alpha(opacity=0);
+	cursor: pointer
+}
+
+.a-upload:hover {
+	color: #444;
+	background: #eee;
+	border-color: #ccc;
+	text-decoration: none
+}
+
+.upload-fun .img {
+	float: left;
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	margin-top: 5px;
+	background-color: #eee;
+}
+
+.upload-fun .img img {
+	height: 100%;
+	vertical-align: top;
+}
+
+.upload-fun span {
+	float: left;
+	display: inline-block;
+	margin: 0 0 0 8px;
 }

@@ -81,7 +81,7 @@ public class RoleController extends ApplicationController {
     @RequestMapping(value = "dataList", method = RequestMethod.POST)
     @ResponseBody
     public Object dataList(RoleParams params, HttpServletRequest request) {
-        DatatableResult dataResult = null;
+        DatatableResult dataResult;
         try {
             dataResult = roleService.queryAsDatatableResult(params);
         }

@@ -48,6 +48,12 @@ public class UserInfo implements Serializable {
     private String faxno;
 
     /**
+     * 用户头像地址: u_user_info.IMGURL
+     * @author MyBatis Generator
+     */
+    private String imgurl;
+
+    /**
      * 获取用户ID: u_user_info.USERID
      * @return 用户ID: u_user_info.USERID
      * @author MyBatis Generator
@@ -171,5 +177,23 @@ public class UserInfo implements Serializable {
      */
     public void setFaxno(String faxno) {
         this.faxno = faxno == null ? null : faxno.trim();
+    }
+
+    /**
+     * 获取用户头像地址: u_user_info.IMGURL
+     * @return 用户头像地址: u_user_info.IMGURL
+     * @author MyBatis Generator
+     */
+    public String getImgurl() {
+        return imgurl;
+    }
+
+    /**
+     * 设置用户头像地址: u_user_info.IMGURL
+     * @param imgurl 映射数据库字段: u_user_info.IMGURL
+     * @author MyBatis Generator
+     */
+    public void setImgurl(String imgurl) {
+        this.imgurl = imgurl == null ? null : imgurl.trim();
     }
 }

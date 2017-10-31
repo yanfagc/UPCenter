@@ -30,6 +30,8 @@ public class UserVo {
     
     private String          faxno;
     
+    private String          imgurl;
+    
     private LoginUserStatus status;
     
     private Long            creator;
@@ -122,6 +124,14 @@ public class UserVo {
     
     public void setFaxno(String faxno) {
         this.faxno = faxno;
+    }
+    
+    public String getImgurl() {
+        return imgurl;
+    }
+    
+    public void setImgurl(String imgurl) {
+        this.imgurl = imgurl;
     }
     
     public LoginUserStatus getStatus() {

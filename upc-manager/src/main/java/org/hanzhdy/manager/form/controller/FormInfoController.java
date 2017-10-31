@@ -190,17 +190,19 @@ public class FormInfoController extends ApplicationController {
     @RequestMapping(value = "dataList", method = RequestMethod.POST)
     @ResponseBody
     public Object dataList(FormInfoParams params, HttpServletRequest request) {
+        DatatableResult dataResult;
         try {
-            DatatableResult dataResult = formInfoService.queryAsDatatableResult(params);
-            return JSON.toJSONString(dataResult);
+            dataResult = formInfoService.queryAsDatatableResult(params);
         }
         catch (BizException ex) {
             logger.error("查询表单数据失败，查询参数：{}, 错误信息：[{}, {}]", JSON.toJSONString(params), ex.getCode(), ex.getMsg());
+            dataResult = super.getEmptyDatatableResult();
         }
         catch (Exception ex) {
             logger.error("查询表单数据失败，查询参数：" + JSON.toJSONString(params), ex);
+            dataResult = super.getEmptyDatatableResult();
         }
-        return null;
+        return JSON.toJSONString(dataResult);
     }
     
     /**
@@ -213,17 +215,19 @@ public class FormInfoController extends ApplicationController {
     @RequestMapping(value = "formFieldList", method = RequestMethod.POST)
     @ResponseBody
     public Object formFieldList(FieldInfoParams params, HttpServletRequest request) {
+        DatatableResult dataResult;
         try {
-            DatatableResult dataResult = fieldInfoService.queryByFormidAsDatatableResult(params);
-            return JSON.toJSONString(dataResult);
+            dataResult = fieldInfoService.queryByFormidAsDatatableResult(params);
         }
         catch (BizException ex) {
             logger.error("查询表单字段失败，查询参数：{}, 错误信息：[{}, {}]", JSON.toJSONString(params), ex.getCode(), ex.getMsg());
+            dataResult = super.getEmptyDatatableResult();
         }
         catch (Exception ex) {
             logger.error("查询表单字段失败，查询参数：" + JSON.toJSONString(params), ex);
+            dataResult = super.getEmptyDatatableResult();
         }
-        return null;
+        return JSON.toJSONString(dataResult);
     }
     
     /**
@@ -236,18 +240,20 @@ public class FormInfoController extends ApplicationController {
     @RequestMapping(value = "canAddList", method = RequestMethod.POST)
     @ResponseBody
     public Object canAddList(FieldInfoParams params, HttpServletRequest request) {
+        DatatableResult dataResult;
         try {
-            DatatableResult dataResult = fieldInfoService.queryCanAddFieldAsDTR(params);
-            return JSON.toJSONString(dataResult);
+            dataResult = fieldInfoService.queryCanAddFieldAsDTR(params);
         }
         catch (BizException ex) {
             logger.error("查询可添加到指定表单中的字段数据，查询参数：{}, 错误信息：[{}, {}]", JSON.toJSONString(params), ex.getCode(),
                     ex.getMsg());
+            dataResult = super.getEmptyDatatableResult();
         }
         catch (Exception ex) {
             logger.error("查询可添加到指定表单中的字段数据，查询参数：" + JSON.toJSONString(params), ex);
+            dataResult = super.getEmptyDatatableResult();
         }
-        return null;
+        return JSON.toJSONString(dataResult);
     }
     
     /**

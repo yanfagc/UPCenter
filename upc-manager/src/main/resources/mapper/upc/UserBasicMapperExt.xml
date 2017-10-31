@@ -31,6 +31,7 @@
 		i.CERTNO,
 		i.OFFICEPHONE,
 		i.FAXNO,
+		i.IMGURL,
 		s.`STATUS`,
 		b.PASSWORD
 	FROM u_user_basic b,u_user_info i,u_user_status s

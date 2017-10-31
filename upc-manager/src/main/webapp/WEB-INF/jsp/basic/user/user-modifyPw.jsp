@@ -16,24 +16,29 @@
     </nav>
     <div class="container" style="width:100%;margin-top:50px;padding-left:10px;padding-right:10px;">
       <form id="submitForm" class="form-horizontal" action="${ctx}/basic/user/updatePassword" method="POST">
-        <input name="account" value="${account}" type="hidden"/>
         <input name="userid" value="${userid}" type="hidden"/>
         <table class="table table-bordered table-hover">
           <tr>
+            <td style="width:25%;text-align:right;">登录帐号：</td>
+            <td style="width:75%;padding:4px;">
+              <input name="account" class="form-control input-sm myspan6" type="text" value="${account}" readonly="readonly">
+            </td>
+          </tr>
+          <tr>
             <td style="width:25%;text-align:right;">新密码：</td>
-            <td style="width:75%;padding:4px;" colspan="3">
+            <td style="padding:4px;">
               <input name="newPassword" class="form-control input-sm myspan6" type="password" placeholder="请输入新密码">
             </td>
           </tr>
           <tr>
             <td style="width:25%;text-align:right;">重复密码：</td>
-            <td style="width:75%;padding:4px;" colspan="3">
+            <td style="padding:4px;">
               <input name="rePassword" class="form-control input-sm myspan6" type="password" placeholder="请重复输入新密码">
             </td>
           </tr>
           <tr>
             <td style="width:25%;text-align:right;">管理员密码：</td>
-            <td style="width:75%;padding:4px;" colspan="3">
+            <td style="padding:4px;">
               <input name="adminPassword" class="form-control input-sm myspan6" type="password" placeholder="请输入管理员登录密码">
             </td>
           </tr>

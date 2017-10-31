@@ -21,7 +21,10 @@ $(function() {
                     mData:"account"
                 },
                 {
-                    mData:"nickname"
+                    mData:"nickname",
+                    mRender:function(data, display, record) {
+                        return data?data:'';
+                    }
                 },
                 {
                     mData:"mobileno",
@@ -41,7 +44,7 @@ $(function() {
                         if(data=='N'){
                             return '<lable style="color:green">正常</label>';
                         }else if(data=='F'){
-                            return '<lable style="color:red">冻结</label>';
+                            return '<lable style="color: #f39c12;">冻结</label>';
                         }else if(data=='L'){
                             return '<lable style="color:red">锁定</label>';
                         }else if(data=='D'){
@@ -69,11 +72,18 @@ $(function() {
                 {
                     mData:null,
                     sClass:"text-center",
+                    mRender:function(data, display, record) {
+                        return '<a class="btn btn-primary btn-xs toUpdatePw" fid="'+record.id+'" fcode="'+record.account
+                            +'" href="javascript:void(0);">&nbsp;修改密码&nbsp;</a>';
+                    }
+                },
+                {
+                    mData:null,
+                    sClass:"text-center",
                     sWidth:null,
                     mRender:function(data, display, record) {
                         var html="";
                         if(record.status=='N'){
-                            html+='<a class="btn btn-info btn-xs toUpdatePw" fid="'+record.id+'" fcode="'+record.account+'" href="javascript:void(0);">&nbsp;修改密码&nbsp;</a>&nbsp;';
                             html+='<a class="btn btn-primary btn-xs toEdit" fid="'+record.id+'" href="javascript:void(0);">&nbsp;编辑&nbsp;</a>&nbsp;';
                             html+='<a class="btn btn-warning btn-xs toFrozen" fid="'+record.id+'" href="javascript:void(0);">&nbsp;冻结&nbsp;</a>&nbsp;';
                             html+='<a class="btn btn-danger btn-xs toDemise" fid="'+record.id+'" href="javascript:void(0);">&nbsp;注销&nbsp;</a>';

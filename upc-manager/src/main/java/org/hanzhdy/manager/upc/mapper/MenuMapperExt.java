@@ -40,7 +40,7 @@ public interface MenuMapperExt extends MenuMapper {
     List<ZTreeNode> selectAsZTreeNodeByRoleAndSystemidForSettingItem(@Param("roleid") Long roleid, @Param("systemid") Long systemid);
 
     /**
-     * 根据用户ID和登录的系统ID，查询该用户在该系统中所拥有的菜单数据
+     * 根据用户ID和登录的系统ID，查询该用户在该系统中所拥有的菜单数据(查询正常状态，且SHOWFLAG值为SHOW的菜单)
      * @param userid
      * @param systemid
      * @return

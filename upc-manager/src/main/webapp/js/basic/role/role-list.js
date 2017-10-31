@@ -28,11 +28,20 @@ $(function() {
                 {
                     mData:"rolecode"
                 },{
-                    mData:"rolename"
+                    mData:"rolename",
+                    mRender:function(data, display, record) {
+                        return (data==0||data)?data:'';
+                    }
                 },{
-                    mData:"groupname"
+                    mData:"groupname",
+                    mRender:function(data, display, record) {
+                        return (data==0||data)?data:'';
+                    }
                 },{
-                    mData:"systemname"
+                    mData:"systemname",
+                    mRender:function(data, display, record) {
+                        return (data==0||data)?data:'';
+                    }
                 },{
                     mData:"status",
                     sClass:"text-center",

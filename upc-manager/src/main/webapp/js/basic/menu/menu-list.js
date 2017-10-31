@@ -44,21 +44,24 @@ $(function() {
                     mData:"code"
                 },
                 {
-                    mData:"name"
+                    mData:"name",
+                    mRender:function(data, display, record) {
+                        return (data==0||data)?data:'';
+                    }
                 },
                 {
                     mData:"sort",
                     mRender:function(data, display, record) {
-                        return data?data:'';
+                        return (data==0||data)?data:'';
                     }
                 },
                 {
                     mData:"showflag",
                     mRender:function(data, display, record) {
                         if(data=='SHOW'){
-                            return '显示';
+                            return '<lable style="color:green">显示</lable>';
                         }else if(data=='HIDDEN'){
-                            return '隐藏';
+                            return '<lable style="color:gray">隐藏</lable>';
                         }
                         return data?'未知('+data+')':'未知(空)';
                     }

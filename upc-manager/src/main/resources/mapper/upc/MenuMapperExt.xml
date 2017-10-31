@@ -14,7 +14,8 @@
       m.URLTYPE AS urltype,
       m.MENUURL AS url,
       m.STATUS AS status,
-	  m.SORT AS sort
+	  m.SORT AS sort,
+	  m.SHOWFLAG AS showflag
     FROM r_menu m
     <include refid="wherecause_menu"/>
 	ORDER BY m.SORT ASC
@@ -101,6 +102,7 @@ FROM
 WHERE
 	m.`STATUS` = 'N'
 AND r.`STATUS` = 'N'
+AND m.SHOWFLAG = 'SHOW'
 AND m.SYSTEMID = #{systemid}
 AND m.ID = rm.MENUID
 AND r.ID = rm.ROLEID

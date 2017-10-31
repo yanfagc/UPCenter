@@ -55,14 +55,15 @@ public class RoleGroupController extends ApplicationController {
     @RequestMapping(value = "dataList", method = RequestMethod.POST)
     @ResponseBody
     public Object dataList(RoleGroupParams params, HttpServletRequest request) {
+        DatatableResult dataResult;
         try {
-            DatatableResult dataResult = roleGroupService.queryAsDatatableResult(params);
-            return JSON.toJSONString(dataResult);
+            dataResult = roleGroupService.queryAsDatatableResult(params);
         }
         catch (Exception ex) {
             logger.error("查询角色分组数据失败，查询参数：" + JSON.toJSONString(params), ex);
-            return null;
+            dataResult = super.getEmptyDatatableResult();
         }
+        return JSON.toJSONString(dataResult);
     }
     
     /**

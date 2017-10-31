@@ -1,6 +1,7 @@
 package org.hanzhdy.manager.upc.controller;
 
 import com.alibaba.fastjson.JSON;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.hanzhdy.manager.support.bean.SessionUser;
 import org.hanzhdy.manager.support.constants.resp.RespResult;
@@ -88,12 +89,18 @@ public class MenuController extends ApplicationController {
     @RequiresPermissions("basic:menu:list")
     @RequestMapping(value = "zTreeData", method = RequestMethod.POST)
     @ResponseBody
-    public Object zTreeData(Long pid, @RequestParam("systemid") Long systemid) {
+    public Object zTreeData(String pid, @RequestParam("systemid") Long systemid) {
         try {
-            if (pid == null) {
-                pid = 0l;
+            Long parentId = 0l;
+            if (StringUtils.isNotBlank(pid) && !pid.startsWith("sys-")) {
+                try {
+                    parentId = Long.valueOf(pid);
+                }
+                catch (Exception ex) {
+                    logger.warn("获取ZTree数据，pid不能转换为数字：{}", pid);
+                }
             }
-            List<ZTreeNode> nodeList = this.menuService.queryMenuAsZTreeNode(pid, systemid);
+            List<ZTreeNode> nodeList = this.menuService.queryMenuAsZTreeNode(parentId, systemid);
             return nodeList;
         }
         catch (Exception ex) {
@@ -112,23 +119,24 @@ public class MenuController extends ApplicationController {
     @RequestMapping(value = "dataList", method = RequestMethod.POST)
     @ResponseBody
     public Object dataList(MenuParams params, HttpServletRequest request) {
+        DatatableResult dataResult;
         try {
-            DatatableResult dataResult = null;
             if ("item".equalsIgnoreCase(params.getShowtype())) {
                 dataResult = this.menuItemService.queryAsDatatableResult(params);
             }
             else {
                 dataResult = this.menuService.queryAsDatatableResult(params);
             }
-            return JSON.toJSONString(dataResult);
         }
         catch (BizException ex) {
             logger.error("查询菜单数据失败，查询参数：{}, 错误信息：[{}, {}]", JSON.toJSONString(params), ex.getCode(), ex.getMsg());
+            dataResult = super.getEmptyDatatableResult();
         }
         catch (Exception ex) {
             logger.error("查询菜单数据失败，查询参数：" + JSON.toJSONString(params), ex);
+            dataResult = super.getEmptyDatatableResult();
         }
-        return null;
+        return JSON.toJSONString(dataResult);
     }
     
     /**

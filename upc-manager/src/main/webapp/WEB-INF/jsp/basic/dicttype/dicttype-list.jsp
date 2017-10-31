@@ -44,11 +44,11 @@
               <table id="dataList" class="table table-bordered table-hover">
                 <thead>
                   <tr>
-                    <th class="text-center" style="width:15%">类型编码</th>
-                    <th class="text-center" style="width:15%">类型名称</th>
+                    <th style="width:15%">类型编码</th>
+                    <th style="width:15%">类型名称</th>
                     <th class="text-center" style="width:12%">状态</th>
-                    <th class="text-center" style="width:25%">描述</th>
-                    <th class="text-center" style="width:15%">创建时间</th>
+                    <th style="width:25%">描述</th>
+                    <th style="width:15%">创建时间</th>
                     <th class="text-center" style="width:20%">操作</th>
                   </tr>
                 </thead>

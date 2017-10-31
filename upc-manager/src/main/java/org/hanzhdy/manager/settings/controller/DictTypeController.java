@@ -55,17 +55,19 @@ public class DictTypeController extends ApplicationController {
     @RequestMapping(value = "dataList", method = RequestMethod.POST)
     @ResponseBody
     public Object dataList(DictTypeParams params, HttpServletRequest request) {
+        DatatableResult dataResult;
         try {
-            DatatableResult dataResult = dictTypeService.queryAsDatatableResult(params);
-            return JSON.toJSONString(dataResult);
+            dataResult = dictTypeService.queryAsDatatableResult(params);
         }
         catch (BizException ex) {
             logger.error("查询字典类型数据失败，查询参数：{}, 错误信息：[{}, {}]", JSON.toJSONString(params), ex.getCode(), ex.getMsg());
+            dataResult = super.getEmptyDatatableResult();
         }
         catch (Exception ex) {
             logger.error("查询字典类型数据失败，查询参数：" + JSON.toJSONString(params), ex);
+            dataResult = super.getEmptyDatatableResult();
         }
-        return null;
+        return JSON.toJSONString(dataResult);
     }
     
     /**

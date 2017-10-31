@@ -9,4 +9,4 @@
     <link href="${ctx}/plugins/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
     <link href="${ctx}/plugins/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
     <link href="${ctx}/plugins/easydialog/easydialog.css" rel="stylesheet" type="text/css" />
-    <link href="${ctx}/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="${ctx}/css/main.css<c:if test='${not empty crm}'>?${crm}</c:if>" rel="stylesheet" type="text/css" />

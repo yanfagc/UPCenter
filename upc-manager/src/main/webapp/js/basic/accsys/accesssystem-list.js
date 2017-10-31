@@ -21,14 +21,19 @@ $(function() {
                     mData:"syscode"
                 },
                 {
-                    mData:"sysname"
+                    mData:"sysname",
+                    mRender:function(data, display, record) {
+                        return (data==0||data)?data:'';
+                    }
                 },
                 {
-                    mData:"sysaddr"
+                    mData:"sysaddr",
+                    mRender:function(data, display, record) {
+                        return (data==0||data)?data:'';
+                    }
                 },
                 {
                     mData:"createtime",
-                    sClass:"text-center",
                     mRender:function(data, display, record) {
                         return formatDatetime(data);
                     }

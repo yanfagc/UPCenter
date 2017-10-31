@@ -4,14 +4,14 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>第三方接入</title>
+    <title>接入系统</title>
     <jsp:include page="/WEB-INF/jsp/commons/metaheader.jsp" />
     <link href="${ctx}/css/list.css" rel="stylesheet" type="text/css" />
   </head>
   <body class="skin-blue sidebar-mini">
   <div id="content" style="background-color:#ecf0f5">
     <section class="content-header">
-      <h1><small>系统管理 &gt; 第三方接入</small></h1>
+      <h1><small>系统管理 &gt; 接入系统</small></h1>
     </section>
   <!-- Main content -->
     <section class="content">
@@ -45,10 +45,10 @@
               <table id="dataList" class="table table-bordered table-hover">
                 <thead>
                   <tr>
-                    <th class="text-center" style="width:10%">系统编号</th>
-                    <th class="text-center" style="width:13%">系统名称</th>
-                    <th class="text-center" style="width:25%">访问路径</th>
-                    <th class="text-center" style="width:15%">创建时间</th>
+                    <th style="width:10%">系统编号</th>
+                    <th style="width:13%">系统名称</th>
+                    <th style="width:25%">访问路径</th>
+                    <th style="width:15%">创建时间</th>
                     <th class="text-center" style="width:10%">菜单管理</th>
                     <th class="text-center" style="width:12%">状态</th>
                     <th class="text-center" style="width:15%">操作</th>

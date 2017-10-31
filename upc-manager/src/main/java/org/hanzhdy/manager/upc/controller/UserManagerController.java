@@ -106,14 +106,15 @@ public class UserManagerController extends ApplicationController {
     @RequestMapping(value = "dataList", method = RequestMethod.POST)
     @ResponseBody
     public Object dataList(UserParams params, HttpServletRequest request) {
+        DatatableResult dataResult;
         try {
-            DatatableResult dataResult = userManagerService.queryAsDatatableResult(params);
-            return JSON.toJSONString(dataResult);
+            dataResult = userManagerService.queryAsDatatableResult(params);
         }
         catch (Exception ex) {
             logger.error("查询用户数据失败，查询参数：" + JSON.toJSONString(params), ex);
-            return null;
+            dataResult = super.getEmptyDatatableResult();
         }
+        return JSON.toJSONString(dataResult);
     }
     
     /**

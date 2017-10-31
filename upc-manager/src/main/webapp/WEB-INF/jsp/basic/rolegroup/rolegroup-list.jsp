@@ -36,10 +36,10 @@
               <table id="dataList" class="table table-bordered table-hover">
                 <thead>
                   <tr>
-                    <th class="text-center" style="width:15%">分组编码</th>
-                    <th class="text-center" style="width:15%">分组名称</th>
-                    <th class="text-center" style="width:40%">备注</th>
-                    <th class="text-center" style="width:15%">创建时间</th>
+                    <th style="width:15%">分组编码</th>
+                    <th style="width:15%">分组名称</th>
+                    <th style="width:40%">备注</th>
+                    <th style="width:15%">创建时间</th>
                     <th class="text-center" style="width:15%">操作</th>
                   </tr>
                 </thead>

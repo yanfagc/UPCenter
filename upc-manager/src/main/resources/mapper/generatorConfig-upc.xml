@@ -110,6 +110,7 @@
         </table>
         <table schema="" tableName="U_USER_STATUS"   domainObjectName="UserStatus">
         	<columnOverride column="USERID" property="userId" javaType="java.lang.Long" jdbcType="NUMERIC" />
+			<columnOverride column="ERRCOUNT" property="errcount" javaType="java.lang.Integer" jdbcType="NUMERIC" />
         	<columnOverride column="STATUS" property="status" javaType="org.hanzhdy.manager.support.enums.LoginUserStatus" jdbcType="VARCHAR" />
 			<columnOverride column="CREATETIME" property="createtime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
 			<columnOverride column="FROZENTIME" property="frozentime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>

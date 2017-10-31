@@ -94,7 +94,7 @@ public class MenuService extends AbstractUpcService {
     }
     
     /**
-     * 根据用户和系统ID查询菜单信息
+     * 根据用户和系统ID查询菜单信息(不查询隐藏的菜单信息)
      * @param userid
      * @param systemid
      * @return

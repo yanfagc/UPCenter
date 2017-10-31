@@ -51,16 +51,18 @@ public class LoginLogController extends ApplicationController {
     @RequestMapping(value = "dataList", method = RequestMethod.POST)
     @ResponseBody
     public Object dataList(LoginLogParams params, HttpServletRequest request) {
+        DatatableResult dataResult;
         try {
-            DatatableResult dataResult = loginLogService.queryAsDatatableResult(params);
-            return JSON.toJSONString(dataResult);
+            dataResult = loginLogService.queryAsDatatableResult(params);
         }
         catch (BizException ex) {
             logger.error("查询登录日志列表数据失败，查询参数：{}, 错误信息：[{}, {}]", JSON.toJSONString(params), ex.getCode(), ex.getMsg());
+            dataResult = super.getEmptyDatatableResult();
         }
         catch (Exception ex) {
             logger.error("查询登录日志列表数据失败，查询参数：" + JSON.toJSONString(params), ex);
+            dataResult = super.getEmptyDatatableResult();
         }
-        return null;
+        return JSON.toJSONString(dataResult);
     }
 }

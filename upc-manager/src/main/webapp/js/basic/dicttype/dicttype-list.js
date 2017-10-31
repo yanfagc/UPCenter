@@ -21,7 +21,10 @@ $(function() {
                     mData:"typecode"
                 },
                 {
-                    mData:"typename"
+                    mData:"typename",
+                    mRender:function(data, display, record) {
+                        return (data==0||data)?data:'';
+                    }
                 },
                 {
                     mData:"status",
@@ -45,7 +48,6 @@ $(function() {
                 },
                 {
                     mData:"createtime",
-                    sClass:"text-center",
                     mRender:function(data, display, record) {
                         return formatDatetime(data);
                     }

@@ -28,7 +28,8 @@ public class ErrorController extends ApplicationController {
      * @return
      */
     @RequestMapping("/404")
-    public String to404(Model model, HttpServletRequest request) {
+    public String to404(Model model, HttpServletRequest request, HttpServletResponse response) {
+        response.setStatus(404);
         return "error/404";
     }
     
@@ -39,7 +40,8 @@ public class ErrorController extends ApplicationController {
      * @return
      */
     @RequestMapping("/403")
-    public String to403(Model model, HttpServletRequest request) {
+    public String to403(Model model, HttpServletRequest request, HttpServletResponse response) {
+        response.setStatus(403);
         return "error/403";
     }
     

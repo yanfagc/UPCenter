@@ -76,6 +76,7 @@
 	<context:component-scan base-package="org.hanzhdy.manager.form.**"></context:component-scan>
     <context:component-scan base-package="org.hanzhdy.manager.upc.**"></context:component-scan>
     <context:component-scan base-package="org.hanzhdy.manager.settings.**"></context:component-scan>
+    <context:component-scan base-package="org.hanzhdy.manager.support.**"></context:component-scan>
     
     <!-- beware that mapper-config.xml is not needed if you use injected mappers -->
     <bean id="manager-form-sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">

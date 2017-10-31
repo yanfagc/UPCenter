@@ -70,6 +70,12 @@ public class RespCode {
     /** 数据保存失败，记录已存在 */
     public final BizStatus        SAVE_DUPLICATE            = null;
     
+    /** 文件上传失败，请稍候再试 */
+    public final BizStatus        UPLOAD_FAILURE            = null;
+    
+    /** 文件上传失败，服务配置错误 */
+    public final BizStatus        UPLOAD_ERROR_CONFIGURE    = null;
+    
     /** 数据保存失败，主键数据为空 */
     public final BizStatus        SAVE_PRIMARY_EMPTY        = null;
 

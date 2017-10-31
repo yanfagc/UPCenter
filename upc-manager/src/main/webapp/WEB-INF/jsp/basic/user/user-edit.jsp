@@ -23,6 +23,19 @@
             <td style="width:32%;padding:4px;">
               <input name="account" class="form-control input-sm myspan6" type="text" placeholder="登录帐号" value="${record.account}">
             </td>
+            <td style="width:16%;text-align:right;" rowspan="4">用户头像：
+              <a class="a-upload" style="color: #1a1a1a;margin-top:90px;">
+                <input type="file" name="uploadFile" id="uploadFile">上传头像
+              </a>
+            </td>
+            <td style="width:32%;padding:4px;" rowspan="4">
+              <img id="channer_cover_display" name="channer_cover_display" style="height:145px;width:145px;"
+                   src="<c:if test="${not empty record.imgurl}">${record.imgurl}</c:if><c:if test="${empty record.imgurl}">${ctx}/images/photobg.png</c:if>">
+              <br/>
+              <input type="hidden" name="imgurl" value="${record.imgurl}"/>
+            </td>
+          </tr>
+          <tr>
             <td style="width:16%;text-align:right;">登录密码：</td>
             <td style="width:32%;padding:4px;">
               <input name="password" class="form-control input-sm myspan6" type="text" placeholder="默认：111111">
@@ -33,6 +46,8 @@
             <td style="width:32%;padding:4px;">
               <input name="nickname" class="form-control input-sm myspan6" type="text" placeholder="显示名称" value="${record.nickname}">
             </td>
+          </tr>
+          <tr>
             <td style="width:16%;text-align:right;">办公电话：</td>
             <td style="width:32%;padding:4px;">
               <input name="officephone" class="form-control input-sm myspan6" type="text" placeholder="办公电话" value="${record.officephone}">

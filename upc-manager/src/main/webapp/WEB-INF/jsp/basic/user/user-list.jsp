@@ -45,14 +45,15 @@
               <table id="dataList" class="table table-bordered table-hover">
                 <thead>
                   <tr>
-                    <th style="width:13%">登录帐号</th>
-                    <th style="width:15%">显示名称</th>
-                    <th style="width:13%">移动电话</th>
-                    <th style="width:13%">电子邮箱</th>
-                    <th style="width:10%">状态</th>
-                    <th style="width:10%">扩展属性</th>
-                    <th style="width:10%">角色设置</th>
-                    <th style="width:16%">操作</th>
+                    <th style="width:10%">登录帐号</th>
+                    <th style="width:12%">显示名称</th>
+                    <th style="width:12%">移动电话</th>
+                    <th style="width:12%">电子邮箱</th>
+                    <th style="width:9%">状态</th>
+                    <th style="width:9%">扩展属性</th>
+                    <th style="width:9%">角色设置</th>
+                    <th style="width:9%">密码修改</th>
+                    <th style="width:15%">操作</th>
                   </tr>
                 </thead>
                 <tbody></tbody>

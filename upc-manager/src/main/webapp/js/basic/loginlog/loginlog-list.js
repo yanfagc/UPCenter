@@ -22,24 +22,35 @@ $(function() {
             },
             aoColumns:[
                 {
-                    mData:"account"
+                    mData:"account",
+                    mRender:function(data, display, record) {
+                        return (data==0||data)?data:'';
+                    }
                 },
                 {
-                    mData:"nickname"
+                    mData:"nickname",
+                    mRender:function(data, display, record) {
+                        return (data==0||data)?data:'';
+                    }
                 },
                 {
-                    mData:"loginip"
+                    mData:"loginip",
+                    mRender:function(data, display, record) {
+                        return (data==0||data)?data:'';
+                    }
                 },
                 {
                     mData:"logintime",
-                    sClass:"text-center",
                     sWidth:null,
                     mRender:function(data, display, record) {
                         return data?formatDatetime(data):'';
                     }
                 },
                 {
-                    mData:"remark"
+                    mData:"remark",
+                    mRender:function(data, display, record) {
+                        return (data==0||data)?data:'';
+                    }
                 }]
         }));
     // 搜索按钮事件

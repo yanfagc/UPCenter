@@ -337,6 +337,66 @@ public class UserStatusExample {
             return (Criteria) this;
         }
 
+        public Criteria andErrcountIsNull() {
+            addCriterion("ERRCOUNT is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andErrcountIsNotNull() {
+            addCriterion("ERRCOUNT is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andErrcountEqualTo(Integer value) {
+            addCriterion("ERRCOUNT =", value, "errcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andErrcountNotEqualTo(Integer value) {
+            addCriterion("ERRCOUNT <>", value, "errcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andErrcountGreaterThan(Integer value) {
+            addCriterion("ERRCOUNT >", value, "errcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andErrcountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("ERRCOUNT >=", value, "errcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andErrcountLessThan(Integer value) {
+            addCriterion("ERRCOUNT <", value, "errcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andErrcountLessThanOrEqualTo(Integer value) {
+            addCriterion("ERRCOUNT <=", value, "errcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andErrcountIn(List<Integer> values) {
+            addCriterion("ERRCOUNT in", values, "errcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andErrcountNotIn(List<Integer> values) {
+            addCriterion("ERRCOUNT not in", values, "errcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andErrcountBetween(Integer value1, Integer value2) {
+            addCriterion("ERRCOUNT between", value1, value2, "errcount");
+            return (Criteria) this;
+        }
+
+        public Criteria andErrcountNotBetween(Integer value1, Integer value2) {
+            addCriterion("ERRCOUNT not between", value1, value2, "errcount");
+            return (Criteria) this;
+        }
+
         public Criteria andCreatetimeIsNull() {
             addCriterion("CREATETIME is null");
             return (Criteria) this;

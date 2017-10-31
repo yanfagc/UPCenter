@@ -25,10 +25,16 @@ $(function() {
                     mData:"formcode"
                 },
                 {
-                    mData:"formname"
+                    mData:"formname",
+                    mRender:function(data, display, record) {
+                        return (data==0||data)?data:'';
+                    }
                 },
                 {
-                    mData:"colcounts"
+                    mData:"colcounts",
+                    mRender:function(data, display, record) {
+                        return (data==0||data)?data:'';
+                    }
                 },
                 {
                     mData:"status",

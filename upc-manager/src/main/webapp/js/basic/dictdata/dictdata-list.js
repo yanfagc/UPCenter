@@ -25,10 +25,16 @@ $(function() {
                     mData:"datacode"
                 },
                 {
-                    mData:"dataname"
+                    mData:"dataname",
+                    mRender:function(data, display, record) {
+                        return (data==0||data)?data:'';
+                    }
                 },
                 {
-                    mData:"typename"
+                    mData:"typename",
+                    mRender:function(data, display, record) {
+                        return (data==0||data)?data:'';
+                    }
                 },
                 {
                     mData:"datatype",

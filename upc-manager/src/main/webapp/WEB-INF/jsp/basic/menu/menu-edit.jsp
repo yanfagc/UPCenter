@@ -37,16 +37,6 @@
             <td style="width:32%;padding:4px;">
               <input name="pmcode" class="form-control input-sm myspan6" type="text" readonly value="${not empty parent.menucode?parent.menucode:'无'}">
             </td>
-            <td style="width:16%;text-align:right;"><span class="red">&nbsp;*&nbsp;</span>菜单编码：</td>
-            <td style="width:32%;padding:4px;">
-              <input name="menucode" class="form-control input-sm myspan6" type="text" placeholder="菜单编码" value="${record.menucode}">
-            </td>
-          </tr>
-          <tr>
-            <td style="width:16%;text-align:right;"><span class="red">&nbsp;*&nbsp;</span>菜单名称：</td>
-            <td style="width:32%;padding:4px;">
-              <input name="menuname" class="form-control input-sm myspan6" type="text" placeholder="菜单名称" value="${record.menuname}">
-            </td>
             <td style="width:16%;text-align:right;"><span class="red">&nbsp;*&nbsp;</span>菜单类型：</td>
             <td style="width:32%;padding:4px;">
               <select name="urltype" class="form-control input-sm myspan6">
@@ -54,6 +44,16 @@
                 <option value="R" ${record.urltype eq 'R'?'selected="selected"':''}>内部地址</option>
                 <option value="A" ${record.urltype eq 'A'?'selected="selected"':''}>外部地址</option>
               </select>
+            </td>
+          </tr>
+          <tr>
+            <td style="width:16%;text-align:right;"><span class="red">&nbsp;*&nbsp;</span>菜单编码：</td>
+            <td style="width:32%;padding:4px;">
+              <input name="menucode" class="form-control input-sm myspan6" type="text" placeholder="菜单编码" value="${record.menucode}">
+            </td>
+            <td style="width:16%;text-align:right;"><span class="red">&nbsp;*&nbsp;</span>菜单名称：</td>
+            <td style="width:32%;padding:4px;">
+              <input name="menuname" class="form-control input-sm myspan6" type="text" placeholder="菜单名称" value="${record.menuname}">
             </td>
           </tr>
           <tr>

@@ -139,6 +139,7 @@ public class UserManagerService extends AbstractUpcService {
         info.setCertno(record.getCertno());
         info.setOfficephone(record.getOfficephone());
         info.setFaxno(record.getFaxno());
+        info.setImgurl(record.getImgurl());
         
         UserStatus status = new UserStatus();
         status.setStatus(record.getStatus());
@@ -183,6 +184,7 @@ public class UserManagerService extends AbstractUpcService {
         info.setOfficephone(record.getOfficephone());
         info.setFaxno(record.getFaxno());
         info.setUserId(record.getId());
+        info.setImgurl(record.getImgurl());
         
         UserStatus status = new UserStatus();
         status.setStatus(record.getStatus());

@@ -3,5 +3,5 @@
     <meta charset="UTF-8">
 	<link rel="shortcut icon" href="${ctx}/logo.png" />
     <link href="${ctx}/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="${ctx}/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="${ctx}/css/main.css<c:if test='${not empty crm}'>?${crm}</c:if>" rel="stylesheet" type="text/css" />
     <link href="${ctx}/plugins/easydialog/easydialog.css" rel="stylesheet" type="text/css" />

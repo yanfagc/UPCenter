@@ -1,5 +1,7 @@
 package org.hanzhdy.manager.upc.vo;
 
+import org.hanzhdy.manager.support.enums.ShowFlag;
+
 /**
  * @description 菜单VO
  * @author H.CAAHN
@@ -29,6 +31,9 @@ public class MenuVo {
     
     /** 菜单状态 */
     private String status;
+    
+    /** 显示标记 */
+    private ShowFlag showflag;
     
     public Long getId() {
         return id;
@@ -92,5 +97,13 @@ public class MenuVo {
     
     public void setStatus(String status) {
         this.status = status;
+    }
+    
+    public ShowFlag getShowflag() {
+        return showflag;
+    }
+    
+    public void setShowflag(ShowFlag showflag) {
+        this.showflag = showflag;
     }
 }

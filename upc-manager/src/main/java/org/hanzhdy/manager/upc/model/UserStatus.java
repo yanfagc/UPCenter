@@ -20,6 +20,12 @@ public class UserStatus implements Serializable {
     private LoginUserStatus status;
 
     /**
+     * 登录错误次数: u_user_status.ERRCOUNT
+     * @author MyBatis Generator
+     */
+    private Integer errcount;
+
+    /**
      * 创建时间: u_user_status.CREATETIME
      * @author MyBatis Generator
      */
@@ -95,6 +101,24 @@ public class UserStatus implements Serializable {
      */
     public void setStatus(LoginUserStatus status) {
         this.status = status;
+    }
+
+    /**
+     * 获取登录错误次数: u_user_status.ERRCOUNT
+     * @return 登录错误次数: u_user_status.ERRCOUNT
+     * @author MyBatis Generator
+     */
+    public Integer getErrcount() {
+        return errcount;
+    }
+
+    /**
+     * 设置登录错误次数: u_user_status.ERRCOUNT
+     * @param errcount 映射数据库字段: u_user_status.ERRCOUNT
+     * @author MyBatis Generator
+     */
+    public void setErrcount(Integer errcount) {
+        this.errcount = errcount;
     }
 
     /**

@@ -12,6 +12,7 @@
       i.ITEMCODE AS CODE,
       i.ITEMNAME AS NAME,
       'RES' AS urltype,
+      'SHOW' AS showflag,
       i.RESOURCE AS url,
       i.STATUS AS status,
       i.SORT AS sort

@@ -68,7 +68,9 @@ function showTipsDialog(title, message, yesFn, noFn) {
 }
 
 function closeDialog(){
-    easyDialog.close();
+    try {
+        easyDialog.close();
+    }catch(e){}
 }
 
 function $sessionAjax(params){
@@ -79,6 +81,7 @@ function $sessionAjax(params){
         url:params.url,
         type:params.type?params.type:'post',
         data:params.data?params.data:{},
+        dataType:'application/json',
         success:function(rsp){
             try {
                 if (typeof rsp === 'string') {
@@ -110,6 +113,7 @@ function $sessionAjaxSubmit($element,params){
         return;
     }
     var options={
+        url:params.url?params.url:undefined,
         beforeSubmit:function(){
         	if(params.beforeSubmit&&(typeof params.beforeSubmit=='function')){
         		var r=params.beforeSubmit();

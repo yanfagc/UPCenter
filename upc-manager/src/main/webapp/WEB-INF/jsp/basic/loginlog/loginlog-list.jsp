@@ -41,11 +41,11 @@
               <table id="dataList" class="table table-bordered table-hover">
                 <thead>
                   <tr>
-                    <th class="text-center" style="width:15%">登录名</th>
-                    <th class="text-center" style="width:15%">用户昵称</th>
-                    <th class="text-center" style="width:20%">登录IP</th>
-                    <th class="text-center" style="width:20%">登录时间</th>
-                    <th class="text-center" style="width:30%">备注</th>
+                    <th style="width:15%">登录名</th>
+                    <th style="width:15%">用户昵称</th>
+                    <th style="width:20%">登录IP</th>
+                    <th style="width:20%">登录时间</th>
+                    <th style="width:30%">备注</th>
                   </tr>
                 </thead>
                 <tbody></tbody>

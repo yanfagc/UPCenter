@@ -53,12 +53,12 @@
               <table id="dataList" class="table table-bordered table-hover">
                 <thead>
                   <tr>
-                    <th class="text-center" style="width:12%">字典编码</th>
-                    <th class="text-center" style="width:12%">字典名称</th>
-                    <th class="text-center" style="width:12%">字典类型</th>
-                    <th class="text-center" style="width:12%">数据类型</th>
-                    <th class="text-center" style="width:16%">字典值</th>
-                    <th class="text-center" style="width:12%">排序</th>
+                    <th style="width:12%">字典编码</th>
+                    <th style="width:12%">字典名称</th>
+                    <th style="width:12%">字典类型</th>
+                    <th style="width:12%">数据类型</th>
+                    <th style="width:16%">字典值</th>
+                    <th style="width:12%">排序</th>
                     <th class="text-center" style="width:12%">状态</th>
                     <th class="text-center" style="width:12%">操作</th>
                   </tr>
