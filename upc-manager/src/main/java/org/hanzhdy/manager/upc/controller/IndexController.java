@@ -13,7 +13,9 @@ import org.hanzhdy.manager.upc.model.AccessSystem;
 import org.hanzhdy.manager.upc.service.*;
 import org.hanzhdy.manager.upc.vo.Resource;
 import org.hanzhdy.utils.HttpUtils;
+import org.hanzhdy.utils.MathUtils;
 import org.hanzhdy.utils.images.VerifyCode;
+import org.hanzhdy.utils.resources.GlobalPlus;
 import org.hanzhdy.web.throwable.BizException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -75,6 +77,12 @@ public class IndexController extends ApplicationController {
             }
             model.addAttribute("user", user);
             model.addAttribute("system", system);
+    
+            GlobalPlus.Env env=GlobalPlus.getEnv();
+            if (env!=GlobalPlus.Env.production) {
+                int rcode = MathUtils.getRandomNum(1000, 9999);
+                super.setSessionVal(request, "cacheRandom", rcode);
+            }
         }
         catch (Exception ex) {
             logger.error("首页打开失败", ex);

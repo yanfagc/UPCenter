@@ -11,7 +11,8 @@
     <nav class="navbar navbar-default navbar-fixed-top" style="min-height:40px;">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="javascript:void(0);" style="height:40px;line-height:8px;">角色菜单设置</a>
+          <a class="navbar-brand" href="javascript:void(0);" style="height:40px;line-height:8px;">角色菜单设置
+            <span style="font-size:14px;margin-left:10px;">角色编码：${record.rolecode}&nbsp;&nbsp;角色名称：${record.rolename}</span></a>
         </div>
       </div>
     </nav>
@@ -19,6 +20,18 @@
       <form id="submitForm" class="form-horizontal" action="${ctx}/basic/role/saveRoleMenus" method="POST">
         <input type="hidden" name="roleid" value="${roleid}"/>
         <input type="hidden" name="resources" id="resources"/>
+        <%--<table class="table table-bordered table-hover">
+          <tr>
+            <td style="width:16%;text-align:right;">角色编码：</td>
+            <td style="width:32%;padding:4px;">
+              <input name="rolecode" class="form-control input-sm myspan6" type="text" readonly="readonly" value="${record.rolecode}">
+            </td>
+            <td style="width:16%;text-align:right;">角色名称：</td>
+            <td style="width:32%;padding:4px;">
+              <input name="rolename" class="form-control input-sm myspan6" type="text" readonly="readonly" value="${record.rolename}">
+            </td>
+          </tr>
+        </table>--%>
       </form>
       <div class="row" style="width:98%">
         <div class="col-xs-2">

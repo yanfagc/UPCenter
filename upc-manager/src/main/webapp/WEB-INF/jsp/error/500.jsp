@@ -31,7 +31,7 @@
 					<a href="javascript:void(0);" onclick="showDetail();">&gt;&gt;错误详情</a>
 				</span>
 			</div>
-			<div class="panel-body" style="display:none">
+			<pre class="panel-body" style="display:none">
 				<%
 				StringWriter sw = new StringWriter();
 				PrintWriter pw = new PrintWriter(sw);
@@ -42,7 +42,7 @@
 				<p>
 					<pre><%=buf.toString() %></pre>
 				</p>
-			</div>
+			</pre>
 		</div>
 	  </div>
     </div>

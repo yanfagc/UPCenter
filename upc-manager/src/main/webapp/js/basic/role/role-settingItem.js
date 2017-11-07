@@ -1,4 +1,4 @@
-var datatable;
+var datatable,resourceArray=[];
 $(function() {
     // 初始化树形菜单
 	initZTree(zNodes);
@@ -26,7 +26,22 @@ $(function() {
                     mData:null,
                     sClass:"text-center",
                     mRender:function(data, display, record){
-                        return '<input name="checkedId" type="checkbox" value="mi_'+record.id+'"'+(record.checked?'checked="checked"':'')+'/>';
+                        var checked=false,item,mid=$('#menuid').val();
+                        for(var i in resourceArray){
+                            if(resourceArray[i]&&resourceArray[i].mid==mid){
+                                item=resourceArray[i];
+                                for(var j in resourceArray[i].res){
+                                    if(resourceArray[i].res[j]=="mi_"+record.id){
+                                        checked=true;
+                                    }
+                                }
+                            }
+                        }
+                        if (!item){
+                            checked=record.checked;
+                        }
+
+                        return '<input name="checkedId" type="checkbox" value="mi_'+record.id+'"'+(checked?'checked="checked"':'')+'/>';
                     }
                 },{
                     mData:"name",
@@ -49,6 +64,7 @@ $(function() {
 	// 提交按钮事件
     $(".submit").on("click",function() {
         settingResource();
+        $('#resources').val(JSON.stringify(resourceArray));
         var options={
             beforeSubmit:function() {
                 showTipsDialog("操作提示","服务器处理中，请稍候...");
@@ -82,6 +98,7 @@ function initZTree(data) {
     	},
         callback:{
     	    onClick:function(event,treeId,node,clickFlag){
+                settingResource();
     	        $('#menuid').val(node.id.substr(2));
                 datatable.fnClearTable(0);
                 datatable.fnDraw();
@@ -95,24 +112,30 @@ function initZTree(data) {
 function zNodeFilter(dataList,deep){
     if($.isArray(dataList)){
         for(var i=0;i<dataList.length;i++){
-            dataList[i].isParent=true;
             dataList[i].open=(deep==1);
             zNodeFilter(dataList[i].children,deep+1);
         }
-    }else if(dataList){
-        dataList.isParent=true;
     }
     return dataList;
 }
 
 function settingResource(){
-    var resources=[];
+    var resources=[],item={};
     $.each($('input[name="checkedId"]:checked'),function(i,v){
         resources.push($(v).val());
     });
-    if(resources.length>0){
-        $('#resources').val(JSON.stringify(resources));
-    }else{
-        $('#resources').val('');
+
+    item.mid=$('#menuid').val();
+    item.res=resources;
+
+    var exists=false;
+    for(var i in resourceArray){
+        if(resourceArray[i]&&resourceArray[i].mid==item.mid){
+            resourceArray[i]=item;
+            exists=true;
+        }
+    }
+    if (!exists){
+        resourceArray.push(item);
     }
 }

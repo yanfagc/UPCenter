@@ -91,6 +91,7 @@ public class LoginService extends AbstractUpcService {
         su.setId(user.getId());
         su.setNickname(user.getNickname());
         su.setStatus(user.getStatus());
+        su.setImgurl(user.getImgurl());
         return su;
     }
     

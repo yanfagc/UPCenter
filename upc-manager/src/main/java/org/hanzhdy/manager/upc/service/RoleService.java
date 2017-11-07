@@ -302,10 +302,36 @@ public class RoleService extends AbstractUpcService {
     /**
      * 更新角色菜单项关联信息
      * @param id
-     * @param menuid
-     * @param items
+     * @param resources
      * @return
      */
+    public boolean updateRoleItem(Long id, String resources) {
+        JSONArray jsonArray = JSONArray.parseArray(resources);
+        if (jsonArray.isEmpty()) {
+            return true;
+        }
+        
+        for (Object obj : jsonArray) {
+            JSONObject jsonObject = (JSONObject) obj;
+            this.deleteRoleMenuItems(id, jsonObject.getLong("mid"));
+            JSONArray array = jsonObject.getJSONArray("res");
+            if (array != null && !array.isEmpty()) {
+                for (Object _itemid : array) {
+                    try {
+                        RoleMenuItemKey key = new RoleMenuItemKey();
+                        key.setRoleId(id);
+                        key.setItemId(Long.valueOf(_itemid.toString().substring(3)));
+                        this.roleMenuItemMapperExt.insert(key);
+                    }
+                    catch (NumberFormatException ex) {
+            
+                    }
+                }
+            }
+        }
+        return true;
+    }
+    
     public boolean updateRoleItem(Long id, Long menuid, String items) {
         this.deleteRoleMenuItems(id, menuid);
         if (StringUtils.isNotBlank(items)) {
@@ -319,7 +345,7 @@ public class RoleService extends AbstractUpcService {
                         this.roleMenuItemMapperExt.insert(key);
                     }
                     catch (NumberFormatException ex) {
-
+                    
                     }
                 }
             }

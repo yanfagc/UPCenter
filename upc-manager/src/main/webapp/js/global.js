@@ -1,11 +1,25 @@
 var js=document.scripts;
 var url=js[js.length-1].src;
 var $ctx=getQueryString(url,'contextPath');
+
+$(function(){
+    $('.content form.form-inline :input').keydown(function(e){
+        if(e.keyCode==13){
+            try {
+                search();
+                e.stopPropagation();
+            }
+            catch (e){}
+            return false;
+        }
+    });
+});
 function getQueryString(url, name) {
     var reg=new RegExp("(\\?|&)"+name+"=([^&]*)(&|$)");
     var r=url.substr(1).match(reg);
-    if(r!=null)
+    if(r!=null) {
         return unescape(r[2]);
+    }
     return null;
 }
 var pageParams={
@@ -17,7 +31,6 @@ var pageParams={
     bFilter:false,
     sServerMethod:"POST",
     sPaginationType:"full_numbers",
-    sAjaxSource:'aaa',
     iDisplayLength:10,
     oLanguage:{
         sProcessing:"正在加载数据...",
@@ -81,7 +94,7 @@ function $sessionAjax(params){
         url:params.url,
         type:params.type?params.type:'post',
         data:params.data?params.data:{},
-        dataType:'application/json',
+        dataType:'json',
         success:function(rsp){
             try {
                 if (typeof rsp === 'string') {
@@ -114,6 +127,7 @@ function $sessionAjaxSubmit($element,params){
     }
     var options={
         url:params.url?params.url:undefined,
+        dataType:params.dataType?params.dataType:"JSON",
         beforeSubmit:function(){
         	if(params.beforeSubmit&&(typeof params.beforeSubmit=='function')){
         		var r=params.beforeSubmit();

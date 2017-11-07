@@ -172,6 +172,8 @@ public class RoleController extends ApplicationController {
     public String toSettingMenus(Model model, @RequestParam("roleid") Long roleid,
             @RequestParam("sysid") Long sysid) {
         List<ZTreeNode> nodeList = this.roleService.queryRoleMenuById(roleid, sysid);
+        Role record = this.roleService.queryById(roleid);
+        model.addAttribute("record", record);
         model.addAttribute("roleid", roleid);
         model.addAttribute("sysid", sysid);
         model.addAttribute("nodeList", nodeList);
@@ -218,6 +220,9 @@ public class RoleController extends ApplicationController {
         if (nodeList != null && !nodeList.isEmpty()) {
             model.addAttribute("menuid", nodeList.get(0).getId().substring(2));
         }
+    
+        Role record = this.roleService.queryById(roleid);
+        model.addAttribute("record", record);
         model.addAttribute("roleid", roleid);
         model.addAttribute("sysid", sysid);
         model.addAttribute("nodeList", nodeList);
@@ -255,17 +260,15 @@ public class RoleController extends ApplicationController {
     /**
      * 保存角色权限信息
      * @param roleid
-     * @param menuid
      * @param resources
      * @return
      */
     @RequiresPermissions("basic:role:edit")
     @RequestMapping(value = "saveRoleItems", method = RequestMethod.POST)
     @ResponseBody
-    public Object saveRoleItems(@RequestParam("roleid") Long roleid, @RequestParam("menuid") Long menuid,
-                                @RequestParam("resources") String resources) {
+    public Object saveRoleItems(@RequestParam("roleid") Long roleid, @RequestParam("resources") String resources) {
         try {
-            this.roleService.updateRoleItem(roleid, menuid, resources);
+            this.roleService.updateRoleItem(roleid, resources);
             return RespResult.create(respCode.SUCCESS);
         }
         catch (BizException ex) {

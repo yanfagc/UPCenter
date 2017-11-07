@@ -30,7 +30,7 @@
             </td>
             <td style="width:32%;padding:4px;" rowspan="4">
               <img id="channer_cover_display" name="channer_cover_display" style="height:145px;width:145px;"
-                   src="<c:if test="${not empty record.imgurl}">${record.imgurl}</c:if><c:if test="${empty record.imgurl}">${ctx}/images/photobg.png</c:if>">
+                   src="<c:if test="${not empty record.imgurl}">/basic/viewfile/userImage/${record.imgurl}</c:if><c:if test="${empty record.imgurl}">${ctx}/images/photobg.png</c:if>">
               <br/>
               <input type="hidden" name="imgurl" value="${record.imgurl}"/>
             </td>

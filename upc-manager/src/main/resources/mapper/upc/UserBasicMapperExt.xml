@@ -40,7 +40,7 @@
 	
 	<!-- 根据用户帐号查询用户信息 -->
 	<select id="selectByAccount" parameterType="java.lang.String" resultType="org.hanzhdy.manager.upc.vo.UserVo">
-	SELECT b.ID,b.ACCOUNT,b.NICKNAME,i.MOBILENO,i.EMAIL,s.`STATUS`,b.PASSWORD
+	SELECT b.ID,b.ACCOUNT,b.NICKNAME,i.MOBILENO,i.EMAIL,i.IMGURL AS imgurl,s.`STATUS`,b.PASSWORD
 	FROM u_user_basic b,u_user_info i,u_user_status s
 	WHERE b.ID = i.USERID AND b.ID=s.USERID AND b.ACCOUNT=#{account}
 	</select>

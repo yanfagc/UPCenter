@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
  * Created by H.CAAHN on 2017/10/24.
  */
 @Controller
-@RequestMapping("/fileupload/")
+@RequestMapping("/basic/upfile/")
 public class FileUploadController extends ApplicationController {
     /** 日志对象 */
     private static final Logger logger = LoggerFactory.getLogger(FileUploadController.class);
@@ -32,13 +32,13 @@ public class FileUploadController extends ApplicationController {
     private FileUploadService fileUploadService;
     
     /**
-     * 上传用户头像
+     * 上传用户头像GET
      * @param uploadFile
      * @param request
      * @return
      */
-    @RequiresPermissions("basic:file:userImg")
-    @RequestMapping(value = "userImg", method = RequestMethod.POST)
+    @RequiresPermissions("basic:upfile:user")
+    @RequestMapping(value = "userImage", method = RequestMethod.POST)
     @ResponseBody
     public Object uploadUserImage(@RequestParam("uploadFile")MultipartFile uploadFile, HttpServletRequest request) {
         try {

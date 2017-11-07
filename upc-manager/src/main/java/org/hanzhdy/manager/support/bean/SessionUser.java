@@ -16,11 +16,13 @@ public class SessionUser {
     
     private String          nickname;
     
-    private LoginUserStatus status;
+    private String          imgurl;
     
     private Date            logintime;
     
     private String          loginip;
+    
+    private LoginUserStatus status;
     
     public Long getId() {
         return id;
@@ -45,7 +47,15 @@ public class SessionUser {
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
-
+    
+    public String getImgurl() {
+        return imgurl;
+    }
+    
+    public void setImgurl(String imgurl) {
+        this.imgurl = imgurl;
+    }
+    
     public LoginUserStatus getStatus() {
         return status;
     }

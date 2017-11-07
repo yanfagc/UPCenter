@@ -11,7 +11,8 @@
     <nav class="navbar navbar-default navbar-fixed-top" style="min-height:40px;">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="javascript:void(0);" style="height:40px;line-height:8px;">角色菜单设置</a>
+          <a class="navbar-brand" href="javascript:void(0);" style="height:40px;line-height:8px;">角色菜单设置
+            <span style="font-size:14px;margin-left:10px;">角色编码：${record.rolecode}&nbsp;&nbsp;角色名称：${record.rolename}</span></a></a>
         </div>
       </div>
     </nav>
