@@ -68,27 +68,13 @@
 
     <!-- 配置哪些类的方法需要进行事务管理 -->
     <aop:config>
-        <aop:advisor pointcut="execution(* org.hanzhdy.manager.form.service..*Service.*(..))" advice-ref="manager-tx-advice" />
         <aop:advisor pointcut="execution(* org.hanzhdy.manager.upc.service..*Service.*(..))" advice-ref="manager-tx-advice" />
         <aop:advisor pointcut="execution(* org.hanzhdy.manager.settings.service..*Service.*(..))" advice-ref="manager-tx-advice" />
     </aop:config>
-	
-	<context:component-scan base-package="org.hanzhdy.manager.form.**"></context:component-scan>
+
     <context:component-scan base-package="org.hanzhdy.manager.upc.**"></context:component-scan>
     <context:component-scan base-package="org.hanzhdy.manager.settings.**"></context:component-scan>
     <context:component-scan base-package="org.hanzhdy.manager.support.**"></context:component-scan>
-    
-    <!-- beware that mapper-config.xml is not needed if you use injected mappers -->
-    <bean id="manager-form-sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="_manager-dataSource" />
-        <property name="mapperLocations" value="classpath*:mapper/form/**/*.xml"/>
-    </bean>
-
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="org.hanzhdy.manager.form.mapper" />
-        <!-- optional unless there are multiple session factories defined -->
-        <property name="sqlSessionFactoryBeanName" value="manager-form-sqlSessionFactoryBean" />
-    </bean>
 
     <!-- beware that mapper-config.xml is not needed if you use injected mappers -->
     <bean id="manager-upc-sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">

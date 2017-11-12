@@ -6,9 +6,6 @@ $(function() {
         showText:true,
         rules:{
 
-        },
-        messages:{
-            
         }
     });
     $(".submit").on("click",function() {

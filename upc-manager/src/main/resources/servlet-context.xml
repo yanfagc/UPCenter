@@ -30,7 +30,6 @@
 	</bean>
 	
     <!-- Imports user-defined @Controller beans that process client requests -->
-    <context:component-scan base-package="org.hanzhdy.manager.form.controller" />
     <context:component-scan base-package="org.hanzhdy.manager.support.controller" />
     <context:component-scan base-package="org.hanzhdy.manager.upc.controller" />
 	<context:component-scan base-package="org.hanzhdy.manager.settings.controller" />

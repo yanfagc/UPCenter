@@ -193,7 +193,9 @@ $.extend($.fn, {
     getMessage:function(item,name,rulename){
         var options=$.fn.options,message=$.fn.messages[rulename],value=options.rules[name][rulename];
         try{
-            message=options.messages[name][rulename];
+            if(options.messages[name][rulename]){
+                message=options.messages[name][rulename];
+            }
         }catch(e){
         }
 

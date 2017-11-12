@@ -12,7 +12,7 @@
   <body class="skin-blue sidebar-mini">
   <div id="content" style="background-color:#ecf0f5">
     <section class="content-header">
-      <h1><small>系统管理 &gt; ${system.sysname}&gt; 菜单管理</small></h1>
+      <h1><small>系统管理 &gt; <a href="${ctx}/basic/accesssys/list">接入系统</a> &gt; 菜单管理</small></h1>
     </section>
   <!-- Main content -->
     <section class="content">

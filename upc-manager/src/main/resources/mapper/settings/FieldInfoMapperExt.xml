@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.hanzhdy.manager.settings.mapper.FieldInfoMapperExt">
+	<!-- 根据表单ID，查询表单关联的字段信息 -->
+	<select id="selectByFormId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+	SELECT
+		fi.*
+	FROM
+		f_form_field ff,
+		f_field_info fi
+	WHERE
+		ff.FIELDID = fi.id
+	AND ff.FORMID = #{formid}
+	ORDER BY ff.SORT
+	</select>
+	
+	<!-- 根据表单ID和其他查询条件，查询表单关联的字段信息 -->
+	<select id="selectByFormIdAndConds" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+	SELECT
+		fi.*
+	FROM
+		f_form_field ff,
+		f_field_info fi
+	WHERE
+		ff.FIELDID = fi.id
+	AND ff.FORMID = #{formid}
+	  <if test="status!=null and status!=''">
+	  AND fi.STATUS=#{status}
+	  </if>
+	ORDER BY ff.SORT
+	</select>
+	
+	<!-- 根据表单ID，查询表单关联的字段信息总数 -->
+	<select id="countByFormId" parameterType="java.util.HashMap" resultType="int">
+	SELECT
+		COUNT(1)
+	FROM
+		f_form_field ff,
+		f_field_info fi
+	WHERE
+		ff.FIELDID = fi.id
+	<include refid="selectByFormId_whereClause" />
+	</select>
+	
+	<!-- 根据表单ID，分页查询表单关联的字段信息 -->
+	<select id="selectByFormIdAsPage" parameterType="java.util.HashMap" resultType="org.hanzhdy.manager.settings.vo.FormFieldVo">
+	<include refid="Pageable_Prefix" />
+	SELECT
+		fi.FIELDCODE AS fieldcode,
+		fi.FIELDNAME AS fieldname,
+		fi.STATUS AS status,
+		IFNULL(ff.COLSPAN, fi.COLSPAN) AS colspan,
+		ff.FORMID AS formid,
+		ff.FIELDID AS fieldid,
+		ff.SORT AS sort
+	FROM
+		f_form_field ff,
+		f_field_info fi
+	WHERE
+		ff.FIELDID = fi.id
+	<include refid="selectByFormId_whereClause" />
+	ORDER BY ff.SORT ASC
+	<include refid="Pageable_Suffix" />
+	</select>
+	
+	<!-- 根据表单ID查询表单关联字段信息的条件 -->
+	<sql id="selectByFormId_whereClause">
+		<if test="formid != null and formid > 0">
+		AND ff.FORMID = #{formid}
+		</if>
+		<if test="status != null and status!=''">
+		AND fi.STATUS=#{status}
+		</if>
+		<if test="statusList != null and statusList!=''">
+		AND fi.STATUS IN ${statusList}
+		</if>
+	</sql>
+	
+	<!-- 查询可添加到指定表单中的字段总数 -->
+	<select id="countCanAddField" parameterType="java.util.HashMap" resultType="int">
+	SELECT COUNT(1) FROM f_field_info t
+	WHERE t.`STATUS` = 'N'
+	<include refid="selectCanAddField_whereClause" />
+	AND NOT EXISTS(SELECT 1 FROM f_form_field ff WHERE ff.FORMID=#{formid} AND ff.FIELDID=t.ID)
+	</select>
+	
+	<!-- 查询可添加到指定表单中的字段列表 -->
+	<select id="selectCanAddField" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+	<include refid="Pageable_Prefix" />
+	SELECT <include refid="Base_Column_List" /> FROM f_field_info t
+	WHERE t.`STATUS` = 'N'
+	<include refid="selectCanAddField_whereClause" />
+	AND NOT EXISTS(SELECT 1 FROM f_form_field ff WHERE ff.FORMID=#{formid} AND ff.FIELDID=t.ID)
+	<include refid="Pageable_Suffix" />
+	</select>
+	
+	<!-- 查询可添加到指定表单中的查询条件 -->
+	<sql id="selectCanAddField_whereClause">
+	  <if test="fieldcode!=null and fieldcode!=''"> AND t.FIELDCODE LIKE #{fieldcode} </if>
+	  <if test="fieldname!=null and fieldname!=''"> AND t.FIELDNAME LIKE #{fieldname} </if>
+	</sql>
+	
+	<!-- 根据条件，查询表单字段信息，用于autoComplete -->
+	<select id="selectAsAutoComplete" parameterType="java.lang.String" resultMap="BaseResultMap">
+SELECT
+	f.ID AS id,
+	f.FIELDCODE AS fieldcode,
+	f.FIELDNAME AS fieldname
+FROM
+	F_FIELD_INFO f
+WHERE
+	f.`STATUS` = 'N'
+	AND (f.FIELDCODE LIKE #{searchKey} OR f.FIELDNAME LIKE #{searchKey})
+	</select>
+</mapper>

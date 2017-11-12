@@ -206,6 +206,7 @@ public class MenuController extends ApplicationController {
             boolean result = false;
             if (record.getId() == null) {
                 record.setCreator(user.getId());
+                record.setUpdater(user.getId());
                 result = this.menuService.insert(record);
             }
             else {

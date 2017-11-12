@@ -7,6 +7,7 @@ $(function() {
         rules:{
             fieldcode:{
                 required:true,
+                en_code:true,
                 maxlength:15
             },
             fieldname:{
@@ -25,21 +26,16 @@ $(function() {
         },
         messages:{
             fieldcode:{
-                required:"字段编码不允许为空！",
-                maxlength:"最大长度不能长于15位！"
+                required:"字段编码不允许为空！"
             },
             fieldname:{
-                required:"字段名称不允许为空！",
-                integer:"最大长度不能长于30位！"
+                required:"字段名称不允许为空！"
             },
             defaultvalue:{
                 integer:"最大长度不能长于30位！"
             },
             colspan:{
-                required:"所占列数不允许为空！",
-                integer:"请输入大于0的整型数值！",
-                morethanzero:"请输入大于0的整型数值！",
-                max:"最大值不允许大于10！"
+                required:"所占列数不允许为空！"
             }
         }
     });

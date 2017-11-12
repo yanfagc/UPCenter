@@ -64,5 +64,56 @@
             <columnOverride column="createtime" property="createtime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
             <columnOverride column="canceltime" property="canceltime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
         </table>
+
+        <!--
+        <table schema="" tableName="F_FIELD_ITEM"       domainObjectName="FieldItem">
+        	<generatedKey column="ID" sqlStatement="JDBC" identity="false"/>
+        	<columnOverride column="ID" property="id" javaType="java.lang.Long" jdbcType="NUMERIC"/>
+        	<columnOverride column="FIELDID" property="fieldid" javaType="java.lang.Long" jdbcType="NUMERIC"/>
+        	<columnOverride column="SORT" property="sort" javaType="java.lang.Short" jdbcType="NUMERIC"/>
+        	<columnOverride column="STATUS" property="status" javaType="org.hanzhdy.manager.support.enums.CommonStatus" jdbcType="VARCHAR"/>
+        </table>
+         -->
+        <table schema="" tableName="F_FIELD_INFO"          domainObjectName="FieldInfo">
+            <generatedKey column="ID" sqlStatement="JDBC" identity="false"/>
+            <columnOverride column="ID" property="id" javaType="java.lang.Long" jdbcType="NUMERIC"/>
+            <columnOverride column="FIELDTYPE" property="fieldtype" javaType="org.hanzhdy.manager.support.enums.FieldType" jdbcType="VARCHAR"/>
+            <columnOverride column="STATUS" property="status" javaType="org.hanzhdy.manager.support.enums.CommonStatus" jdbcType="VARCHAR"/>
+            <columnOverride column="COLSPAN" property="colspan" javaType="java.lang.Integer" jdbcType="NUMERIC"/>
+            <columnOverride column="REQUIRED" property="required" javaType="org.hanzhdy.manager.support.enums.YesOrNo" jdbcType="VARCHAR"/>
+            <columnOverride column="LENTYPE" property="lentype" javaType="org.hanzhdy.manager.support.enums.FieldLengthType" jdbcType="VARCHAR"/>
+            <columnOverride column="MAXLENGTH" property="maxlength" javaType="java.lang.Integer" jdbcType="NUMERIC"/>
+            <columnOverride column="MINLENGTH" property="minlength" javaType="java.lang.Integer" jdbcType="NUMERIC"/>
+            <columnOverride column="MAXLIMIT" property="maxlimit" javaType="java.lang.Long" jdbcType="NUMERIC"/>
+            <columnOverride column="MINLIMIT" property="minlimit" javaType="java.lang.Long" jdbcType="NUMERIC"/>
+        </table>
+
+        <!--
+        <table schema="" tableName="F_FORM_INFO"           domainObjectName="FormInfo">
+        	<generatedKey column="ID" sqlStatement="JDBC" identity="false"/>
+        	<columnOverride column="ID" property="id" javaType="java.lang.Long" jdbcType="NUMERIC"/>
+        	<columnOverride column="COLCOUNTS" property="colcounts" javaType="java.lang.Integer" jdbcType="NUMERIC"/>
+        	<columnOverride column="STATUS" property="status" javaType="org.hanzhdy.manager.support.enums.CommonStatus" jdbcType="VARCHAR"/>
+			<columnOverride column="CREATETIME" property="createtime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+			<columnOverride column="UPDATETIME" property="updatetime" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+        	<columnOverride column="CREATOR" property="creator" javaType="java.lang.Long" jdbcType="NUMERIC"/>
+        	<columnOverride column="UPDATER" property="updater" javaType="java.lang.Long" jdbcType="NUMERIC"/>
+        </table>
+
+        <table schema="" tableName="F_FORM_FIELD"     domainObjectName="FormField">
+        	<columnOverride column="FORMID" property="formId" javaType="java.lang.Long" jdbcType="NUMERIC"/>
+        	<columnOverride column="FIELDID" property="fieldId" javaType="java.lang.Long" jdbcType="NUMERIC"/>
+        	<columnOverride column="COLSPAN" property="colspan" javaType="java.lang.Integer" jdbcType="NUMERIC"/>
+        	<columnOverride column="SORT" property="sort" javaType="java.lang.Short" jdbcType="NUMERIC"/>
+        </table> -->
+
+        <!--
+        <table schema="" tableName="F_FORM_DATA" domainObjectName="FormData">
+        	<generatedKey column="ID" sqlStatement="JDBC" identity="false"/>
+        	<columnOverride column="ID" property="id" javaType="java.lang.Long" jdbcType="NUMERIC"/>
+        	<columnOverride column="FIELDID" property="fieldid" javaType="java.lang.Long" jdbcType="NUMERIC"/>
+        	<columnOverride column="RECORDID" property="recordid" javaType="java.lang.Long" jdbcType="NUMERIC"/>
+        </table>
+         -->
     </context>  
 </generatorConfiguration>

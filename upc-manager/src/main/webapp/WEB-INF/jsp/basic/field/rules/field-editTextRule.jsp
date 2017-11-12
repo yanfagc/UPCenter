@@ -89,6 +89,76 @@
             </td>
           </tr>
           </c:if>
+          <c:if test="${record.macrotype eq 'INT' or record.macrotype eq 'FLOAT'}">
+          <tr>
+            <td style="text-align:right;"><s>*</s>是否必填：</td>
+            <td style="padding:4px;">
+              <label class="radio-inline">
+                <input type="radio" name="required" value="Y" ${record.required eq 'Y'?'checked="checked"':''}/> 是
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="required" value="N" ${record.required ne 'Y'?'checked="checked"':''}> 否
+              </label>
+            </td>
+            <td colspan="2"></td>
+          </tr>
+          <tr>
+            <td style="text-align:right;">最小长度：</td>
+            <td style="padding:4px;">
+              <input name="minlength" class="form-control input-sm myspan6" placeholder="最小长度" type="text" value="${record.minlength}">
+            </td>
+            <td style="text-align:right;">最大长度：</td>
+            <td style="padding:4px;">
+              <input name="maxlength" class="form-control input-sm myspan6" placeholder="最大长度" type="text" value="${record.maxlength}">
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align:right;">最小值：</td>
+            <td style="padding:4px;">
+              <input name="minval" class="form-control input-sm myspan6" placeholder="最小值" type="text" value="${record.minval}">
+            </td>
+            <td style="text-align:right;">最大值：</td>
+            <td style="padding:4px;">
+              <input name="maxval" class="form-control input-sm myspan6" placeholder="最大值" type="text" value="${record.maxval}">
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align:right;">最小对比字段：</td>
+            <td style="padding:4px;">
+              <input type="hidden" name="minlimit" value="${record.minlimit}"/>
+              <input for="minlimit" class="form-control input-sm myspan6" placeholder="最小对比字段" type="text" value="${minlimit.fieldname}">
+            </td>
+            <td style="text-align:right;">最大对比字段：</td>
+            <td style="padding:4px;">
+              <input type="hidden" name="maxlimit" value="${record.maxlimit}"/>
+              <input for="maxlimit" class="form-control input-sm myspan6" placeholder="最大对比字段" type="text" value="${maxlimit.fieldname}">
+            </td>
+          </tr>
+          </c:if>
+          <c:if test="${record.macrotype eq 'EMAIL'}">
+          <tr>
+            <td style="text-align:right;"><s>*</s>是否必填：</td>
+            <td style="padding:4px;">
+              <label class="radio-inline">
+                <input type="radio" name="required" value="Y" ${record.required eq 'Y'?'checked="checked"':''}/> 是
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="required" value="N" ${record.required ne 'Y'?'checked="checked"':''}> 否
+              </label>
+            </td>
+            <td colspan="2"></td>
+          </tr>
+          <tr>
+            <td style="text-align:right;">最小长度：</td>
+            <td style="padding:4px;">
+              <input name="minlength" class="form-control input-sm myspan6" placeholder="最小长度" type="text" value="${record.minlength}">
+            </td>
+            <td style="text-align:right;">最大长度：</td>
+            <td style="padding:4px;">
+              <input name="maxlength" class="form-control input-sm myspan6" placeholder="最大长度" type="text" value="${record.maxlength}">
+            </td>
+          </tr>
+          </c:if>
         </table>
       </form>
     </div>

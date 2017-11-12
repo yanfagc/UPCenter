@@ -5,19 +5,15 @@ $(function() {
         ignore:'',
         showText:true,
         rules:{
-        	minlength:{
-                maxlength:15
-            },
-            maxlength:{
-                maxlength:30
-            }
-        },
-        messages:{
             minlength:{
-                maxlength:'最大长度不允许超过15个字符'
+                integer:true,
+                min:0,
+                maxlength:5
             },
             maxlength:{
-                maxlength:'最大长度不允许超过'
+                integer:true,
+                min:0,
+                maxlength:5
             }
         }
     });

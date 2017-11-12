@@ -2,10 +2,10 @@ package org.hanzhdy.manager.upc.service;
 
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.StringUtils;
-import org.hanzhdy.manager.form.mapper.FormDataMapperExt;
-import org.hanzhdy.manager.form.model.FormData;
-import org.hanzhdy.manager.form.model.FormDataExample;
-import org.hanzhdy.manager.form.service.FormEngineService;
+import org.hanzhdy.manager.settings.mapper.FormDataMapperExt;
+import org.hanzhdy.manager.settings.model.FormData;
+import org.hanzhdy.manager.settings.model.FormDataExample;
+import org.hanzhdy.manager.settings.service.FormEngineService;
 import org.hanzhdy.manager.support.bean.SessionUser;
 import org.hanzhdy.manager.support.constants.DBConstants;
 import org.hanzhdy.manager.support.service.AbstractUpcService;

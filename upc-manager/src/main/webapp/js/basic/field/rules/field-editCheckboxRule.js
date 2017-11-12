@@ -5,10 +5,15 @@ $(function() {
         ignore:'',
         showText:true,
         rules:{
-
-        },
-        messages:{
-            
+            minlength:{
+                integer:true,
+                min:0
+            },
+            maxlength:{
+                integer:true,
+                min:0,
+                max:99
+            }
         }
     });
     $(".submit").on("click",function() {

@@ -41,6 +41,16 @@
             </td>
             <td style="text-align:right;" colspan="2"></td>
           </tr>
+          <tr>
+            <td style="text-align:right;">最小选择数量：</td>
+            <td style="padding:4px;">
+              <input name="minlength" class="form-control input-sm myspan6" placeholder="最小选择数量" type="text" value="${record.minlength}">
+            </td>
+            <td style="text-align:right;">最大选择数量：</td>
+            <td style="padding:4px;">
+              <input name="maxlength" class="form-control input-sm myspan6" placeholder="最大选择数量" type="text" value="${record.maxlength}">
+            </td>
+          </tr>
         </table>
       </form>
     </div>
