@@ -2,7 +2,7 @@ package org.hanzhdy.manager.support.service;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hanzhdy.manager.support.enums.FileUploadType;
-import org.hanzhdy.utils.express.StringFormatter;
+import org.hanzhdy.utils.formatter.StringFormatter;
 import org.hanzhdy.utils.resources.Resources;
 
 import javax.annotation.PostConstruct;

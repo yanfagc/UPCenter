@@ -59,7 +59,7 @@ $(function() {
                     mData:null,
                     sClass:"text-center",
                     mRender:function(data, display, record) {
-                        return '<a class="btn btn-success btn-xs toPreview" fid="'+record.id
+                        return '<a class="btn btn-primary btn-xs toPreview" fid="'+record.id
                             +'" href="javascript:void(0);">&nbsp;表单预览&nbsp;</a>';
                     }
                 },
@@ -67,7 +67,7 @@ $(function() {
                     mData:null,
                     sClass:"text-center",
                     mRender:function(data, display, record) {
-                        return '<a class="btn btn-success btn-xs toFormField" fid="'+record.id
+                        return '<a class="btn btn-primary btn-xs toFormField" fid="'+record.id
                             +'" href="javascript:void(0);">&nbsp;字段管理&nbsp;</a>';
                     }
                 },

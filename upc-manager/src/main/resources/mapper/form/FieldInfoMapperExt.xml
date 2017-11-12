@@ -11,6 +11,7 @@
 	WHERE
 		ff.FIELDID = fi.id
 	AND ff.FORMID = #{formid}
+	ORDER BY ff.SORT
 	</select>
 	
 	<!-- 根据表单ID和其他查询条件，查询表单关联的字段信息 -->
@@ -26,6 +27,7 @@
 	  <if test="status!=null and status!=''">
 	  AND fi.STATUS=#{status}
 	  </if>
+	ORDER BY ff.SORT
 	</select>
 	
 	<!-- 根据表单ID，查询表单关联的字段信息总数 -->

@@ -178,12 +178,12 @@ public class FieldInfoController extends ApplicationController {
             
             model.addAttribute("record", record);
             if (FieldType.TEXTAREA == record.getFieldtype()) {
-                return "/basic/field/field-editTextareaRule";
+                return "/basic/field/rules/field-editTextareaRule";
             }
             else if (FieldType.SELECT == record.getFieldtype()) {
                 List<FieldItem> items = this.fieldInfoService.queryItemsByFieldId(id);
                 model.addAttribute("items", items);
-                return "/basic/field/field-editSelectRule";
+                return "/basic/field/rules/field-editSelectRule";
             }
             else if (FieldType.CHECKBOX == record.getFieldtype()) {
                 List<FieldItem> items = this.fieldInfoService.queryItemsByFieldId(id);
@@ -192,20 +192,20 @@ public class FieldInfoController extends ApplicationController {
                 }
                 
                 model.addAttribute("items", items);
-                return "/basic/field/field-editCheckboxRule";
+                return "/basic/field/rules/field-editCheckboxRule";
             }
             else if (FieldType.RADIO == record.getFieldtype()) {
                 List<FieldItem> items = this.fieldInfoService.queryItemsByFieldId(id);
                 model.addAttribute("items", items);
-                return "/basic/field/field-editRadioRule";
+                return "/basic/field/rules/field-editRadioRule";
             }
             else if (FieldType.MACROS == record.getFieldtype()) {
                 model.addAttribute("macrosList", NormalMacrosType.values());
-                return "/basic/field/field-editMacrosRule";
+                return "/basic/field/rules/field-editMacrosRule";
             }
             else {
                 model.addAttribute("macrosList", InputMacrosType.values());
-                return "/basic/field/field-editTextRule";
+                return "basic/field/rules/field-editTextRule";
             }
         }
         catch (Exception ex) {

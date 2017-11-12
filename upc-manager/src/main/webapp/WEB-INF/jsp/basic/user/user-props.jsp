@@ -29,8 +29,18 @@
             </td>
           </tr>
           <tr>
+            <td style="width:16%;text-align:right;">帐号状态：</td>
+            <td style="width:32%;padding:4px;vertical-align:middle">
+              <c:choose>
+                <c:when test="${record.status eq 'N'}"><lable style="color:green">正常</lable></c:when>
+                <c:when test="${record.status eq 'L'}"><lable style="color:red">锁定</lable></c:when>
+                <c:when test="${record.status eq 'F'}"><lable style="color: #f39c12;">冻结</lable></c:when>
+                <c:when test="${record.status eq 'D'}"><lable style="color:gray;">注销</lable></c:when>
+                <c:otherwise>未知(${record.status})</c:otherwise>
+              </c:choose>
+            </td>
             <td style="width:16%;text-align:right;">属性表单：</td>
-            <td style="width:32%;padding:4px;" colspan="3">
+            <td style="width:32%;padding:4px;vertical-align:middle">
               <select id="formid" name="formid" class="form-control input-sm myspan6">
                 <option value="">---请选择---</option>
               	<c:forEach items="${formList}" var="form">
@@ -42,57 +52,13 @@
           ${formHtml.html}
         </table>
       </form>
-    </div>
-    <div class="well center-block" style="left:10px;right:10px;position:fixed;bottom:0px;padding:10px;">
-      <button type="button" class="btn btn-primary submit">&nbsp;&nbsp;保&nbsp;存&nbsp;&nbsp;</button>
-      <button type="button" class="btn btn-warning" onclick="window.close();" style="float:right">&nbsp;&nbsp;关&nbsp;闭&nbsp;&nbsp;</button>
+      <div style="height:60px;"></div>
+      <div class="well center-block">
+        <button type="button" class="btn btn-primary submit">&nbsp;&nbsp;保&nbsp;存&nbsp;&nbsp;</button>
+        <button type="button" class="btn btn-warning" onclick="window.close();" style="float:right">&nbsp;&nbsp;关&nbsp;闭&nbsp;&nbsp;</button>
+      </div>
     </div>
   </body>
   <jsp:include page="/WEB-INF/jsp/commons/editfooter.jsp" />
-  <script type="text/javascript">
-  $(function(){
-	  $('form').on('change','#formid',function(){
-		  var formid=$(this).val();
-		  if(formid){
-			  location.href='${ctx}/basic/user/toUserProps?userid=${record.id}&formid='+formid;
-		  }else{
-			  location.href='${ctx}/basic/user/toUserProps?userid=${record.id}';
-		  }
-	  });
-	  
-	  $(".submit").on("click",function() {
-	        var options={
-	            beforeSubmit:function() {
-	                /* var check=$.fn.validForm();
-	                if(!check){
-	                    return false;
-	                } */
-	                showTipsDialog("操作提示","服务器处理中，请稍候...");
-	            },
-	            success:function(rsp) {
-	                if(rsp.code=='1000'){
-	                    showTipsDialog("保存成功","数据保存成功！",function() {
-	                        closeDialog();
-	                        window.close();
-	                    });
-	                    if(window.opener){
-	                        opener.search();
-	                    }
-	                }else{
-	                    var msg=rsp.msg?rsp.msg:"数据保存失败，请联系管理员或稍后再试！";
-	                    showTipsDialog("错误信息",msg,true);
-	                }
-	            },
-	            error:function(rsp) {
-	                if(rsp.status==404||rsp.status=='404'){
-	                    showTipsDialog("错误信息","数据保存失败，无法访问目标地址！",true);
-	                }else{
-	                    showTipsDialog("错误信息","数据保存失败，请联系管理员或稍后再试！",true);
-	                }
-	            }
-	        };
-	        $sessionAjaxSubmit($("#submitForm"),options);
-	    });
-  });
-  </script>
+  <script type="text/javascript" src="${ctx}/js/basic/user/user-props.js<c:if test='${not empty crm}'>?${crm}</c:if>"></script>
 </html>

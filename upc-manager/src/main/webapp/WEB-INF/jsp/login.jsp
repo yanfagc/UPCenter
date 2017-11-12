@@ -68,7 +68,7 @@ if(top.location!=self.location){
 
 <ul id="supersized" class="quality" style="visibility: visible;">
 	<li class="slide-3 activeslide" style="visibility: visible; opacity: 1;">
-		<a target="_blank"><img src="${ctx}/images/login/login_bg.jpg" style="width: 100%; left: 0px; top: 0px; height: 100%;"></a>
+
 	</li>
 </ul>
 
@@ -79,8 +79,8 @@ if(top.location!=self.location){
 <![endif]-->
 <script type="text/javascript" src="${ctx}/plugins/jquery/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="${ctx}/plugins/jquery/jquery.form.js"></script>
-<%-- <script type="text/javascript" src="${ctx}/js/login/supersized.3.2.7.min.js"></script>
-<script type="text/javascript" src="${ctx}/js/login/supersized-init.js"></script> --%>
+<script type="text/javascript" src="${ctx}/js/login/supersized.3.2.7.min.js"></script>
+<script type="text/javascript" src="${ctx}/js/login/supersized-init.js"></script>
 <script type="text/javascript" src="${ctx}/js/login/tooltips.js"></script>
 <script type="text/javascript" src="${ctx}/js/login/login.js<c:if test='${not empty crm}'>?${crm}</c:if>"></script>
 <script type="text/javascript" src="${ctx}/js/login/scripts.js"></script>

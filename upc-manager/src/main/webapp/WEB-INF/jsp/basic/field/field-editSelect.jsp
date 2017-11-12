@@ -22,21 +22,21 @@
         <input type="hidden" name="defaultvalue" value="${record.defaultvalue}"/>
         <table class="table table-bordered table-hover">
           <tr>
-            <td style="width:16%;text-align:right;">字段编码：</td>
+            <td style="width:16%;text-align:right;"><s>*</s>字段编码：</td>
             <td style="width:32%;padding:4px;">
               <input name="fieldcode" class="form-control input-sm myspan6" type="text" placeholder="字段编码（建议英文）" value="${record.fieldcode}">
             </td>
-            <td style="width:16%;text-align:right;">字段名称：</td>
+            <td style="width:16%;text-align:right;"><s>*</s>字段名称：</td>
             <td style="width:32%;padding:4px;">
               <input name="fieldname" class="form-control input-sm myspan6" type="text" placeholder="字段名称（建议中文）" value="${record.fieldname}">
             </td>
           </tr>
           <tr>
-            <td style="text-align:right;">所占列数：</td>
+            <td style="text-align:right;"><s>*</s>所占列数：</td>
             <td style="padding:4px;">
               <input name="colspan" class="form-control input-sm myspan6" type="text" placeholder="所占列数" value="${not empty record.colspan?record.colspan:1}">
             </td>
-            <td style="text-align:right;">状态：</td>
+            <td style="text-align:right;"><s>*</s>状态：</td>
             <td style="padding:4px;">
               <select name="status" class="form-control input-sm myspan6">
                 <option value="N" ${record.status eq 'N'?'selected="selected"':''}>正常</option>
@@ -51,8 +51,8 @@
             <tr>
               <th style="width:15%;text-align:center;">排序</th>
               <th style="width:10%;text-align:center;">默认值</th>
-              <th style="width:20%;text-align:center;">实际值</th>
-              <th style="width:20%;text-align:center;">显示值</th>
+              <th style="width:20%;text-align:center;"><s>*</s>实际值</th>
+              <th style="width:20%;text-align:center;"><s>*</s>显示值</th>
               <th style="width:10%;text-align:center;">
                 <a href="javascript:void(0);" class="btn btn-success btn-xs item-add">添加选项</a>
               </th>
@@ -82,10 +82,11 @@
           </tbody>
         </table>
       </form>
-    </div>
-    <div class="well center-block" style="left:10px;right:10px;position:fixed;bottom:0px;padding:10px;">
-      <button type="button" class="btn btn-primary submit">&nbsp;&nbsp;保&nbsp;存&nbsp;&nbsp;</button>
-      <button type="button" class="btn btn-warning" onclick="window.close();" style="float:right">&nbsp;&nbsp;关&nbsp;闭&nbsp;&nbsp;</button>
+      <div style="height:60px;"></div>
+      <div class="well center-block" style="left:10px;right:10px;bottom:0px;padding:10px;position:fixed;margin-bottom:10px;">
+        <button type="button" class="btn btn-primary submit">&nbsp;&nbsp;保&nbsp;存&nbsp;&nbsp;</button>
+        <button type="button" class="btn btn-warning" onclick="window.close();" style="float:right">&nbsp;&nbsp;关&nbsp;闭&nbsp;&nbsp;</button>
+      </div>
     </div>
   </body>
   <jsp:include page="/WEB-INF/jsp/commons/editfooter.jsp" />

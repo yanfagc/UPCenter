@@ -27,17 +27,17 @@
         <input type="hidden" name="id" value="${record.id}"/>
         <table class="table table-bordered table-hover">
           <tr>
-            <td style="width:16%;text-align:right;">字段编码：</td>
+            <td style="width:16%;text-align:right;"><s>*</s>字段编码：</td>
             <td style="width:32%;padding:4px;">
               <input name="fieldcode" class="form-control input-sm myspan6" type="text" placeholder="字段编码（建议英文）" value="${record.fieldcode}">
             </td>
-            <td style="width:16%;text-align:right;">字段名称：</td>
+            <td style="width:16%;text-align:right;"><s>*</s>字段名称：</td>
             <td style="width:32%;padding:4px;">
               <input name="fieldname" class="form-control input-sm myspan6" type="text" placeholder="字段名称（建议中文）" value="${record.fieldname}">
             </td>
           </tr>
           <tr>
-            <td style="text-align:right;">扩展分类：</td>
+            <td style="text-align:right;"><s>*</s>扩展分类：</td>
             <td style="padding:4px;" colspan="3">
               <label class="radio-inline">
                 <input type="radio" name="__mtype" value="date">时间日期
@@ -51,17 +51,17 @@
             </td>
           </tr>
           <tr>
-            <td style="text-align:right;">扩展字段：</td>
+            <td style="text-align:right;"><s>*</s>扩展字段：</td>
             <td style="padding:4px;">
               <select name="__macrotype" class="form-control input-sm myspanAll"></select>
             </td>
-            <td style="text-align:right;">所占列数:</td>
+            <td style="text-align:right;"><s>*</s>所占列数：</td>
             <td style="padding:4px;">
               <input name="colspan" class="form-control input-sm myspan6" type="text" placeholder="所占列数" value="${not empty record.colspan?record.colspan:1}">
             </td>
           </tr>
           <tr>
-            <td style="text-align:right;">状态：</td>
+            <td style="text-align:right;"><s>*</s>状态：</td>
             <td style="padding:4px;">
               <select name="status" class="form-control input-sm myspan6">
                 <option value="N" ${record.status eq 'N'?'selected="selected"':''}>正常</option>

@@ -3,10 +3,40 @@ $.extend($.fn, {
     options:{
         showText:true,//错误提示的label框中是否显示错误文本
         focusCleanup:true,
-        focusInvalid:false
+        focusInvalid:false,
+        rules:{},
+        messages:{}
     },
     initOpts:{
         showText:true//错误提示的label框中是否显示错误文本
+    },
+    messages:{
+        required:'必填参数不允许为空！',
+        integer:'请输入正确的整数值！',
+        float:'请输入正确的小数数值！',
+        numberOrLetter:'请输入数字或字母（不区分大小写）',
+        en_code:'请输入数字字母或下划线（不区分大小写）',
+        cn_code:'请输入汉字！',
+        noSpecial:'不允许输入特殊字符！',
+        morethanzero:'请输入大于0的数值！',
+        min:'最小值不允许小于${}',
+        max:'最大值不允许大于${}',
+        minlimit:'最小值不允许小于特定的值！',
+        maxlimit:'最大值不允许大于特定的值！',
+        minlength:'最小长度不允许小于${}位！',
+        maxlength:'最大长度不允许大于${}位！',
+        minbytes:'最小长度不允许小于${}位（一个中文按三个字符计算）',
+        maxbytes:'最大长度不允许大于${}位（一个中文按三个字符计算）',
+        mincodes:'最小长度不允许小于${}位（一个中文按二个字符计算）',
+        maxcodes:'最大长度不允许大于${}位（一个中文按二个字符计算）',
+        money:'请输入正确的金额数字！',
+        email:'请输入正确的邮箱地址！',
+        idcard:'请输入正确的身份证号码！',
+        mobile:'请输入正确的手机号码！',
+        phone:'请输入正确的电话号码！',
+        zipcode:'请输入正确的邮政编码！',
+        equalTo:'指定的两项数值必须相等！',
+        notEqualTo:'指定的两项数值必须不相等！'
     },
     args:{
         wi:[7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2, 1 ],
@@ -49,9 +79,7 @@ $.extend($.fn, {
         }
         $.fn.extend($.fn.options, options);
         
-        var $this=this,
-            rules=options.rules,
-            messages=options.messages;
+        var $this=this,rules=options.rules?options.rules:{},messages=options.messages?options.messages:{};
         
         //复制一份到初始化数据中，该数据运行过程中始终不变，用于支持reset规则
         $.fn.initOpts.rules={};
@@ -159,6 +187,39 @@ $.extend($.fn, {
         $.fn.validResult.handle(eventElement,key,result);
         return result;
     },
+    // item: 元素，可能为空
+    // name: 元素name
+    // rulename: rule规则的item名称
+    getMessage:function(item,name,rulename){
+        var options=$.fn.options,message=$.fn.messages[rulename],value=options.rules[name][rulename];
+        try{
+            message=options.messages[name][rulename];
+        }catch(e){
+        }
+
+        // 替换文中出现的${}字符串为rule中填写的value值
+        try{
+            var realmsg='',exists=false,length=message.length,begin=0;
+            for(var i=0;i<length;){
+                if(message[i]=='$'&&!exists&&i<length-1&&message[i+1]=='{'){
+                    exists=true;
+                    begin=i;
+                    realmsg=message.substr(0,begin);
+                    i+=1;
+                    continue;
+                }else if(exists&&message[i]=='}'){
+                    begin=i+1;
+                    realmsg+=value;
+                }
+                i++;
+            }
+            if(begin<length-1){
+                realmsg+=message.substr(begin);
+            }
+            message=realmsg;
+        }catch(e){alert(e);}
+        return message;
+    },
     validResult :{
         handle: function(item, name, result) {
             if(result.success) {
@@ -179,8 +240,9 @@ $.extend($.fn, {
             }
             item.attr("title",result.errmsg);
 
-            var text=$.fn.options.showText?result.errmsg:'';
-            var $error=$("<label forname='"+name+"' class='error' title='"+result.errmsg+"'>"+text+"</label>");
+            var errmsg=$.fn.getMessage(item,name,result.key);
+            var text=$.fn.options.showText?errmsg:'';
+            var $error=$("<label forname='"+name+"' class='error' title='"+errmsg+"'>"+text+"</label>");
             if(options.rules[name].unique ==true){
                 if(!options.rules[name].error){
                     options.rules[name].error=true;
@@ -266,17 +328,34 @@ $.extend($.fn, {
         	if(param!=true || $.trim(value).length==0){
         		return true;
         	}
-        	var reg=/^[a-zA-Z][0-9]+$/;
+        	var reg=/^[0-9a-zA-Z]+$/;
         	return reg.test(value);
         },
+        en_code:function(item,name,param){
+            var value=item.val();
+            if(param!=true || $.trim(value).length==0){
+                return true;
+            }
+            var reg=/^[a-zA-Z0-9_]+$/;
+            return reg.test(value);
+        },
         // 仅限中文（unicode汉字字符，部分特殊汉字可能未包含在其中）
-        cn_code:function(item,name,param) {
+        cn_code:function(item,name,param){
             var value=item.val();
             if(param!=true || $.trim(value).length==0){
                 return true;
             }
             var reg=/^[\u4E00-\u9FA5]+$/;
             return reg.test(value);
+        },
+        // 不允许输入特殊字符
+        noSpecial:function(item,name,param) {
+            var value=item.val();
+            if(param!=true || $.trim(value).length==0){
+                return true;
+            }
+            var reg=/[`~!@#$^&*()=|{}':;',\[\].<>/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？]/;
+            return !reg.test(value);
         },
         // 匹配大于0的数值（包含整数和小数）
         morethanzero:function(item,name,param) {
@@ -394,7 +473,7 @@ $.extend($.fn, {
             if(param!=true || $.trim(value).length==0){
                 return true;
             }
-            var reg=/^(\(\d{3,4}\)|\d{3,4}-|\s)?\d{8}$/;
+            var reg=/^(\(\d{3,4}\)|\d{3,4}-|\d{3,4})?\d{7,8}$/;
             return reg.test(value);
         },
         // 匹配邮政编码

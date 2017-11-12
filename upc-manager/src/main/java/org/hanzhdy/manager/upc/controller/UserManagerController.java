@@ -140,7 +140,7 @@ public class UserManagerController extends ApplicationController {
         EngineContext context = super.getEngineContext(request);
         FormInfo formInfo = null;
         List<FormInfo> formList = this.formInfoService.queryFormInfoAsList();
-        if (formid != null && formList != null && !formList.isEmpty()) {
+        if (formid != null && formid > 0 && formList != null && !formList.isEmpty()) {
             for (FormInfo form : formList) {
                 if (formid.longValue() == form.getId().longValue()) {
                     formInfo = form;

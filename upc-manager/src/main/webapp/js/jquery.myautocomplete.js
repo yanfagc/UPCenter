@@ -1,13 +1,28 @@
 /**
  * jQuery AutoComplete plugin
+ * example:
+ * $(function() {
+ *     var test=new $.minefn.autoComplete({
+ *     id:'test',
+ *     url:$ctx+'/component/macros/ajaxUser',
+ *         reader:'input[for="user"]',
+ *         writer:'input[name="user"]',
+ *         keyProps:{
+ *             key:'id',
+ *             title:'name',
+ *             serverKey:'key'
+ *         }
+ *     });
+ *     test.init();
+ * })
  * @author H.CAAHN
- * @date 2016-05-13 create 2016-05-17 modify
+ * @date 2016-05-13 create
  */
 (function($) {
 	$.extend($,{
-		jme:{}
+		minefn:{}
 	});
-	$.extend($.jme, {
+	$.extend($.minefn, {
 		autoComplete:function(options){
 			var $this=this;
 			$this.options={
@@ -41,7 +56,7 @@
 			this.server={
 				result:null, // 当前服务器传回的数据
 				data:null // 当前服务器数据存放
-			}
+			};
 			
 			$.extend($this.options,options);
 			
@@ -72,7 +87,7 @@
 				ops.reader.on('blur',function() {
 					clearInterval(ops.finterval);
 				});
-			}
+			};
 			
 			$this.trigger=function(){
 				var ops=$this.options;
@@ -188,7 +203,7 @@
 
 				server.data={};
 				for(var i=0;i<result.length;i++){
-					html+='<div class="jme_autocomplete_item"  rid="'+result[i][key]+'"';
+					html+='<div class="fn_autocomplete_item"  rid="'+result[i][key]+'"';
                     html+=' style="height:25px;padding-left:5px;padding-top:5px;">';
 					html+=result[i][title];
 					html+='</div>';
@@ -200,13 +215,13 @@
 				$('body').append(html);
 
 				// 鼠标响应事件
-				$('.jme_autocomplete_item').mouseover(function(){
+				$('.fn_autocomplete_item').mouseover(function(){
 					this.style.backgroundColor='#DFDFDF';
 				});
-				$('.jme_autocomplete_item').mouseout(function(){
+				$('.fn_autocomplete_item').mouseout(function(){
 					this.style.backgroundColor='#FFFFFF';
 				});
-				$('.jme_autocomplete_item').on('click',function(){
+				$('.fn_autocomplete_item').on('click',function(){
 					var $this=$(this),rid=$this.attr('rid'),rtext=$(this).html();
 					ops.writer.val(rid);
 					ops.reader.val(rtext);
@@ -230,18 +245,3 @@
 	});
 	
 }(jQuery));
-
-//$(function() {
-//	var test=new $.jme.autoComplete({
-//		id:'test',
-//		url:$ctx+'/component/macros/ajaxUser',
-//		reader:'input[for="user"]',
-//		writer:'input[name="user"]',
-//		keyProps:{
-//			key:'id',
-//			title:'name',
-//			serverKey:'key'
-//		}
-//	});
-//	test.init();
-//})

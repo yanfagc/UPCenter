@@ -4,14 +4,12 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.HttpStatus;
 import org.hanzhdy.manager.support.bean.SessionUser;
 import org.hanzhdy.manager.support.service.AbstractUpcService;
 import org.hanzhdy.manager.upc.model.MenuItem;
 import org.hanzhdy.manager.upc.model.Role;
 import org.hanzhdy.manager.upc.vo.UserVo;
 import org.hanzhdy.utils.HttpUtils;
-import org.hanzhdy.utils.HttpUtils.HttpResult;
 import org.hanzhdy.web.throwable.LocalBizException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -151,9 +149,8 @@ public class LoginService extends AbstractUpcService {
         Map<String, String> params = new HashMap<String, String>();
         params.put("mobile", mobileno);
         params.put("code", token);
-        HttpResult result = HttpUtils.post(tokenurl, headers, JSON.toJSONString(params), "UTF-8");
-        if (result.getStatus() == HttpStatus.SC_OK) {
-            String data = result.getString();
+        String data = HttpUtils.post(tokenurl, headers, JSON.toJSONString(params), "UTF-8");
+        if (data != null) {
             try {
                 JSONObject obj = JSON.parseObject(data);
                 int rcode = (int) obj.get("result");

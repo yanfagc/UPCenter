@@ -3,7 +3,7 @@ package org.hanzhdy.manager.engine.utils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hanzhdy.manager.engine.FieldEngine;
-import org.hanzhdy.utils.express.StringFormatter;
+import org.hanzhdy.utils.formatter.StringFormatter;
 import org.hanzhdy.utils.resources.GlobalPlus;
 import org.hanzhdy.utils.resources.GlobalPlus.Env;
 import org.hanzhdy.utils.resources.Resources;
@@ -24,7 +24,7 @@ import java.util.Map;
  */
 public final class FieldHtmlFormat {
     /** 模版Map */
-    private static Map<String, StringFormatter>              templateMap;
+    private static Map<String, StringFormatter> templateMap;
     
     /** elementMap */
     private static Map<String, Map<String, StringFormatter>> elementMap;
@@ -186,7 +186,7 @@ public final class FieldHtmlFormat {
         }
     
         StringFormatter formatter = new StringFormatter(template);
-        return formatter.toReplaceString(false, params);
+        return formatter.toReplaceString(params);
     }
     
     /**

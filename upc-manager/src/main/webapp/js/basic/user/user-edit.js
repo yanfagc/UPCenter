@@ -7,13 +7,59 @@ $(function() {
         rules:{
             account:{
                 required:true,
+                en_code:true,
                 maxlength:15
+            },
+            password:{
+                maxlength:16
+            },
+            nickname:{
+                noSpecial:true
+            },
+            officephone:{
+                phone:true
+            },
+            mobileno:{
+                mobile:true
+            },
+            email:{
+                email:true,
+                maxlength:30
+            },
+            certno:{
+                idcard:true
+            },
+            faxno:{
+                phone:true
             }
         },
         messages:{
             account:{
                 required:"登录帐号不允许为空！",
-                maxlength:"最大长度不能长于15位！"
+                en_code:'请输入正确的登录帐号（英文数字下划线组合）',
+                maxlength:"最大长度不允许超过15位！"
+            },
+            password:{
+                maxlength:'最大长度不允许超过16位！'
+            },
+            nickname:{
+                noSpecial:'不允许输入特殊字符！'
+            },
+            officephone:{
+                phone:'请输入正确的电话号码！'
+            },
+            mobileno:{
+                mobile:'请输入正确的手机号码！'
+            },
+            email:{
+                email:'请输入正确的邮箱地址！',
+                maxlength:'最大长度不允许超过30位！'
+            },
+            certno:{
+                idcard:'请输入正确的身份证号码！'
+            },
+            faxno:{
+                phone:'请输入正确的传真号码！'
             }
         }
     });

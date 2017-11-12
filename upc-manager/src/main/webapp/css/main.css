@@ -19,6 +19,22 @@ label.error {
 	padding:5px 3px;
 }
 
+s{
+	color:red;
+	text-decoration: none;
+	padding:2px 3px 0 3px;
+	vertical-align:middle;
+}
+
+.well.center-block{
+	left:10px;
+	right:10px;
+	bottom:0px;
+	padding:10px;
+	position:fixed;
+	margin-bottom:10px;
+}
+
 span.red{
 	color: red;
 	font-weight: bold;

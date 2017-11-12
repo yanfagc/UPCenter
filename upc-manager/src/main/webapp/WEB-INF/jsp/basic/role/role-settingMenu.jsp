@@ -20,18 +20,6 @@
       <form id="submitForm" class="form-horizontal" action="${ctx}/basic/role/saveRoleMenus" method="POST">
         <input type="hidden" name="roleid" value="${roleid}"/>
         <input type="hidden" name="resources" id="resources"/>
-        <%--<table class="table table-bordered table-hover">
-          <tr>
-            <td style="width:16%;text-align:right;">角色编码：</td>
-            <td style="width:32%;padding:4px;">
-              <input name="rolecode" class="form-control input-sm myspan6" type="text" readonly="readonly" value="${record.rolecode}">
-            </td>
-            <td style="width:16%;text-align:right;">角色名称：</td>
-            <td style="width:32%;padding:4px;">
-              <input name="rolename" class="form-control input-sm myspan6" type="text" readonly="readonly" value="${record.rolename}">
-            </td>
-          </tr>
-        </table>--%>
       </form>
       <div class="row" style="width:98%">
         <div class="col-xs-2">
@@ -39,8 +27,8 @@
         </div>
       </div>
     </div>
-    <div style="height:80px;">&nbsp;</div>
-    <div class="well center-block" style="left:10px;right:10px;position:fixed;bottom:0px;padding:10px;">
+    <div style="height:60px;"></div>
+    <div class="well center-block">
       <button type="button" class="btn btn-primary submit">&nbsp;&nbsp;保&nbsp;存&nbsp;&nbsp;</button>
       <button type="button" class="btn btn-warning" onclick="window.close();" style="float:right">&nbsp;&nbsp;关&nbsp;闭&nbsp;&nbsp;</button>
     </div>

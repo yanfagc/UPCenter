@@ -19,7 +19,7 @@
         <input type="hidden" name="id" value="${record.id}"/>
         <table class="table table-bordered table-hover">
           <tr>
-            <td style="width:16%;text-align:right;">登录帐号：</td>
+            <td style="width:16%;text-align:right;"><s>*</s>登录帐号：</td>
             <td style="width:32%;padding:4px;">
               <input name="account" class="form-control input-sm myspan6" type="text" placeholder="登录帐号" value="${record.account}">
             </td>
@@ -54,7 +54,7 @@
             </td>
           </tr>
           <tr>
-            <td style="width:16%;text-align:right;">移动电话：</td>
+            <td style="width:16%;text-align:right;">手机号码：</td>
             <td style="width:32%;padding:4px;">
               <input name="mobileno" class="form-control input-sm myspan6" type="text" placeholder="移动电话" value="${record.mobileno}">
             </td>
@@ -91,10 +91,11 @@
           </tr>
         </table>
       </form>
-    </div>
-    <div class="well center-block" style="left:10px;right:10px;position:fixed;bottom:0px;padding:10px;">
-      <button type="button" class="btn btn-primary submit">&nbsp;&nbsp;保&nbsp;存&nbsp;&nbsp;</button>
-      <button type="button" class="btn btn-warning" onclick="window.close();" style="float:right">&nbsp;&nbsp;关&nbsp;闭&nbsp;&nbsp;</button>
+      <div style="height:60px;"></div>
+      <div class="well center-block">
+        <button type="button" class="btn btn-primary submit">&nbsp;&nbsp;保&nbsp;存&nbsp;&nbsp;</button>
+        <button type="button" class="btn btn-warning" onclick="window.close();" style="float:right">&nbsp;&nbsp;关&nbsp;闭&nbsp;&nbsp;</button>
+      </div>
     </div>
   </body>
   <jsp:include page="/WEB-INF/jsp/commons/editfooter.jsp" />

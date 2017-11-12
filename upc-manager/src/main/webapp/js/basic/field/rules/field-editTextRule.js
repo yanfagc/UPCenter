@@ -6,10 +6,14 @@ $(function() {
         showText:true,
         rules:{
         	minlength:{
-                maxlength:15
+                integer:true,
+                min:0,
+                max:5
             },
             maxlength:{
-                maxlength:30
+                integer:true,
+                morethanzero:true,
+                max:5
             },
             minval:{
                 maxlength:32,
@@ -22,9 +26,6 @@ $(function() {
             regular:{
             	maxlength:128
             }
-        },
-        messages:{
-            
         }
     });
     $(".submit").on("click",function() {
@@ -60,7 +61,7 @@ $(function() {
         };
         $sessionAjaxSubmit($("#submitForm"),options);
     });
-    var minlimit=new $.jme.autoComplete({
+    var minlimit=new $.minefn.autoComplete({
 		id:'autoComplete_minlimit',
 		type:'get',
 		url:$ctx+'/basic/field/ajaxFieldInfo',
@@ -80,7 +81,7 @@ $(function() {
 	});
     minlimit.init();
     
-    var maxlimit=new $.jme.autoComplete({
+    var maxlimit=new $.minefn.autoComplete({
 		id:'autoComplete_maxlimit',
 		type:'get',
 		url:$ctx+'/basic/field/ajaxFieldInfo',
