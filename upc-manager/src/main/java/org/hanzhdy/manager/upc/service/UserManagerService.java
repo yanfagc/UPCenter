@@ -122,12 +122,20 @@ public class UserManagerService extends AbstractUpcService {
      * @return
      */
     public boolean insert(UserVo record, HttpServletRequest request) {
+        UserBasicExample example = new UserBasicExample();
+        example.createCriteria().andAccountEqualTo(record.getAccount());
+        List<UserBasic> bList = this.userBasicMapperExt.selectByExample(example);
+        if (bList != null && !bList.isEmpty()) {
+            throw new BizException(respCode.SAVE_DUPLICATE);
+        }
+        
         // 构造基本信息
         UserBasic basic = new UserBasic();
         basic.setAccount(record.getAccount());
         if (StringUtils.isBlank(record.getPassword())) {
             record.setPassword("111111");
         }
+        basic.setSalt(record.getAccount());
         basic.setPassword(this.encryptPwd(record.getAccount(), record.getPassword()));
         basic.setNickname(record.getNickname());
         basic.setFormId(record.getFormid());
@@ -166,6 +174,15 @@ public class UserManagerService extends AbstractUpcService {
      * @return
      */
     public boolean update(UserVo record, HttpServletRequest request) {
+        UserBasicExample example = new UserBasicExample();
+        example.createCriteria().andAccountEqualTo(record.getAccount());
+        List<UserBasic> bList = this.userBasicMapperExt.selectByExample(example);
+        if (bList != null && !bList.isEmpty()) {
+            if (bList.size() > 1 || bList.get(0).getId().longValue() != record.getId().longValue()) {
+                throw new BizException(respCode.SAVE_DUPLICATE);
+            }
+        }
+        
         // 构造基本信息
         UserBasic basic = new UserBasic();
         basic.setAccount(record.getAccount());

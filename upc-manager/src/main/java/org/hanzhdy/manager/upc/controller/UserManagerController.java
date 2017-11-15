@@ -203,6 +203,10 @@ public class UserManagerController extends ApplicationController {
             // 处理返回结果
             return RespResult.create(result ? respCode.SUCCESS : respCode.SAVE_NORECORD);
         }
+        catch (BizException ex) {
+            logger.warn("保存用户信息失败，错误码：{}，描述：{}", ex.getCode(), ex.getMsg());
+            return RespResult.create(ex.getStatus());
+        }
         catch (Exception ex) {
             logger.error("保存用户信息失败，数据参数：" + JSON.toJSONString(record), ex);
             return RespResult.create(respCode.ERROR_EXCEPTION);

@@ -42,6 +42,7 @@ public class FieldInfoService extends AbstractUpcService {
     public DatatableResult queryAsDatatableResult(FieldInfoParams params) {
         // 构造查询条件
         FieldInfoExample example = new FieldInfoExample();
+        example.setPage(params.getPage());
         FieldInfoExample.Criteria criteria = example.createCriteria();
         if (StringUtils.isNotBlank(params.getFieldcode())) {
             criteria.andFieldcodeLike("%" + params.getFieldcode() + "%");
