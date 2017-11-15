@@ -7,17 +7,29 @@
   
   <select id="selectAsList" parameterType="java.util.HashMap" resultType="org.hanzhdy.manager.upc.vo.MenuVo">
   <include refid="Pageable_Prefix" />
-    SELECT
-      m.ID AS id,
-      m.MENUCODE AS CODE,
-      m.MENUNAME AS NAME,
-      m.URLTYPE AS urltype,
-      m.MENUURL AS url,
-      m.STATUS AS status,
+	  SELECT * FROM ((SELECT
+	  m.ID AS id,
+	  m.MENUCODE AS CODE,
+	  m.MENUNAME AS NAME,
+	  m.URLTYPE AS urltype,
+	  m.MENUURL AS url,
+	  m.STATUS AS status,
 	  m.SORT AS sort,
 	  m.SHOWFLAG AS showflag
-    FROM r_menu m
-    <include refid="wherecause_menu"/>
+	  FROM r_menu m
+	  <include refid="wherecause_menu"/>)
+	  UNION (SELECT
+	  i.ID AS id,
+	  i.ITEMCODE AS CODE,
+	  i.ITEMNAME AS NAME,
+	  'RES' AS urltype,
+	  i.RESOURCE AS url,
+	  i.STATUS AS status,
+	  i.SORT AS sort,
+	  'SHOW' AS showflag
+	  FROM r_menuitem i
+	  <include refid="wherecause_menuitem"/>)
+	  ) m
 	ORDER BY m.SORT ASC
     <include refid="Pageable_Suffix" />
   </select>
@@ -32,6 +44,16 @@
     </if>
     <if test="urltype!=null and urltype!=''">
     AND URLTYPE=#{urltype}
+    </if>
+    <if test="status!=null and status!=''">
+    AND STATUS=#{status}
+    </if>
+  </sql>
+
+  <sql id="wherecause_menuitem">
+    WHERE i.MENUID = #{parentid}
+    <if test="searchkey!=null and searchkey!=''">
+    AND (ITEMCODE LIKE #{searchkey} OR ITEMCODE LIKE #{searchkey})
     </if>
     <if test="status!=null and status!=''">
     AND STATUS=#{status}

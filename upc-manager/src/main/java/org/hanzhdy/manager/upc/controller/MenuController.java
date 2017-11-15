@@ -121,12 +121,7 @@ public class MenuController extends ApplicationController {
     public Object dataList(MenuParams params, HttpServletRequest request) {
         DatatableResult dataResult;
         try {
-            if ("item".equalsIgnoreCase(params.getShowtype())) {
-                dataResult = this.menuItemService.queryAsDatatableResult(params);
-            }
-            else {
-                dataResult = this.menuService.queryAsDatatableResult(params);
-            }
+            dataResult = this.menuService.queryAsDatatableResult(params);
         }
         catch (BizException ex) {
             logger.error("查询菜单数据失败，查询参数：{}, 错误信息：[{}, {}]", JSON.toJSONString(params), ex.getCode(), ex.getMsg());

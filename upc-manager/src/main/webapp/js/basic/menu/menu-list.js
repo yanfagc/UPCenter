@@ -120,44 +120,44 @@ $(function() {
     $('.search').click(function() {
         search();
     });
-    // 新增
+    // 新增菜单
     $('.add-menu-btn').click(function() {
         var parentid=$('input[name="parentid"]').val();
         var systemid=$('input[name="systemid"]').val();
         openWindow($ctx+'/basic/menu/toEdit?parentid='+parentid+'&systemid='+systemid,750,500);
     });
-    // 新增
+    // 新增权限
     $('.add-item-btn').click(function() {
         var parentid=$('input[name="parentid"]').val();
         openWindow($ctx+'/basic/menuitem/toEdit?menuid='+parentid,750,350);
     });
-    // 切换显示
-    $('.change-toMenu-btn').click(function() {
-        if($('input[name="showtype"]').val()=='item'){
-            $('input[name="showtype"]').val("menu");
-            $('.change-toItem-btn').removeClass("btn-warning");
-            $('.change-toMenu-btn').addClass("btn-warning");
-            $('.add-menu-btn').removeAttr("disabled");
-            $('.add-item-btn').attr("disabled","disabled");
-            search();
-        }
-    });
-    // 切换显示
-    $('.change-toItem-btn').click(function() {
-        if($('input[name="showtype"]').val()!='item'){
-            var parentid=$('input[name="parentid"]').val();
-            if(!parentid||parentid=='0'){
-                return;
-            }
-            
-            $('input[name="showtype"]').val("item");
-            $('.change-toItem-btn').addClass("btn-warning");
-            $('.change-toMenu-btn').removeClass("btn-warning");
-            $('.add-menu-btn').attr("disabled","disabled");
-            $('.add-item-btn').removeAttr("disabled");
-            search();
-        }
-    });
+    // // 切换显示
+    // $('.change-toMenu-btn').click(function() {
+    //     if($('input[name="showtype"]').val()=='item'){
+    //         $('input[name="showtype"]').val("menu");
+    //         $('.change-toItem-btn').removeClass("btn-warning");
+    //         $('.change-toMenu-btn').addClass("btn-warning");
+    //         $('.add-menu-btn').removeAttr("disabled");
+    //         $('.add-item-btn').attr("disabled","disabled");
+    //         search();
+    //     }
+    // });
+    // // 切换显示
+    // $('.change-toItem-btn').click(function() {
+    //     if($('input[name="showtype"]').val()!='item'){
+    //         var parentid=$('input[name="parentid"]').val();
+    //         if(!parentid||parentid=='0'){
+    //             return;
+    //         }
+    //
+    //         $('input[name="showtype"]').val("item");
+    //         $('.change-toItem-btn').addClass("btn-warning");
+    //         $('.change-toMenu-btn').removeClass("btn-warning");
+    //         $('.add-menu-btn').attr("disabled","disabled");
+    //         $('.add-item-btn').removeAttr("disabled");
+    //         search();
+    //     }
+    // });
     // 编辑
     $('tbody').on("click", '.toEdit', function() {
         var id=$(this).attr("fid");
@@ -228,8 +228,10 @@ function initZTree(data) {
             onClick:function(event, treeId, treeNode){
                 if(/^[0-9]*$/.test(treeNode.id)){
                     $('input[name="parentid"]').val(treeNode.id);
+                    $('.add-item-btn').removeAttr('disabled');
                 }else{
                     $('input[name="parentid"]').val(0);
+                    $('.add-item-btn').attr('disabled','disabled');
                 }
                 search();
             }

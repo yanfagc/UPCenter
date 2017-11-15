@@ -54,9 +54,7 @@
               </form>
               <!-- <div class="btn-group"> -->
                 <button class="btn btn-info add-menu-btn">&nbsp;&nbsp;新增菜单&nbsp;&nbsp;</button>
-                <button class="btn btn-info add-item-btn" disabled="disabled">&nbsp;&nbsp;新增权限&nbsp;&nbsp;</button>
-                <button class="btn btn-warning change-toMenu-btn">&nbsp;&nbsp;菜单列表&nbsp;&nbsp;</button>
-                <button class="btn change-toItem-btn">&nbsp;&nbsp;权限列表&nbsp;&nbsp;</button>
+                <button class="btn btn-success add-item-btn" disabled="disabled">&nbsp;&nbsp;新增权限&nbsp;&nbsp;</button>
               <!-- </div> -->
             </div><!-- /.box-header -->
             <div class="box-body">
