@@ -23,7 +23,7 @@ public abstract class AbstractFileService extends AbstractUpcService {
         if (typeArray != null && typeArray.length > 0) {
             for (FileUploadType type : typeArray) {
                 String path = Resources.getString(type.getPathkey());
-                StringFormatter formatter = new StringFormatter(path);
+                StringFormatter formatter = StringFormatter.getFormatter(path, true);
                 path = formatter.toReplaceString();
                 if (StringUtils.isNotBlank(path)) {
                     if (!path.endsWith("/") && !path.endsWith("\\")) {

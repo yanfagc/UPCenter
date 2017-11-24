@@ -59,7 +59,7 @@ public final class FieldHtmlFormat {
                     formatter = templateMap.get(tempkey);
                     if (formatter == null) {
                         String template = loadTemplate(tempkey);
-                        formatter = new StringFormatter(tempkey);
+                        formatter = StringFormatter.getFormatter(tempkey, true);
                         templateMap.put(tempkey, formatter);
                     }
                 }
@@ -107,7 +107,7 @@ public final class FieldHtmlFormat {
                 if ((ele = elements.get(moduleid)) == null) {
                     String temp = getModuleById(template, moduleid);
                     
-                    ele = new StringFormatter(temp);
+                    ele = StringFormatter.getFormatter(temp, true);
                     elements.put(moduleid, ele);
                 }
             }
@@ -185,7 +185,7 @@ public final class FieldHtmlFormat {
             return template;
         }
     
-        StringFormatter formatter = new StringFormatter(template);
+        StringFormatter formatter = StringFormatter.getFormatter(template, true);
         return formatter.toReplaceString(params);
     }
     
@@ -198,7 +198,7 @@ public final class FieldHtmlFormat {
         if (StringUtils.isBlank(template)) {
             return template;
         }
-        StringFormatter formatter = new StringFormatter(template);
+        StringFormatter formatter = StringFormatter.getFormatter(template, true);
         return formatter.toReplaceString(false);
     }
     

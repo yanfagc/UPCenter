@@ -1,9 +1,9 @@
 package org.hanzhdy.manager.upc.mapper;
 
+import org.hanzhdy.manager.upc.vo.UserVo;
+
 import java.util.List;
 import java.util.Map;
-
-import org.hanzhdy.manager.upc.vo.UserVo;
 
 public interface UserBasicMapperExt extends UserBasicMapper {
     /**
@@ -11,26 +11,33 @@ public interface UserBasicMapperExt extends UserBasicMapper {
      * @param params
      * @return
      */
-    public int countAsList(Map<String, Object> params);
+    int countAsList(Map<String, Object> params);
     
     /**
      * 按条件查询用户信息
      * @param params
      * @return
      */
-    public List<UserVo> selectAsList(Map<String, Object> params);
+    List<UserVo> selectAsList(Map<String, Object> params);
     
     /**
      * 根据用户ID查询用户信息
      * @param userid
      * @return
      */
-    public UserVo selectById(Long userid);
+    UserVo selectById(Long userid);
     
     /**
      * 根据用户帐号查询用户信息
      * @param account
      * @return
      */
-    public UserVo selectByAccount(String account);
+    UserVo selectByAccount(String account);
+    
+    /**
+     * 删除用户的formid属性
+     * @param userid
+     * @return
+     */
+    int updateClearUserFormid(Long userid);
 }

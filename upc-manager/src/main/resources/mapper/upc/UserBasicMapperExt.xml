@@ -66,4 +66,9 @@
 		AND (account LIKE #{searchkey} OR email LIKE #{searchkey} OR mobileno LIKE #{searchkey} OR nickname LIKE #{searchkey})
 		</if>
 	</sql>
+
+	<!-- 删除用户的formid属性 -->
+	<update id="updateClearUserFormid" parameterType="java.lang.Long">
+		UPDATE u_user_basic SET FORMID=NULL WHERE ID=#{userid}
+	</update>
 </mapper>

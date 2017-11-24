@@ -244,17 +244,20 @@ public class UserManagerService extends AbstractUpcService {
             return;
         }
         
-        UserBasic record = new UserBasic();
-        record.setId(userid);
-        record.setFormId(formid);
-        this.userBasicMapperExt.updateByPrimaryKeySelective(record);
-        
-        // 删除已有的数据
+        // 删除已有的扩展属性数据
         FormDataExample example = new FormDataExample();
         example.createCriteria().andDatatypeEqualTo(DBConstants.FORM_DATA_TYPE_USER).andRecordidEqualTo(userid);
         formDataMapperExt.deleteByExample(example);
         
-        if (formid == null) {
+        // 更新用户所属的表单属性
+        if (formid != null) {
+            UserBasic record = new UserBasic();
+            record.setId(userid);
+            record.setFormId(formid);
+            this.userBasicMapperExt.updateByPrimaryKeySelective(record);
+        }
+        else {
+            this.userBasicMapperExt.updateClearUserFormid(userid);
             return;
         }
         
