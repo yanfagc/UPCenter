@@ -52,7 +52,7 @@ public class MenuService extends AbstractUpcService {
             search.put("searchkey", "%" + params.getSearchkey() + "%");
         }
         if (StringUtils.isNotBlank(params.getStatus())) {
-            search.put("status", "%" + params.getStatus() + "%");
+            search.put("status", params.getStatus());
         }
         
         int count = this.menuMapperExt.countAsList(search);

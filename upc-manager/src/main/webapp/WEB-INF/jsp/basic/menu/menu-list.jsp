@@ -61,14 +61,14 @@
               <table id="dataList" class="table table-bordered table-hover">
                 <thead>
                   <tr>
-                    <th style="width:14%">菜单编码</th>
-                    <th style="width:14%">菜单名称</th>
-                    <th style="width:10%">菜单排序</th>
-                    <th style="width:10%">是否显示</th>
-                    <th style="width:10%">菜单类型</th>
-                    <th style="width:20%">菜单地址</th>
-                    <th class="text-center" style="width:10%">状态</th>
-                    <th class="text-center" style="width:18%">操作</th>
+                    <th style="width:15%">菜单编码</th>
+                    <th style="width:15%">菜单名称</th>
+                    <th style="width:8%">菜单排序</th>
+                    <th style="width:8%">是否显示</th>
+                    <th style="width:8%">菜单类型</th>
+                    <th style="width:25%">菜单地址</th>
+                    <th class="text-center" style="width:8%">状态</th>
+                    <th class="text-center" style="width:12%">操作</th>
                   </tr>
                 </thead>
                 <tbody></tbody>

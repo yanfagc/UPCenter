@@ -1,22 +1,58 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.hanzhdy.manager.settings.mapper.AreaMapperExt">
+	<!-- 查询符合条件的地区数据总数 -->
+	<select id="countAsList" parameterType="java.util.HashMap" resultType="int">
+		SELECT COUNT(1) FROM t_area t
+		<include refid="selectAsList_whereClause" />
+	</select>
+
+	<!-- 查询符合条件的地区数据，返回数据集合 -->
+	<select id="selectAsList" parameterType="java.util.HashMap" resultType="org.hanzhdy.manager.settings.vo.AreaVo">
+		SELECT t.*,p.NAME AS parentName FROM(<include refid="Pageable_Prefix"/>
+		SELECT
+		t.id AS id,
+		t.node AS node,
+		t.parent AS parent,
+		t.NAME AS name,
+		t.spell AS spell,
+		t.STATUS AS status,
+		t.createtime AS createtime,
+		t.canceltime AS canceltime
+		FROM t_area t
+		<include refid="selectAsList_whereClause"/>
+		ORDER BY t.id
+		<include refid="Pageable_Suffix"/>
+		) t LEFT JOIN t_area p ON t.parent=p.node
+	</select>
+
+	<sql id="selectAsList_whereClause">
+		<where>
+			<if test="searchkey!=null and searchkey!=''">
+			AND (t.NAME LIKE #{searchkey} OR t.SPELL LIKE #{searchkey} OR t.NODE LIKE #{searchkey})
+			</if>
+			<if test="status!=null and status!=''">
+			AND t.STATUS=#{status}
+			</if>
+		</where>
+	</sql>
+
     <!-- 根据上级区域名称查询子区域列表，不包括再次级区域 -->
     <select id="selectByParentName" parameterType="java.lang.String" resultMap="BaseResultMap">
-SELECT
-	t.id AS id,
-	t.node AS node,
-	t.parent AS parent,
-	t.NAME AS name,
-	t.spell AS spell,
-	t.STATUS AS status,
-	t.createtime AS createtime,
-	t.canceltime AS canceltime
-FROM
-	t_area t,
-	t_area p
-WHERE
-	t.parent = p.node
-AND p. NAME = #{parentName}
+		SELECT
+			t.id AS id,
+			t.node AS node,
+			t.parent AS parent,
+			t.NAME AS name,
+			t.spell AS spell,
+			t.STATUS AS status,
+			t.createtime AS createtime,
+			t.canceltime AS canceltime
+		FROM
+			t_area t,
+			t_area p
+		WHERE
+			t.parent = p.node
+		AND p. NAME = #{parentName}
     </select>
 </mapper>

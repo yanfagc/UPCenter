@@ -51,12 +51,14 @@ $(function() {
                 },
                 {
                     mData:"sort",
+                    sClass:"text-center",
                     mRender:function(data, display, record) {
                         return (data==0||data)?data:'';
                     }
                 },
                 {
                     mData:"showflag",
+                    sClass:"text-center",
                     mRender:function(data, display, record) {
                         if(data=='SHOW'){
                             return '<lable style="color:green">显示</lable>';
@@ -68,6 +70,7 @@ $(function() {
                 },
                 {
                     mData:"urltype",
+                    sClass:"text-center",
                     mRender:function(data, display, record) {
                         if(data=='M'){
                             return '菜单目录';
@@ -131,33 +134,7 @@ $(function() {
         var parentid=$('input[name="parentid"]').val();
         openWindow($ctx+'/basic/menuitem/toEdit?menuid='+parentid,750,350);
     });
-    // // 切换显示
-    // $('.change-toMenu-btn').click(function() {
-    //     if($('input[name="showtype"]').val()=='item'){
-    //         $('input[name="showtype"]').val("menu");
-    //         $('.change-toItem-btn').removeClass("btn-warning");
-    //         $('.change-toMenu-btn').addClass("btn-warning");
-    //         $('.add-menu-btn').removeAttr("disabled");
-    //         $('.add-item-btn').attr("disabled","disabled");
-    //         search();
-    //     }
-    // });
-    // // 切换显示
-    // $('.change-toItem-btn').click(function() {
-    //     if($('input[name="showtype"]').val()!='item'){
-    //         var parentid=$('input[name="parentid"]').val();
-    //         if(!parentid||parentid=='0'){
-    //             return;
-    //         }
-    //
-    //         $('input[name="showtype"]').val("item");
-    //         $('.change-toItem-btn').addClass("btn-warning");
-    //         $('.change-toMenu-btn').removeClass("btn-warning");
-    //         $('.add-menu-btn').attr("disabled","disabled");
-    //         $('.add-item-btn').removeAttr("disabled");
-    //         search();
-    //     }
-    // });
+
     // 编辑
     $('tbody').on("click", '.toEdit', function() {
         var id=$(this).attr("fid");
