@@ -1,8 +1,9 @@
 package org.hanzhdy.manager.upc.model;
 
+import org.hanzhdy.web.bean.Page;
+
 import java.util.ArrayList;
 import java.util.List;
-import org.hanzhdy.web.bean.Page;
 
 public class RoleMenuItemExample {
     /**
