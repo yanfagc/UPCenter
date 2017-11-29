@@ -14,8 +14,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @description 文件格式化工具，类似MessageFormat，但该工具可以直接读取文件
@@ -23,9 +23,6 @@ import java.util.Map;
  * @author H.CAAHN
  */
 public final class FieldHtmlFormat {
-    /** 模版Map */
-    private static Map<String, StringFormatter> templateMap;
-    
     /** elementMap */
     private static Map<String, Map<String, StringFormatter>> elementMap;
     
@@ -33,8 +30,7 @@ public final class FieldHtmlFormat {
     private static final Logger                     logger = LoggerFactory.getLogger(FieldHtmlFormat.class);
     
     static {
-        templateMap = new HashMap<String, StringFormatter>();
-        elementMap = new HashMap<String, Map<String, StringFormatter>>();
+        elementMap = new ConcurrentHashMap<String, Map<String, StringFormatter>>();
         
         //资源文件
         String msgf = Resources.getDefault("field.engine.message.file", "templates.engines.message");
@@ -53,17 +49,7 @@ public final class FieldHtmlFormat {
             return template;
         }
         else {
-            StringFormatter formatter = templateMap.get(tempkey);
-            if (formatter == null) {
-                synchronized (FieldEngine.class) {
-                    formatter = templateMap.get(tempkey);
-                    if (formatter == null) {
-                        String template = loadTemplate(tempkey);
-                        formatter = StringFormatter.getFormatter(tempkey, true);
-                        templateMap.put(tempkey, formatter);
-                    }
-                }
-            }
+            StringFormatter formatter = StringFormatter.getFormatter(tempkey, true);
             return formatter.getSource();
         }
     }
@@ -89,11 +75,10 @@ public final class FieldHtmlFormat {
         else {
             Map<String, StringFormatter> elements = elementMap.get(tempkey);
             if (elements == null) {
-                synchronized (elementMap) {
-                    if ((elements = elementMap.get(tempkey)) == null) {
-                        elements = new HashMap<String, StringFormatter>();
-                        elementMap.put(tempkey, elements);
-                    }
+                Map<String, StringFormatter> e = new ConcurrentHashMap<String, StringFormatter>();
+                elements = elementMap.putIfAbsent(tempkey, e);
+                if (elements == null) {
+                    elements = e;
                 }
             }
     
@@ -103,38 +88,15 @@ public final class FieldHtmlFormat {
             }
             
             String template = getTemplate(tempkey);
-            synchronized (elements) {
-                if ((ele = elements.get(moduleid)) == null) {
-                    String temp = getModuleById(template, moduleid);
-                    
-                    ele = StringFormatter.getFormatter(temp, true);
-                    elements.put(moduleid, ele);
-                }
+            String temp = getModuleById(template, moduleid);
+            StringFormatter f = StringFormatter.getFormatter(temp);
+            ele = elements.putIfAbsent(moduleid, ele);
+            if (ele == null) {
+                ele = f;
             }
+            
             return ele.getSource();
         }
-    }
-    
-    /**
-     * 根据模版key值和参数，创建HTML
-     * @param tempkey
-     * @param params
-     * @return
-     */
-    public static String createHTML(String tempkey, Map<String, Object> params) {
-        String template = getTemplate(tempkey);
-        return parseHTML(template, params);
-    }
-    
-    /**
-     * 根据模版key值和参数，创建HTML
-     * @param tempkey
-     * @param params
-     * @return
-     */
-    public static String createHTML(String tempkey, String... params) {
-        String template = getTemplate(tempkey);
-        return parseHTML(template, params);
     }
     
     /**
@@ -187,19 +149,6 @@ public final class FieldHtmlFormat {
     
         StringFormatter formatter = StringFormatter.getFormatter(template, true);
         return formatter.toReplaceString(params);
-    }
-    
-    /**
-     * 根据模版内容，从Resources中取出数据组装成完整对象
-     * @param template
-     * @return
-     */
-    public static String parseFromResources(String template) {
-        if (StringUtils.isBlank(template)) {
-            return template;
-        }
-        StringFormatter formatter = StringFormatter.getFormatter(template, true);
-        return formatter.toReplaceString(false);
     }
     
     public static String getModuleById(String template, String moduleid) {

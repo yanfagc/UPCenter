@@ -404,6 +404,7 @@
         </pluginManagement>
     </build>
     <modules>
+        <module>upc-basic</module>
         <module>upc-manager</module>
         <module>upc-client</module>
     </modules>

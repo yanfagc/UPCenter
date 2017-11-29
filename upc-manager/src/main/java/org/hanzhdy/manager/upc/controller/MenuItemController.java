@@ -3,7 +3,7 @@ package org.hanzhdy.manager.upc.controller;
 import com.alibaba.fastjson.JSON;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.hanzhdy.manager.support.bean.SessionUser;
-import org.hanzhdy.manager.support.constants.resp.RespResult;
+import org.hanzhdy.manager.support.constants.resp.ApiResult;
 import org.hanzhdy.manager.support.controller.ApplicationController;
 import org.hanzhdy.manager.upc.model.Menu;
 import org.hanzhdy.manager.upc.model.MenuItem;
@@ -94,11 +94,11 @@ public class MenuItemController extends ApplicationController {
             }
             
             // 处理返回结果
-            return RespResult.create(result ? respCode.SUCCESS : respCode.SAVE_NORECORD);
+            return result ? ApiResult.SUCCESS : ApiResult.SAVE_NORECORD;
         }
         catch (Exception ex) {
             logger.error("保存菜单项信息失败，数据参数：" + JSON.toJSONString(record), ex);
-            return RespResult.create(respCode.ERROR_EXCEPTION);
+            return ApiResult.ERROR_EXCEPTION;
         }
     }
     
@@ -116,11 +116,11 @@ public class MenuItemController extends ApplicationController {
         try {
             record.setUpdater(user.getId());
             this.menuItemService.updateStatus(record);
-            return RespResult.create(respCode.SUCCESS);
+            return ApiResult.SUCCESS;
         }
         catch (Exception ex) {
             logger.error("更新菜单项数据状态失败，数据参数：" + JSON.toJSONString(record), ex);
-            return RespResult.create(respCode.ERROR_EXCEPTION);
+            return ApiResult.ERROR_EXCEPTION;
         }
     }
 }

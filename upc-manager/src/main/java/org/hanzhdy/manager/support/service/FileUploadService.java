@@ -1,6 +1,7 @@
 package org.hanzhdy.manager.support.service;
 
 import org.apache.commons.lang3.StringUtils;
+import org.hanzhdy.manager.support.constants.resp.ApiResult;
 import org.hanzhdy.manager.support.enums.FileUploadType;
 import org.hanzhdy.utils.DateUtils;
 import org.hanzhdy.utils.MathUtils;
@@ -26,7 +27,7 @@ public class FileUploadService extends AbstractFileService {
     public String upload(FileUploadType type, MultipartFile file) throws  Exception {
         String path = dirpath.get(type);
         if (StringUtils.isBlank(path)) {
-            throw new BizException(respCode.UPLOAD_ERROR_CONFIGURE);
+            throw new BizException(ApiResult.UPLOAD_ERROR_CONFIGURE);
         }
         
         String relativePath = null;

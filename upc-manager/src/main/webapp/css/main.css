@@ -11,6 +11,11 @@ label.error {
 	background: url("../images/icon/unchecked.jpg") left no-repeat;
 }
 
+.checkbox-inline.checkbox-inline, .radio-inline.radio-inline {
+	margin-left:0px;
+	margin-right: 10px;
+}
+
 .input-sm{
 	padding:5px 3px;
 }

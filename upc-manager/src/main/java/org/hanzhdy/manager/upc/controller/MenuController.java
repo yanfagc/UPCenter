@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.hanzhdy.manager.support.bean.SessionUser;
-import org.hanzhdy.manager.support.constants.resp.RespResult;
+import org.hanzhdy.manager.support.constants.resp.ApiResult;
 import org.hanzhdy.manager.support.controller.ApplicationController;
 import org.hanzhdy.manager.support.enums.MenuIcon;
 import org.hanzhdy.manager.upc.controller.params.MenuParams;
@@ -72,7 +72,7 @@ public class MenuController extends ApplicationController {
             return "/basic/menu/menu-list";
         }
         catch (BizException ex) {
-            logger.error("转到菜单资源列表页面失败！错误信息：[{}, {}]", ex.getCode(), ex.getMsg());
+            logger.error("转到菜单资源列表页面失败！错误信息：[{}, {}]", ex.getCode(), ex.getBizMessage());
             throw ex;
         }
         catch (Exception ex) {
@@ -124,7 +124,7 @@ public class MenuController extends ApplicationController {
             dataResult = this.menuService.queryAsDatatableResult(params);
         }
         catch (BizException ex) {
-            logger.error("查询菜单数据失败，查询参数：{}, 错误信息：[{}, {}]", JSON.toJSONString(params), ex.getCode(), ex.getMsg());
+            logger.error("查询菜单数据失败，查询参数：{}, 错误信息：[{}, {}]", JSON.toJSONString(params), ex.getCode(), ex.getBizMessage());
             dataResult = super.getEmptyDatatableResult();
         }
         catch (Exception ex) {
@@ -210,15 +210,15 @@ public class MenuController extends ApplicationController {
             }
             
             // 处理返回结果
-            return RespResult.create(result ? respCode.SUCCESS : respCode.SAVE_NORECORD);
+            return result ? ApiResult.SUCCESS : ApiResult.SAVE_NORECORD;
         }
         catch (BizException ex) {
-            logger.error("保存菜单信息失败，数据参数：{}, 错误信息：[{}, {}]", JSON.toJSONString(record), ex.getCode(), ex.getMsg());
-            return RespResult.create(ex.getCode(), ex.getMsg());
+            logger.error("保存菜单信息失败，数据参数：{}, 错误信息：[{}, {}]", JSON.toJSONString(record), ex.getCode(), ex.getBizMessage());
+            return ex.getStatus();
         }
         catch (Exception ex) {
             logger.error("保存菜单信息失败，数据参数：" + JSON.toJSONString(record), ex);
-            return RespResult.create(respCode.ERROR_EXCEPTION);
+            return ApiResult.ERROR_EXCEPTION;
         }
     }
     
@@ -236,11 +236,11 @@ public class MenuController extends ApplicationController {
         try {
             record.setUpdater(user.getId());
             this.menuService.updateStatus(record);
-            return RespResult.create(respCode.SUCCESS);
+            return ApiResult.SUCCESS;
         }
         catch (Exception ex) {
             logger.error("更新菜单数据状态失败，数据参数：" + JSON.toJSONString(record), ex);
-            return RespResult.create(respCode.ERROR_EXCEPTION);
+            return ApiResult.ERROR_EXCEPTION;
         }
     }
 }

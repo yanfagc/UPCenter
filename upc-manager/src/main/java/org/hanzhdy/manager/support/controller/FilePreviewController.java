@@ -45,7 +45,7 @@ public class FilePreviewController extends ApplicationController {
             this.filePreviewService.preview(FileUploadType.USER_IMG, month, id, response);
         }
         catch (BizException ex) {
-            logger.warn("查看用户头像失败: {}/{}, 错误信息：[{}, {}]", month, id, ex.getCode(), ex.getMsg());
+            logger.warn("查看用户头像失败: {}/{}, 错误信息：[{}, {}]", month, id, ex.getCode(), ex.getBizMessage());
         }
         catch (Exception ex) {
             String errmsg = MessageFormat.format("查看用户头像失败: {0}/{1}", month, id);

@@ -3,7 +3,7 @@ package org.hanzhdy.manager.upc.controller;
 import com.alibaba.fastjson.JSON;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.hanzhdy.manager.support.bean.SessionUser;
-import org.hanzhdy.manager.support.constants.resp.RespResult;
+import org.hanzhdy.manager.support.constants.resp.ApiResult;
 import org.hanzhdy.manager.support.controller.ApplicationController;
 import org.hanzhdy.manager.support.enums.CommonStatus;
 import org.hanzhdy.manager.upc.controller.params.RoleParams;
@@ -87,7 +87,7 @@ public class RoleController extends ApplicationController {
         }
         catch (BizException ex) {
             dataResult = super.getEmptyDatatableResult();
-            logger.error("查询角色数据失败，查询参数：{}, 错误信息：[{}, {}]", JSON.toJSONString(params), ex.getCode(), ex.getMsg());
+            logger.error("查询角色数据失败，查询参数：{}, 错误信息：[{}, {}]", JSON.toJSONString(params), ex.getCode(), ex.getBizMessage());
         }
         catch (Exception ex) {
             dataResult = super.getEmptyDatatableResult();
@@ -149,15 +149,15 @@ public class RoleController extends ApplicationController {
             }
             
             // 处理返回结果
-            return RespResult.create(result ? respCode.SUCCESS : respCode.SAVE_NORECORD);
+            return result ? ApiResult.SUCCESS : ApiResult.SAVE_NORECORD;
         }
         catch (BizException ex) {
-            logger.error("保存角色信息失败，数据参数：{}, 错误信息：[{}, {}]", JSON.toJSONString(record), ex.getCode(), ex.getMsg());
-            return RespResult.create(ex.getCode(), ex.getMsg());
+            logger.error("保存角色信息失败，数据参数：{}, 错误信息：[{}, {}]", JSON.toJSONString(record), ex.getCode(), ex.getBizMessage());
+            return ex.getStatus();
         }
         catch (Exception ex) {
             logger.error("保存角色信息失败，数据参数：" + JSON.toJSONString(record), ex);
-            return RespResult.create(respCode.ERROR_EXCEPTION);
+            return ApiResult.ERROR_EXCEPTION;
         }
     }
     
@@ -192,15 +192,15 @@ public class RoleController extends ApplicationController {
     public Object saveRoleMenus(@RequestParam("roleid") Long roleid, @RequestParam("resources") String resources) {
         try {
             this.roleService.updateRoleMenu(roleid, resources);
-            return RespResult.create(respCode.SUCCESS);
+            return ApiResult.SUCCESS;
         }
         catch (BizException ex) {
-            logger.error("更新角色菜单失败，角色ID：{}, 错误信息：[{}, {}]", roleid, ex.getCode(), ex.getMsg());
-            return RespResult.create(ex.getCode(), ex.getMsg());
+            logger.error("更新角色菜单失败，角色ID：{}, 错误信息：[{}, {}]", roleid, ex.getCode(), ex.getBizMessage());
+            return ex.getStatus();
         }
         catch (Exception ex) {
             logger.error("更新角色菜单失败，角色ID：" + roleid, ex);
-            return RespResult.create(respCode.ERROR_EXCEPTION);
+            return ApiResult.ERROR_EXCEPTION;
         }
     }
 
@@ -246,7 +246,7 @@ public class RoleController extends ApplicationController {
         catch (BizException ex) {
             dataResult = super.getEmptyDatatableResult();
             String params = MessageFormatter.format("角色ID: {0}, 菜单ID: {1}", roleid, menuid).toString();
-            logger.error("查询角色权限数据失败，查询参数>>{}, 错误信息：[{}, {}]", JSON.toJSONString(params), ex.getCode(), ex.getMsg());
+            logger.error("查询角色权限数据失败，查询参数>>{}, 错误信息：[{}, {}]", JSON.toJSONString(params), ex.getCode(), ex.getBizMessage());
         }
         catch (Exception ex) {
             dataResult = super.getEmptyDatatableResult();
@@ -269,15 +269,15 @@ public class RoleController extends ApplicationController {
     public Object saveRoleItems(@RequestParam("roleid") Long roleid, @RequestParam("resources") String resources) {
         try {
             this.roleService.updateRoleItem(roleid, resources);
-            return RespResult.create(respCode.SUCCESS);
+            return ApiResult.SUCCESS;
         }
         catch (BizException ex) {
-            logger.error("更新角色权限失败，角色ID：{}, 错误信息：[{}, {}]", roleid, ex.getCode(), ex.getMsg());
-            return RespResult.create(ex.getCode(), ex.getMsg());
+            logger.error("更新角色权限失败，角色ID：{}, 错误信息：[{}, {}]", roleid, ex.getCode(), ex.getBizMessage());
+            return ex.getStatus();
         }
         catch (Exception ex) {
             logger.error("更新角色权限失败，角色ID：" + roleid, ex);
-            return RespResult.create(respCode.ERROR_EXCEPTION);
+            return ApiResult.ERROR_EXCEPTION;
         }
     }
     
@@ -295,15 +295,15 @@ public class RoleController extends ApplicationController {
         try {
             record.setUpdater(user.getId());
             this.roleService.updateStatus(record);
-            return RespResult.create(respCode.SUCCESS);
+            return ApiResult.SUCCESS;
         }
         catch (BizException ex) {
-            logger.error("更新角色数据状态失败，数据参数：{}, 错误信息：[{}, {}]", JSON.toJSONString(record), ex.getCode(), ex.getMsg());
-            return RespResult.create(ex.getCode(), ex.getMsg());
+            logger.error("更新角色数据状态失败，数据参数：{}, 错误信息：[{}, {}]", JSON.toJSONString(record), ex.getCode(), ex.getBizMessage());
+            return ex.getStatus();
         }
         catch (Exception ex) {
             logger.error("更新角色数据状态失败，数据参数：" + JSON.toJSONString(record), ex);
-            return RespResult.create(respCode.ERROR_EXCEPTION);
+            return ApiResult.ERROR_EXCEPTION;
         }
     }
     
@@ -319,11 +319,11 @@ public class RoleController extends ApplicationController {
     public Object delete(@RequestParam("id") Long id, HttpServletRequest request) {
         try {
             this.roleService.delete(id);
-            return RespResult.create(respCode.SUCCESS);
+            return ApiResult.SUCCESS;
         }
         catch (Exception ex) {
             logger.error("删除角色数据失败，ID：" + id, ex);
-            return RespResult.create(respCode.ERROR_EXCEPTION);
+            return ApiResult.ERROR_EXCEPTION;
         }
     }
 }

@@ -4,7 +4,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
-import org.hanzhdy.manager.support.constants.resp.RespCode;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -17,8 +16,6 @@ import javax.servlet.http.HttpServletRequest;
  * Created by H.CAAHN on 2017/9/29.
  */
 public class LoginAuthenticationFilter extends FormAuthenticationFilter {
-    private RespCode respCode = RespCode.getInstance();
-    
     protected boolean onLoginSuccess(AuthenticationToken token, Subject subject,
                                      ServletRequest request, ServletResponse response) throws Exception {
         if (request instanceof HttpServletRequest) {

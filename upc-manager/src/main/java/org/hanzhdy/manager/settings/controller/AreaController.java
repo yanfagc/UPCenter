@@ -5,7 +5,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.hanzhdy.manager.settings.controller.params.AreaParams;
 import org.hanzhdy.manager.settings.model.Area;
 import org.hanzhdy.manager.settings.service.AreaService;
-import org.hanzhdy.manager.support.constants.resp.RespResult;
+import org.hanzhdy.manager.support.constants.resp.ApiResult;
 import org.hanzhdy.manager.support.controller.ApplicationController;
 import org.hanzhdy.web.bean.DatatableResult;
 import org.hanzhdy.web.throwable.BizException;
@@ -62,7 +62,7 @@ public class AreaController extends ApplicationController {
             dataResult = this.areaService.queryAsDatatableResult(params);
         }
         catch (BizException ex) {
-            logger.error("查询地区列表数据失败，查询参数：{}, 错误信息：[{}, {}]", JSON.toJSONString(params), ex.getCode(), ex.getMsg());
+            logger.error("查询地区列表数据失败，查询参数：{}, 错误信息：[{}, {}]", JSON.toJSONString(params), ex.getCode(), ex.getBizMessage());
             dataResult = super.getEmptyDatatableResult();
         }
         catch (Exception ex) {
@@ -85,11 +85,11 @@ public class AreaController extends ApplicationController {
         try {
             List<Area> areaList = this.areaService.queryByParent(parent);
             // 处理返回结果
-            return RespResult.create(respCode.SUCCESS, areaList);
+            return ApiResult.create(ApiResult.SUCCESS, areaList);
         }
         catch (Exception ex) {
             logger.error("根据parent查询区域信息失败，parent：" + parent, ex);
-            return RespResult.create(respCode.ERROR_EXCEPTION);
+            return ApiResult.ERROR_EXCEPTION;
         }
     }
 }

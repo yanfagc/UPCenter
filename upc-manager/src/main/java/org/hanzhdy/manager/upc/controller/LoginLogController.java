@@ -56,7 +56,7 @@ public class LoginLogController extends ApplicationController {
             dataResult = loginLogService.queryAsDatatableResult(params);
         }
         catch (BizException ex) {
-            logger.error("查询登录日志列表数据失败，查询参数：{}, 错误信息：[{}, {}]", JSON.toJSONString(params), ex.getCode(), ex.getMsg());
+            logger.error("查询登录日志列表数据失败，查询参数：{}, 错误信息：[{}, {}]", JSON.toJSONString(params), ex.getCode(), ex.getBizMessage());
             dataResult = super.getEmptyDatatableResult();
         }
         catch (Exception ex) {

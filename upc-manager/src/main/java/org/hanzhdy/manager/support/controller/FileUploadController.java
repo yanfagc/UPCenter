@@ -2,7 +2,7 @@ package org.hanzhdy.manager.support.controller;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.hanzhdy.manager.support.constants.resp.RespResult;
+import org.hanzhdy.manager.support.constants.resp.ApiResult;
 import org.hanzhdy.manager.support.enums.FileUploadType;
 import org.hanzhdy.manager.support.service.FileUploadService;
 import org.hanzhdy.web.throwable.BizException;
@@ -45,19 +45,19 @@ public class FileUploadController extends ApplicationController {
             String filePath = fileUploadService.upload(FileUploadType.USER_IMG, uploadFile);
             // 处理返回结果
             if (StringUtils.isNotBlank(filePath)) {
-                return RespResult.create(respCode.SUCCESS, filePath);
+                return ApiResult.create(ApiResult.SUCCESS, filePath);
             }
             else {
-                return RespResult.create(respCode.UPLOAD_FAILURE);
+                return ApiResult.UPLOAD_FAILURE;
             }
         }
         catch (BizException ex) {
-            logger.warn("上传用户头像失败, 错误信息：[{}, {}]", ex.getCode(), ex.getMsg());
-            return RespResult.create(ex.getStatus());
+            logger.warn("上传用户头像失败, 错误信息：[{}, {}]", ex.getCode(), ex.getBizMessage());
+            return ex.getStatus();
         }
         catch (Exception ex) {
             logger.error("上传用户头像失败, 文件大小：" + uploadFile.getSize(), ex);
-            return RespResult.create(respCode.ERROR_EXCEPTION);
+            return ApiResult.ERROR_EXCEPTION;
         }
     }
 }

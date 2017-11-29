@@ -9,7 +9,7 @@ import org.hanzhdy.manager.settings.service.FormEngineService;
 import org.hanzhdy.manager.settings.service.FormInfoService;
 import org.hanzhdy.manager.support.bean.SessionUser;
 import org.hanzhdy.manager.support.constants.DBConstants;
-import org.hanzhdy.manager.support.constants.resp.RespResult;
+import org.hanzhdy.manager.support.constants.resp.ApiResult;
 import org.hanzhdy.manager.support.controller.ApplicationController;
 import org.hanzhdy.manager.support.enums.LoginUserStatus;
 import org.hanzhdy.manager.upc.controller.params.UserParams;
@@ -201,15 +201,15 @@ public class UserManagerController extends ApplicationController {
             }
             
             // 处理返回结果
-            return RespResult.create(result ? respCode.SUCCESS : respCode.SAVE_NORECORD);
+            return result ? ApiResult.SUCCESS : ApiResult.SAVE_NORECORD;
         }
         catch (BizException ex) {
-            logger.warn("保存用户信息失败，错误码：{}，描述：{}", ex.getCode(), ex.getMsg());
-            return RespResult.create(ex.getStatus());
+            logger.warn("保存用户信息失败，错误码：{}，描述：{}", ex.getCode(), ex.getBizMessage());
+            return ex.getStatus();
         }
         catch (Exception ex) {
             logger.error("保存用户信息失败，数据参数：" + JSON.toJSONString(record), ex);
-            return RespResult.create(respCode.ERROR_EXCEPTION);
+            return ApiResult.ERROR_EXCEPTION;
         }
     }
 
@@ -227,11 +227,11 @@ public class UserManagerController extends ApplicationController {
             HttpServletRequest request) {
         try {
             this.userManagerService.insertExtendData(id, formid, request);
-            return RespResult.create(respCode.SUCCESS);
+            return ApiResult.SUCCESS;
         }
         catch (Exception ex) {
             logger.error("更新用户扩展数据失败，用户ID：" + id, ex);
-            return RespResult.create(respCode.ERROR_EXCEPTION);
+            return ApiResult.ERROR_EXCEPTION;
         }
     }
     
@@ -247,15 +247,15 @@ public class UserManagerController extends ApplicationController {
     public Object saveUserRole(@RequestParam("userid") Long userid, @RequestParam("roles") String roles) {
         try {
             this.userManagerService.updateUserRole(userid, roles);
-            return RespResult.create(respCode.SUCCESS);
+            return ApiResult.SUCCESS;
         }
         catch (BizException ex) {
             logger.error("保存用户角色信息失败，用户ID：" + userid, ex);
-            return RespResult.create(ex.getStatus());
+            return ex.getStatus();
         }
         catch (Exception ex) {
             logger.error("保存用户角色信息失败，用户ID：" + userid, ex);
-            return RespResult.create(respCode.ERROR_EXCEPTION);
+            return ApiResult.ERROR_EXCEPTION;
         }
     }
     
@@ -273,11 +273,11 @@ public class UserManagerController extends ApplicationController {
         try {
             record.setUpdater(user.getId());
             this.userManagerService.updateStatus(record);
-            return RespResult.create(respCode.SUCCESS);
+            return ApiResult.SUCCESS;
         }
         catch (Exception ex) {
             logger.error("更新用户数据状态失败，数据参数：" + JSON.toJSONString(record), ex);
-            return RespResult.create(respCode.ERROR_EXCEPTION);
+            return ApiResult.ERROR_EXCEPTION;
         }
     }
     
@@ -313,15 +313,15 @@ public class UserManagerController extends ApplicationController {
         SessionUser user = super.getSessionUser(request);
         try {
             boolean result = this.userManagerService.updateUserPw(user, userid, account, adminPassword, newPassword);
-            return RespResult.create(result ? respCode.SUCCESS : respCode.UPDATE_PW_NORECORD);
+            return result ? ApiResult.SUCCESS : ApiResult.UPDATE_PW_NORECORD;
         }
         catch (BizException ex) {
             logger.warn("修改用户[" + user.getAccount() + "]密码失败，错误原因：" + JSON.toJSONString(ex.getStatus()));
-            return RespResult.create(ex.getStatus());
+            return ex.getStatus();
         }
         catch (Exception ex) {
             logger.error("修改用户[" + user.getAccount() + "]密码失败，服务器出现异常", ex);
-            return RespResult.create(respCode.ERROR_EXCEPTION);
+            return ApiResult.ERROR_EXCEPTION;
         }
     }
 }

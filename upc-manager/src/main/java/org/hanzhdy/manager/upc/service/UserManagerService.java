@@ -8,6 +8,7 @@ import org.hanzhdy.manager.settings.model.FormDataExample;
 import org.hanzhdy.manager.settings.service.FormEngineService;
 import org.hanzhdy.manager.support.bean.SessionUser;
 import org.hanzhdy.manager.support.constants.DBConstants;
+import org.hanzhdy.manager.support.constants.resp.ApiResult;
 import org.hanzhdy.manager.support.service.AbstractUpcService;
 import org.hanzhdy.manager.upc.controller.params.UserParams;
 import org.hanzhdy.manager.upc.mapper.UserBasicMapperExt;
@@ -126,7 +127,7 @@ public class UserManagerService extends AbstractUpcService {
         example.createCriteria().andAccountEqualTo(record.getAccount());
         List<UserBasic> bList = this.userBasicMapperExt.selectByExample(example);
         if (bList != null && !bList.isEmpty()) {
-            throw new BizException(respCode.SAVE_DUPLICATE);
+            throw new BizException(ApiResult.SAVE_DUPLICATE);
         }
         
         // 构造基本信息
@@ -179,7 +180,7 @@ public class UserManagerService extends AbstractUpcService {
         List<UserBasic> bList = this.userBasicMapperExt.selectByExample(example);
         if (bList != null && !bList.isEmpty()) {
             if (bList.size() > 1 || bList.get(0).getId().longValue() != record.getId().longValue()) {
-                throw new BizException(respCode.SAVE_DUPLICATE);
+                throw new BizException(ApiResult.SAVE_DUPLICATE);
             }
         }
         
@@ -281,7 +282,7 @@ public class UserManagerService extends AbstractUpcService {
     public boolean updateUserRole(Long userid, String roles) {
         if (userid == null) {
             logger.warn("保存用户角色信息失败，userid=null");
-            throw new BizException(respCode.SAVE_PRIMARY_EMPTY);
+            throw new BizException(ApiResult.SAVE_PRIMARY_EMPTY);
         }
     
         UserRoleExample ure = new UserRoleExample();
@@ -317,7 +318,7 @@ public class UserManagerService extends AbstractUpcService {
         UserBasic userBasic = this.userBasicMapperExt.selectByPrimaryKey(sessionUser.getId());
         boolean check = this.checkPwd(userBasic.getAccount(), oldPassword, userBasic.getPassword());
         if (!check) {
-            throw new BizException(respCode.UPDATE_PW_ILLEGAL_OLDPW);
+            throw new BizException(ApiResult.UPDATE_PW_ILLEGAL_OLDPW);
         }
         
         String password = encryptPwd(userBasic.getAccount(), newPassword);
@@ -341,7 +342,7 @@ public class UserManagerService extends AbstractUpcService {
         UserBasic userBasic = this.userBasicMapperExt.selectByPrimaryKey(sessionUser.getId());
         boolean check = this.checkPwd(userBasic.getAccount(), adminPassword, userBasic.getPassword());
         if (!check) {
-            throw new BizException(respCode.UPDATE_PW_ILLEGAL_ADMINPW);
+            throw new BizException(ApiResult.UPDATE_PW_ILLEGAL_ADMINPW);
         }
     
         String password = encryptPwd(account, newPassword);

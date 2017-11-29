@@ -3,7 +3,7 @@ package org.hanzhdy.manager.upc.controller;
 import com.alibaba.fastjson.JSON;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.hanzhdy.manager.support.bean.SessionUser;
-import org.hanzhdy.manager.support.constants.resp.RespResult;
+import org.hanzhdy.manager.support.constants.resp.ApiResult;
 import org.hanzhdy.manager.support.controller.ApplicationController;
 import org.hanzhdy.manager.upc.controller.params.RoleGroupParams;
 import org.hanzhdy.manager.upc.model.RoleGroup;
@@ -106,25 +106,25 @@ public class RoleGroupController extends ApplicationController {
             boolean result = false;
             if (record.getId() == null) {
                 if (old != null) {
-                    return RespResult.create(respCode.SAVE_DUPLICATE);
+                    return ApiResult.SAVE_DUPLICATE;
                 }
                 record.setCreator(user.getId());
                 result = this.roleGroupService.insert(record);
             }
             else {
                 if (old != null && old.getId().longValue() != record.getId().longValue()) {
-                    return RespResult.create(respCode.SAVE_DUPLICATE);
+                    return ApiResult.SAVE_DUPLICATE;
                 }
                 record.setUpdater(user.getId());
                 result = this.roleGroupService.update(record);
             }
             
             // 处理返回结果
-            return RespResult.create(result ? respCode.SUCCESS : respCode.SAVE_NORECORD);
+            return result ? ApiResult.SUCCESS : ApiResult.SAVE_NORECORD;
         }
         catch (Exception ex) {
             logger.error("保存角色分组信息失败，数据参数：" + JSON.toJSONString(record), ex);
-            return RespResult.create(respCode.ERROR_EXCEPTION);
+            return ApiResult.ERROR_EXCEPTION;
         }
     }
     
@@ -140,11 +140,11 @@ public class RoleGroupController extends ApplicationController {
     public Object delete(@RequestParam("id") Long id, HttpServletRequest request) {
         try {
             this.roleGroupService.delete(id);
-            return RespResult.create(respCode.SUCCESS);
+            return ApiResult.SUCCESS;
         }
         catch (Exception ex) {
             logger.error("删除角色分组数据失败，ID：" + id, ex);
-            return RespResult.create(respCode.ERROR_EXCEPTION);
+            return ApiResult.ERROR_EXCEPTION;
         }
     }
 }

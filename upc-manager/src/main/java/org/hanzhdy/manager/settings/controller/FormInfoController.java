@@ -14,7 +14,7 @@ import org.hanzhdy.manager.settings.service.FieldInfoService;
 import org.hanzhdy.manager.settings.service.FormEngineService;
 import org.hanzhdy.manager.settings.service.FormInfoService;
 import org.hanzhdy.manager.support.bean.SessionUser;
-import org.hanzhdy.manager.support.constants.resp.RespResult;
+import org.hanzhdy.manager.support.constants.resp.ApiResult;
 import org.hanzhdy.manager.support.controller.ApplicationController;
 import org.hanzhdy.web.bean.DatatableResult;
 import org.hanzhdy.web.throwable.BizException;
@@ -195,7 +195,7 @@ public class FormInfoController extends ApplicationController {
             dataResult = formInfoService.queryAsDatatableResult(params);
         }
         catch (BizException ex) {
-            logger.error("查询表单数据失败，查询参数：{}, 错误信息：[{}, {}]", JSON.toJSONString(params), ex.getCode(), ex.getMsg());
+            logger.error("查询表单数据失败，查询参数：{}, 错误信息：[{}, {}]", JSON.toJSONString(params), ex.getCode(), ex.getBizMessage());
             dataResult = super.getEmptyDatatableResult();
         }
         catch (Exception ex) {
@@ -220,7 +220,7 @@ public class FormInfoController extends ApplicationController {
             dataResult = fieldInfoService.queryByFormidAsDatatableResult(params);
         }
         catch (BizException ex) {
-            logger.error("查询表单字段失败，查询参数：{}, 错误信息：[{}, {}]", JSON.toJSONString(params), ex.getCode(), ex.getMsg());
+            logger.error("查询表单字段失败，查询参数：{}, 错误信息：[{}, {}]", JSON.toJSONString(params), ex.getCode(), ex.getBizMessage());
             dataResult = super.getEmptyDatatableResult();
         }
         catch (Exception ex) {
@@ -246,7 +246,7 @@ public class FormInfoController extends ApplicationController {
         }
         catch (BizException ex) {
             logger.error("查询可添加到指定表单中的字段数据，查询参数：{}, 错误信息：[{}, {}]", JSON.toJSONString(params), ex.getCode(),
-                    ex.getMsg());
+                    ex.getBizMessage());
             dataResult = super.getEmptyDatatableResult();
         }
         catch (Exception ex) {
@@ -280,15 +280,15 @@ public class FormInfoController extends ApplicationController {
             }
             
             // 处理返回结果
-            return RespResult.create(result ? respCode.SUCCESS : respCode.SAVE_NORECORD);
+            return result ? ApiResult.SUCCESS : ApiResult.SAVE_NORECORD;
         }
         catch (BizException ex) {
-            logger.error("保存表单信息失败，数据参数：{}, 错误信息：[{}, {}]", JSON.toJSONString(record), ex.getCode(), ex.getMsg());
-            return RespResult.create(ex.getCode(), ex.getMsg());
+            logger.error("保存表单信息失败，数据参数：{}, 错误信息：[{}, {}]", JSON.toJSONString(record), ex.getCode(), ex.getBizMessage());
+            return ex.getStatus();
         }
         catch (Exception ex) {
             logger.error("保存表单信息失败，数据参数：" + JSON.toJSONString(record), ex);
-            return RespResult.create(respCode.ERROR_EXCEPTION);
+            return ApiResult.ERROR_EXCEPTION;
         }
     }
     
@@ -306,15 +306,15 @@ public class FormInfoController extends ApplicationController {
         try {
             record.setUpdater(user.getId());
             this.formInfoService.updateStatus(record);
-            return RespResult.create(respCode.SUCCESS);
+            return ApiResult.SUCCESS;
         }
         catch (BizException ex) {
-            logger.error("更新表单数据状态失败，数据参数：{}, 错误信息：[{}, {}]", JSON.toJSONString(record), ex.getCode(), ex.getMsg());
-            return RespResult.create(ex.getCode(), ex.getMsg());
+            logger.error("更新表单数据状态失败，数据参数：{}, 错误信息：[{}, {}]", JSON.toJSONString(record), ex.getCode(), ex.getBizMessage());
+            return ex.getStatus();
         }
         catch (Exception ex) {
             logger.error("更新表单数据状态失败，数据参数：" + JSON.toJSONString(record), ex);
-            return RespResult.create(respCode.ERROR_EXCEPTION);
+            return ApiResult.ERROR_EXCEPTION;
         }
     }
     
@@ -332,19 +332,19 @@ public class FormInfoController extends ApplicationController {
         try {
             if (formid == null || formid <= 0 || StringUtils.isBlank(fieldid) || StringUtils.isBlank(colspan)) {
                 logger.error("添加表单字段关联关系，异常数据请求formid:[{}], fieldid:[{}]", formid, fieldid);
-                return RespResult.create(respCode.ERROR_DATA_FORMAT);
+                return ApiResult.ERROR_DATA_FORMAT;
             }
             
             this.formInfoService.insertFormField(formid, fieldid, colspan);
-            return RespResult.create(respCode.SUCCESS);
+            return ApiResult.SUCCESS;
         }
         catch (BizException ex) {
-            logger.error("添加表单字段关联关系失败，关联ID：[{}, {}], 错误信息：[{}, {}]", formid, fieldid, ex.getCode(), ex.getMsg());
-            return RespResult.create(ex.getCode(), ex.getMsg());
+            logger.error("添加表单字段关联关系失败，关联ID：[{}, {}], 错误信息：[{}, {}]", formid, fieldid, ex.getCode(), ex.getBizMessage());
+            return ex.getStatus();
         }
         catch (Exception ex) {
             logger.error("添加表单字段关联关系失败，关联ID：" + formid + ", " + fieldid, ex);
-            return RespResult.create(respCode.ERROR_EXCEPTION);
+            return ApiResult.ERROR_EXCEPTION;
         }
     }
 
@@ -361,19 +361,19 @@ public class FormInfoController extends ApplicationController {
         try {
             if (record.getFieldId() == null || record.getFormId() == null) {
                 logger.error("更新表单字段关联关系，异常数据请求:[{}], fieldid:[{}]", JSON.toJSONString(record));
-                return RespResult.create(respCode.ERROR_DATA_FORMAT);
+                return ApiResult.ERROR_DATA_FORMAT;
             }
             
             this.formInfoService.updateFormField(record);
-            return RespResult.create(respCode.SUCCESS);
+            return ApiResult.SUCCESS;
         }
         catch (BizException ex) {
-            logger.error("添加表单字段关联关系失败，请求数据：[{}], 错误信息：[{}, {}]", JSON.toJSONString(record), ex.getCode(), ex.getMsg());
-            return RespResult.create(ex.getCode(), ex.getMsg());
+            logger.error("添加表单字段关联关系失败，请求数据：[{}], 错误信息：[{}, {}]", JSON.toJSONString(record), ex.getCode(), ex.getBizMessage());
+            return ex.getStatus();
         }
         catch (Exception ex) {
             logger.error("添加表单字段关联关系失败，请求数据：[{}]", JSON.toJSONString(record), ex);
-            return RespResult.create(respCode.ERROR_EXCEPTION);
+            return ApiResult.ERROR_EXCEPTION;
         }
     }
     
@@ -391,19 +391,19 @@ public class FormInfoController extends ApplicationController {
         try {
             if (formid == null || formid <= 0 || fieldid == null || fieldid <= 0) {
                 logger.error("删除表单字段关联关系，异常数据请求formid:[{}], fieldid:[{}]", formid, fieldid);
-                return RespResult.create(respCode.ERROR_DATA_FORMAT);
+                return ApiResult.ERROR_DATA_FORMAT;
             }
             
             this.formInfoService.deleteFormField(formid, fieldid);
-            return RespResult.create(respCode.SUCCESS);
+            return ApiResult.SUCCESS;
         }
         catch (BizException ex) {
-            logger.error("删除表单字段关联关系失败，关联ID：[{}, {}], 错误信息：[{}, {}]", formid, fieldid, ex.getCode(), ex.getMsg());
-            return RespResult.create(ex.getCode(), ex.getMsg());
+            logger.error("删除表单字段关联关系失败，关联ID：[{}, {}], 错误信息：[{}, {}]", formid, fieldid, ex.getCode(), ex.getBizMessage());
+            return ex.getStatus();
         }
         catch (Exception ex) {
             logger.error("删除表单字段关联关系失败，关联ID：" + formid + ", " + fieldid, ex);
-            return RespResult.create(respCode.ERROR_EXCEPTION);
+            return ApiResult.ERROR_EXCEPTION;
         }
     }
 }

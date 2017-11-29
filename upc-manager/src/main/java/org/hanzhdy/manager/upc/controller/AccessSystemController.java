@@ -3,7 +3,7 @@ package org.hanzhdy.manager.upc.controller;
 import com.alibaba.fastjson.JSON;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.hanzhdy.manager.support.bean.SessionUser;
-import org.hanzhdy.manager.support.constants.resp.RespResult;
+import org.hanzhdy.manager.support.constants.resp.ApiResult;
 import org.hanzhdy.manager.support.controller.ApplicationController;
 import org.hanzhdy.manager.support.enums.CommonStatus;
 import org.hanzhdy.manager.upc.controller.params.AccessSystemParams;
@@ -62,7 +62,7 @@ public class AccessSystemController extends ApplicationController {
             dataResult = accessSystemService.queryAsDatatableResult(params);
         }
         catch (BizException ex) {
-            logger.error("查询接入系统数据失败，查询参数：{}, 错误信息：[{}, {}]", JSON.toJSONString(params), ex.getCode(), ex.getMsg());
+            logger.error("查询接入系统数据失败，查询参数：{}, 错误信息：[{}, {}]", JSON.toJSONString(params), ex.getCode(), ex.getBizMessage());
             dataResult = super.getEmptyDatatableResult();
         }
         catch (Exception ex) {
@@ -120,15 +120,15 @@ public class AccessSystemController extends ApplicationController {
             }
             
             // 处理返回结果
-            return RespResult.create(result ? respCode.SUCCESS : respCode.SAVE_NORECORD);
+            return result ? ApiResult.SUCCESS : ApiResult.SAVE_NORECORD;
         }
         catch (BizException ex) {
-            logger.warn("保存第三方接入系统信息失败，数据参数{}, 错误信息：[{}, {}]", JSON.toJSONString(record), ex.getCode(), ex.getMsg());
-            return RespResult.create(ex.getCode(), ex.getMsg());
+            logger.warn("保存第三方接入系统信息失败，数据参数{}, 错误信息：[{}, {}]", JSON.toJSONString(record), ex.getCode(), ex.getBizMessage());
+            return ex.getStatus();
         }
         catch (Exception ex) {
             logger.error("保存第三方接入系统信息失败，数据参数：" + JSON.toJSONString(record), ex);
-            return RespResult.create(respCode.ERROR_EXCEPTION);
+            return ApiResult.ERROR_EXCEPTION;
         }
     }
     
@@ -146,15 +146,15 @@ public class AccessSystemController extends ApplicationController {
         try {
             record.setUpdater(user.getId());
             this.accessSystemService.updateStatus(record);
-            return RespResult.create(respCode.SUCCESS);
+            return ApiResult.SUCCESS;
         }
         catch (BizException ex) {
-            logger.error("更新第三方接入系统数据状态失败，数据参数：{}, 错误信息：[{}, {}]", JSON.toJSONString(record), ex.getCode(), ex.getMsg());
-            return RespResult.create(ex.getCode(), ex.getMsg());
+            logger.error("更新第三方接入系统数据状态失败，数据参数：{}, 错误信息：[{}, {}]", JSON.toJSONString(record), ex.getCode(), ex.getBizMessage());
+            return ex.getStatus();
         }
         catch (Exception ex) {
             logger.error("更新第三方接入系统数据状态失败，数据参数：" + JSON.toJSONString(record), ex);
-            return RespResult.create(respCode.ERROR_EXCEPTION);
+            return ApiResult.ERROR_EXCEPTION;
         }
     }
 }

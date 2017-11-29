@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.StringUtils;
 import org.hanzhdy.manager.support.bean.SessionUser;
+import org.hanzhdy.manager.support.constants.resp.ApiResult;
 import org.hanzhdy.manager.support.service.AbstractUpcService;
 import org.hanzhdy.manager.upc.model.MenuItem;
 import org.hanzhdy.manager.upc.model.Role;
@@ -53,11 +54,11 @@ public class LoginService extends AbstractUpcService {
     public SessionUser insertByCheckLogin(String account, String password, String token) {
         UserVo user = userManagerService.queryByAccount(account);
         if (user == null) {
-            throw new LocalBizException(respCode.LOGIN_ILLEGAL_USER_PWD);
+            throw new LocalBizException(ApiResult.LOGIN_ILLEGAL_USER_PWD);
         }
         
         if (StringUtils.isBlank(user.getMobileno())) {
-            throw new LocalBizException(respCode.LOGIN_ILLEGAL_MOBILETOKEN);
+            throw new LocalBizException(ApiResult.LOGIN_ILLEGAL_MOBILETOKEN);
         }
         
 //        boolean rst = this.checkToken(user.getMobileno(), token);
@@ -68,7 +69,7 @@ public class LoginService extends AbstractUpcService {
         // 开始校验密码
         boolean rst = this.userManagerService.checkPwd(account, password, user.getPassword());
         if (!rst) {
-            throw new LocalBizException(respCode.LOGIN_ILLEGAL_USER_PWD);
+            throw new LocalBizException(ApiResult.LOGIN_ILLEGAL_USER_PWD);
         }
         
         SessionUser su = new SessionUser();
@@ -82,7 +83,7 @@ public class LoginService extends AbstractUpcService {
     public SessionUser getSessionUserByAccount(String account) {
         UserVo user = userManagerService.queryByAccount(account);
         if (user == null) {
-            throw new LocalBizException(respCode.LOGIN_ILLEGAL_USER_PWD);
+            throw new LocalBizException(ApiResult.LOGIN_ILLEGAL_USER_PWD);
         }
         SessionUser su = new SessionUser();
         su.setAccount(user.getAccount());

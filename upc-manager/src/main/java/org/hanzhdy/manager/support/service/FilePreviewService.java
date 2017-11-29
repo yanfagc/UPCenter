@@ -1,6 +1,7 @@
 package org.hanzhdy.manager.support.service;
 
 import org.apache.commons.lang3.StringUtils;
+import org.hanzhdy.manager.support.constants.resp.ApiResult;
 import org.hanzhdy.manager.support.enums.FileUploadType;
 import org.hanzhdy.web.throwable.BizException;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public class FilePreviewService extends AbstractFileService {
     public void preview(FileUploadType type, String month, String id, HttpServletResponse response) throws Exception {
         String path = dirpath.get(type);
         if (StringUtils.isBlank(path)) {
-            throw new BizException(respCode.UPLOAD_ERROR_CONFIGURE);
+            throw new BizException(ApiResult.UPLOAD_ERROR_CONFIGURE);
         }
         
         StringBuffer pathBuffer = new StringBuffer();

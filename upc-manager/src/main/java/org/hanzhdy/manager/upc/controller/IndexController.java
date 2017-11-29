@@ -7,7 +7,7 @@ import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
 import org.hanzhdy.manager.support.bean.SessionUser;
 import org.hanzhdy.manager.support.constants.WebConstants;
-import org.hanzhdy.manager.support.constants.resp.RespResult;
+import org.hanzhdy.manager.support.constants.resp.ApiResult;
 import org.hanzhdy.manager.support.controller.ApplicationController;
 import org.hanzhdy.manager.upc.model.AccessSystem;
 import org.hanzhdy.manager.upc.service.*;
@@ -124,7 +124,7 @@ public class IndexController extends ApplicationController {
             if (checkVCode) {
                 String vcode = (String) super.getSessionVal(request, WebConstants.SESSION_LOGIN_VCODE);
                 if (!StringUtils.equalsIgnoreCase(captcha, vcode)) {
-                    return RespResult.create(respCode.LOGIN_ILLEGAL_IMGTOKEN);
+                    return ApiResult.LOGIN_ILLEGAL_IMGTOKEN;
                 }
             }
             
@@ -142,34 +142,34 @@ public class IndexController extends ApplicationController {
             this.loginLogService.insert(user, realip, "用户[" + username + "]登录系统");
             
             // 返回登录成功
-            return RespResult.create(respCode.SUCCESS);
+            return ApiResult.SUCCESS;
         }
         catch (BizException ex) {
             int code = ex.getCode();
-            if (code == respCode.LOGIN_ILLEGAL_IMGTOKEN.getCode()) {
+            if (code == ApiResult.LOGIN_ILLEGAL_IMGTOKEN.getCode()) {
                 logger.warn("用户: {} 登录失败: 验证码错误：{}", username, captcha);
             }
-            return RespResult.create(ex.getStatus());
+            return ex.getStatus();
         }
         catch (ExcessiveAttemptsException ex) {
             logger.warn("用户: {} 登录失败: 登录次数过多", username);
-            return RespResult.create(respCode.LOGIN_EXCESSIVE_ATTEMPTS);
+            return ApiResult.LOGIN_EXCESSIVE_ATTEMPTS;
         }
         catch (LockedAccountException ex) {
             logger.warn("用户: {} 登录失败：帐号被锁定", username);
-            return RespResult.create(respCode.LOGIN_USER_LOCKED);
+            return ApiResult.LOGIN_USER_LOCKED;
         }
         catch (DisabledAccountException ex) {
             logger.warn("用户: {} 登录失败，状态冻结或注销", username);
-            return RespResult.create(respCode.LOGIN_USER_FROZEN);
+            return ApiResult.LOGIN_USER_FROZEN;
         }
         catch (IncorrectCredentialsException | UnknownAccountException ex) {
             logger.warn("用户: {} 登录失败: 错误的用户名或密码", username);
-            return RespResult.create(respCode.LOGIN_ILLEGAL_USER_PWD);
+            return ApiResult.LOGIN_ILLEGAL_USER_PWD;
         }
         catch (Exception ex) {
             logger.error("登录失败，内部服务错误", ex);
-            return RespResult.create(respCode.ERROR_EXCEPTION);
+            return ApiResult.ERROR_EXCEPTION;
         }
     }
     
@@ -203,15 +203,15 @@ public class IndexController extends ApplicationController {
         SessionUser user = super.getSessionUser(request);
         try {
             boolean result = this.userManagerService.updateMinePw(user, oldPassword, newPassword);
-            return RespResult.create(result ? respCode.SUCCESS : respCode.UPDATE_PW_NORECORD);
+            return result ? ApiResult.SUCCESS : ApiResult.UPDATE_PW_NORECORD;
         }
         catch (BizException ex) {
             logger.warn("修改个人[" + user.getAccount() + "]密码失败，错误原因：" + JSON.toJSONString(ex.getStatus()));
-            return RespResult.create(ex.getStatus());
+            return ex.getStatus();
         }
         catch (Exception ex) {
             logger.error("修改个人[" + user.getAccount() + "]密码失败，服务器出现异常", ex);
-            return RespResult.create(respCode.ERROR_EXCEPTION);
+            return ApiResult.ERROR_EXCEPTION;
         }
     }
 }

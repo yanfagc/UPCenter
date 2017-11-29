@@ -5,7 +5,6 @@ import org.apache.shiro.subject.Subject;
 import org.hanzhdy.manager.settings.engine.EngineContext;
 import org.hanzhdy.manager.support.bean.SessionUser;
 import org.hanzhdy.manager.support.constants.WebConstants;
-import org.hanzhdy.manager.support.constants.resp.RespCode;
 import org.hanzhdy.web.bean.DatatableResult;
 import org.hanzhdy.web.controller.AbstractController;
 import org.hanzhdy.web.throwable.BizStatus;
@@ -25,8 +24,6 @@ public class ApplicationController extends AbstractController {
     
     @Value("${system.code}")
     protected String                systemCode;
-    
-    protected static final RespCode respCode     = RespCode.getInstance();
     
     protected Object response(BizStatus status, Object data) {
         return super.response(String.valueOf(status.getCode()), data, status.getMsg());
