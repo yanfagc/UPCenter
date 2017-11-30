@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.StringUtils;
 import org.hanzhdy.manager.support.bean.SessionUser;
-import org.hanzhdy.manager.support.constants.resp.ApiResult;
+import org.hanzhdy.manager.support.constants.ApiResult;
 import org.hanzhdy.manager.support.service.AbstractUpcService;
 import org.hanzhdy.manager.upc.model.MenuItem;
 import org.hanzhdy.manager.upc.model.Role;

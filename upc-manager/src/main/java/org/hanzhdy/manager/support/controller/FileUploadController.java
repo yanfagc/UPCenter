@@ -2,7 +2,7 @@ package org.hanzhdy.manager.support.controller;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.hanzhdy.manager.support.constants.resp.ApiResult;
+import org.hanzhdy.manager.support.constants.ApiResult;
 import org.hanzhdy.manager.support.enums.FileUploadType;
 import org.hanzhdy.manager.support.service.FileUploadService;
 import org.hanzhdy.web.throwable.BizException;

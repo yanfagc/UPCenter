@@ -8,7 +8,7 @@ import org.hanzhdy.manager.settings.model.DictType;
 import org.hanzhdy.manager.settings.service.DictDataService;
 import org.hanzhdy.manager.settings.service.DictTypeService;
 import org.hanzhdy.manager.support.bean.SessionUser;
-import org.hanzhdy.manager.support.constants.resp.ApiResult;
+import org.hanzhdy.manager.support.constants.ApiResult;
 import org.hanzhdy.manager.support.controller.ApplicationController;
 import org.hanzhdy.manager.support.enums.DictDataType;
 import org.hanzhdy.web.bean.DatatableResult;

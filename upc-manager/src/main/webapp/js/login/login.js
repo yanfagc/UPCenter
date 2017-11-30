@@ -1,5 +1,6 @@
 // JavaScript Document
 //支持Enter键登录
+var isGetVCode=false;
 document.onkeydown = function(e){
 	if($(".bac").length==0)
 	{
@@ -17,6 +18,8 @@ $(function(){
 		$('#j_username').val(_account);
 		$('#j_remember').attr('checked','checked');
 	}
+
+    getVCodeNumber();
 
 	//提交表单
 	$('#submit_btn').click(function(){
@@ -54,6 +57,8 @@ $(function(){
 	/** 切换图片验证码 */
 	$('form').on('click','#captcha_img',function(){
 		$('#captcha_img').attr('src',$ctx+'/getVCode?_t='+new Date());
+        isGetVCode=false;
+        setTimeout('getVCodeNumber()',50);
 	});
 });
 
@@ -92,4 +97,20 @@ function getCookieAccount(){
         //搜索失败，返回空字符串
     	return "";
     }
+}
+
+function getVCodeNumber() {
+	if(!isGetVCode&&enableGetVCodeNumber){
+        $sessionAjax({
+            url:$ctx+'/getVCodeNumber?_t='+new Date(),
+            success:function(rsp){
+                if(rsp.code=='1000' && rsp.body){
+                    isGetVCode=true;
+                    $('#j_captcha').val(rsp.body);
+                }else{
+                    setTimeout('getVCodeNumber()',100);
+				}
+			}
+		})
+	}
 }

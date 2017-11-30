@@ -10,7 +10,7 @@ import org.hanzhdy.manager.settings.model.FieldInfo;
 import org.hanzhdy.manager.settings.model.FieldItem;
 import org.hanzhdy.manager.settings.service.FieldInfoService;
 import org.hanzhdy.manager.settings.vo.FieldInfoVo;
-import org.hanzhdy.manager.support.constants.resp.ApiResult;
+import org.hanzhdy.manager.support.constants.ApiResult;
 import org.hanzhdy.manager.support.controller.ApplicationController;
 import org.hanzhdy.manager.support.enums.FieldType;
 import org.hanzhdy.web.bean.DatatableResult;

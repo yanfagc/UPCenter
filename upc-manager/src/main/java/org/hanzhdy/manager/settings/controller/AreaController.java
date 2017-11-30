@@ -5,7 +5,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.hanzhdy.manager.settings.controller.params.AreaParams;
 import org.hanzhdy.manager.settings.model.Area;
 import org.hanzhdy.manager.settings.service.AreaService;
-import org.hanzhdy.manager.support.constants.resp.ApiResult;
+import org.hanzhdy.manager.support.constants.ApiResult;
 import org.hanzhdy.manager.support.controller.ApplicationController;
 import org.hanzhdy.web.bean.DatatableResult;
 import org.hanzhdy.web.throwable.BizException;

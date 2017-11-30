@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="${ctx}/css/login/supersized.css">
 <link rel="stylesheet" href="${ctx}/css/login/login.css"><script type="text/javascript">
 var $ctx='${ctx}';
+var enableGetVCodeNumber=${enableGetVCodeNumber};
 if(window.opener){
     window.opener.location=self.location;
     window.close();
@@ -75,13 +76,14 @@ if(top.location!=self.location){
 <!-- Javascript -->
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]>
-	<script src="${ctx}/js/html5.js"></script>
+<script type="text/javascript" src="${ctx}/js/html5.js"></script>
 <![endif]-->
 <script type="text/javascript" src="${ctx}/plugins/jquery/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="${ctx}/plugins/jquery/jquery.form.js"></script>
 <script type="text/javascript" src="${ctx}/js/login/supersized.3.2.7.min.js"></script>
 <script type="text/javascript" src="${ctx}/js/login/supersized-init.js"></script>
 <script type="text/javascript" src="${ctx}/js/login/tooltips.js"></script>
+<script src="${ctx}/js/global.js?contextPath=${ctx}<c:if test='${not empty crm}'>&${crm}</c:if>" type="text/javascript"></script>
 <script type="text/javascript" src="${ctx}/js/login/login.js<c:if test='${not empty crm}'>?${crm}</c:if>"></script>
 <script type="text/javascript" src="${ctx}/js/login/scripts.js"></script>
 </body>

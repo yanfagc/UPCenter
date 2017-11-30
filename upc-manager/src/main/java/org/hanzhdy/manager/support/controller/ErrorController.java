@@ -2,7 +2,7 @@ package org.hanzhdy.manager.support.controller;
 
 import com.alibaba.fastjson.JSON;
 import org.hanzhdy.manager.shiro.ShiroFilterUtils;
-import org.hanzhdy.manager.support.constants.resp.ApiResult;
+import org.hanzhdy.manager.support.constants.ApiResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;

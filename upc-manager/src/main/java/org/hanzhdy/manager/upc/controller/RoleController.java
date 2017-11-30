@@ -3,7 +3,7 @@ package org.hanzhdy.manager.upc.controller;
 import com.alibaba.fastjson.JSON;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.hanzhdy.manager.support.bean.SessionUser;
-import org.hanzhdy.manager.support.constants.resp.ApiResult;
+import org.hanzhdy.manager.support.constants.ApiResult;
 import org.hanzhdy.manager.support.controller.ApplicationController;
 import org.hanzhdy.manager.support.enums.CommonStatus;
 import org.hanzhdy.manager.upc.controller.params.RoleParams;

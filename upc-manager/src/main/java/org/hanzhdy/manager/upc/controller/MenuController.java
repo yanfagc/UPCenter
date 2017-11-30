@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.hanzhdy.manager.support.bean.SessionUser;
-import org.hanzhdy.manager.support.constants.resp.ApiResult;
+import org.hanzhdy.manager.support.constants.ApiResult;
 import org.hanzhdy.manager.support.controller.ApplicationController;
 import org.hanzhdy.manager.support.enums.MenuIcon;
 import org.hanzhdy.manager.upc.controller.params.MenuParams;

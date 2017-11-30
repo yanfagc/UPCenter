@@ -1,7 +1,7 @@
 package org.hanzhdy.manager.support.service;
 
 import org.apache.commons.lang3.StringUtils;
-import org.hanzhdy.manager.support.constants.resp.ApiResult;
+import org.hanzhdy.manager.support.constants.ApiResult;
 import org.hanzhdy.manager.support.enums.FileUploadType;
 import org.hanzhdy.web.throwable.BizException;
 import org.springframework.stereotype.Service;

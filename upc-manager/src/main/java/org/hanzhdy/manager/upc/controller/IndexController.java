@@ -7,7 +7,7 @@ import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
 import org.hanzhdy.manager.support.bean.SessionUser;
 import org.hanzhdy.manager.support.constants.WebConstants;
-import org.hanzhdy.manager.support.constants.resp.ApiResult;
+import org.hanzhdy.manager.support.constants.ApiResult;
 import org.hanzhdy.manager.support.controller.ApplicationController;
 import org.hanzhdy.manager.upc.model.AccessSystem;
 import org.hanzhdy.manager.upc.service.*;
@@ -55,7 +55,10 @@ public class IndexController extends ApplicationController {
     private UserManagerService  userManagerService;
     
     @Value("${system.vcode.verify}")
-    public boolean              checkVCode;
+    private boolean             checkVCode;
+    
+    @Value("${system.vcode.auto}")
+    private boolean             autoVCode;
     
     /** 日志对象 */
     private static final Logger logger = LoggerFactory.getLogger(IndexController.class);
@@ -87,12 +90,13 @@ public class IndexController extends ApplicationController {
      * @return
      */
     @RequestMapping(value = "login", method = RequestMethod.GET)
-    public String login() {
+    public String login(Model model, HttpServletRequest request) {
+        model.addAttribute("enableGetVCodeNumber", autoVCode);
         return "login";
     }
     
     /**
-     * 获取图片验证码
+     * 获取图片验证码的图片流
      * @param request
      * @param response
      */
@@ -105,6 +109,28 @@ public class IndexController extends ApplicationController {
         }
         catch (Exception ex) {
             logger.error("获取图形验证码失败", ex);
+        }
+    }
+    
+    /**
+     * 获取图片验证码的验证码数字，只能在开发或测试环境下有效
+     * @param request
+     * @param response
+     */
+    @RequestMapping(value = "getVCodeNumber", method = RequestMethod.POST)
+    @ResponseBody
+    public Object getVCodeNumber(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            if (!autoVCode) {
+                return ApiResult.ERROR_NO_AUTHORITY;
+            }
+            
+            String vcode = (String)super.getSessionVal(request, WebConstants.SESSION_LOGIN_VCODE);
+            return ApiResult.create(ApiResult.SUCCESS, vcode);
+        }
+        catch (Exception ex) {
+            logger.error("获取图片验证码的验证码数字，内部服务错误", ex);
+            return ApiResult.ERROR_EXCEPTION;
         }
     }
     

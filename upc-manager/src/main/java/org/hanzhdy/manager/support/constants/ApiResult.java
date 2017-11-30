@@ -1,4 +1,4 @@
-package org.hanzhdy.manager.support.constants.resp;
+package org.hanzhdy.manager.support.constants;
 
 import org.hanzhdy.utils.resources.Resources;
 import org.hanzhdy.web.throwable.BizStatus;
@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 
 /**
  * @description
@@ -73,14 +74,17 @@ public class ApiResult {
     /** 数据保存失败，记录已存在 */
     public static final BizStatus        SAVE_DUPLICATE            = null;
     
+    /** 数据保存失败，主键数据为空 */
+    public static final BizStatus        SAVE_PRIMARY_EMPTY        = null;
+    
     /** 文件上传失败，请稍候再试 */
     public static final BizStatus        UPLOAD_FAILURE            = null;
     
     /** 文件上传失败，服务配置错误 */
     public static final BizStatus        UPLOAD_ERROR_CONFIGURE    = null;
     
-    /** 数据保存失败，主键数据为空 */
-    public static final BizStatus        SAVE_PRIMARY_EMPTY        = null;
+    /** 操作失败，没有操作权限 */
+    public static final BizStatus        ERROR_NO_AUTHORITY        = null;
     
     /** 操作失败，错误的数据格式 */
     public static final BizStatus        ERROR_DATA_FORMAT         = null;
@@ -129,19 +133,31 @@ public class ApiResult {
         Field[] fieldList = ApiResult.class.getFields();
         for (Field field : fieldList) {
             String codeKey = CODE_PREFIX + field.getName();
-            String msgKey = MSG_PREFIX + field.getName();
-        
             String code = Resources.getI18nString(codeKey);
-            String msg = Resources.getI18nString(msgKey);
-            try {
-                field.setAccessible(true);
-                field.set(clazz, new BizStatus(Integer.valueOf(code), msg));
-            }
-            catch (NumberFormatException ex) {
-                logger.warn("不能将：{}转换为数值", code);
-            }
-            catch (Exception ex) {
-                logger.error("无法设置返回值：" + code + ", " + msg, ex);
+            
+            if (code != null && code.length() > 0) {
+                String msgKey = MSG_PREFIX + field.getName();
+                String msg = Resources.getI18nString(msgKey);
+                try {
+                    field.setAccessible(true);
+                    
+                    // 将field的访问置为非final类型
+                    int oldModify = field.getModifiers();
+                    int modify = oldModify & ~Modifier.FINAL;
+                    Field modifiersFile = field.getClass().getDeclaredField("modifiers");
+                    modifiersFile.setAccessible(true);
+                    modifiersFile.setInt(field, modify);
+                    
+                    // 修改static final的值
+                    field.set(clazz, new BizStatus(Integer.valueOf(code), msg));
+    
+                    // 还原Field的访问权限
+                    modifiersFile.setInt(field, oldModify);
+                } catch (NumberFormatException ex) {
+                    logger.warn("不能将：{}转换为数值", code);
+                } catch (Exception ex) {
+                    logger.error("无法设置返回值：" + code + ", " + msg, ex);
+                }
             }
         }
     }
