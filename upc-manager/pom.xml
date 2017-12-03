@@ -254,11 +254,6 @@
       </dependency>
       <dependency>
           <groupId>org.hanzhdy.upc</groupId>
-          <artifactId>upc-client</artifactId>
-          <version>1.0.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-          <groupId>org.hanzhdy.upc</groupId>
           <artifactId>upc-basic</artifactId>
           <version>1.0.0-SNAPSHOT</version>
       </dependency>

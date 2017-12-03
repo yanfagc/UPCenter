@@ -27,13 +27,13 @@
         <!-- generate xml -->  
         <sqlMapGenerator targetPackage="mapper.settings"  targetProject="E:\workspace_git\UPCenter\upc-basic\src\main\resources">
             <property name="enableSubPackages" value="true" />
-            <property name="extTargetProject" value="E:\workspace_git\UPCenter\upc-manager\src\main\resources"/>
+            <property name="extTargetProject" value="E:\workspace_git\UPCenter\upc-manager\src\main\resources,E:\workspace_git\UPCenter\upc-proxy\src\main\resources"/>
         </sqlMapGenerator>  
           
         <!-- generate Mapper -->  
         <javaClientGenerator type="XMLMAPPER" targetPackage="org.hanzhdy.manager.settings.mapper" targetProject="E:\workspace_git\UPCenter\upc-basic\src\main\java">
             <property name="enableSubPackages" value="true" />
-            <property name="extTargetProject" value="E:\workspace_git\UPCenter\upc-manager\src\main\java"/>
+            <property name="extTargetProject" value="E:\workspace_git\UPCenter\upc-manager\src\main\java,E:\workspace_git\UPCenter\upc-proxy\src\main\java"/>
         </javaClientGenerator>
 
         <table schema="" tableName="S_DICTTYPE" domainObjectName="DictType">

@@ -407,6 +407,7 @@
         <module>upc-basic</module>
         <module>upc-manager</module>
         <module>upc-client</module>
+        <module>upc-proxy</module>
     </modules>
 
 
