@@ -62,7 +62,7 @@
 
         <spring.data.redis.version>1.5.0.RELEASE</spring.data.redis.version>
         <redis.clients.version>2.6.2</redis.clients.version>
-        <log4jdbc.version>4-1.2</log4jdbc.version>
+        <log4jdbc.version>1.2</log4jdbc.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -245,7 +245,7 @@
                 <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>net.sf.log4jdbc</groupId>
+                <groupId>com.googlecode.log4jdbc</groupId>
                 <artifactId>log4jdbc</artifactId>
                 <version>${log4jdbc.version}</version>
             </dependency>

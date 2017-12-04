@@ -150,7 +150,7 @@
       </dependency>
 
       <dependency>
-          <groupId>net.sf.log4jdbc</groupId>
+          <groupId>com.googlecode.log4jdbc</groupId>
           <artifactId>log4jdbc</artifactId>
       </dependency>
       <dependency>
