@@ -1,15 +1,6 @@
 .idea/
-权限管理系统表结构.pdb
-upc.iml
+*.pdb
+*.iml
+logs/
+*/target/
 
-upc-basic/upc-basic.iml
-upc-basic/target
-
-upc-manager/upc-manager.iml
-upc-manager/target
-
-upc-client/upc-client.iml
-upc-client/target
-
-upc-proxy/upc-proxy.iml
-upc-proxy/target

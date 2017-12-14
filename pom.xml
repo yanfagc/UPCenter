@@ -358,6 +358,15 @@
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql-connector.version}</version>
             </dependency>
+
+            <!-- 定义spring boot -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>1.5.4.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <repositories>
@@ -408,6 +417,7 @@
         <module>upc-manager</module>
         <module>upc-client</module>
         <module>upc-proxy</module>
+        <module>upc-proxy-common</module>
     </modules>
 
 

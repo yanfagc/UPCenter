@@ -92,9 +92,7 @@ public class ApiResult {
     /** 操作失败，服务器异常，请联系管理员 */
     public static final BizStatus        ERROR_EXCEPTION           = null;
     
-    private static final String CODE_PREFIX = "biz.code.";
-    
-    private static final String MSG_PREFIX  = "biz.mesg.";
+    private static final String PREFIX = "biz.";
     
     private static final Logger logger      = LoggerFactory.getLogger(ApiResult.class);
     
@@ -132,12 +130,18 @@ public class ApiResult {
         Class<ApiResult> clazz = ApiResult.class;
         Field[] fieldList = ApiResult.class.getFields();
         for (Field field : fieldList) {
-            String codeKey = CODE_PREFIX + field.getName();
-            String code = Resources.getI18nString(codeKey);
+            String key = PREFIX + field.getName();
+            String value = Resources.getI18nString(key);
             
-            if (code != null && code.length() > 0) {
-                String msgKey = MSG_PREFIX + field.getName();
-                String msg = Resources.getI18nString(msgKey);
+            if (value != null && value.length() > 0) {
+                int index = value.indexOf("|");
+                String code = "";
+                String msg = value;
+                if (index > -1) {
+                    code = value.substring(0, index);
+                    msg = value.substring(index + 1);
+                }
+                
                 try {
                     field.setAccessible(true);
                     
@@ -149,13 +153,18 @@ public class ApiResult {
                     modifiersFile.setInt(field, modify);
                     
                     // 修改static final的值
-                    field.set(clazz, new BizStatus(Integer.valueOf(code), msg));
+                    try {
+                        field.set(clazz, new BizStatus(Integer.valueOf(code), msg));
+                    }
+                    catch (NumberFormatException ex) {
+                        field.set(clazz, new BizStatus(-1, msg));
+                        logger.warn("不能将：{}转换为数值", code);
+                    }
     
                     // 还原Field的访问权限
                     modifiersFile.setInt(field, oldModify);
-                } catch (NumberFormatException ex) {
-                    logger.warn("不能将：{}转换为数值", code);
-                } catch (Exception ex) {
+                }
+                catch (Exception ex) {
                     logger.error("无法设置返回值：" + code + ", " + msg, ex);
                 }
             }

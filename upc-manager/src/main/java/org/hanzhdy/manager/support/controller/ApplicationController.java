@@ -8,6 +8,8 @@ import org.hanzhdy.manager.support.constants.WebConstants;
 import org.hanzhdy.web.bean.DatatableResult;
 import org.hanzhdy.web.controller.AbstractController;
 import org.hanzhdy.web.throwable.BizStatus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +26,10 @@ public class ApplicationController extends AbstractController {
     
     @Value("${system.code}")
     protected String                systemCode;
+    
+    private static final Logger           logger = LoggerFactory.getLogger(ApplicationController.class);
+    
+    protected final boolean       isDebugEnabled = logger.isDebugEnabled();
     
     protected Object response(BizStatus status, Object data) {
         return super.response(String.valueOf(status.getCode()), data, status.getMsg());
