@@ -1,4 +1,4 @@
-package org.hanzhdy.manager.proxy.common;
+package org.hanzhdy.proxy.common;
 
 /**
  * Api Result

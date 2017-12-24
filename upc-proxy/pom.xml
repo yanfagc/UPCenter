@@ -9,60 +9,104 @@
   <artifactId>upc-proxy</artifactId>
   <name>upc-proxy</name>
   <packaging>jar</packaging>
-  <description>jar</description>
+  <description>User Permission Center Proxy </description>
   <properties>
       <java.version>1.8</java.version>
+      <hanzhdy.version>1.0.0-SNAPSHOT</hanzhdy.version>
+      <hanzhdy.upc.version>1.0.0-SNAPSHOT</hanzhdy.upc.version>
+      <spring.boot.version>1.5.7.RELEASE</spring.boot.version>
+      <fastxml.version>2.8.10</fastxml.version><!-- 默认2.9.3出现问题 -->
   </properties>
   <dependencies>
       <dependency>
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-starter-web</artifactId>
+          <version>${spring.boot.version}</version>
       </dependency>
       <dependency>
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-starter-aop</artifactId>
+          <version>${spring.boot.version}</version>
       </dependency>
       <dependency>
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-starter-jdbc</artifactId>
-      </dependency>
-
-      <dependency>
-          <groupId>org.apache.commons</groupId>
-          <artifactId>commons-lang3</artifactId>
-      </dependency>
-
-      <dependency>
-          <groupId>com.alibaba</groupId>
-          <artifactId>fastjson</artifactId>
+          <version>${spring.boot.version}</version>
       </dependency>
 
       <!-- 引入自定义工程 -->
       <dependency>
           <groupId>org.hanzhdy.upc</groupId>
           <artifactId>upc-basic</artifactId>
-          <version>1.0.0-SNAPSHOT</version>
+          <version>${hanzhdy.upc.version}</version>
+          <exclusions>
+              <exclusion>
+                  <groupId>org.slf4j</groupId>
+                  <artifactId>slf4j-api</artifactId>
+              </exclusion>
+              <exclusion>
+                  <groupId>org.mybatis</groupId>
+                  <artifactId>mybatis</artifactId>
+              </exclusion>
+              <exclusion>
+                  <groupId>org.mybatis</groupId>
+                  <artifactId>mybatis-spring</artifactId>
+              </exclusion>
+          </exclusions>
       </dependency>
       <dependency>
           <groupId>org.hanzhdy.upc</groupId>
           <artifactId>upc-proxy-common</artifactId>
-          <version>1.0.0-SNAPSHOT</version>
+          <version>${hanzhdy.upc.version}</version>
+      </dependency>
+      <dependency>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-core</artifactId>
+          <version>${fastxml.version}</version>
+      </dependency>
+      <dependency>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-databind</artifactId>
+          <version>${fastxml.version}</version>
+      </dependency>
+      <dependency>
+          <groupId>com.fasterxml.jackson.datatype</groupId>
+          <artifactId>jackson-datatype-joda</artifactId>
+          <version>${fastxml.version}</version>
+      </dependency>
+      <dependency>
+          <groupId>com.fasterxml.jackson.module</groupId>
+          <artifactId>jackson-module-parameter-names</artifactId>
+          <version>${fastxml.version}</version>
       </dependency>
   </dependencies>
-    <repositories>
-        <repository>
-            <id>nexus</id>
-            <url>http://192.168.80.128:8081/repository/maven-public/</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
             </plugin>
         </plugins>
     </build>

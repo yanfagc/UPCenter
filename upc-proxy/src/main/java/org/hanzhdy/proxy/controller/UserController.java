@@ -1,8 +1,8 @@
-package org.hanzhdy.manager.proxy.controller;
+package org.hanzhdy.proxy.controller;
 
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.StringUtils;
-import org.hanzhdy.manager.proxy.common.ApiResult;
+import org.hanzhdy.proxy.common.ApiResult;
 import org.hanzhdy.manager.upc.service.UserService;
 import org.hanzhdy.proxy.request.UserLoginRequest;
 import org.hanzhdy.web.controller.AbstractController;
@@ -16,16 +16,16 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Created by H.CAAHN on 2017/12/8.
  */
-@RestController
-@RequestMapping("/api/user")
+//@RestController
+//@RequestMapping("/api/user")
 public class UserController extends AbstractController {
     @Autowired
     private UserService userService;
-    
+
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
-    
+
     private static final boolean isDebugEnabled = logger.isDebugEnabled();
-    
+
     /**
      * 客户端登录请求
      * @param params
@@ -40,11 +40,11 @@ public class UserController extends AbstractController {
             if (StringUtils.isBlank(params.getAccount()) || StringUtils.isBlank(params.getPassword())) {
                 return ApiResult.FAILED_ARGS_EMPTY;
             }
-            
+
             if (isDebugEnabled) {
                 logger.debug("客户端登录请求【处理中】请求参数：" + JSON.toJSONString(params));
             }
-            
+
             if (isDebugEnabled) {
                 logger.debug("客户端登录请求【登录成功】请求参数：" + JSON.toJSONString(params));
             }

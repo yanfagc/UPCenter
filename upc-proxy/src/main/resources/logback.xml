@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- <configuration scan="true" scanPeriod="10 seconds" debug="true"> -->
+<configuration scan="true" scanPeriod="10 seconds" debug="false">
+
+	<property name="maxFileSize" value="20MB" />
+	<property name="conversionPattern" value="%-5level %d %thread %logger{35}[%line]: %m%n" />
+	
+	<property name="logRootDir" value="../logs" />                           <!-- 配根目录 -->
+	<property name="rootFileName" value="system" />                          <!-- 非本项目的日志文件名 -->
+	<property name="appFileName" value="proxy" />                           <!-- 本项目的日志文件名 -->
+	
+	<property name="appPackage" value="org.hanzhdy" />                        <!-- 不用修改 -->
+	
+	<property name="rootLevel" value="info" />                                      <!-- 非本项目的日志级别 -->
+	<property name="appLevel" value="debug" />                                      <!-- 本项目的日志级别 -->
+	
+	<contextName>Manager</contextName>                                   <!-- 本项目的名字 -->
+
+	<!-- default file 日志打印到文件中 -->
+	<appender name="root-file"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${logRootDir}/${rootFileName}.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<fileNamePattern>${logRootDir}/${rootFileName}.%i.log.zip</fileNamePattern>
+			<minIndex>1</minIndex>
+			<maxIndex>100</maxIndex>
+		</rollingPolicy>
+
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<maxFileSize>${maxFileSize}</maxFileSize>
+		</triggeringPolicy>
+		<encoder>
+			<pattern>${conversionPattern}</pattern>
+		</encoder>
+	</appender>
+	
+	<!-- app file 日志打印到文件中 -->
+	<appender name="app-file"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${logRootDir}/${appFileName}.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<fileNamePattern>${logRootDir}/${appFileName}.%i.log.zip</fileNamePattern>
+			<minIndex>1</minIndex>
+			<maxIndex>100</maxIndex>
+		</rollingPolicy>
+
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<maxFileSize>${maxFileSize}</maxFileSize>
+		</triggeringPolicy>
+		<encoder>
+			<pattern>${conversionPattern}</pattern>
+		</encoder>
+	</appender>
+
+	<!-- 日志打印到console中 -->
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder 
+			by default -->
+		<encoder charset="UTF-8">
+			<pattern>${conversionPattern}</pattern>
+		</encoder>
+	</appender>
+
+	<!-- 本项目的日志配置 -->
+	<logger name="${appPackage}" level="${appLevel}" additivity="false">
+		<appender-ref ref="app-file" />
+		<appender-ref ref="root-file" />
+		<appender-ref ref="console" />
+	</logger>
+	
+	<!-- 根目录的日志配置 -->
+	<root level="${rootLevel}" additivity="false">
+		<appender-ref ref="root-file" />
+		<appender-ref ref="console" />
+	</root>
+	
+</configuration>
